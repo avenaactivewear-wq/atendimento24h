@@ -5,6 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Atendimento24h — Seu negócio nunca mais fica sem resposta</title>
 <meta name="description" content="Atendente de WhatsApp com IA que responde seus clientes 24 horas por dia, 7 dias por semana. Zero instalação. Ativa em minutos.">
+<meta property="og:title" content="Atendimento24h — Seu negócio nunca mais fica sem resposta">
+<meta property="og:description" content="Atendente de WhatsApp com IA. 24/7. Zero instalação. A partir de R$197/mês.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
@@ -28,6 +32,8 @@
   --radius-lg:24px;
   --radius-xl:32px;
 }
+
+/* ─── OG META ─── */
 
 html{scroll-behavior:smooth}
 body{
@@ -148,6 +154,26 @@ h1 span{
   display:flex;gap:32px;margin-top:48px;
 }
 @media(max-width:900px){.hero-stats{justify-content:center}}
+
+/* floating notification */
+.hero-notif{
+  position:absolute;
+  bottom:40px;right:-20px;
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:12px 16px;
+  display:flex;align-items:center;gap:10px;
+  box-shadow:0 16px 40px rgba(0,0,0,0.4);
+  animation:floatUp 0.6s cubic-bezier(0.16,1,0.3,1) 1.5s both;
+  max-width:240px;
+  z-index:2;
+}
+@media(max-width:900px){.hero-notif{display:none}}
+@keyframes floatUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.notif-dot{width:10px;height:10px;border-radius:50%;background:var(--green);flex-shrink:0;animation:pulse 2s infinite}
+.notif-text{font-size:12px;font-weight:600;color:var(--text2)}
+.notif-text strong{color:var(--text);display:block}
 .hero-stat{}
 .hero-stat-n{font-size:28px;font-weight:800;letter-spacing:-1px;color:var(--green)}
 .hero-stat-l{font-size:12px;color:var(--text3);font-weight:500;margin-top:2px}
@@ -332,8 +358,10 @@ section{padding:120px 24px}
 .demo-msgs{
   background:#0b141a;
   padding:20px 16px;
-  min-height:300px;
+  min-height:300px;height:300px;
   display:flex;flex-direction:column;gap:10px;
+  overflow:hidden;
+  transition:height .4s ease;
 }
 .d-in{background:#202c33;color:#e9edef;padding:10px 14px;border-radius:8px 8px 8px 2px;font-size:14px;max-width:80%;align-self:flex-start;line-height:1.5}
 .d-out{background:#005c4b;color:#e9edef;padding:10px 14px;border-radius:8px 8px 2px 8px;font-size:14px;max-width:80%;align-self:flex-end;line-height:1.5}
@@ -362,6 +390,10 @@ section{padding:120px 24px}
   transform:scale(1.04);
 }
 .plan-featured:hover{transform:scale(1.04) translateY(-4px)}
+@media(max-width:800px){
+  .plan-featured{transform:none}
+  .plan-featured:hover{transform:translateY(-4px)}
+}
 .plan-badge{
   position:absolute;top:-14px;left:50%;transform:translateX(-50%);
   background:var(--green);color:#000;
@@ -401,6 +433,64 @@ section{padding:120px 24px}
   background:var(--green);color:#000;border-color:var(--green);
 }
 .plan-featured .plan-cta:hover{background:#1fba58}
+
+/* ─── TESTIMONIALS ─── */
+.testi-section{background:var(--bg);border-top:1px solid var(--border)}
+.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:56px}
+@media(max-width:700px){.testi-grid{grid-template-columns:1fr}}
+.testi-card{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:var(--radius-lg);padding:28px;
+  transition:border-color .2s;
+}
+.testi-card:hover{border-color:var(--border-green)}
+.testi-stars{color:var(--green);font-size:14px;margin-bottom:14px;letter-spacing:2px}
+.testi-text{font-size:15px;color:var(--text2);line-height:1.65;margin-bottom:20px;font-style:italic}
+.testi-author{display:flex;align-items:center;gap:10px}
+.testi-avatar{
+  width:36px;height:36px;border-radius:50%;
+  background:linear-gradient(135deg,var(--green),var(--green-dark));
+  display:flex;align-items:center;justify-content:center;
+  font-weight:700;font-size:14px;color:#fff;flex-shrink:0;
+}
+.testi-name{font-size:14px;font-weight:600}
+.testi-biz{font-size:12px;color:var(--text3)}
+
+/* ─── COMPARE ─── */
+.compare-section{background:var(--surface);border-top:1px solid var(--border)}
+.compare-table{
+  margin-top:56px;
+  border:1px solid var(--border);
+  border-radius:var(--radius-xl);overflow:hidden;
+}
+.compare-header{
+  display:grid;grid-template-columns:1fr 1fr 1fr;
+  background:var(--card);
+  border-bottom:1px solid var(--border);
+}
+.compare-col{padding:20px 24px;text-align:center}
+.compare-col:first-child{text-align:left}
+.compare-col-title{font-size:14px;font-weight:700;letter-spacing:0.3px}
+.compare-col-sub{font-size:12px;color:var(--text3);margin-top:4px}
+.compare-col.featured-col{background:rgba(37,211,102,0.05)}
+.compare-col.featured-col .compare-col-title{color:var(--green)}
+.compare-row{
+  display:grid;grid-template-columns:1fr 1fr 1fr;
+  border-bottom:1px solid var(--border);
+  transition:background .15s;
+}
+.compare-row:last-child{border-bottom:none}
+.compare-row:hover{background:rgba(255,255,255,0.02)}
+.compare-cell{padding:16px 24px;font-size:14px;display:flex;align-items:center}
+.compare-cell:not(:first-child){justify-content:center}
+.compare-cell:first-child{color:var(--text2)}
+.compare-check{color:var(--green);font-size:18px}
+.compare-x{color:var(--text3);font-size:18px}
+.compare-cell.featured-cell{background:rgba(37,211,102,0.03)}
+@media(max-width:600px){
+  .compare-header,.compare-row{grid-template-columns:1fr 1fr}
+  .compare-col:nth-child(2),.compare-cell:nth-child(2){display:none}
+}
 
 /* ─── FAQ ─── */
 .faq-section{background:var(--surface)}
@@ -512,21 +602,25 @@ footer{
       <div class="hero-stats">
         <div class="hero-stat">
           <div class="hero-stat-n">24/7</div>
-          <div class="hero-stat-l">Disponibilidade</div>
+          <div class="hero-stat-l">Sempre online</div>
         </div>
         <div class="hero-stat">
-          <div class="hero-stat-n">&lt; 3s</div>
-          <div class="hero-stat-l">Tempo de resposta</div>
+          <div class="hero-stat-n">&lt;3s</div>
+          <div class="hero-stat-l">Para responder</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-n">10min</div>
+          <div class="hero-stat-l">Para ativar</div>
         </div>
         <div class="hero-stat">
           <div class="hero-stat-n">R$0</div>
-          <div class="hero-stat-l">Custo de instalação</div>
+          <div class="hero-stat-l">Instalação</div>
         </div>
       </div>
     </div>
 
     <!-- WHATSAPP MOCKUP -->
-    <div class="wpp-phone">
+    <div class="wpp-phone" style="position:relative">
       <div class="wpp-frame">
         <div class="wpp-header">
           <div class="wpp-avatar">A</div>
@@ -559,6 +653,13 @@ footer{
           </div>
         </div>
         <div class="wpp-glow"></div>
+      </div>
+      <div class="hero-notif">
+        <div class="notif-dot"></div>
+        <div class="notif-text">
+          <strong>Mensagem respondida</strong>
+          agora mesmo · menos de 2s
+        </div>
       </div>
     </div>
   </div>
@@ -809,7 +910,112 @@ footer{
 
     <!-- COMPARATIVO -->
     <div class="reveal" style="margin-top:48px;text-align:center">
-      <p style="color:var(--text3);font-size:14px">Atendente humano tempo parcial: <strong style="color:var(--text2)">R$1.500+/mês</strong>. Seu novo atendente: a partir de <strong style="color:var(--green)">R$6,57/dia</strong>.</p>
+      <p style="color:var(--text3);font-size:14px">Atendente humano parcial: <strong style="color:var(--text2)">R$1.500+/mês</strong> · Seu atendente IA: a partir de <strong style="color:var(--green)">R$6,57/dia</strong> · Cancele quando quiser</p>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testi-section">
+  <div class="wrap">
+    <div class="reveal" style="text-align:center">
+      <div class="sec-eyebrow">Quem usa</div>
+      <div class="sec-title">Negócios que nunca<br>mais perdem clientes.</div>
+    </div>
+    <div class="testi-grid">
+      <div class="testi-card reveal reveal-delay-1">
+        <div class="testi-stars">★★★★★</div>
+        <div class="testi-text">"Antes eu perdia pelo menos 5 pedidos por semana porque não conseguia responder rápido. Agora o atendente responde instantaneamente e eu só entro quando é algo complexo."</div>
+        <div class="testi-author">
+          <div class="testi-avatar">M</div>
+          <div>
+            <div class="testi-name">Mariana S.</div>
+            <div class="testi-biz">Loja de roupas femininas</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card reveal reveal-delay-2">
+        <div class="testi-stars">★★★★★</div>
+        <div class="testi-text">"Minha clínica recebe agendamentos às 2h da manhã agora. Paciente manda mensagem, o atendente já informa disponibilidade e confirmação. Incrível."</div>
+        <div class="testi-author">
+          <div class="testi-avatar">R</div>
+          <div>
+            <div class="testi-name">Dr. Ricardo A.</div>
+            <div class="testi-biz">Clínica odontológica</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card reveal reveal-delay-3">
+        <div class="testi-stars">★★★★★</div>
+        <div class="testi-text">"Configurei em 10 minutos. Subi o cardápio e em menos de 1 hora o atendente já estava tirando pedidos. O melhor investimento do restaurante esse ano."</div>
+        <div class="testi-author">
+          <div class="testi-avatar">F</div>
+          <div>
+            <div class="testi-name">Felipe M.</div>
+            <div class="testi-biz">Restaurante delivery</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPARE -->
+<section class="compare-section">
+  <div class="wrap">
+    <div class="reveal" style="text-align:center">
+      <div class="sec-eyebrow">Comparativo</div>
+      <div class="sec-title">Por que não contratar<br>um atendente humano?</div>
+    </div>
+    <div class="compare-table reveal reveal-delay-1">
+      <div class="compare-header">
+        <div class="compare-col">
+          <div class="compare-col-title">Característica</div>
+        </div>
+        <div class="compare-col">
+          <div class="compare-col-title">Atendente humano</div>
+          <div class="compare-col-sub">R$1.500–2.500/mês</div>
+        </div>
+        <div class="compare-col featured-col">
+          <div class="compare-col-title">Atendimento24h</div>
+          <div class="compare-col-sub">A partir de R$197/mês</div>
+        </div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-cell">Disponível 24/7</div>
+        <div class="compare-cell"><span class="compare-x">✕</span></div>
+        <div class="compare-cell featured-cell"><span class="compare-check">✓</span></div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-cell">Responde em menos de 3 segundos</div>
+        <div class="compare-cell"><span class="compare-x">✕</span></div>
+        <div class="compare-cell featured-cell"><span class="compare-check">✓</span></div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-cell">Custo fixo mensal</div>
+        <div class="compare-cell" style="color:#f87171;font-weight:600">R$1.500+</div>
+        <div class="compare-cell featured-cell" style="color:var(--green);font-weight:600">R$197–797</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-cell">Nunca fica doente ou de férias</div>
+        <div class="compare-cell"><span class="compare-x">✕</span></div>
+        <div class="compare-cell featured-cell"><span class="compare-check">✓</span></div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-cell">Atende múltiplos clientes simultâneos</div>
+        <div class="compare-cell"><span class="compare-x">✕</span></div>
+        <div class="compare-cell featured-cell"><span class="compare-check">✓</span></div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-cell">Ativo em minutos</div>
+        <div class="compare-cell"><span class="compare-x">✕</span></div>
+        <div class="compare-cell featured-cell"><span class="compare-check">✓</span></div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-cell">Precisa de treinamento</div>
+        <div class="compare-cell"><span class="compare-x" style="color:#f87171">Semanas</span></div>
+        <div class="compare-cell featured-cell"><span class="compare-check">Não</span></div>
+      </div>
     </div>
   </div>
 </section>
@@ -981,9 +1187,12 @@ function toggleFaq(el) {
     answer.style.maxHeight = answer.scrollHeight + 'px'
   }
 }
-// Init first open
-document.querySelectorAll('.faq-item.open').forEach(item => {
-  item.querySelector('.faq-a').style.maxHeight = '200px'
+// Init first open — calc real height after DOM is ready
+requestAnimationFrame(() => {
+  document.querySelectorAll('.faq-item.open').forEach(item => {
+    const answer = item.querySelector('.faq-a')
+    answer.style.maxHeight = answer.scrollHeight + 'px'
+  })
 })
 
 // ── Smooth nav active
