@@ -1662,8 +1662,10 @@ requestAnimationFrame(() => {
 window.addEventListener('scroll', () => {
   const scrolled = window.scrollY > 50
   const nav = document.querySelector('nav')
-  nav.style.background = scrolled
+  if(nav) nav.style.background = scrolled
     ? 'rgba(255,255,255,0.09)' : 'rgba(255,255,255,0.06)'
+  const bottom = document.getElementById('sb-mobile-bottom')
+  if(bottom) bottom.style.transform = window.scrollY > 120 ? 'translateY(0)' : 'translateY(100%)'
 })
 
 // ── Particle background
@@ -1855,7 +1857,7 @@ window.addEventListener('scroll', () => {
 <!-- SOCIAL PROOF + STICKY MOBILE BARS -->
 <style>
 @keyframes sb-pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(1.5)}}
-@keyframes sb-flip{0%{opacity:1;transform:translateY(0)}40%{opacity:0;transform:translateY(-5px)}60%{opacity:0;transform:translateY(5px)}100%{opacity:1;transform:translateY(0)}}
+@keyframes sb-flip{0%{opacity:1}40%{opacity:0}60%{opacity:0}100%{opacity:1}}
 
 /* Desktop: floating bottom pill */
 #sb-desktop{
@@ -1900,20 +1902,23 @@ window.addEventListener('scroll', () => {
   padding:12px 20px;
   align-items:center;justify-content:space-between;gap:12px;
   font-family:'Plus Jakarta Sans',system-ui,sans-serif;
+  transform:translateY(100%);
+  transition:transform .3s cubic-bezier(.4,0,.2,1);
 }
 @media(max-width:640px){#sb-mobile-bottom{display:flex!important}}
+@media(max-width:640px){nav{display:none!important}}
 </style>
 
 <!-- Desktop pill -->
 <div id="sb-desktop">
   <span style="width:6px;height:6px;border-radius:50%;background:#22c55e;flex-shrink:0;animation:sb-pulse 2s infinite"></span>
-  <span style="font-size:12px;font-weight:600;color:rgba(255,255,255,0.9)"><span id="sb-num" style="display:inline-block">1.381</span> usando nossa ferramenta</span>
+  <span style="font-size:12px;font-weight:600;color:rgba(255,255,255,0.9)"><span id="sb-num" style="display:inline-block">1.381</span> empresas usando nossa plataforma</span>
 </div>
 
 <!-- Mobile top bar: social proof -->
 <div id="sb-mobile-top">
   <span style="width:6px;height:6px;border-radius:50%;background:#22c55e;flex-shrink:0;animation:sb-pulse 2s infinite"></span>
-  <span style="font-size:12px;font-weight:600;color:rgba(255,255,255,0.88)"><span id="sb-num-mobile" style="display:inline-block">1.381</span> usando nossa ferramenta</span>
+  <span style="font-size:12px;font-weight:600;color:rgba(255,255,255,0.88)"><span id="sb-num-mobile" style="display:inline-block">1.381</span> empresas usando nossa plataforma</span>
 </div>
 
 <!-- Mobile bottom bar: sticky CTA -->
