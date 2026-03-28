@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin · Atendimento24h</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --green:#25D366;
+  --green-dark:#128C7E;
+  --green-glow:rgba(37,211,102,0.12);
+  --bg:#080808;
+  --surface:#0f0f0f;
+  --card:#141414;
+  --card2:#1a1a1a;
+  --border:rgba(255,255,255,0.07);
+  --border-green:rgba(37,211,102,0.2);
+  --text:#ffffff;
+  --text2:#a1a1aa;
+  --text3:#52525b;
+  --red:#ef4444;
+  --yellow:#f59e0b;
+  --blue:#3b82f6;
+  --radius:12px;
+}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans',system-ui,sans-serif;font-size:14px;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+
+/* LOGIN */
+.login-overlay{position:fixed;inset:0;background:var(--bg);z-index:9999;display:flex;align-items:center;justify-content:center}
+.login-box{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:40px 36px;width:100%;max-width:380px;text-align:center}
+.login-logo{font-size:20px;font-weight:800;margin-bottom:6px}
+.login-logo span{color:var(--green)}
+.login-sub{font-size:13px;color:var(--text3);margin-bottom:32px}
+.login-field{margin-bottom:14px;text-align:left}
+.login-field label{display:block;font-size:11px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px}
+.login-field input{width:100%;background:var(--card2);border:1px solid var(--border);border-radius:10px;padding:10px 14px;color:var(--text);font-size:14px;font-family:inherit;outline:none;transition:.15s}
+.login-field input:focus{border-color:rgba(37,211,102,0.4)}
+.login-error{font-size:12px;color:var(--red);margin-bottom:14px;min-height:18px}
+.login-btn{width:100%;background:var(--green);border:none;border-radius:10px;padding:12px;color:#000;font-size:14px;font-weight:700;font-family:inherit;cursor:pointer;transition:.15s;margin-top:4px}
+.login-btn:hover{background:#20bf5a}
+
+/* LAYOUT */
+.layout{display:grid;grid-template-columns:220px 1fr;min-height:100vh}
+
+/* SIDEBAR */
+.sidebar{background:var(--surface);border-right:1px solid var(--border);display:flex;flex-direction:column;padding:24px 0;position:sticky;top:0;height:100vh;overflow-y:auto}
+.sidebar-logo{padding:0 20px 24px;border-bottom:1px solid var(--border);margin-bottom:8px}
+.sidebar-logo .brand{font-size:15px;font-weight:800;color:var(--text)}
+.sidebar-logo .brand span{color:var(--green)}
+.sidebar-logo .tagline{font-size:11px;color:var(--text3);margin-top:2px}
+.nav-item{display:flex;align-items:center;gap:10px;padding:10px 20px;color:var(--text2);text-decoration:none;font-size:13px;font-weight:500;border-radius:0;transition:all .15s;cursor:pointer;border:none;background:none;width:100%;text-align:left}
+.nav-item:hover{color:var(--text);background:rgba(255,255,255,0.04)}
+.nav-item.active{color:var(--green);background:var(--green-glow)}
+.nav-icon{width:16px;height:16px;opacity:.7;flex-shrink:0}
+.nav-item.active .nav-icon{opacity:1}
+.nav-section{padding:16px 20px 6px;font-size:10px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.08em}
+.sidebar-footer{margin-top:auto;padding:16px 20px;border-top:1px solid var(--border)}
+.sidebar-footer .version{font-size:11px;color:var(--text3)}
+
+/* MAIN */
+.main{display:flex;flex-direction:column;min-height:100vh;overflow:hidden}
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:16px 28px;border-bottom:1px solid var(--border);background:var(--surface);position:sticky;top:0;z-index:10}
+.topbar-title{font-size:15px;font-weight:700}
+.topbar-right{display:flex;align-items:center;gap:12px}
+.badge-live{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--green);font-weight:600;background:var(--green-glow);padding:5px 10px;border-radius:100px;border:1px solid var(--border-green)}
+.badge-live::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--green);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.btn-sm{font-size:12px;font-weight:600;padding:7px 14px;border-radius:8px;border:1px solid var(--border);background:var(--card2);color:var(--text);cursor:pointer;transition:.15s}
+.btn-sm:hover{background:var(--card)}
+.btn-green{background:var(--green);border-color:var(--green);color:#000}
+.btn-green:hover{background:#20bf5a}
+
+.content{padding:28px;flex:1}
+
+/* METRICS */
+.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:28px}
+.metric-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px}
+.metric-label{font-size:11px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px}
+.metric-value{font-size:28px;font-weight:800;line-height:1;margin-bottom:4px}
+.metric-value.green{color:var(--green)}
+.metric-sub{font-size:11px;color:var(--text2)}
+.metric-delta{display:inline-flex;align-items:center;gap:3px;font-size:11px;font-weight:600;padding:2px 7px;border-radius:100px;margin-top:6px}
+.delta-up{background:rgba(37,211,102,0.1);color:var(--green)}
+.delta-down{background:rgba(239,68,68,0.1);color:var(--red)}
+
+/* TABLE */
+.table-wrap{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}
+.table-header{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-bottom:1px solid var(--border)}
+.table-title{font-size:13px;font-weight:700}
+.table-actions{display:flex;align-items:center;gap:8px}
+.search-input{background:var(--card2);border:1px solid var(--border);border-radius:8px;padding:7px 12px;color:var(--text);font-size:12px;font-family:inherit;outline:none;width:200px}
+.search-input::placeholder{color:var(--text3)}
+.search-input:focus{border-color:rgba(37,211,102,0.3)}
+table{width:100%;border-collapse:collapse}
+thead th{padding:10px 16px;text-align:left;font-size:11px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.06em;border-bottom:1px solid var(--border);white-space:nowrap}
+tbody tr{border-bottom:1px solid rgba(255,255,255,0.04);transition:.1s}
+tbody tr:last-child{border-bottom:none}
+tbody tr:hover{background:rgba(255,255,255,0.02)}
+td{padding:12px 16px;font-size:13px;vertical-align:middle}
+.td-name{font-weight:600;color:var(--text)}
+.td-sub{font-size:11px;color:var(--text3);margin-top:2px}
+.status-badge{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;padding:3px 9px;border-radius:100px}
+.status-active{background:rgba(37,211,102,0.12);color:var(--green)}
+.status-active::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--green)}
+.status-trial{background:rgba(245,158,11,0.12);color:var(--yellow)}
+.status-trial::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--yellow)}
+.status-cancelled{background:rgba(239,68,68,0.1);color:var(--red)}
+.status-cancelled::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--red)}
+.plan-badge{font-size:11px;font-weight:600;padding:3px 8px;border-radius:6px;background:var(--card2);color:var(--text2)}
+.plan-pro{background:rgba(59,130,246,0.12);color:var(--blue)}
+.whatsapp-link{color:var(--green);text-decoration:none;font-size:12px;font-weight:500}
+.whatsapp-link:hover{text-decoration:underline}
+.action-btn{background:none;border:1px solid var(--border);border-radius:6px;padding:5px 10px;color:var(--text2);font-size:11px;font-weight:600;cursor:pointer;font-family:inherit;transition:.15s}
+.action-btn:hover{color:var(--text);border-color:rgba(255,255,255,0.15)}
+.action-btn.danger:hover{color:var(--red);border-color:rgba(239,68,68,0.3)}
+
+/* PAGINATION */
+.pagination{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;border-top:1px solid var(--border)}
+.pagination-info{font-size:12px;color:var(--text3)}
+.pagination-btns{display:flex;gap:4px}
+.page-btn{background:var(--card2);border:1px solid var(--border);border-radius:6px;padding:5px 10px;color:var(--text2);font-size:12px;font-weight:500;cursor:pointer;font-family:inherit}
+.page-btn.active{background:var(--green);border-color:var(--green);color:#000;font-weight:700}
+.page-btn:hover:not(.active){color:var(--text)}
+
+/* FILTER BAR */
+.filter-bar{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap}
+.filter-btn{font-size:12px;font-weight:600;padding:6px 14px;border-radius:100px;border:1px solid var(--border);background:var(--card);color:var(--text2);cursor:pointer;transition:.15s}
+.filter-btn.active{background:var(--green-glow);border-color:var(--border-green);color:var(--green)}
+.filter-btn:hover:not(.active){color:var(--text)}
+
+/* EMPTY */
+.empty-row td{text-align:center;padding:48px;color:var(--text3)}
+
+/* MOBILE */
+@media(max-width:768px){
+  .layout{grid-template-columns:1fr}
+  .sidebar{display:none}
+  .metrics{grid-template-columns:1fr 1fr}
+  .content{padding:16px}
+  .topbar{padding:12px 16px}
+  .search-input{width:140px}
+  td:nth-child(4),th:nth-child(4),
+  td:nth-child(5),th:nth-child(5){display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- LOGIN OVERLAY -->
+<div class="login-overlay" id="loginOverlay">
+  <div class="login-box">
+    <div class="login-logo">Atendimento<span>24h</span></div>
+    <div class="login-sub">Painel Administrativo</div>
+    <div class="login-field">
+      <label>Usuario</label>
+      <input type="text" id="loginUser" placeholder="seu usuario" autocomplete="username">
+    </div>
+    <div class="login-field">
+      <label>Senha</label>
+      <input type="password" id="loginPass" placeholder="senha" autocomplete="current-password" onkeydown="if(event.key==='Enter')doLogin()">
+    </div>
+    <div class="login-error" id="loginError"></div>
+    <button class="login-btn" onclick="doLogin()">Entrar</button>
+  </div>
+</div>
+
+<div class="layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <div class="brand">Atendimento<span>24h</span></div>
+      <div class="tagline">Painel Administrativo</div>
+    </div>
+
+    <span class="nav-section">Principal</span>
+    <a class="nav-item active" onclick="showTab('assinantes')">
+      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      Assinantes
+    </a>
+    <a class="nav-item" onclick="showTab('receita')">
+      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+      Receita
+    </a>
+    <a class="nav-item" onclick="showTab('mensagens')">
+      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      Mensagens
+    </a>
+
+    <span class="nav-section">Config</span>
+    <a class="nav-item" onclick="showTab('config')">
+      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M12 2a10 10 0 0 1 7.07 2.93"/><path d="M4.93 4.93a10 10 0 0 0 0 14.14M12 22a10 10 0 0 1-7.07-2.93"/></svg>
+      Configuracoes
+    </a>
+
+    <div class="sidebar-footer">
+      <div class="version">v1.0 · Mar 2026</div>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main">
+    <div class="topbar">
+      <div class="topbar-title" id="page-title">Assinantes</div>
+      <div class="topbar-right">
+        <div class="badge-live">Sistema ativo</div>
+        <button class="btn-sm btn-green" onclick="exportCSV()">Exportar CSV</button>
+      </div>
+    </div>
+
+    <div class="content">
+
+      <!-- METRICS -->
+      <div class="metrics">
+        <div class="metric-card">
+          <div class="metric-label">Total assinantes</div>
+          <div class="metric-value green" id="m-total">0</div>
+          <div class="metric-delta delta-up">+3 este mes</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">MRR</div>
+          <div class="metric-value" id="m-mrr">R$0</div>
+          <div class="metric-delta delta-up">+R$591 este mes</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">Ativos agora</div>
+          <div class="metric-value" id="m-ativos">0</div>
+          <div class="metric-sub">Em trial: <span id="m-trial">0</span></div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">Churn este mes</div>
+          <div class="metric-value" id="m-churn">0</div>
+          <div class="metric-delta delta-down">1 cancelamento</div>
+        </div>
+      </div>
+
+      <!-- FILTERS -->
+      <div class="filter-bar">
+        <button class="filter-btn active" onclick="setFilter('todos',this)">Todos</button>
+        <button class="filter-btn" onclick="setFilter('ativo',this)">Ativos</button>
+        <button class="filter-btn" onclick="setFilter('trial',this)">Trial</button>
+        <button class="filter-btn" onclick="setFilter('cancelado',this)">Cancelados</button>
+      </div>
+
+      <!-- TABLE -->
+      <div class="table-wrap">
+        <div class="table-header">
+          <div class="table-title">Lista de assinantes</div>
+          <div class="table-actions">
+            <input class="search-input" type="text" placeholder="Buscar nome ou WhatsApp..." id="searchInput" oninput="renderTable()">
+            <button class="btn-sm" onclick="renderTable()">Atualizar</button>
+          </div>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>Cliente</th>
+              <th>Status</th>
+              <th>Plano</th>
+              <th>WhatsApp</th>
+              <th>Desde</th>
+              <th>Acoes</th>
+            </tr>
+          </thead>
+          <tbody id="table-body"></tbody>
+        </table>
+        <div class="pagination">
+          <div class="pagination-info" id="pagination-info"></div>
+          <div class="pagination-btns" id="pagination-btns"></div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+</div>
+
+<script>
+// DADOS MOCK - substituir por chamada API quando backend estiver pronto
+const assinantes = [
+  { id:1, nome:'Carlos Mendes', empresa:'Barbearia do Carlos', whatsapp:'(11) 99123-4567', plano:'Essencial', status:'ativo', desde:'2026-02-10', mrr:197 },
+  { id:2, nome:'Fernanda Lima', empresa:'Clinica Estetica FL', whatsapp:'(21) 98765-3210', plano:'Pro', status:'ativo', desde:'2026-01-22', mrr:397 },
+  { id:3, nome:'Ricardo Souza', empresa:'RS Eletrica', whatsapp:'(31) 97654-8901', plano:'Essencial', status:'trial', desde:'2026-03-20', mrr:0 },
+  { id:4, nome:'Ana Paula Costa', empresa:'Salao Ana Paula', whatsapp:'(51) 96543-7890', plano:'Pro', status:'ativo', desde:'2026-02-05', mrr:397 },
+  { id:5, nome:'Marcos Oliveira', empresa:'Auto Pecas MO', whatsapp:'(41) 95432-6789', plano:'Essencial', status:'ativo', desde:'2026-01-15', mrr:197 },
+  { id:6, nome:'Julia Ferreira', empresa:'Studio Julia', whatsapp:'(85) 94321-5678', plano:'Pro', status:'trial', desde:'2026-03-22', mrr:0 },
+  { id:7, nome:'Pedro Alves', empresa:'Construa Mais', whatsapp:'(62) 93210-4567', plano:'Essencial', status:'cancelado', desde:'2026-01-08', mrr:0 },
+  { id:8, nome:'Camila Santos', empresa:'Doces da Camila', whatsapp:'(71) 92109-3456', plano:'Essencial', status:'ativo', desde:'2026-03-01', mrr:197 },
+  { id:9, nome:'Bruno Rodrigues', empresa:'BR Consultoria', whatsapp:'(11) 91098-2345', plano:'Pro', status:'ativo', desde:'2026-02-18', mrr:397 },
+  { id:10, nome:'Leticia Martins', empresa:'Farmacia Saudavel', whatsapp:'(47) 90987-1234', plano:'Essencial', status:'ativo', desde:'2026-03-10', mrr:197 },
+];
+
+let filtroAtual = 'todos';
+let paginaAtual = 1;
+const POR_PAGINA = 7;
+
+function setFilter(f, btn) {
+  filtroAtual = f;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  paginaAtual = 1;
+  renderTable();
+}
+
+function filtrar() {
+  const q = document.getElementById('searchInput').value.toLowerCase();
+  return assinantes.filter(a => {
+    const matchStatus = filtroAtual === 'todos' || a.status === filtroAtual;
+    const matchSearch = !q || a.nome.toLowerCase().includes(q) || a.whatsapp.includes(q) || a.empresa.toLowerCase().includes(q);
+    return matchStatus && matchSearch;
+  });
+}
+
+function renderTable() {
+  const dados = filtrar();
+  const total = dados.length;
+  const inicio = (paginaAtual - 1) * POR_PAGINA;
+  const pagina = dados.slice(inicio, inicio + POR_PAGINA);
+  const tbody = document.getElementById('table-body');
+
+  if (pagina.length === 0) {
+    tbody.innerHTML = '<tr class="empty-row"><td colspan="6">Nenhum assinante encontrado.</td></tr>';
+  } else {
+    tbody.innerHTML = pagina.map(a => `
+      <tr>
+        <td>
+          <div class="td-name">${a.nome}</div>
+          <div class="td-sub">${a.empresa}</div>
+        </td>
+        <td><span class="status-badge status-${a.status}">${a.status === 'ativo' ? 'Ativo' : a.status === 'trial' ? 'Trial' : 'Cancelado'}</span></td>
+        <td><span class="plan-badge ${a.plano === 'Pro' ? 'plan-pro' : ''}">${a.plano}</span></td>
+        <td><a class="whatsapp-link" href="https://wa.me/55${a.whatsapp.replace(/\D/g,'')}" target="_blank">${a.whatsapp}</a></td>
+        <td style="color:var(--text2);font-size:12px">${formatDate(a.desde)}</td>
+        <td style="display:flex;gap:6px">
+          <button class="action-btn" onclick="verDetalhes(${a.id})">Ver</button>
+          <button class="action-btn danger" onclick="cancelar(${a.id})">Cancelar</button>
+        </td>
+      </tr>
+    `).join('');
+  }
+
+  // Pagination
+  const totalPaginas = Math.ceil(total / POR_PAGINA);
+  document.getElementById('pagination-info').textContent = `${inicio+1}–${Math.min(inicio+POR_PAGINA, total)} de ${total} assinantes`;
+  const btnsCont = document.getElementById('pagination-btns');
+  btnsCont.innerHTML = '';
+  for (let i = 1; i <= totalPaginas; i++) {
+    const b = document.createElement('button');
+    b.className = 'page-btn' + (i === paginaAtual ? ' active' : '');
+    b.textContent = i;
+    b.onclick = () => { paginaAtual = i; renderTable(); };
+    btnsCont.appendChild(b);
+  }
+
+  updateMetrics();
+}
+
+function updateMetrics() {
+  const ativos = assinantes.filter(a => a.status === 'ativo');
+  const trial = assinantes.filter(a => a.status === 'trial');
+  const cancelados = assinantes.filter(a => a.status === 'cancelado');
+  const mrr = ativos.reduce((s,a) => s + a.mrr, 0);
+
+  document.getElementById('m-total').textContent = assinantes.length;
+  document.getElementById('m-mrr').textContent = 'R$' + mrr.toLocaleString('pt-BR');
+  document.getElementById('m-ativos').textContent = ativos.length;
+  document.getElementById('m-trial').textContent = trial.length;
+  document.getElementById('m-churn').textContent = cancelados.length;
+}
+
+function formatDate(d) {
+  const [y,m,day] = d.split('-');
+  return `${day}/${m}/${y}`;
+}
+
+function verDetalhes(id) {
+  const a = assinantes.find(x => x.id === id);
+  alert(`${a.nome}\n${a.empresa}\n${a.whatsapp}\nPlano: ${a.plano} · ${a.status}\nAssinante desde: ${formatDate(a.desde)}\nMRR: R$${a.mrr}`);
+}
+
+function cancelar(id) {
+  if (!confirm('Cancelar assinatura deste cliente?')) return;
+  const a = assinantes.find(x => x.id === id);
+  a.status = 'cancelado';
+  a.mrr = 0;
+  renderTable();
+}
+
+function exportCSV() {
+  const rows = [['Nome','Empresa','WhatsApp','Plano','Status','Desde']];
+  assinantes.forEach(a => rows.push([a.nome, a.empresa, a.whatsapp, a.plano, a.status, a.desde]));
+  const csv = rows.map(r => r.join(',')).join('\n');
+  const blob = new Blob([csv], {type:'text/csv'});
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = 'assinantes-atendimento24h.csv';
+  link.click();
+}
+
+function showTab(tab) {
+  document.getElementById('page-title').textContent =
+    tab === 'assinantes' ? 'Assinantes' :
+    tab === 'receita' ? 'Receita' :
+    tab === 'mensagens' ? 'Mensagens' : 'Configuracoes';
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  event.currentTarget.classList.add('active');
+}
+
+// LOGIN
+const USERS = { caco: 'Somzeira!', dudu: 'Somzeira!' };
+function doLogin() {
+  const u = document.getElementById('loginUser').value.trim().toLowerCase();
+  const p = document.getElementById('loginPass').value;
+  if (USERS[u] && USERS[u] === p) {
+    document.getElementById('loginOverlay').style.display = 'none';
+    sessionStorage.setItem('a24h_auth', '1');
+  } else {
+    document.getElementById('loginError').textContent = 'Usuario ou senha incorretos.';
+  }
+}
+if (!sessionStorage.getItem('a24h_auth')) {
+  document.getElementById('loginOverlay').style.display = 'flex';
+} else {
+  document.getElementById('loginOverlay').style.display = 'none';
+}
+
+// INIT
+renderTable();
+</script>
+</body>
+</html>
