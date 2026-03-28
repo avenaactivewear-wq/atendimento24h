@@ -156,6 +156,19 @@ td{padding:12px 16px;font-size:13px;vertical-align:middle}
 .modal-close{background:none;border:none;color:var(--text3);font-size:20px;cursor:pointer;position:absolute;top:20px;right:20px;line-height:1;padding:4px}
 .modal-wrap{position:relative}
 .td-email{font-size:11px;color:var(--text3);margin-top:1px}
+/* PROGRESS BAR */
+.usage-bar-wrap{width:100%;min-width:90px}
+.usage-bar-labels{display:flex;justify-content:space-between;font-size:10px;color:var(--text3);margin-bottom:4px}
+.usage-bar-track{height:5px;background:rgba(255,255,255,0.08);border-radius:100px;overflow:hidden}
+.usage-bar-fill{height:100%;border-radius:100px;transition:.3s}
+.fill-ok{background:var(--green)}
+.fill-warn{background:var(--yellow)}
+.fill-danger{background:var(--red)}
+.renew-date{font-size:10px;color:var(--text3);margin-top:4px}
+/* CANCELLED ROW */
+tr.row-cancelado{background:rgba(239,68,68,0.04)}
+tr.row-cancelado:hover{background:rgba(239,68,68,0.07)}
+.action-btn.reativar:hover{color:var(--green);border-color:rgba(37,211,102,0.4)}
 
 /* MOBILE */
 @media(max-width:768px){
@@ -274,63 +287,146 @@ td{padding:12px 16px;font-size:13px;vertical-align:middle}
 
     <div class="content">
 
-      <!-- METRICS -->
-      <div class="metrics">
-        <div class="metric-card">
-          <div class="metric-label">Total assinantes</div>
-          <div class="metric-value green" id="m-total">0</div>
-          <div class="metric-delta delta-up">+3 este mes</div>
-        </div>
-        <div class="metric-card">
-          <div class="metric-label">MRR</div>
-          <div class="metric-value" id="m-mrr">R$0</div>
-          <div class="metric-delta delta-up">+R$591 este mes</div>
-        </div>
-        <div class="metric-card">
-          <div class="metric-label">Ativos agora</div>
-          <div class="metric-value" id="m-ativos">0</div>
-          <div class="metric-sub">Em trial: <span id="m-trial">0</span></div>
-        </div>
-        <div class="metric-card">
-          <div class="metric-label">Churn este mes</div>
-          <div class="metric-value" id="m-churn">0</div>
-          <div class="metric-delta delta-down">1 cancelamento</div>
-        </div>
-      </div>
-
-      <!-- FILTERS -->
-      <div class="filter-bar">
-        <button class="filter-btn active" onclick="setFilter('todos',this)">Todos</button>
-        <button class="filter-btn" onclick="setFilter('ativo',this)">Ativos</button>
-        <button class="filter-btn" onclick="setFilter('trial',this)">Trial</button>
-        <button class="filter-btn" onclick="setFilter('cancelado',this)">Cancelados</button>
-      </div>
-
-      <!-- TABLE -->
-      <div class="table-wrap">
-        <div class="table-header">
-          <div class="table-title">Lista de assinantes</div>
-          <div class="table-actions">
-            <input class="search-input" type="text" placeholder="Buscar nome ou WhatsApp..." id="searchInput" oninput="renderTable()">
-            <button class="btn-sm" onclick="renderTable()">Atualizar</button>
+      <!-- TAB: ASSINANTES -->
+      <div id="tab-assinantes">
+        <div class="metrics">
+          <div class="metric-card">
+            <div class="metric-label">Total assinantes</div>
+            <div class="metric-value green" id="m-total">0</div>
+            <div class="metric-delta delta-up">+3 este mes</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-label">MRR</div>
+            <div class="metric-value" id="m-mrr">R$0</div>
+            <div class="metric-delta delta-up">+R$591 este mes</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-label">Ativos agora</div>
+            <div class="metric-value" id="m-ativos">0</div>
+            <div class="metric-sub">Em trial: <span id="m-trial">0</span></div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-label">Churn este mes</div>
+            <div class="metric-value" id="m-churn">0</div>
+            <div class="metric-delta delta-down">1 cancelamento</div>
           </div>
         </div>
-        <table>
-          <thead>
-            <tr>
-              <th>Cliente</th>
-              <th>Status</th>
-              <th>Plano</th>
-              <th>WhatsApp</th>
-              <th>Desde</th>
-              <th>Acoes</th>
-            </tr>
-          </thead>
-          <tbody id="table-body"></tbody>
-        </table>
-        <div class="pagination">
-          <div class="pagination-info" id="pagination-info"></div>
-          <div class="pagination-btns" id="pagination-btns"></div>
+        <div class="filter-bar">
+          <button class="filter-btn active" onclick="setFilter('todos',this)">Todos</button>
+          <button class="filter-btn" onclick="setFilter('ativo',this)">Ativos</button>
+          <button class="filter-btn" onclick="setFilter('trial',this)">Trial</button>
+          <button class="filter-btn" onclick="setFilter('cancelado',this)">Cancelados</button>
+        </div>
+        <div class="table-wrap">
+          <div class="table-header">
+            <div class="table-title">Lista de assinantes</div>
+            <div class="table-actions">
+              <input class="search-input" type="text" placeholder="Buscar nome, email ou WhatsApp..." id="searchInput" oninput="renderTable()">
+              <button class="btn-sm" onclick="renderTable()">Atualizar</button>
+            </div>
+          </div>
+          <table>
+            <thead>
+              <tr>
+                <th>Cliente</th>
+                <th>Status</th>
+                <th>Plano</th>
+                <th>Consumo / Renovacao</th>
+                <th>WhatsApp</th>
+                <th>Acoes</th>
+              </tr>
+            </thead>
+            <tbody id="table-body"></tbody>
+          </table>
+          <div class="pagination">
+            <div class="pagination-info" id="pagination-info"></div>
+            <div class="pagination-btns" id="pagination-btns"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB: RECEITA -->
+      <div id="tab-receita" style="display:none">
+        <div class="metrics" id="receita-metrics"></div>
+        <div class="table-wrap">
+          <div class="table-header"><div class="table-title">Historico de receita por assinante</div></div>
+          <table>
+            <thead><tr><th>Cliente</th><th>Empresa</th><th>Plano</th><th>Status</th><th>MRR</th><th>Desde</th></tr></thead>
+            <tbody id="receita-body"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- TAB: MENSAGENS -->
+      <div id="tab-mensagens" style="display:none">
+        <div class="metrics">
+          <div class="metric-card">
+            <div class="metric-label">Total enviadas</div>
+            <div class="metric-value green">--</div>
+            <div class="metric-sub">Backend pendente</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-label">Este mes</div>
+            <div class="metric-value">--</div>
+            <div class="metric-sub">Backend pendente</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-label">Respondidas por IA</div>
+            <div class="metric-value">--</div>
+            <div class="metric-sub">Backend pendente</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-label">Taxa de resposta</div>
+            <div class="metric-value">--</div>
+            <div class="metric-sub">Backend pendente</div>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <div class="table-header"><div class="table-title">Uso por cliente</div></div>
+          <table>
+            <thead><tr><th>Cliente</th><th>Plano</th><th>Limite</th><th>Usado</th><th>Restante</th></tr></thead>
+            <tbody>
+              <tr><td colspan="5" style="text-align:center;padding:48px;color:var(--text3)">Disponivel apos integracao com Evolution API</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- TAB: CONFIG -->
+      <div id="tab-config" style="display:none">
+        <div class="table-wrap" style="margin-bottom:20px">
+          <div class="table-header"><div class="table-title">Configuracoes do sistema</div></div>
+          <div style="padding:24px;display:flex;flex-direction:column;gap:20px">
+            <div>
+              <div class="modal-label" style="margin-bottom:8px">Planos e precos</div>
+              <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px">
+                <div class="metric-card"><div class="metric-label">Essencial</div><div class="metric-value" style="font-size:20px">R$197</div><div class="metric-sub">500 msgs/mes</div></div>
+                <div class="metric-card"><div class="metric-label">Recomendado</div><div class="metric-value" style="font-size:20px">R$397</div><div class="metric-sub">2.500 msgs/mes</div></div>
+                <div class="metric-card"><div class="metric-label">Pro</div><div class="metric-value" style="font-size:20px">R$797</div><div class="metric-sub">15.000 msgs/mes</div></div>
+              </div>
+            </div>
+            <div>
+              <div class="modal-label" style="margin-bottom:8px">Integracao backend</div>
+              <div style="display:flex;flex-direction:column;gap:8px">
+                <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 16px;background:var(--card2);border-radius:8px;border:1px solid var(--border)">
+                  <span style="font-size:13px">Evolution API (WhatsApp)</span>
+                  <span style="font-size:11px;font-weight:600;color:var(--red);background:rgba(239,68,68,0.1);padding:3px 9px;border-radius:100px">Pendente</span>
+                </div>
+                <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 16px;background:var(--card2);border-radius:8px;border:1px solid var(--border)">
+                  <span style="font-size:13px">n8n Workflow</span>
+                  <span style="font-size:11px;font-weight:600;color:var(--red);background:rgba(239,68,68,0.1);padding:3px 9px;border-radius:100px">Pendente</span>
+                </div>
+                <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 16px;background:var(--card2);border-radius:8px;border:1px solid var(--border)">
+                  <span style="font-size:13px">Kiwify Webhook</span>
+                  <span style="font-size:11px;font-weight:600;color:var(--red);background:rgba(239,68,68,0.1);padding:3px 9px;border-radius:100px">Pendente</span>
+                </div>
+                <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 16px;background:var(--card2);border-radius:8px;border:1px solid var(--border)">
+                  <span style="font-size:13px">License Server</span>
+                  <span style="font-size:11px;font-weight:600;color:var(--red);background:rgba(239,68,68,0.1);padding:3px 9px;border-radius:100px">Pendente</span>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -340,17 +436,18 @@ td{padding:12px 16px;font-size:13px;vertical-align:middle}
 
 <script>
 // DADOS MOCK - substituir por chamada API quando backend estiver pronto
+const LIMITES = { Essencial: 500, Pro: 2500, Basico: 500, Recomendado: 2500 };
 const assinantes = [
-  { id:1, nome:'Carlos Mendes', empresa:'Barbearia do Carlos', email:'carlos@barbeariadorcarlos.com.br', whatsapp:'(11) 99123-4567', plano:'Essencial', status:'ativo', desde:'2026-02-10', mrr:197, licenca:'A24H-ESS-1A2B-3C4D' },
-  { id:2, nome:'Fernanda Lima', empresa:'Clinica Estetica FL', email:'fernanda@clinicafl.com.br', whatsapp:'(21) 98765-3210', plano:'Pro', status:'ativo', desde:'2026-01-22', mrr:397, licenca:'A24H-PRO-5E6F-7G8H' },
-  { id:3, nome:'Ricardo Souza', empresa:'RS Eletrica', email:'ricardo@rseletrica.com.br', whatsapp:'(31) 97654-8901', plano:'Essencial', status:'trial', desde:'2026-03-20', mrr:0, licenca:'A24H-ESS-9I0J-1K2L' },
-  { id:4, nome:'Ana Paula Costa', empresa:'Salao Ana Paula', email:'anapaula@salaoanapaula.com.br', whatsapp:'(51) 96543-7890', plano:'Pro', status:'ativo', desde:'2026-02-05', mrr:397, licenca:'A24H-PRO-3M4N-5O6P' },
-  { id:5, nome:'Marcos Oliveira', empresa:'Auto Pecas MO', email:'marcos@autopecasmo.com.br', whatsapp:'(41) 95432-6789', plano:'Essencial', status:'ativo', desde:'2026-01-15', mrr:197, licenca:'A24H-ESS-7Q8R-9S0T' },
-  { id:6, nome:'Julia Ferreira', empresa:'Studio Julia', email:'julia@studiojulia.com.br', whatsapp:'(85) 94321-5678', plano:'Pro', status:'trial', desde:'2026-03-22', mrr:0, licenca:'A24H-PRO-1U2V-3W4X' },
-  { id:7, nome:'Pedro Alves', empresa:'Construa Mais', email:'pedro@construamais.com.br', whatsapp:'(62) 93210-4567', plano:'Essencial', status:'cancelado', desde:'2026-01-08', mrr:0, licenca:'A24H-ESS-5Y6Z-7A8B' },
-  { id:8, nome:'Camila Santos', empresa:'Doces da Camila', email:'camila@docesdacamila.com.br', whatsapp:'(71) 92109-3456', plano:'Essencial', status:'ativo', desde:'2026-03-01', mrr:197, licenca:'A24H-ESS-9C0D-1E2F' },
-  { id:9, nome:'Bruno Rodrigues', empresa:'BR Consultoria', email:'bruno@brconsultoria.com.br', whatsapp:'(11) 91098-2345', plano:'Pro', status:'ativo', desde:'2026-02-18', mrr:397, licenca:'A24H-PRO-3G4H-5I6J' },
-  { id:10, nome:'Leticia Martins', empresa:'Farmacia Saudavel', email:'leticia@farmaciasaudavel.com.br', whatsapp:'(47) 90987-1234', plano:'Essencial', status:'ativo', desde:'2026-03-10', mrr:197, licenca:'A24H-ESS-7K8L-9M0N' },
+  { id:1, nome:'Carlos Mendes', empresa:'Barbearia do Carlos', email:'carlos@barbeariadorcarlos.com.br', whatsapp:'(11) 99123-4567', plano:'Essencial', status:'ativo', desde:'2026-02-10', mrr:197, licenca:'A24H-ESS-1A2B-3C4D', msgs:312 },
+  { id:2, nome:'Fernanda Lima', empresa:'Clinica Estetica FL', email:'fernanda@clinicafl.com.br', whatsapp:'(21) 98765-3210', plano:'Pro', status:'ativo', desde:'2026-01-22', mrr:397, licenca:'A24H-PRO-5E6F-7G8H', msgs:1890 },
+  { id:3, nome:'Ricardo Souza', empresa:'RS Eletrica', email:'ricardo@rseletrica.com.br', whatsapp:'(31) 97654-8901', plano:'Essencial', status:'trial', desde:'2026-03-20', mrr:0, licenca:'A24H-ESS-9I0J-1K2L', msgs:47 },
+  { id:4, nome:'Ana Paula Costa', empresa:'Salao Ana Paula', email:'anapaula@salaoanapaula.com.br', whatsapp:'(51) 96543-7890', plano:'Pro', status:'ativo', desde:'2026-02-05', mrr:397, licenca:'A24H-PRO-3M4N-5O6P', msgs:2310 },
+  { id:5, nome:'Marcos Oliveira', empresa:'Auto Pecas MO', email:'marcos@autopecasmo.com.br', whatsapp:'(41) 95432-6789', plano:'Essencial', status:'ativo', desde:'2026-01-15', mrr:197, licenca:'A24H-ESS-7Q8R-9S0T', msgs:198 },
+  { id:6, nome:'Julia Ferreira', empresa:'Studio Julia', email:'julia@studiojulia.com.br', whatsapp:'(85) 94321-5678', plano:'Pro', status:'trial', desde:'2026-03-22', mrr:0, licenca:'A24H-PRO-1U2V-3W4X', msgs:203 },
+  { id:7, nome:'Pedro Alves', empresa:'Construa Mais', email:'pedro@construamais.com.br', whatsapp:'(62) 93210-4567', plano:'Essencial', status:'cancelado', desde:'2026-01-08', mrr:0, licenca:'A24H-ESS-5Y6Z-7A8B', msgs:0 },
+  { id:8, nome:'Camila Santos', empresa:'Doces da Camila', email:'camila@docesdacamila.com.br', whatsapp:'(71) 92109-3456', plano:'Essencial', status:'ativo', desde:'2026-03-01', mrr:197, licenca:'A24H-ESS-9C0D-1E2F', msgs:478 },
+  { id:9, nome:'Bruno Rodrigues', empresa:'BR Consultoria', email:'bruno@brconsultoria.com.br', whatsapp:'(11) 91098-2345', plano:'Pro', status:'ativo', desde:'2026-02-18', mrr:397, licenca:'A24H-PRO-3G4H-5I6J', msgs:960 },
+  { id:10, nome:'Leticia Martins', empresa:'Farmacia Saudavel', email:'leticia@farmaciasaudavel.com.br', whatsapp:'(47) 90987-1234', plano:'Essencial', status:'ativo', desde:'2026-03-10', mrr:197, licenca:'A24H-ESS-7K8L-9M0N', msgs:115 },
 ];
 
 let filtroAtual = 'todos';
@@ -384,8 +481,17 @@ function renderTable() {
   if (pagina.length === 0) {
     tbody.innerHTML = '<tr class="empty-row"><td colspan="6">Nenhum assinante encontrado.</td></tr>';
   } else {
-    tbody.innerHTML = pagina.map(a => `
-      <tr>
+    tbody.innerHTML = pagina.map(a => {
+      const limite = LIMITES[a.plano] || 500;
+      const pct = a.status === 'cancelado' ? 0 : Math.min(100, Math.round((a.msgs / limite) * 100));
+      const fillClass = pct >= 90 ? 'fill-danger' : pct >= 70 ? 'fill-warn' : 'fill-ok';
+      const renovacao = calcRenovacao(a.desde);
+      const acoes = a.status === 'cancelado'
+        ? `<button class="action-btn reativar" onclick="reativar(${a.id})">Reativar</button>`
+        : `<button class="action-btn" onclick="abrirLicenca(${a.id})">Licenca</button>
+           <button class="action-btn danger" onclick="cancelar(${a.id})">Cancelar</button>`;
+      return `
+      <tr class="${a.status === 'cancelado' ? 'row-cancelado' : ''}">
         <td>
           <div class="td-name">${a.nome}</div>
           <div class="td-sub">${a.empresa}</div>
@@ -393,14 +499,18 @@ function renderTable() {
         </td>
         <td><span class="status-badge status-${a.status}">${a.status === 'ativo' ? 'Ativo' : a.status === 'trial' ? 'Trial' : 'Cancelado'}</span></td>
         <td><span class="plan-badge ${a.plano === 'Pro' ? 'plan-pro' : ''}">${a.plano}</span></td>
-        <td><a class="whatsapp-link" href="https://wa.me/55${a.whatsapp.replace(/\D/g,'')}" target="_blank">${a.whatsapp}</a></td>
-        <td style="color:var(--text2);font-size:12px">${formatDate(a.desde)}</td>
-        <td style="display:flex;gap:6px;flex-wrap:wrap">
-          <button class="action-btn" onclick="abrirLicenca(${a.id})">Licenca</button>
-          <button class="action-btn danger" onclick="cancelar(${a.id})">Cancelar</button>
+        <td>
+          ${a.status === 'cancelado' ? '<span style="font-size:12px;color:var(--text3)">--</span>' : `
+          <div class="usage-bar-wrap">
+            <div class="usage-bar-labels"><span>${a.msgs} msgs</span><span>${limite}</span></div>
+            <div class="usage-bar-track"><div class="usage-bar-fill ${fillClass}" style="width:${pct}%"></div></div>
+            <div class="renew-date">Renova em ${renovacao}</div>
+          </div>`}
         </td>
-      </tr>
-    `).join('');
+        <td><a class="whatsapp-link" href="https://wa.me/55${a.whatsapp.replace(/\D/g,'')}" target="_blank">${a.whatsapp}</a></td>
+        <td style="display:flex;gap:6px;flex-wrap:wrap">${acoes}</td>
+      </tr>`;
+    }).join('');
   }
 
   // Pagination
@@ -481,11 +591,28 @@ function reenviarWpp() {
   window.open(`https://wa.me/55${num}?text=${msg}`, '_blank');
 }
 
+function calcRenovacao(desde) {
+  const dia = desde.split('-')[2];
+  const hoje = new Date();
+  const mes = hoje.getDate() >= parseInt(dia) ? hoje.getMonth() + 1 : hoje.getMonth();
+  const ano = mes > 11 ? hoje.getFullYear() + 1 : hoje.getFullYear();
+  const mesNorm = mes > 11 ? 0 : mes;
+  return `${dia}/${String(mesNorm + 1).padStart(2,'0')}/${ano}`;
+}
+
 function cancelar(id) {
   if (!confirm('Cancelar assinatura deste cliente?')) return;
   const a = assinantes.find(x => x.id === id);
   a.status = 'cancelado';
   a.mrr = 0;
+  renderTable();
+}
+
+function reativar(id) {
+  const a = assinantes.find(x => x.id === id);
+  if (!confirm(`Reativar assinatura de ${a.nome}?`)) return;
+  a.status = 'ativo';
+  a.mrr = LIMITES[a.plano] === 500 ? 197 : 397;
   renderTable();
 }
 
@@ -502,12 +629,38 @@ function exportCSV() {
 }
 
 function showTab(tab) {
-  document.getElementById('page-title').textContent =
-    tab === 'assinantes' ? 'Assinantes' :
-    tab === 'receita' ? 'Receita' :
-    tab === 'mensagens' ? 'Mensagens' : 'Configuracoes';
+  const titulos = { assinantes:'Assinantes', receita:'Receita', mensagens:'Mensagens', config:'Configuracoes' };
+  document.getElementById('page-title').textContent = titulos[tab] || tab;
   document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
   event.currentTarget.classList.add('active');
+  ['assinantes','receita','mensagens','config'].forEach(t => {
+    const el = document.getElementById('tab-' + t);
+    if (el) el.style.display = t === tab ? '' : 'none';
+  });
+  if (tab === 'receita') renderReceita();
+}
+
+function renderReceita() {
+  const ativos = assinantes.filter(a => a.status === 'ativo');
+  const mrr = ativos.reduce((s,a) => s + a.mrr, 0);
+  const arr = assinantes.filter(a => a.status !== 'cancelado').reduce((s,a) => s + a.mrr * 12, 0);
+  document.getElementById('receita-metrics').innerHTML = `
+    <div class="metric-card"><div class="metric-label">MRR</div><div class="metric-value green">R$${mrr.toLocaleString('pt-BR')}</div><div class="metric-sub">Receita mensal recorrente</div></div>
+    <div class="metric-card"><div class="metric-label">ARR Projetado</div><div class="metric-value">R$${arr.toLocaleString('pt-BR')}</div><div class="metric-sub">x12 meses</div></div>
+    <div class="metric-card"><div class="metric-label">Ticket Medio</div><div class="metric-value">R$${ativos.length ? Math.round(mrr/ativos.length) : 0}</div><div class="metric-sub">${ativos.length} clientes ativos</div></div>
+    <div class="metric-card"><div class="metric-label">Meta (20 clientes)</div><div class="metric-value">R$7.940</div><div class="metric-sub">Progresso: ${Math.round(mrr/7940*100)}%</div></div>
+  `;
+  document.getElementById('receita-body').innerHTML = assinantes
+    .filter(a => a.mrr > 0)
+    .sort((a,b) => b.mrr - a.mrr)
+    .map(a => `<tr>
+      <td><div class="td-name">${a.nome}</div><div class="td-email">${a.email}</div></td>
+      <td>${a.empresa}</td>
+      <td><span class="plan-badge ${a.plano==='Pro'?'plan-pro':''}">${a.plano}</span></td>
+      <td><span class="status-badge status-${a.status}">${a.status==='ativo'?'Ativo':'Trial'}</span></td>
+      <td style="font-weight:700;color:var(--green)">R$${a.mrr}/mes</td>
+      <td style="font-size:12px;color:var(--text2)">${formatDate(a.desde)}</td>
+    </tr>`).join('');
 }
 
 // LOGIN
