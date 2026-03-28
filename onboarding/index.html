@@ -246,6 +246,34 @@ textarea{resize:vertical;min-height:120px}
   display:flex;gap:10px;align-items:flex-start;
 }
 .help-note-icon{font-size:16px;flex-shrink:0;margin-top:1px}
+
+/* ─── HOURS BUILDER ─── */
+.hours-builder{display:flex;flex-direction:column;gap:10px}
+.hours-row{
+  display:flex;align-items:center;gap:10px;
+  background:var(--card2);border:1px solid var(--border);
+  border-radius:var(--radius);padding:12px 14px;
+  transition:border-color .2s;
+}
+.hours-row.active{border-color:var(--border-green)}
+.hours-day{display:flex;align-items:center;gap:8px;min-width:100px;flex-shrink:0}
+.hours-day input[type=checkbox]{
+  width:18px;height:18px;border-radius:4px;
+  accent-color:var(--green);cursor:pointer;flex-shrink:0;
+}
+.hours-day-label{font-size:14px;font-weight:600;color:var(--text);cursor:pointer}
+.hours-row.closed .hours-day-label{color:var(--text3)}
+.hours-times{display:flex;align-items:center;gap:8px;flex:1}
+.hours-times select{
+  padding:7px 28px 7px 10px;font-size:13px;border-radius:8px;
+  background:var(--card);flex:1;min-width:80px;
+}
+.hours-sep{font-size:13px;color:var(--text3);flex-shrink:0}
+.hours-closed-label{font-size:13px;color:var(--text3);font-style:italic}
+@media(max-width:400px){
+  .hours-row{flex-wrap:wrap}
+  .hours-times{width:100%}
+}
 </style>
 </head>
 <body>
@@ -395,19 +423,89 @@ textarea{resize:vertical;min-height:120px}
         <label>Segmento <span>*</span></label>
         <select id="i-segmento">
           <option value="">Selecione...</option>
-          <option value="loja">Loja / E-commerce</option>
-          <option value="clinica">Clínica / Saúde</option>
-          <option value="salao">Salão / Estética</option>
-          <option value="restaurante">Restaurante / Delivery</option>
-          <option value="servicos">Serviços Gerais</option>
-          <option value="educacao">Educação / Cursos</option>
+          <optgroup label="Saúde &amp; Beleza">
+            <option value="clinica">Clínica médica</option>
+            <option value="dentista">Dentista / Odonto</option>
+            <option value="psicologia">Psicologia / Terapia</option>
+            <option value="salao">Salão de beleza</option>
+            <option value="barbearia">Barbearia</option>
+            <option value="estetica">Estética / Spa</option>
+            <option value="academia">Academia / Fitness</option>
+            <option value="pet">Pet shop / Veterinário</option>
+          </optgroup>
+          <optgroup label="Comércio">
+            <option value="loja">Loja física</option>
+            <option value="ecommerce">E-commerce / Online</option>
+            <option value="restaurante">Restaurante / Delivery</option>
+            <option value="farmacia">Farmácia</option>
+            <option value="automoveis">Automóveis</option>
+          </optgroup>
+          <optgroup label="Serviços">
+            <option value="imobiliaria">Imobiliária</option>
+            <option value="advocacia">Advocacia / Jurídico</option>
+            <option value="contabilidade">Contabilidade</option>
+            <option value="construcao">Construção / Reformas</option>
+            <option value="educacao">Educação / Cursos</option>
+            <option value="tecnologia">Tecnologia / TI</option>
+            <option value="marketing">Marketing / Agência</option>
+            <option value="servicos">Outros serviços</option>
+          </optgroup>
           <option value="outro">Outro</option>
         </select>
       </div>
-      <div class="field">
-        <label>Horário de atendimento humano</label>
-        <input type="text" id="i-horario" placeholder="Ex: Seg-Sex 9h às 18h">
+    </div>
+
+    <div class="field-row">
+      <div class="field" id="f-cidade">
+        <label>Cidade <span style="color:var(--text3);font-weight:400">(opcional)</span></label>
+        <input type="text" id="i-cidade" placeholder="Ex: São Paulo, SP">
       </div>
+      <div class="field">
+        <label>Site ou redes sociais <span style="color:var(--text3);font-weight:400">(opcional)</span></label>
+        <input type="text" id="i-site" placeholder="Ex: instagram.com/suaempresa">
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Horário de funcionamento <span>*</span></label>
+      <div class="hours-builder" id="hours-builder">
+        <div class="hours-row active" id="hr-semana">
+          <label class="hours-day">
+            <input type="checkbox" id="hc-semana" checked onchange="toggleHours('semana')">
+            <span class="hours-day-label">Seg a Sex</span>
+          </label>
+          <div class="hours-times" id="ht-semana">
+            <select id="ho-semana">HOURS_OPTIONS_9</select>
+            <span class="hours-sep">às</span>
+            <select id="hf-semana">HOURS_OPTIONS_18</select>
+          </div>
+        </div>
+        <div class="hours-row" id="hr-sabado">
+          <label class="hours-day">
+            <input type="checkbox" id="hc-sabado" onchange="toggleHours('sabado')">
+            <span class="hours-day-label">Sábado</span>
+          </label>
+          <div class="hours-times" id="ht-sabado" style="display:none">
+            <select id="ho-sabado">HOURS_OPTIONS_9</select>
+            <span class="hours-sep">às</span>
+            <select id="hf-sabado">HOURS_OPTIONS_14</select>
+          </div>
+          <span class="hours-closed-label" id="hcl-sabado">Fechado</span>
+        </div>
+        <div class="hours-row" id="hr-domingo">
+          <label class="hours-day">
+            <input type="checkbox" id="hc-domingo" onchange="toggleHours('domingo')">
+            <span class="hours-day-label">Domingo</span>
+          </label>
+          <div class="hours-times" id="ht-domingo" style="display:none">
+            <select id="ho-domingo">HOURS_OPTIONS_9</select>
+            <span class="hours-sep">às</span>
+            <select id="hf-domingo">HOURS_OPTIONS_13</select>
+          </div>
+          <span class="hours-closed-label" id="hcl-domingo">Fechado</span>
+        </div>
+      </div>
+      <div class="error-msg" id="hours-error">Selecione pelo menos um dia de funcionamento</div>
     </div>
 
     <div class="nav-btns">
@@ -552,6 +650,15 @@ Políticas:
       <div class="step-desc">Abra o WhatsApp no celular e escaneie o QR code abaixo para ativar seu atendente.</div>
     </div>
 
+    <div style="background:rgba(37,211,102,0.05);border:1px solid rgba(37,211,102,0.2);border-radius:12px;padding:16px 18px;margin-bottom:24px">
+      <div style="font-size:13px;font-weight:700;color:var(--green);margin-bottom:10px">💾 Recomendado: faça um backup antes</div>
+      <div style="font-size:13px;color:var(--text2);line-height:1.6;margin-bottom:8px">Para garantir que não perde nada, ative o backup automático do WhatsApp:</div>
+      <div style="display:flex;flex-direction:column;gap:5px;font-size:13px;color:var(--text2)">
+        <span>No WhatsApp: <strong style="color:var(--text)">Configurações → Conversas → Backup de conversas → Fazer backup</strong></span>
+      </div>
+      <div style="margin-top:10px;font-size:12px;color:var(--text3)">Suas mensagens <strong style="color:var(--text2)">NÃO serão apagadas</strong>. O atendente funciona em paralelo — você continua usando o WhatsApp normalmente no celular.</div>
+    </div>
+
     <div style="display:flex;flex-direction:column;align-items:center;gap:24px;margin-bottom:36px">
 
       <!-- QR Code container -->
@@ -645,8 +752,48 @@ function showAccessDenied(msg) {
   document.getElementById('access-denied-msg').textContent = msg
 }
 
-document.addEventListener('DOMContentLoaded', checkToken)
+document.addEventListener('DOMContentLoaded', () => { checkToken(); initHoursBuilder() })
 const NGROK_HEADERS = { 'Content-Type': 'application/json', 'ngrok-skip-browser-warning': 'true' }
+
+// ─── HOURS BUILDER ───────────────────────────────────────────────────────────
+function buildHoursOptions(defaultHour) {
+  const hours = ['06:00','07:00','08:00','09:00','10:00','11:00','12:00','13:00','14:00','15:00','16:00','17:00','18:00','19:00','20:00','21:00','22:00','23:00']
+  return hours.map(h => `<option value="${h}"${h===defaultHour?' selected':''}>${h}</option>`).join('')
+}
+
+function initHoursBuilder() {
+  const map = {HOURS_OPTIONS_9:'09:00',HOURS_OPTIONS_14:'14:00',HOURS_OPTIONS_13:'13:00',HOURS_OPTIONS_18:'18:00'}
+  document.querySelectorAll('#hours-builder select').forEach(sel => {
+    const placeholder = sel.innerHTML.trim()
+    const def = map[placeholder] || '09:00'
+    sel.innerHTML = buildHoursOptions(def)
+  })
+}
+
+function toggleHours(day) {
+  const checked = document.getElementById('hc-'+day).checked
+  const row = document.getElementById('hr-'+day)
+  const times = document.getElementById('ht-'+day)
+  const closedLabel = document.getElementById('hcl-'+day)
+  row.classList.toggle('active', checked)
+  row.classList.toggle('closed', !checked)
+  if (times) times.style.display = checked ? 'flex' : 'none'
+  if (closedLabel) closedLabel.style.display = checked ? 'none' : ''
+}
+
+function getHoursString() {
+  const parts = []
+  if (document.getElementById('hc-semana').checked) {
+    parts.push(`Seg-Sex: ${document.getElementById('ho-semana').value} às ${document.getElementById('hf-semana').value}`)
+  }
+  if (document.getElementById('hc-sabado').checked) {
+    parts.push(`Sáb: ${document.getElementById('ho-sabado').value} às ${document.getElementById('hf-sabado').value}`)
+  }
+  if (document.getElementById('hc-domingo').checked) {
+    parts.push(`Dom: ${document.getElementById('ho-domingo').value} às ${document.getElementById('hf-domingo').value}`)
+  }
+  return parts.length ? parts.join(' | ') : ''
+}
 
 let currentStep = 0
 const totalSteps = 5
@@ -709,11 +856,17 @@ function validateStep0() {
 function validateStep1() {
   const nome = document.getElementById('i-nome').value.trim()
   const empresa = document.getElementById('i-empresa').value.trim()
-  const tom = document.getElementById('i-tom').value
-  const seg = document.getElementById('i-segmento').value
+  const hours = getHoursString()
   let ok = true
   setError('f-nome', !nome); if (!nome) ok = false
   setError('f-empresa', !empresa); if (!empresa) ok = false
+  const hoursErr = document.getElementById('hours-error')
+  if (!hours) {
+    hoursErr.style.display = 'block'
+    ok = false
+  } else {
+    hoursErr.style.display = 'none'
+  }
   if (ok) {
     fillSummary()
     nextStep()
@@ -737,13 +890,13 @@ function validateStep2() {
 
 function fillSummary() {
   const tomMap = {amigavel:'Amigável e descontraído',profissional:'Profissional e formal',empatico:'Empático e acolhedor',direto:'Direto e objetivo'}
-  const segMap = {loja:'Loja / E-commerce',clinica:'Clínica / Saúde',salao:'Salão / Estética',restaurante:'Restaurante / Delivery',servicos:'Serviços Gerais',educacao:'Educação / Cursos',outro:'Outro'}
+  const segMap = {clinica:'Clínica médica',dentista:'Dentista / Odonto',psicologia:'Psicologia / Terapia',salao:'Salão de beleza',barbearia:'Barbearia',estetica:'Estética / Spa',academia:'Academia / Fitness',pet:'Pet shop / Veterinário',loja:'Loja física',ecommerce:'E-commerce / Online',restaurante:'Restaurante / Delivery',farmacia:'Farmácia',automoveis:'Automóveis',imobiliaria:'Imobiliária',advocacia:'Advocacia / Jurídico',contabilidade:'Contabilidade',construcao:'Construção / Reformas',educacao:'Educação / Cursos',tecnologia:'Tecnologia / TI',marketing:'Marketing / Agência',servicos:'Outros serviços',outro:'Outro'}
   document.getElementById('s-email').textContent = document.getElementById('i-email').value || '—'
   document.getElementById('s-whatsapp').textContent = document.getElementById('i-whatsapp').value || '—'
   document.getElementById('s-nome').textContent = document.getElementById('i-nome').value || '—'
   document.getElementById('s-empresa').textContent = document.getElementById('i-empresa').value || '—'
   document.getElementById('s-tom').textContent = tomMap[document.getElementById('i-tom').value] || '—'
-  document.getElementById('s-segmento').textContent = segMap[document.getElementById('i-segmento').value] || '—'
+  document.getElementById('s-segmento').textContent = segMap[document.getElementById('i-segmento').value] || document.getElementById('i-segmento').value || '—'
   document.getElementById('success-msg').textContent = `${document.getElementById('i-nome').value || 'Seu atendente'} foi criado com sucesso. Agora escaneie o QR code para ativar o WhatsApp.`
 }
 
@@ -760,7 +913,9 @@ async function activate() {
     nome_empresa: document.getElementById('i-empresa').value.trim(),
     segmento: document.getElementById('i-segmento').value,
     tom_de_voz: document.getElementById('i-tom').value,
-    horario: document.getElementById('i-horario').value.trim(),
+    horario: getHoursString(),
+    cidade: document.getElementById('i-cidade').value.trim(),
+    site: document.getElementById('i-site').value.trim(),
     contexto: document.getElementById('i-info').value.trim(),
     plano_badge: document.getElementById('plan-label').textContent,
     origem: 'onboarding',
