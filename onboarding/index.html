@@ -408,6 +408,10 @@ textarea{resize:vertical;min-height:120px}
           <option value="profissional">Profissional e formal</option>
           <option value="empatico">Empático e acolhedor</option>
           <option value="direto">Direto e objetivo</option>
+          <option value="vendedor">Vendedor e persuasivo</option>
+          <option value="tecnico">Técnico e preciso</option>
+          <option value="descolado">Descolado e jovem</option>
+          <option value="luxo">Sofisticado e exclusivo</option>
         </select>
       </div>
     </div>
@@ -452,6 +456,7 @@ textarea{resize:vertical;min-height:120px}
           </optgroup>
           <option value="outro">Outro</option>
         </select>
+        <input type="text" id="i-segmento-outro" placeholder="Qual é o seu segmento?" style="display:none;margin-top:8px" oninput="document.getElementById('i-segmento-outro').value=this.value">
       </div>
     </div>
 
@@ -506,6 +511,10 @@ textarea{resize:vertical;min-height:120px}
         </div>
       </div>
       <div class="error-msg" id="hours-error">Selecione pelo menos um dia de funcionamento</div>
+      <div style="margin-top:10px;display:flex;gap:8px;background:rgba(34,197,94,0.08);border:1px solid rgba(34,197,94,0.2);border-radius:10px;padding:10px 12px">
+        <span style="font-size:16px;flex-shrink:0">24h</span>
+        <p style="font-size:12px;color:#a1a1aa;line-height:1.5;margin:0">Seu atendente responde <strong style="color:#22c55e">24 horas por dia, 7 dias por semana</strong>, sem parar. Este horário serve apenas para que ele saiba quando informar que um humano pode entrar em contato.</p>
+      </div>
     </div>
 
     <div class="nav-btns">
@@ -527,25 +536,28 @@ textarea{resize:vertical;min-height:120px}
 
     <div class="help-note">
       <span class="help-note-icon">💡</span>
-      Descreva produtos, preços, formas de pagamento, prazo de entrega e os diferenciais do seu negócio. Quanto mais detalhe, melhor.
+      <span>Descreva produtos, preços, formas de pagamento, prazo de entrega e os diferenciais do seu negócio. <strong>Se tiver links, coloque também</strong> — o atendente vai usar para enviar ao cliente na hora certa. Cole tudo que tiver: quanto mais informação, mais inteligente fica. <strong>Ele não vai ler como roteiro</strong>, vai entender o contexto e responder de forma natural.</span>
     </div>
 
     <div class="field">
       <label>Informações da empresa <span>*</span></label>
       <textarea id="i-info" placeholder="Minha empresa se chama [nome] e atua em [segmento]. Nossos principais produtos são...
 
-Preços e formas de pagamento:
-- [produto] por R$X,XX — parcelamos em até X vezes
-- Aceitamos PIX, cartão e dinheiro
+Produtos e precos:
+- [produto] por R$X,XX - parcelamos em ate X vezes
+- Link: https://sualoja.com.br/produto
+- Aceitamos PIX, cartao e dinheiro
 
 Prazo de entrega:
-- Enviamos para todo o Brasil, prazo de X a X dias úteis
+- Enviamos para todo o Brasil, prazo de X a X dias uteis
 
 Diferencial:
 - [O que nos faz especiais?]
 
-Políticas:
-- [Troca, devolução, garantia...]" style="min-height:200px" id="f-info"></textarea>
+Politicas:
+- [Troca, devolucao, garantia...]
+
+Dica: quanto mais voce escrever ou colar aqui, melhor seu atendente vai responder." style="min-height:220px"></textarea>
     </div>
 
     <div class="field">
@@ -752,7 +764,15 @@ function showAccessDenied(msg) {
   document.getElementById('access-denied-msg').textContent = msg
 }
 
-document.addEventListener('DOMContentLoaded', () => { checkToken(); initHoursBuilder() })
+document.addEventListener('DOMContentLoaded', () => {
+  checkToken()
+  initHoursBuilder()
+  document.getElementById('i-segmento').addEventListener('change', function() {
+    const outro = document.getElementById('i-segmento-outro')
+    outro.style.display = this.value === 'outro' ? 'block' : 'none'
+    if (this.value === 'outro') outro.focus()
+  })
+})
 const NGROK_HEADERS = { 'Content-Type': 'application/json', 'ngrok-skip-browser-warning': 'true' }
 
 // ─── HOURS BUILDER ───────────────────────────────────────────────────────────
@@ -876,10 +896,10 @@ function validateStep1() {
 function validateStep2() {
   const info = document.getElementById('i-info').value.trim()
   if (!info) {
-    document.getElementById('f-info').style.borderColor = '#f87171'
+    document.getElementById('i-info').style.borderColor = '#f87171'
     return
   }
-  document.getElementById('f-info').style.borderColor = ''
+  document.getElementById('i-info').style.borderColor = ''
   const docCount = document.querySelectorAll('#files-list-1 .file-item').length
   if (docCount > 0) {
     document.getElementById('check-docs').textContent = '✅'
@@ -889,14 +909,16 @@ function validateStep2() {
 }
 
 function fillSummary() {
-  const tomMap = {amigavel:'Amigável e descontraído',profissional:'Profissional e formal',empatico:'Empático e acolhedor',direto:'Direto e objetivo'}
-  const segMap = {clinica:'Clínica médica',dentista:'Dentista / Odonto',psicologia:'Psicologia / Terapia',salao:'Salão de beleza',barbearia:'Barbearia',estetica:'Estética / Spa',academia:'Academia / Fitness',pet:'Pet shop / Veterinário',loja:'Loja física',ecommerce:'E-commerce / Online',restaurante:'Restaurante / Delivery',farmacia:'Farmácia',automoveis:'Automóveis',imobiliaria:'Imobiliária',advocacia:'Advocacia / Jurídico',contabilidade:'Contabilidade',construcao:'Construção / Reformas',educacao:'Educação / Cursos',tecnologia:'Tecnologia / TI',marketing:'Marketing / Agência',servicos:'Outros serviços',outro:'Outro'}
-  document.getElementById('s-email').textContent = document.getElementById('i-email').value || '—'
-  document.getElementById('s-whatsapp').textContent = document.getElementById('i-whatsapp').value || '—'
-  document.getElementById('s-nome').textContent = document.getElementById('i-nome').value || '—'
-  document.getElementById('s-empresa').textContent = document.getElementById('i-empresa').value || '—'
-  document.getElementById('s-tom').textContent = tomMap[document.getElementById('i-tom').value] || '—'
-  document.getElementById('s-segmento').textContent = segMap[document.getElementById('i-segmento').value] || document.getElementById('i-segmento').value || '—'
+  const tomMap = {amigavel:'Amigável e descontraído',profissional:'Profissional e formal',empatico:'Empático e acolhedor',direto:'Direto e objetivo',vendedor:'Vendedor e persuasivo',tecnico:'Técnico e preciso',descolado:'Descolado e jovem',luxo:'Sofisticado e exclusivo'}
+  const segMap = {clinica:'Clínica médica',dentista:'Dentista / Odonto',psicologia:'Psicologia / Terapia',salao:'Salão de beleza',barbearia:'Barbearia',estetica:'Estética / Spa',academia:'Academia / Fitness',pet:'Pet shop / Veterinário',loja:'Loja física',ecommerce:'E-commerce / Online',restaurante:'Restaurante / Delivery',farmacia:'Farmácia',automoveis:'Automóveis',imobiliaria:'Imobiliária',advocacia:'Advocacia / Jurídico',contabilidade:'Contabilidade',construcao:'Construção / Reformas',educacao:'Educação / Cursos',tecnologia:'Tecnologia / TI',marketing:'Marketing / Agência',servicos:'Outros serviços'}
+  const segVal = document.getElementById('i-segmento').value
+  const segText = segVal === 'outro' ? (document.getElementById('i-segmento-outro').value.trim() || 'Outro') : (segMap[segVal] || segVal || 'Outro')
+  document.getElementById('s-email').textContent = document.getElementById('i-email').value || '--'
+  document.getElementById('s-whatsapp').textContent = document.getElementById('i-whatsapp').value || '--'
+  document.getElementById('s-nome').textContent = document.getElementById('i-nome').value || '--'
+  document.getElementById('s-empresa').textContent = document.getElementById('i-empresa').value || '--'
+  document.getElementById('s-tom').textContent = tomMap[document.getElementById('i-tom').value] || '--'
+  document.getElementById('s-segmento').textContent = segText
   document.getElementById('success-msg').textContent = `${document.getElementById('i-nome').value || 'Seu atendente'} foi criado com sucesso. Agora escaneie o QR code para ativar o WhatsApp.`
 }
 
@@ -911,7 +933,7 @@ async function activate() {
     whatsapp: document.getElementById('i-whatsapp').value.trim().replace(/\D/g,''),
     nome_atendente: document.getElementById('i-nome').value.trim(),
     nome_empresa: document.getElementById('i-empresa').value.trim(),
-    segmento: document.getElementById('i-segmento').value,
+    segmento: document.getElementById('i-segmento').value === 'outro' ? (document.getElementById('i-segmento-outro').value.trim() || 'outro') : document.getElementById('i-segmento').value,
     tom_de_voz: document.getElementById('i-tom').value,
     horario: getHoursString(),
     cidade: document.getElementById('i-cidade').value.trim(),
