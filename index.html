@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Atendimento24h — Seu negócio nunca mais fica sem resposta</title>
+<title>Atendente24h: Seu negócio nunca mais fica sem resposta</title>
 <meta name="description" content="Atendente de WhatsApp com IA que responde seus clientes 24 horas por dia, 7 dias por semana. Zero instalação. Ativa em minutos.">
-<meta property="og:title" content="Atendimento24h — Seu negócio nunca mais fica sem resposta">
+<meta property="og:title" content="Atendente24h: Seu negócio nunca mais fica sem resposta">
 <meta property="og:description" content="Atendente de WhatsApp com IA. 24/7. Zero instalação. A partir de R$197/mês.">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
@@ -47,18 +47,31 @@ body{
   overflow-x:hidden;
 }
 
-/* ─── NAV ─── */
+/* ─── NAV liquid glass ─── */
 nav{
   position:fixed;top:16px;left:50%;transform:translateX(-50%);
   z-index:100;
   display:flex;align-items:center;justify-content:space-between;
   padding:14px 28px;
   width:min(1000px,calc(100% - 32px));
-  background:rgba(8,8,8,0.85);
-  backdrop-filter:blur(24px) saturate(180%);
-  border:1px solid var(--border);
+  background:rgba(255,255,255,0.06);
+  backdrop-filter:blur(48px) saturate(220%) brightness(1.08);
+  -webkit-backdrop-filter:blur(48px) saturate(220%) brightness(1.08);
   border-radius:100px;
-  box-shadow:0 4px 32px rgba(0,0,0,0.4),inset 0 1px 0 rgba(255,255,255,0.05);
+  border:1px solid rgba(255,255,255,0.13);
+  box-shadow:
+    0 2px 0 0 rgba(255,255,255,0.12) inset,
+    0 -1px 0 0 rgba(255,255,255,0.04) inset,
+    0 8px 40px rgba(0,0,0,0.35),
+    0 1px 0 rgba(255,255,255,0.06);
+  position:fixed;
+}
+nav::before{
+  content:'';
+  position:absolute;inset:0;
+  border-radius:100px;
+  background:linear-gradient(135deg,rgba(255,255,255,0.08) 0%,rgba(255,255,255,0.01) 50%,rgba(37,211,102,0.04) 100%);
+  pointer-events:none;
 }
 .nav-logo{
   font-size:17px;font-weight:800;letter-spacing:-0.5px;
@@ -83,6 +96,7 @@ nav{
   display:flex;align-items:center;justify-content:center;
   padding:120px 24px 80px;
   position:relative;overflow:hidden;
+  z-index:1;
 }
 .hero-bg{
   position:absolute;inset:0;
@@ -187,11 +201,16 @@ h1 span{
 @media(max-width:900px){.wpp-phone{width:280px}}
 .wpp-frame{
   background:#111;
-  border-radius:40px;
-  border:2px solid rgba(255,255,255,0.1);
+  border-radius:44px;
+  border:1px solid rgba(255,255,255,0.06);
   padding:16px 12px 24px;
-  box-shadow:0 40px 80px rgba(0,0,0,0.6),0 0 0 1px rgba(255,255,255,0.04),inset 0 1px 0 rgba(255,255,255,0.08);
+  box-shadow:
+    0 40px 80px rgba(0,0,0,0.7),
+    0 0 0 6px rgba(255,255,255,0.03),
+    0 0 0 7px rgba(255,255,255,0.04),
+    inset 0 1px 0 rgba(255,255,255,0.1);
   position:relative;overflow:hidden;
+  outline:8px solid rgba(0,0,0,0.5);
 }
 .wpp-frame::before{
   content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);
@@ -242,19 +261,31 @@ h1 span{
   background:var(--surface);
   border-top:1px solid var(--border);
   border-bottom:1px solid var(--border);
-  padding:32px 24px;
+  padding:20px 24px;
+  position:relative;z-index:1;
+  overflow:hidden;
 }
-.proof-inner{
-  max-width:1000px;margin:0 auto;
-  display:flex;align-items:center;justify-content:center;
-  flex-wrap:wrap;gap:40px;
+.proof-track{
+  display:flex;align-items:center;
+  white-space:nowrap;
+  animation:proofScroll 28s linear infinite;
+  width:max-content;
 }
-.proof-item{display:flex;align-items:center;gap:10px;color:var(--text3);font-size:14px;font-weight:500}
+.proof-track:hover{animation-play-state:paused}
+@keyframes proofScroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.proof-item{
+  display:inline-flex;align-items:center;
+  color:var(--text3);font-size:13px;font-weight:500;
+  padding:0 32px;
+  border-right:1px solid var(--border);
+  white-space:nowrap;
+  flex-shrink:0;
+}
 .proof-icon{font-size:20px}
 .proof-n{font-size:22px;font-weight:800;color:var(--text)}
 
 /* ─── SECTIONS SHARED ─── */
-section{padding:120px 24px}
+section{padding:120px 24px;position:relative;z-index:1}
 .wrap{max-width:1000px;margin:0 auto}
 .sec-eyebrow{
   font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
@@ -292,30 +323,43 @@ section{padding:120px 24px}
 .step-title{font-size:20px;font-weight:700;margin-bottom:12px;letter-spacing:-0.5px}
 .step-desc{font-size:15px;color:var(--text2);line-height:1.6}
 
-/* ─── FEATURES ─── */
+/* ─── FEATURES editorial ─── */
 .features-section{background:var(--bg)}
-.features-grid{
-  display:grid;grid-template-columns:repeat(3,1fr);
-  gap:16px;margin-top:64px;
+.features-editorial{margin-top:80px;display:flex;flex-direction:column;gap:0}
+.feat-row{
+  display:grid;grid-template-columns:1fr 1fr;
+  align-items:center;
+  padding:36px 0;
+  border-bottom:1px solid var(--border);
+  gap:48px;
 }
-@media(max-width:800px){.features-grid{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:500px){.features-grid{grid-template-columns:1fr}}
-.feat{
-  background:var(--card);
-  border:1px solid var(--border);
-  border-radius:var(--radius-lg);
-  padding:32px 28px;
-  transition:all .25s;
+.feat-row:last-child{border-bottom:none}
+@media(max-width:700px){.feat-row{grid-template-columns:1fr;gap:24px;padding:40px 0}}
+.feat-num{
+  font-size:clamp(72px,10vw,120px);
+  font-weight:900;
+  letter-spacing:-4px;
+  line-height:1;
+  background:linear-gradient(135deg,var(--green) 0%,rgba(37,211,102,0.4) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  opacity:0;transform:translateX(-30px);
+  transition:all 0.7s cubic-bezier(0.16,1,0.3,1);
 }
-.feat:hover{border-color:var(--border-green);transform:translateY(-4px);box-shadow:0 16px 40px rgba(0,0,0,0.3)}
-.feat-icon{
-  width:48px;height:48px;border-radius:12px;
-  background:var(--green-glow);
-  display:flex;align-items:center;justify-content:center;
-  font-size:22px;margin-bottom:20px;
+.feat-num.in{opacity:1;transform:translateX(0)}
+.feat-num-unit{
+  font-size:clamp(32px,4vw,52px);
+  font-weight:900;letter-spacing:-2px;
+  background:linear-gradient(135deg,var(--green) 0%,rgba(37,211,102,0.5) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
 }
-.feat-title{font-size:17px;font-weight:700;margin-bottom:8px;letter-spacing:-0.3px}
-.feat-desc{font-size:14px;color:var(--text2);line-height:1.6}
+.feat-copy{
+  opacity:0;transform:translateX(20px);
+  transition:all 0.7s cubic-bezier(0.16,1,0.3,1) 0.15s;
+}
+.feat-copy.in{opacity:1;transform:translateX(0)}
+.feat-label{font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--green);margin-bottom:14px}
+.feat-title{font-size:clamp(22px,3vw,30px);font-weight:800;letter-spacing:-0.8px;margin-bottom:12px;line-height:1.2}
+.feat-desc{font-size:16px;color:var(--text2);line-height:1.7}
 
 /* ─── CONVERSATION DEMO ─── */
 .demo-section{background:var(--surface)}
@@ -437,9 +481,15 @@ section{padding:120px 24px}
 
 /* ─── TESTIMONIALS ─── */
 .testi-section{background:var(--bg);border-top:1px solid var(--border)}
-.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:56px}
-@media(max-width:700px){.testi-grid{grid-template-columns:1fr}}
+.testi-scroll{
+  display:flex;gap:16px;
+  overflow-x:auto;scroll-snap-type:x mandatory;
+  padding:4px 0 24px;margin-top:56px;
+  scrollbar-width:none;-ms-overflow-style:none;
+}
+.testi-scroll::-webkit-scrollbar{display:none}
 .testi-card{
+  scroll-snap-align:start;flex-shrink:0;width:320px;
   background:var(--card);border:1px solid var(--border);
   border-radius:var(--radius-lg);padding:28px;
   transition:border-color .2s;
@@ -449,49 +499,60 @@ section{padding:120px 24px}
 .testi-text{font-size:15px;color:var(--text2);line-height:1.65;margin-bottom:20px;font-style:italic}
 .testi-author{display:flex;align-items:center;gap:10px}
 .testi-avatar{
-  width:36px;height:36px;border-radius:50%;
+  width:40px;height:40px;border-radius:50%;
   background:linear-gradient(135deg,var(--green),var(--green-dark));
   display:flex;align-items:center;justify-content:center;
-  font-weight:700;font-size:14px;color:#fff;flex-shrink:0;
+  font-weight:700;font-size:15px;color:#fff;flex-shrink:0;
+  border:2px solid rgba(37,211,102,0.2);
 }
 .testi-name{font-size:14px;font-weight:600}
 .testi-biz{font-size:12px;color:var(--text3)}
+.testi-nav{display:flex;justify-content:center;align-items:center;gap:16px;margin-top:8px}
+.testi-nav-btn{
+  width:38px;height:38px;border-radius:50%;
+  background:var(--card);border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;transition:all .2s;color:var(--text2);
+  font-size:18px;line-height:1;
+}
+.testi-nav-btn:hover{border-color:var(--border-green);color:var(--green)}
+.testi-dots{display:flex;gap:6px;align-items:center}
+.testi-dot{width:6px;height:6px;border-radius:50%;background:var(--border);transition:all .3s;cursor:pointer}
+.testi-dot.active{background:var(--green);width:18px;border-radius:3px}
 
-/* ─── COMPARE ─── */
-.compare-section{background:var(--surface);border-top:1px solid var(--border)}
-.compare-table{
-  margin-top:56px;
+/* ─── COMPARE CARDS ─── */
+.compare-section{background:var(--bg);border-top:1px solid var(--border)}
+.compare-cards{display:flex;flex-direction:column;gap:12px;margin-top:56px}
+.compare-card{
+  border-radius:var(--radius-xl);padding:32px 40px;
   border:1px solid var(--border);
-  border-radius:var(--radius-xl);overflow:hidden;
+  position:relative;overflow:hidden;
+  transition:border-color .2s;
 }
-.compare-header{
-  display:grid;grid-template-columns:1fr 1fr 1fr;
-  background:var(--card);
-  border-bottom:1px solid var(--border);
+@media(max-width:700px){.compare-card{padding:24px 20px}}
+.compare-card-bad{background:var(--card)}
+.compare-card-winner{
+  background:linear-gradient(135deg,rgba(37,211,102,0.06) 0%,rgba(37,211,102,0.02) 100%);
+  border-color:var(--border-green);
+  box-shadow:0 0 60px rgba(37,211,102,0.1),0 2px 0 rgba(37,211,102,0.15) inset;
 }
-.compare-col{padding:20px 24px;text-align:center}
-.compare-col:first-child{text-align:left}
-.compare-col-title{font-size:14px;font-weight:700;letter-spacing:0.3px}
-.compare-col-sub{font-size:12px;color:var(--text3);margin-top:4px}
-.compare-col.featured-col{background:rgba(37,211,102,0.05)}
-.compare-col.featured-col .compare-col-title{color:var(--green)}
-.compare-row{
-  display:grid;grid-template-columns:1fr 1fr 1fr;
-  border-bottom:1px solid var(--border);
-  transition:background .15s;
+.cc-top{display:flex;align-items:flex-start;justify-content:space-between;gap:24px;margin-bottom:12px;flex-wrap:wrap;gap:12px}
+.cc-name{font-size:18px;font-weight:800;letter-spacing:-0.5px}
+.cc-price-bad{font-size:14px;font-weight:600;color:#f87171;background:rgba(248,113,113,0.08);padding:4px 14px;border-radius:100px;white-space:nowrap}
+.cc-price-good{font-size:14px;font-weight:700;color:var(--green);background:rgba(37,211,102,0.1);padding:4px 14px;border-radius:100px;white-space:nowrap}
+.cc-verdict{font-size:14px;color:var(--text3);font-style:italic;margin-bottom:16px;line-height:1.5}
+.cc-tags{display:flex;flex-wrap:wrap;gap:8px}
+.cc-tag-x{background:rgba(248,113,113,0.06);color:rgba(248,113,113,0.7);border:1px solid rgba(248,113,113,0.12);padding:5px 14px;border-radius:100px;font-size:12px;font-weight:600}
+.cc-tag-ok{background:rgba(37,211,102,0.08);color:var(--green);border:1px solid rgba(37,211,102,0.2);padding:5px 14px;border-radius:100px;font-size:12px;font-weight:600}
+.cc-tag-neutral{background:rgba(255,255,255,0.04);color:var(--text2);border:1px solid rgba(255,255,255,0.08);padding:5px 14px;border-radius:100px;font-size:12px;font-weight:600}
+.cc-winner-badge{
+  position:absolute;top:18px;right:28px;
+  background:var(--green);color:#000;
+  padding:4px 16px;border-radius:100px;
+  font-size:11px;font-weight:800;letter-spacing:0.5px;text-transform:uppercase;
+  white-space:nowrap;
 }
-.compare-row:last-child{border-bottom:none}
-.compare-row:hover{background:rgba(255,255,255,0.02)}
-.compare-cell{padding:16px 24px;font-size:14px;display:flex;align-items:center}
-.compare-cell:not(:first-child){justify-content:center}
-.compare-cell:first-child{color:var(--text2)}
-.compare-check{color:var(--green);font-size:18px}
-.compare-x{color:var(--text3);font-size:18px}
-.compare-cell.featured-cell{background:rgba(37,211,102,0.03)}
-@media(max-width:600px){
-  .compare-header,.compare-row{grid-template-columns:1fr 1fr}
-  .compare-col:nth-child(2),.compare-cell:nth-child(2){display:none}
-}
+@media(max-width:500px){.cc-winner-badge{display:none}}
 
 /* ─── FAQ ─── */
 .faq-section{background:var(--surface)}
@@ -554,6 +615,82 @@ footer{
 .footer-links a:hover{color:var(--text)}
 .footer-copy{color:var(--text3);font-size:13px}
 
+/* ─── ENTERPRISE ─── */
+.enterprise-block{
+  margin-top:24px;
+  border:1px solid rgba(139,92,246,0.35);
+  border-radius:var(--radius-xl);
+  padding:40px 48px;
+  background:linear-gradient(135deg,rgba(99,102,241,0.22) 0%,rgba(139,92,246,0.16) 40%,rgba(88,28,135,0.12) 100%);
+  box-shadow:0 0 60px rgba(99,102,241,0.12), inset 0 1px 0 rgba(255,255,255,0.08);
+  display:grid;grid-template-columns:1fr auto;
+  gap:40px;align-items:center;
+  position:relative;overflow:hidden;
+}
+.enterprise-block::before{
+  content:'';position:absolute;top:-60px;right:-60px;
+  width:200px;height:200px;
+  background:radial-gradient(circle,rgba(99,102,241,0.12) 0%,transparent 70%);
+  pointer-events:none;
+}
+@media(max-width:700px){.enterprise-block{grid-template-columns:1fr;padding:32px 28px}}
+.enterprise-tag{
+  display:inline-flex;align-items:center;gap:6px;
+  background:rgba(99,102,241,0.15);border:1px solid rgba(99,102,241,0.3);
+  padding:4px 12px;border-radius:100px;
+  font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;
+  color:#a5b4fc;margin-bottom:14px;
+}
+.enterprise-title{font-size:clamp(20px,2.5vw,28px);font-weight:800;letter-spacing:-0.5px;margin-bottom:10px}
+.enterprise-sub{font-size:15px;color:var(--text2);line-height:1.6;max-width:480px}
+.enterprise-form{display:flex;flex-direction:column;gap:10px;min-width:280px}
+@media(max-width:700px){.enterprise-form{min-width:unset;width:100%}}
+.enterprise-input{
+  background:rgba(255,255,255,0.06);
+  border:1px solid rgba(255,255,255,0.1);
+  border-radius:12px;
+  padding:13px 16px;
+  font-size:14px;color:var(--text);
+  font-family:inherit;
+  outline:none;
+  transition:border-color .2s;
+  width:100%;
+}
+.enterprise-input::placeholder{color:var(--text3)}
+.enterprise-input:focus{border-color:rgba(99,102,241,0.5)}
+.enterprise-btn{
+  background:linear-gradient(135deg,#6366f1,#8b5cf6);
+  color:#fff;border:none;cursor:pointer;
+  padding:14px 20px;border-radius:12px;
+  font-size:15px;font-weight:700;font-family:inherit;
+  transition:all .2s;
+  display:flex;align-items:center;justify-content:center;gap:8px;
+}
+.enterprise-btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(99,102,241,0.35)}
+
+/* ─── PLAN GUARANTEES ─── */
+.plan-guarantees{margin-top:48px}
+.guarantee-items{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:1px;background:var(--border);
+  border-radius:var(--radius-xl);overflow:hidden;
+}
+@media(max-width:700px){.guarantee-items{grid-template-columns:repeat(2,1fr)}}
+.guarantee-item{
+  background:var(--card);padding:40px 24px;
+  text-align:center;
+  display:flex;flex-direction:column;align-items:center;gap:6px;
+  transition:background .2s;
+}
+.guarantee-item:hover{background:var(--card2)}
+.guarantee-big{
+  font-size:clamp(44px,4.5vw,64px);font-weight:900;
+  letter-spacing:-3px;line-height:1;
+  color:var(--green);margin-bottom:4px;
+}
+.guarantee-title{font-size:15px;font-weight:700;letter-spacing:-0.3px;color:var(--text)}
+.guarantee-sub{font-size:13px;color:var(--text3);line-height:1.45;max-width:150px}
+
 /* ─── ANIMATIONS ─── */
 .reveal{opacity:0;transform:translateY(32px);transition:all .7s cubic-bezier(0.16,1,0.3,1)}
 .reveal.visible{opacity:1;transform:translateY(0)}
@@ -562,13 +699,63 @@ footer{
 .reveal-delay-3{transition-delay:.3s}
 .reveal-delay-4{transition-delay:.4s}
 .reveal-delay-5{transition-delay:.5s}
+
+/* ─── SEM ROTEIRO ─── */
+.no-script-section{background:var(--surface);border-top:1px solid var(--border)}
+.no-script-inner{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:48px;align-items:start;margin-top:64px;
+}
+@media(max-width:800px){.no-script-inner{grid-template-columns:1fr}}
+.ns-battle{display:flex;flex-direction:column;gap:16px}
+.ns-card{border-radius:var(--radius-xl);overflow:hidden;border:1px solid var(--border)}
+.ns-card-bad{border-color:rgba(248,113,113,0.25)}
+.ns-card-good{border-color:var(--border-green);box-shadow:0 0 32px rgba(37,211,102,0.08)}
+.ns-card-hdr{padding:14px 20px;display:flex;align-items:center;justify-content:space-between}
+.ns-card-bad .ns-card-hdr{background:rgba(248,113,113,0.05)}
+.ns-card-good .ns-card-hdr{background:rgba(37,211,102,0.06)}
+.ns-card-label{font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase}
+.ns-card-bad .ns-card-label{color:#f87171}
+.ns-card-good .ns-card-label{color:var(--green)}
+.ns-chat{background:#0b141a;padding:14px;display:flex;flex-direction:column;gap:8px}
+.ns-msg-in{background:#202c33;color:#e9edef;padding:8px 12px;border-radius:8px 8px 8px 2px;font-size:13px;line-height:1.5;max-width:80%;align-self:flex-start}
+.ns-msg-out{padding:8px 12px;border-radius:8px 8px 2px 8px;font-size:13px;line-height:1.5;max-width:85%;align-self:flex-end}
+.ns-msg-bad{background:#2a1a1a;color:#f87171;border:1px solid rgba(248,113,113,0.15)}
+.ns-msg-ok{background:#005c4b;color:#e9edef}
+.ns-proof{display:flex;flex-direction:column;gap:20px;padding-top:4px}
+.ns-proof-title{font-size:clamp(28px,3.5vw,40px);font-weight:800;letter-spacing:-1px;line-height:1.15;margin-bottom:8px}
+.ns-proof-sub{font-size:16px;color:var(--text2);line-height:1.65;margin-bottom:28px}
+.ns-tags{display:flex;flex-wrap:wrap;gap:8px}
+.ns-tag{background:var(--card);border:1px solid var(--border);padding:7px 16px;border-radius:100px;font-size:13px;color:var(--text2);font-weight:500;white-space:nowrap}
+.ns-tag-accent{background:rgba(37,211,102,0.07);border-color:var(--border-green);color:var(--green)}
+.ns-tabs{display:flex;flex-wrap:wrap;gap:8px;margin-top:24px}
+.ns-tab{
+  background:var(--card);border:1px solid var(--border);
+  padding:8px 18px;border-radius:100px;
+  font-size:13px;color:var(--text2);font-weight:500;
+  cursor:pointer;transition:all .2s;font-family:inherit;
+}
+.ns-tab:hover{border-color:var(--border-green);color:var(--text)}
+.ns-tab.active{background:rgba(37,211,102,0.08);border-color:var(--border-green);color:var(--green)}
+
+/* ─── TESTI AUTO CAROUSEL ─── */
+.testi-track-wrap{overflow:hidden;margin-top:56px;cursor:grab}
+.testi-track-wrap:active{cursor:grabbing}
+.testi-track{
+  display:flex;gap:16px;
+  transition:transform .6s cubic-bezier(0.16,1,0.3,1);
+  will-change:transform;
+}
 </style>
 </head>
 <body>
 
+<!-- PARTICLE CANVAS -->
+<canvas id="particle-canvas" style="position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:0.75"></canvas>
+
 <!-- NAV -->
 <nav>
-  <div class="nav-logo">Atendimento24h</div>
+  <div class="nav-logo">Atendente24h</div>
   <div class="nav-links">
     <a href="#como-funciona">Como funciona</a>
     <a href="#recursos">Recursos</a>
@@ -589,7 +776,7 @@ footer{
         Ativo 24h por dia, 7 dias por semana
       </div>
       <h1>Seu negócio nunca mais fica <span>sem resposta</span></h1>
-      <p class="hero-sub">Atendente de WhatsApp com IA que conhece seus produtos, responde dúvidas, consulta pedidos e converte clientes — enquanto você dorme, trabalha ou descansa.</p>
+      <p class="hero-sub">Atendente de WhatsApp com IA que conhece seus produtos, responde dúvidas, consulta pedidos e converte clientes enquanto você dorme, trabalha ou descansa.</p>
       <div class="hero-ctas">
         <a href="#planos" class="btn-primary">
           Ativar meu atendente
@@ -624,9 +811,11 @@ footer{
     <div class="wpp-phone" style="position:relative">
       <div class="wpp-frame">
         <div class="wpp-header">
-          <div class="wpp-avatar">A</div>
+          <div class="wpp-avatar" style="background:none;overflow:hidden;padding:0">
+            <img src="ana-avatar.jpg" alt="Ana Goulart" style="width:100%;height:100%;object-fit:cover;border-radius:50%">
+          </div>
           <div>
-            <div class="wpp-contact-name">Ana · Atendente Virtual</div>
+            <div class="wpp-contact-name">Ana Goulart</div>
             <div class="wpp-contact-status">Online agora</div>
           </div>
         </div>
@@ -636,7 +825,7 @@ footer{
             <div class="msg-time">14:22</div>
           </div>
           <div class="msg msg-out" style="display:none" id="wpp-r1">
-            Oi, Paulo! Temos sim 😊 O modelo Ultralight está disponível nos tamanhos 38 ao 44. No 42 temos em preto, branco e cinza.
+            Oi, Paulo! Temos sim 😊<br>O modelo <strong style="color:#fff">Ultralight</strong> está disponível nos tamanhos 38 ao 44. No 42 temos em <strong style="color:#fff">preto, branco e cinza</strong>.
             <div class="msg-time">14:22</div>
           </div>
           <div class="msg msg-in" style="display:none" id="wpp-q2">
@@ -644,8 +833,21 @@ footer{
             <div class="msg-time">14:23</div>
           </div>
           <div class="msg msg-out" style="display:none" id="wpp-r2">
-            R$189,90. Parcelamos em até 6x sem juros no cartão. Ou à vista com 5% de desconto 🖤 Quer que eu reserve o 42 preto pra você?
+            <strong style="color:#fff">R$189,90</strong>, parcelamos em até <strong style="color:#fff">6x sem juros</strong> no cartão. Ou à vista com 5% de desconto 🖤
             <div class="msg-time">14:23</div>
+          </div>
+          <div class="msg msg-in" style="display:none" id="wpp-q3">
+            Quero o preto! Me manda o link
+            <div class="msg-time">14:23</div>
+          </div>
+          <div class="msg msg-out" style="display:none" id="wpp-r3">
+            Claro! Aqui está 👇<br>
+            <div style="margin-top:8px;background:rgba(255,255,255,0.08);border-radius:8px;padding:8px 10px;border-left:3px solid var(--green)">
+              <div style="font-size:11px;color:var(--green);font-weight:600;margin-bottom:2px">loja.exemplo.com.br</div>
+              <div style="font-size:12px;color:#e9edef;font-weight:500">Ultralight 42 Preto</div>
+              <div style="font-size:11px;color:#8696a0">R$189,90 · Frete grátis</div>
+            </div>
+            <div class="msg-time">14:24</div>
           </div>
           <div class="msg msg-typing" style="display:none" id="wpp-typing">
             <span class="typing-dot"></span>
@@ -668,27 +870,27 @@ footer{
 
 <!-- SOCIAL PROOF -->
 <div class="proof-bar">
-  <div class="proof-inner">
-    <div class="proof-item">
-      <span class="proof-icon">🏪</span>
-      <span>Lojas e e-commerces</span>
-    </div>
-    <div class="proof-item">
-      <span class="proof-icon">🏥</span>
-      <span>Clínicas e consultórios</span>
-    </div>
-    <div class="proof-item">
-      <span class="proof-icon">💈</span>
-      <span>Salões e estéticas</span>
-    </div>
-    <div class="proof-item">
-      <span class="proof-icon">🍽️</span>
-      <span>Restaurantes e deliveries</span>
-    </div>
-    <div class="proof-item">
-      <span class="proof-icon">🔧</span>
-      <span>Prestadores de serviço</span>
-    </div>
+  <div class="proof-track">
+    <span class="proof-item">Lojas e e-commerces</span>
+    <span class="proof-item">Clinicas e consultórios</span>
+    <span class="proof-item">Salões e estéticas</span>
+    <span class="proof-item">Restaurantes e deliveries</span>
+    <span class="proof-item">Prestadores de serviço</span>
+    <span class="proof-item">Imobiliárias</span>
+    <span class="proof-item">Escolas e cursos</span>
+    <span class="proof-item">Advocacias</span>
+    <span class="proof-item">Pet shops</span>
+    <span class="proof-item">Academias</span>
+    <span class="proof-item">Lojas e e-commerces</span>
+    <span class="proof-item">Clinicas e consultórios</span>
+    <span class="proof-item">Salões e estéticas</span>
+    <span class="proof-item">Restaurantes e deliveries</span>
+    <span class="proof-item">Prestadores de serviço</span>
+    <span class="proof-item">Imobiliárias</span>
+    <span class="proof-item">Escolas e cursos</span>
+    <span class="proof-item">Advocacias</span>
+    <span class="proof-item">Pet shops</span>
+    <span class="proof-item">Academias</span>
   </div>
 </div>
 
@@ -703,21 +905,18 @@ footer{
     <div class="steps-grid">
       <div class="step reveal reveal-delay-1">
         <div class="step-num">01</div>
-        <div class="step-icon">📱</div>
         <div class="step-title">Conecte seu WhatsApp</div>
         <div class="step-desc">Abra o app, escaneie o QR code na tela e seu número está conectado. Funciona com WhatsApp Business ou número comum.</div>
       </div>
       <div class="step reveal reveal-delay-2">
         <div class="step-num">02</div>
-        <div class="step-icon">🧠</div>
         <div class="step-title">Ensine seu negócio</div>
         <div class="step-desc">Preencha informações da sua empresa e suba arquivos: catálogo, tabela de preços, FAQ, políticas. O atendente aprende tudo.</div>
       </div>
       <div class="step reveal reveal-delay-3">
         <div class="step-num">03</div>
-        <div class="step-icon">✅</div>
         <div class="step-title">Atendente vai ao ar</div>
-        <div class="step-desc">Pronto. Seu atendente começa a responder instantaneamente. Você pode fechar o computador — ele roda nos nossos servidores.</div>
+        <div class="step-desc">Pronto. Seu atendente começa a responder instantaneamente. Você pode fechar o computador, ele roda nos nossos servidores.</div>
       </div>
     </div>
   </div>
@@ -730,36 +929,38 @@ footer{
       <div class="sec-eyebrow">Recursos</div>
       <div class="sec-title">Tudo que um bom<br>atendente precisa.</div>
     </div>
-    <div class="features-grid">
-      <div class="feat reveal reveal-delay-1">
-        <div class="feat-icon">⚡</div>
-        <div class="feat-title">Responde em menos de 3 segundos</div>
-        <div class="feat-desc">Nenhum cliente espera. A IA responde instantaneamente, a qualquer hora, em qualquer dia.</div>
+    <div class="features-editorial">
+      <div class="feat-row">
+        <div class="feat-num feat-anim"><span class="feat-num-unit">&lt;</span>2<span class="feat-num-unit">s</span></div>
+        <div class="feat-copy feat-anim">
+          <div class="feat-label">Velocidade</div>
+          <div class="feat-title">Responde antes do cliente perder o interesse</div>
+          <div class="feat-desc">Em menos de 2 segundos, qualquer mensagem já tem resposta. Enquanto concorrentes demoram minutos, você já converteu.</div>
+        </div>
       </div>
-      <div class="feat reveal reveal-delay-2">
-        <div class="feat-icon">📚</div>
-        <div class="feat-title">Conhece seus produtos de cor</div>
-        <div class="feat-desc">Suba seu catálogo e o atendente domina preços, variações, disponibilidade e diferenciais.</div>
+      <div class="feat-row">
+        <div class="feat-copy feat-anim" style="order:1">
+          <div class="feat-label">Inteligência</div>
+          <div class="feat-title">Sem roteiro. Sem limite de perguntas.</div>
+          <div class="feat-desc">Entende contexto, lembra da conversa e responde qualquer pergunta sobre seu negócio com naturalidade, sem travar.</div>
+        </div>
+        <div class="feat-num feat-anim" style="order:2;text-align:right">100<span class="feat-num-unit">%</span></div>
       </div>
-      <div class="feat reveal reveal-delay-3">
-        <div class="feat-icon">📦</div>
-        <div class="feat-title">Consulta status de pedidos</div>
-        <div class="feat-desc">Integrado com seu sistema, informa rastreamento e prazo sem precisar de atendente humano.</div>
+      <div class="feat-row">
+        <div class="feat-num feat-anim">5<span class="feat-num-unit">min</span></div>
+        <div class="feat-copy feat-anim">
+          <div class="feat-label">Simplicidade</div>
+          <div class="feat-title">Qualquer pessoa configura. Sem ajuda técnica.</div>
+          <div class="feat-desc">Conecte o WhatsApp, descreva seu negócio, suba os arquivos. Em 5 minutos seu atendente já está no ar.</div>
+        </div>
       </div>
-      <div class="feat reveal reveal-delay-4">
-        <div class="feat-icon">🎯</div>
-        <div class="feat-title">Tom de voz da sua marca</div>
-        <div class="feat-desc">Formal, descontraído, empático. Configure a personalidade e o nome do atendente livremente.</div>
-      </div>
-      <div class="feat reveal reveal-delay-5">
-        <div class="feat-icon">📈</div>
-        <div class="feat-title">Escala sem custo fixo</div>
-        <div class="feat-desc">100 ou 10.000 clientes simultâneos — o atendente responde todos. Sem contratar, sem treinar.</div>
-      </div>
-      <div class="feat reveal reveal-delay-1">
-        <div class="feat-icon">🔒</div>
-        <div class="feat-title">Dados seguros e privados</div>
-        <div class="feat-desc">Suas informações e as dos seus clientes ficam protegidas. Nunca compartilhamos com terceiros.</div>
+      <div class="feat-row">
+        <div class="feat-copy feat-anim" style="order:1">
+          <div class="feat-label">Disponibilidade</div>
+          <div class="feat-title">Feriado, madrugada, fim de semana. Sempre.</div>
+          <div class="feat-desc">Enquanto você dorme ou descansa, seu atendente está lá. Respondendo, convertendo, encaminhando. Sem parar.</div>
+        </div>
+        <div class="feat-num feat-anim" style="order:2;text-align:right">24<span class="feat-num-unit">/7</span></div>
       </div>
     </div>
   </div>
@@ -771,8 +972,8 @@ footer{
     <div class="demo-inner">
       <div class="demo-text reveal">
         <div class="sec-eyebrow">Demo ao vivo</div>
-        <div class="sec-title" style="font-size:clamp(32px,4vw,46px)">Veja como o atendente responde na prática.</div>
-        <p style="color:var(--text2);font-size:16px;line-height:1.65;margin-top:16px">Clique em um cenário para ver como a IA responde em situações reais do seu negócio.</p>
+        <div class="sec-title" style="font-size:clamp(32px,4vw,46px)">Qualquer pergunta.<br>Qualquer situacao.</div>
+        <p style="color:var(--text2);font-size:16px;line-height:1.65;margin-top:16px">O Atendente24h não segue um roteiro fixo. Clique nos cenários abaixo, incluindo perguntas fora do padrão.</p>
         <div class="demo-examples">
           <button class="demo-btn active" onclick="showDemo(0)" data-demo="0">
             <span class="demo-btn-dot"></span>
@@ -790,19 +991,72 @@ footer{
             <span class="demo-btn-dot"></span>
             "Vocês fazem entrega?"
           </button>
+          <button class="demo-btn" onclick="showDemo(4)" data-demo="4" style="border-color:rgba(37,211,102,0.25)">
+            <span class="demo-btn-dot"></span>
+            "Esse tênis vai dar chulé?" <span style="font-size:11px;color:var(--green);margin-left:4px;font-weight:700">fora do roteiro</span>
+          </button>
+          <button class="demo-btn" onclick="showDemo(5)" data-demo="5" style="border-color:rgba(37,211,102,0.25)">
+            <span class="demo-btn-dot"></span>
+            "Produto horrível, quero cancelar!" <span style="font-size:11px;color:var(--green);margin-left:4px;font-weight:700">cliente bravo</span>
+          </button>
         </div>
       </div>
       <div class="demo-window reveal reveal-delay-2">
         <div class="demo-wpp-header">
-          <div class="demo-avatar" id="demo-avatar">A</div>
+          <div class="demo-avatar" id="demo-avatar" style="background:none;overflow:hidden;padding:0">
+            <img src="ana-avatar.jpg" alt="Ana Goulart" style="width:100%;height:100%;object-fit:cover;border-radius:50%">
+          </div>
           <div>
-            <div class="demo-contact" id="demo-name">Ana · Atendente</div>
+            <div class="demo-contact" id="demo-name">Ana Goulart</div>
             <div class="demo-online">Online agora</div>
           </div>
         </div>
         <div class="demo-msgs" id="demo-msgs">
           <div class="d-in">Tem disponível no tamanho 42?<div class="d-time">agora</div></div>
           <div class="d-out">Oi! Temos sim 😊 O modelo está disponível nos tamanhos 38 ao 44. No 42 temos preto, branco e cinza disponíveis. Qual cor te interessa?<div class="d-time">agora</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SEM ROTEIRO FIXO -->
+<section class="no-script-section" id="diferenciais">
+  <div class="wrap">
+    <div class="no-script-inner">
+      <div class="ns-battle reveal">
+        <div class="sec-eyebrow">O maior diferencial</div>
+        <div class="ns-proof-title">Pergunte o que quiser.<br><span style="color:var(--green)">Ele responde.</span></div>
+        <div class="ns-proof-sub">Outros bots travam quando o cliente sai do fluxo. O Atendente24h entende contexto e responde qualquer coisa.</div>
+        <div class="ns-tabs">
+          <button class="ns-tab active" onclick="showNs(0)">Pergunta esquisita</button>
+          <button class="ns-tab" onclick="showNs(1)">Cliente bravo</button>
+          <button class="ns-tab" onclick="showNs(2)">Negociação</button>
+          <button class="ns-tab" onclick="showNs(3)">Fora do tema</button>
+        </div>
+      </div>
+      <div class="reveal reveal-delay-2">
+        <div id="ns-panel">
+          <div class="ns-card ns-card-bad" style="margin-bottom:8px">
+            <div class="ns-card-hdr">
+              <span class="ns-card-label">Outros bots</span>
+              <span id="ns-badge-bad" style="font-size:11px;color:#f87171;background:rgba(248,113,113,0.08);padding:3px 10px;border-radius:100px;font-weight:600">Trava</span>
+            </div>
+            <div class="ns-chat">
+              <div class="ns-msg-in" id="ns-q-bad"></div>
+              <div class="ns-msg-out ns-msg-bad" id="ns-a-bad"></div>
+            </div>
+          </div>
+          <div class="ns-card ns-card-good">
+            <div class="ns-card-hdr">
+              <span class="ns-card-label">Atendente24h</span>
+              <span id="ns-badge-good" style="font-size:11px;color:var(--green);background:rgba(37,211,102,0.1);padding:3px 10px;border-radius:100px;font-weight:600">Converte</span>
+            </div>
+            <div class="ns-chat">
+              <div class="ns-msg-in" id="ns-q-good"></div>
+              <div class="ns-msg-out ns-msg-ok" id="ns-a-good"></div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -878,7 +1132,8 @@ footer{
       </div>
 
       <!-- PRO -->
-      <div class="plan">
+      <div class="plan" style="position:relative">
+        <div class="plan-badge" style="background:linear-gradient(135deg,#6366f1,#8b5cf6);color:#fff">Mais vantajoso</div>
         <div class="plan-name">Pro</div>
         <div class="plan-price"><sup>R$</sup>797<span>/mês</span></div>
         <div class="plan-cycle">Cobrado mensalmente</div>
@@ -904,14 +1159,56 @@ footer{
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
             Suporte VIP via WhatsApp
           </div>
+          <div class="plan-feat" style="color:var(--text);font-weight:600">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8l3 3 7-7" stroke="var(--green)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            🎯 Onboarding com nosso gestor via Google Meet
+          </div>
         </div>
         <a href="#comecar" class="plan-cta">Começar com Pro</a>
       </div>
     </div>
 
-    <!-- COMPARATIVO -->
-    <div class="reveal" style="margin-top:48px;text-align:center">
-      <p style="color:var(--text3);font-size:14px">Atendente humano parcial: <strong style="color:var(--text2)">R$1.500+/mês</strong> · Seu atendente IA: a partir de <strong style="color:var(--green)">R$6,57/dia</strong> · Cancele quando quiser</p>
+    <!-- ENTERPRISE -->
+    <div class="enterprise-block reveal">
+      <div>
+        <div class="enterprise-tag">Enterprise</div>
+        <div class="enterprise-title">Volume alto ou operação complexa?<br>A gente monta o plano do seu tamanho.</div>
+        <p class="enterprise-sub">Múltiplos números, integrações personalizadas, SLA dedicado e onboarding com nossa equipe. Fale com a gente e receba uma proposta em até 24h.</p>
+      </div>
+      <form class="enterprise-form" onsubmit="submitEnterprise(event)">
+        <input class="enterprise-input" type="text" id="ent-nome" placeholder="Seu nome" required>
+        <input class="enterprise-input" type="tel" id="ent-wpp" placeholder="WhatsApp (com DDD)" required>
+        <button class="enterprise-btn" type="submit">
+          Quero uma proposta
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </form>
+    </div>
+
+    <!-- GARANTIAS -->
+    <div class="plan-guarantees reveal">
+      <div class="guarantee-items">
+        <div class="guarantee-item">
+          <div class="guarantee-big">7</div>
+          <div class="guarantee-title">dias de garantia</div>
+          <div class="guarantee-sub">Não gostou? Devolvemos tudo sem perguntas.</div>
+        </div>
+        <div class="guarantee-item">
+          <div class="guarantee-big" style="font-size:clamp(32px,4vw,48px)">OFF</div>
+          <div class="guarantee-title">Cancele quando quiser</div>
+          <div class="guarantee-sub">Sem multa, sem fidelidade, sem burocracia.</div>
+        </div>
+        <div class="guarantee-item">
+          <div class="guarantee-big" style="font-size:clamp(32px,4vw,48px)">24h</div>
+          <div class="guarantee-title">Suporte humano</div>
+          <div class="guarantee-sub">Time real. Nao outro bot respondendo.</div>
+        </div>
+        <div class="guarantee-item">
+          <div class="guarantee-big" style="font-size:clamp(32px,4vw,48px)">5min</div>
+          <div class="guarantee-title">Ativo em minutos</div>
+          <div class="guarantee-sub">Zero codigo. Zero conhecimento tecnico.</div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -923,40 +1220,65 @@ footer{
       <div class="sec-eyebrow">Quem usa</div>
       <div class="sec-title">Negócios que nunca<br>mais perdem clientes.</div>
     </div>
-    <div class="testi-grid">
-      <div class="testi-card reveal reveal-delay-1">
-        <div class="testi-stars">★★★★★</div>
-        <div class="testi-text">"Antes eu perdia pelo menos 5 pedidos por semana porque não conseguia responder rápido. Agora o atendente responde instantaneamente e eu só entro quando é algo complexo."</div>
-        <div class="testi-author">
-          <div class="testi-avatar">M</div>
-          <div>
-            <div class="testi-name">Mariana S.</div>
-            <div class="testi-biz">Loja de roupas femininas</div>
+    <div class="testi-track-wrap" id="testi-wrap">
+      <div class="testi-track" id="testi-track">
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <div class="testi-text">"Antes perdia 5 pedidos por semana por demora. Agora o atendente responde instantaneamente. Só entro quando é algo realmente complexo."</div>
+          <div class="testi-author">
+            <div class="testi-avatar" style="background:none;overflow:hidden;padding:0"><img src="testi-mariana.jpg" alt="Mariana S." style="width:100%;height:100%;object-fit:cover;border-radius:50%"></div>
+            <div><div class="testi-name">Mariana S.</div><div class="testi-biz">Loja de roupas femininas</div></div>
+          </div>
+        </div>
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <div class="testi-text">"Minha clínica recebe agendamentos às 2h da manhã agora. Paciente manda mensagem, o atendente informa disponibilidade e confirma. Incrível."</div>
+          <div class="testi-author">
+            <div class="testi-avatar" style="background:none;overflow:hidden;padding:0"><img src="testi-ricardo.jpg" alt="Dr. Ricardo A." style="width:100%;height:100%;object-fit:cover;border-radius:50%"></div>
+            <div><div class="testi-name">Dr. Ricardo A.</div><div class="testi-biz">Clínica odontológica</div></div>
+          </div>
+        </div>
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <div class="testi-text">"Configurei em 10 minutos. Subi o cardápio e em menos de 1 hora o atendente já estava tirando pedidos. Melhor investimento do restaurante no ano."</div>
+          <div class="testi-author">
+            <div class="testi-avatar" style="background:none;overflow:hidden;padding:0"><img src="testi-felipe.jpg" alt="Felipe M." style="width:100%;height:100%;object-fit:cover;border-radius:50%"></div>
+            <div><div class="testi-name">Felipe M.</div><div class="testi-biz">Restaurante delivery</div></div>
+          </div>
+        </div>
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <div class="testi-text">"Cliente perguntou algo totalmente fora do padrão e o atendente respondeu perfeitamente. Nunca vi outro bot fazer isso. Me vendeu na hora."</div>
+          <div class="testi-author">
+            <div class="testi-avatar" style="background:linear-gradient(135deg,#ec4899,#be185d)">C</div>
+            <div><div class="testi-name">Camila R.</div><div class="testi-biz">E-commerce de cosméticos</div></div>
+          </div>
+        </div>
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <div class="testi-text">"Meu salão não perde mais agendamento por falta de resposta no fim de semana. O atendente marca, confirma e ainda manda lembrete. Virei fã."</div>
+          <div class="testi-author">
+            <div class="testi-avatar" style="background:linear-gradient(135deg,#14b8a6,#0d9488)">J</div>
+            <div><div class="testi-name">Juliana T.</div><div class="testi-biz">Salão de beleza</div></div>
+          </div>
+        </div>
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <div class="testi-text">"Tinha medo de parecer robótico. Mas o atendente conversa tão bem que ninguém percebe. Vários clientes perguntaram o nome 'dela'."</div>
+          <div class="testi-author">
+            <div class="testi-avatar" style="background:linear-gradient(135deg,#3b82f6,#1d4ed8)">G</div>
+            <div><div class="testi-name">Gustavo N.</div><div class="testi-biz">Loja de eletrônicos</div></div>
           </div>
         </div>
       </div>
-      <div class="testi-card reveal reveal-delay-2">
-        <div class="testi-stars">★★★★★</div>
-        <div class="testi-text">"Minha clínica recebe agendamentos às 2h da manhã agora. Paciente manda mensagem, o atendente já informa disponibilidade e confirmação. Incrível."</div>
-        <div class="testi-author">
-          <div class="testi-avatar">R</div>
-          <div>
-            <div class="testi-name">Dr. Ricardo A.</div>
-            <div class="testi-biz">Clínica odontológica</div>
-          </div>
-        </div>
-      </div>
-      <div class="testi-card reveal reveal-delay-3">
-        <div class="testi-stars">★★★★★</div>
-        <div class="testi-text">"Configurei em 10 minutos. Subi o cardápio e em menos de 1 hora o atendente já estava tirando pedidos. O melhor investimento do restaurante esse ano."</div>
-        <div class="testi-author">
-          <div class="testi-avatar">F</div>
-          <div>
-            <div class="testi-name">Felipe M.</div>
-            <div class="testi-biz">Restaurante delivery</div>
-          </div>
-        </div>
-      </div>
+    </div>
+    <div class="testi-dots" id="testi-dots" style="display:flex;justify-content:center;gap:6px;align-items:center;margin-top:20px">
+      <div class="testi-dot active" onclick="testiGo(0)"></div>
+      <div class="testi-dot" onclick="testiGo(1)"></div>
+      <div class="testi-dot" onclick="testiGo(2)"></div>
+      <div class="testi-dot" onclick="testiGo(3)"></div>
+      <div class="testi-dot" onclick="testiGo(4)"></div>
+      <div class="testi-dot" onclick="testiGo(5)"></div>
     </div>
   </div>
 </section>
@@ -965,58 +1287,67 @@ footer{
 <section class="compare-section">
   <div class="wrap">
     <div class="reveal" style="text-align:center">
-      <div class="sec-eyebrow">Comparativo</div>
-      <div class="sec-title">Por que não contratar<br>um atendente humano?</div>
+      <div class="sec-eyebrow">Por que nao as outras opcoes</div>
+      <div class="sec-title">Funcionario dorme.<br>Bot trava. A gente resolve.</div>
+      <p class="sec-sub" style="margin:16px auto 0">Cada alternativa resolve uma parte do problema. Apenas o Atendente24h resolve tudo.</p>
     </div>
-    <div class="compare-table reveal reveal-delay-1">
-      <div class="compare-header">
-        <div class="compare-col">
-          <div class="compare-col-title">Característica</div>
+    <div class="compare-cards reveal reveal-delay-1">
+
+      <!-- CARD 1: FUNCIONARIO -->
+      <div class="compare-card compare-card-bad">
+        <div class="cc-top">
+          <div class="cc-name">Funcionário humano</div>
+          <div class="cc-price-bad">R$1.500 a R$2.500 / mês</div>
         </div>
-        <div class="compare-col">
-          <div class="compare-col-title">Atendente humano</div>
-          <div class="compare-col-sub">R$1.500–2.500/mês</div>
+        <div class="cc-verdict">"Ótimo para casos complexos. Mas cobre só 8h por dia, tira férias e não escala sem custo alto."</div>
+        <div class="cc-tags">
+          <span class="cc-tag-neutral">Responde qualquer pergunta</span>
+          <span class="cc-tag-neutral">Bom para negociações</span>
+          <span class="cc-tag-x">Fora de serviço 16h por dia</span>
+          <span class="cc-tag-x">Férias, doenças, turnover</span>
+          <span class="cc-tag-x">Custo fixo mesmo sem volume</span>
         </div>
-        <div class="compare-col featured-col">
-          <div class="compare-col-title">Atendimento24h</div>
-          <div class="compare-col-sub">A partir de R$197/mês</div>
+      </div>
+
+      <!-- CARD 2: OUTROS BOTS -->
+      <div class="compare-card compare-card-bad">
+        <div class="cc-top">
+          <div class="cc-name">ManyChat, Typebot e similares</div>
+          <div class="cc-price-bad">R$50 a R$300 / mês</div>
+        </div>
+        <div class="cc-verdict">"Funciona enquanto o cliente segue o fluxo. Qualquer pergunta fora do script: trava, confunde, perde a venda."</div>
+        <div class="cc-tags">
+          <span class="cc-tag-neutral">Disponível 24/7</span>
+          <span class="cc-tag-neutral">Custo de entrada baixo</span>
+          <span class="cc-tag-x">Trava fora do roteiro</span>
+          <span class="cc-tag-x">Não entende contexto</span>
+          <span class="cc-tag-x">Sem suporte humano real</span>
         </div>
       </div>
-      <div class="compare-row">
-        <div class="compare-cell">Disponível 24/7</div>
-        <div class="compare-cell"><span class="compare-x">✕</span></div>
-        <div class="compare-cell featured-cell"><span class="compare-check">✓</span></div>
+
+      <!-- CARD 3: ATENDENTE24H -->
+      <div class="compare-card compare-card-winner">
+        <div class="cc-top">
+          <div style="flex:1">
+            <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:6px">
+              <div class="cc-name" style="color:var(--green)">Atendente24h</div>
+              <span style="background:var(--green);color:#000;padding:3px 12px;border-radius:100px;font-size:11px;font-weight:800;white-space:nowrap">Melhor escolha</span>
+            </div>
+            <div class="cc-price-good" style="display:inline-flex">A partir de R$197 / mês</div>
+          </div>
+        </div>
+        <div class="cc-verdict" style="color:var(--text2)">"Inteligência de humano, disponibilidade de máquina. Sem roteiro fixo, sem limite de perguntas, sem parar."</div>
+        <div class="cc-tags">
+          <span class="cc-tag-ok">Disponível 24h / 7 dias</span>
+          <span class="cc-tag-ok">Sem roteiro fixo</span>
+          <span class="cc-tag-ok">Resposta em menos de 2s</span>
+          <span class="cc-tag-ok">Suporte humano 24h</span>
+          <span class="cc-tag-ok">Ativo em 5 minutos</span>
+          <span class="cc-tag-ok">Garantia de 7 dias</span>
+          <span class="cc-tag-ok">Cancele quando quiser</span>
+        </div>
       </div>
-      <div class="compare-row">
-        <div class="compare-cell">Responde em menos de 3 segundos</div>
-        <div class="compare-cell"><span class="compare-x">✕</span></div>
-        <div class="compare-cell featured-cell"><span class="compare-check">✓</span></div>
-      </div>
-      <div class="compare-row">
-        <div class="compare-cell">Custo fixo mensal</div>
-        <div class="compare-cell" style="color:#f87171;font-weight:600">R$1.500+</div>
-        <div class="compare-cell featured-cell" style="color:var(--green);font-weight:600">R$197–797</div>
-      </div>
-      <div class="compare-row">
-        <div class="compare-cell">Nunca fica doente ou de férias</div>
-        <div class="compare-cell"><span class="compare-x">✕</span></div>
-        <div class="compare-cell featured-cell"><span class="compare-check">✓</span></div>
-      </div>
-      <div class="compare-row">
-        <div class="compare-cell">Atende múltiplos clientes simultâneos</div>
-        <div class="compare-cell"><span class="compare-x">✕</span></div>
-        <div class="compare-cell featured-cell"><span class="compare-check">✓</span></div>
-      </div>
-      <div class="compare-row">
-        <div class="compare-cell">Ativo em minutos</div>
-        <div class="compare-cell"><span class="compare-x">✕</span></div>
-        <div class="compare-cell featured-cell"><span class="compare-check">✓</span></div>
-      </div>
-      <div class="compare-row">
-        <div class="compare-cell">Precisa de treinamento</div>
-        <div class="compare-cell"><span class="compare-x" style="color:#f87171">Semanas</span></div>
-        <div class="compare-cell featured-cell"><span class="compare-check">Não</span></div>
-      </div>
+
     </div>
   </div>
 </section>
@@ -1035,7 +1366,7 @@ footer{
           <div class="faq-icon">+</div>
         </div>
         <div class="faq-a" style="max-height:200px">
-          <div class="faq-a-inner">Para dúvidas sobre produtos, preços, pedidos e informações gerais — sim, em 90% dos casos. Para situações complexas como reclamações graves ou negociações especiais, o atendente identifica e pode encaminhar para você. O objetivo é resolver a grande maioria automaticamente e só escalar o que realmente precisa da sua atenção.</div>
+          <div class="faq-a-inner">Para dúvidas sobre produtos, preços, pedidos e informações gerais, sim, em 90% dos casos. Para situações complexas como reclamações graves ou negociações especiais, o atendente identifica e encaminha para você. O objetivo é resolver a grande maioria automaticamente e só escalar o que realmente precisa da sua atenção.</div>
         </div>
       </div>
       <div class="faq-item">
@@ -1044,7 +1375,7 @@ footer{
           <div class="faq-icon">+</div>
         </div>
         <div class="faq-a">
-          <div class="faq-a-inner">Sim, funciona com número comum e com WhatsApp Business. Para melhor experiência, recomendamos o WhatsApp Business pois permite configurar nome da empresa, horários e informações adicionais. A conexão é feita via QR code — sem complicações técnicas.</div>
+          <div class="faq-a-inner">Sim, funciona com número comum e com WhatsApp Business. Para melhor experiência, recomendamos o WhatsApp Business pois permite configurar nome da empresa, horários e informações adicionais. A conexão é feita via QR code, sem complicações técnicas.</div>
         </div>
       </div>
       <div class="faq-item">
@@ -1053,7 +1384,7 @@ footer{
           <div class="faq-icon">+</div>
         </div>
         <div class="faq-a">
-          <div class="faq-a-inner">Você recebe um alerta quando estiver em 80% do limite. Ao atingir o limite, o atendente para de responder até o próximo ciclo mensal ou até você fazer upgrade de plano — o que preferir. Nunca cobraremos automaticamente por mensagens extras sem sua autorização.</div>
+          <div class="faq-a-inner">Você recebe um alerta quando estiver em 80% do limite. Ao atingir o limite, o atendente para de responder até o próximo ciclo mensal ou até você fazer upgrade de plano. Nunca cobraremos automaticamente por mensagens extras sem sua autorização. Nunca cobraremos automaticamente por mensagens extras sem sua autorização.</div>
         </div>
       </div>
       <div class="faq-item">
@@ -1096,7 +1427,7 @@ footer{
 <!-- FOOTER -->
 <footer>
   <div class="footer-inner">
-    <div class="footer-logo">Atendimento24h</div>
+    <div class="footer-logo">Atendente24h</div>
     <div class="footer-links">
       <a href="#planos">Planos</a>
       <a href="#faq">FAQ</a>
@@ -1109,35 +1440,146 @@ footer{
 </footer>
 
 <script>
+// ── Enterprise lead capture
+function submitEnterprise(e) {
+  e.preventDefault()
+  const nome = document.getElementById('ent-nome').value.trim()
+  const wpp  = document.getElementById('ent-wpp').value.trim().replace(/\D/g,'')
+  const msg = encodeURIComponent(`Oi! Sou ${nome} e tenho interesse no plano Enterprise do Atendente24h. Meu WhatsApp é ${wpp}. Quero receber uma proposta.`)
+  window.open(`https://wa.me/5511999999999?text=${msg}`, '_blank')
+}
+
 // ── Scroll reveal
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible') })
 }, {threshold:.1, rootMargin:'0px 0px -40px 0px'})
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el))
 
+// ── Features editorial animation
+const featObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('in') })
+}, {threshold:0.15})
+document.querySelectorAll('.feat-anim').forEach(el => featObs.observe(el))
+
+// ── "Sem Roteiro" interactive tabs
+;(function(){
+  const nsData = [
+    {
+      label:'Trava', goodLabel:'Converte',
+      q: 'Esse tênis vai dar chulé?',
+      aBad: 'Desculpe, não entendi. Escolha uma opção: 1 - Ver produtos  2 - Rastrear pedido  3 - Falar com humano',
+      aGood: 'Haha, boa pergunta! O solado tem ventilação e o tecido é anti-odor. Temos também o modelo com palmilha antibacteriana no seu tamanho. Qual prefere? 😄'
+    },
+    {
+      label:'Piora', goodLabel:'Resolve',
+      q: 'Que empresa péssima, meu produto não chegou!',
+      aBad: 'Opção inválida. Por favor, escolha: 1 - Produtos  2 - Pedidos  3 - Sair',
+      aGood: 'Entendo sua frustração e sinto muito. Me passa o número do pedido e resolvo agora mesmo. 🙏'
+    },
+    {
+      label:'Trava', goodLabel:'Negocia',
+      q: 'Tem desconto se eu comprar 3 pares?',
+      aBad: 'Desculpe, essa opção não está disponível. Digite 1 para continuar.',
+      aGood: 'Sim! Para 3 pares damos 10% de desconto automático, já aplicado no checkout. Posso te mandar o link com os 3 já selecionados? 😊'
+    },
+    {
+      label:'Trava', goodLabel:'Responde',
+      q: 'Qual a capital da França?',
+      aBad: 'Não entendi sua mensagem. Por favor escolha: 1 - Produtos  2 - Pedidos  3 - Suporte',
+      aGood: 'Paris! 😄 Mas posso te ajudar com algo da nossa loja também. Está procurando algum produto em especial?'
+    }
+  ]
+  function renderNs(i){
+    const d = nsData[i]
+    document.getElementById('ns-badge-bad').textContent = d.label
+    document.getElementById('ns-badge-good').textContent = d.goodLabel
+    document.getElementById('ns-q-bad').textContent = d.q
+    document.getElementById('ns-a-bad').textContent = d.aBad
+    document.getElementById('ns-q-good').textContent = d.q
+    document.getElementById('ns-a-good').textContent = d.aGood
+    document.querySelectorAll('.ns-tab').forEach((t,j) => t.classList.toggle('active', i===j))
+  }
+  window.showNs = renderNs
+  renderNs(0)
+})()
+
+// ── Testimonials auto-scroll
+;(function(){
+  const wrap = document.getElementById('testi-wrap')
+  const track = document.getElementById('testi-track')
+  const dots = document.querySelectorAll('.testi-dot')
+  if(!wrap || !track) return
+  let current = 0
+  const cards = track.querySelectorAll('.testi-card')
+  const total = cards.length
+  const CARD_W = 320 + 16 // width + gap
+
+  function updateDots(i){ dots.forEach((d,j) => d.classList.toggle('active', i===j)) }
+  function goTo(i){
+    current = ((i % total) + total) % total
+    track.style.transform = `translateX(-${current * CARD_W}px)`
+    updateDots(current)
+  }
+  window.testiGo = goTo
+  window.testiNav = function(dir){ goTo(current + dir) }
+
+  let timer = setInterval(() => goTo(current + 1), 4000)
+  wrap.addEventListener('mouseenter', () => clearInterval(timer))
+  wrap.addEventListener('mouseleave', () => { timer = setInterval(() => goTo(current + 1), 4000) })
+})()
+
 // ── WhatsApp mockup animation
-const msgs = {
+const wppMsgs = {
   r1: document.getElementById('wpp-r1'),
   q2: document.getElementById('wpp-q2'),
   r2: document.getElementById('wpp-r2'),
+  q3: document.getElementById('wpp-q3'),
+  r3: document.getElementById('wpp-r3'),
   typing: document.getElementById('wpp-typing'),
 }
-function showWppMsg(el, delay) {
-  return new Promise(r => setTimeout(() => { el.style.display=''; r() }, delay))
+const wppContainer = document.getElementById('wpp-msgs')
+function showWppMsg(el) {
+  return new Promise(r => {
+    el.style.display = ''
+    el.style.opacity = '0'
+    el.style.transform = 'translateY(6px)'
+    el.style.transition = 'all 0.3s ease'
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      el.style.opacity = '1'
+      el.style.transform = 'translateY(0)'
+    }))
+    setTimeout(r, 350)
+    wppContainer.scrollTop = wppContainer.scrollHeight
+  })
 }
+function showTyping(ms) {
+  return new Promise(r => {
+    wppMsgs.typing.style.display = ''
+    wppContainer.scrollTop = wppContainer.scrollHeight
+    setTimeout(() => { wppMsgs.typing.style.display = 'none'; r() }, ms)
+  })
+}
+function wait(ms){ return new Promise(r => setTimeout(r, ms)) }
 async function animateWpp() {
-  await new Promise(r => setTimeout(r, 1200))
-  msgs.typing.style.display = ''
-  await new Promise(r => setTimeout(r, 1200))
-  msgs.typing.style.display = 'none'
-  await showWppMsg(msgs.r1, 0)
-  await new Promise(r => setTimeout(r, 1800))
-  await showWppMsg(msgs.q2, 0)
-  await new Promise(r => setTimeout(r, 600))
-  msgs.typing.style.display = ''
-  await new Promise(r => setTimeout(r, 1200))
-  msgs.typing.style.display = 'none'
-  await showWppMsg(msgs.r2, 0)
+  await wait(1200)
+  await showTyping(1000)
+  await showWppMsg(wppMsgs.r1)
+  await wait(1600)
+  await showWppMsg(wppMsgs.q2)
+  await wait(600)
+  await showTyping(1000)
+  await showWppMsg(wppMsgs.r2)
+  await wait(1800)
+  await showWppMsg(wppMsgs.q3)
+  await wait(500)
+  await showTyping(1200)
+  await showWppMsg(wppMsgs.r3)
+  await wait(6000)
+  // loop
+  Object.values(wppMsgs).forEach(el => { if(el.id !== 'wpp-msgs') el.style.display = 'none' })
+  const firstMsg = document.querySelector('#wpp-msgs .msg-in')
+  if(firstMsg){ firstMsg.style.display = '' }
+  animateWpp()
 }
 animateWpp()
 
@@ -1145,19 +1587,27 @@ animateWpp()
 const demos = [
   {
     q: "Tem disponível no tamanho 42?",
-    a: "Oi! Temos sim 😊 O modelo está disponível nos tamanhos 38 ao 44. No 42 temos preto, branco e cinza disponíveis. Qual cor te interessa?"
+    a: "Oi! Temos sim 😊 O modelo está disponível nos tamanhos 38 ao 44. No 42 temos preto, branco e cinza. Qual cor te interessa?"
   },
   {
     q: "Quando meu pedido vai chegar?",
-    a: "Oi! Deixa eu verificar aqui 🔍 Seu pedido #4821 foi despachado ontem e o código de rastreio é BR123456789. A previsão de entrega é amanhã até as 18h. Precisa de mais alguma coisa?"
+    a: "Oi! Deixa eu verificar aqui 🔍 Seu pedido #4821 foi despachado ontem. Código de rastreio: BR123456789. Previsão de entrega: amanhã até as 18h. Precisa de mais alguma coisa?"
   },
   {
     q: "Quais são os horários de funcionamento?",
-    a: "Nosso atendimento humano funciona de segunda a sexta, das 9h às 18h, e sábado das 9h às 13h. Mas eu estou aqui 24 horas por dia, 7 dias por semana para te ajudar com qualquer dúvida 😊"
+    a: "Nosso atendimento humano funciona de segunda a sexta, das 9h às 18h, e sábado das 9h às 13h. Mas eu estou aqui 24 horas por dia, 7 dias por semana para te ajudar 😊"
   },
   {
     q: "Vocês fazem entrega?",
-    a: "Sim! Entregamos para todo o Brasil. O prazo varia de 2 a 7 dias úteis dependendo da sua região. O frete é grátis em compras acima de R$199. Quer saber o prazo para o seu CEP?"
+    a: "Sim! Entregamos para todo o Brasil. Prazo de 2 a 7 dias úteis dependendo da sua região. Frete grátis em compras acima de R$199. Quer saber o prazo para o seu CEP?"
+  },
+  {
+    q: "Esse tênis vai dar chulé?",
+    a: "Haha, boa pergunta! O solado tem ventilação lateral e o tecido é anti-odor. Se quiser garantia extra, temos o modelo com palmilha antibacteriana disponível no 42. Qual prefere? 😄"
+  },
+  {
+    q: "Produto horrível, quero cancelar!",
+    a: "Entendo sua frustração e sinto muito pela experiência. Me conta o que aconteceu? Quero resolver isso pra você agora mesmo. Se preferir, posso acionar nosso time de suporte em menos de 2 minutos. 🙏"
   }
 ]
 function showDemo(i) {
@@ -1199,9 +1649,195 @@ requestAnimationFrame(() => {
 // ── Smooth nav active
 window.addEventListener('scroll', () => {
   const scrolled = window.scrollY > 50
-  document.querySelector('nav').style.background = scrolled
-    ? 'rgba(8,8,8,0.95)' : 'rgba(8,8,8,0.85)'
+  const nav = document.querySelector('nav')
+  nav.style.background = scrolled
+    ? 'rgba(255,255,255,0.09)' : 'rgba(255,255,255,0.06)'
 })
+
+// ── Particle background
+;(function(){
+  const canvas = document.getElementById('particle-canvas')
+  const ctx = canvas.getContext('2d')
+  let W, H
+  const G = {r:37, g:211, b:102}
+  const rgb = `${G.r},${G.g},${G.b}`
+  let rotX = 0, rotY = 0
+  let mouse = {x:0, y:0}
+  let nodes = [], nebulae = []
+
+  function resize(){
+    W = canvas.width = window.innerWidth
+    H = canvas.height = window.innerHeight
+  }
+
+  // Nebula blobs: large atmospheric glows that drift slowly
+  function makeNebula(){
+    return {
+      x: (Math.random() - 0.5) * 1.4,
+      y: (Math.random() - 0.5) * 1.4,
+      r: 0.2 + Math.random() * 0.25,
+      alpha: 0.04 + Math.random() * 0.05,
+      vx: (Math.random() - 0.5) * 0.00015,
+      vy: (Math.random() - 0.5) * 0.00015,
+      pulse: Math.random() * Math.PI * 2,
+      ps: 0.003 + Math.random() * 0.003
+    }
+  }
+
+  // 3-D molecular node
+  function makeNode(){
+    const theta = Math.random() * Math.PI * 2
+    const phi   = Math.acos(2 * Math.random() - 1)
+    const rad   = 220 + Math.random() * 280
+    const ox = rad * Math.sin(phi) * Math.cos(theta)
+    const oy = rad * Math.sin(phi) * Math.sin(theta)
+    const oz = rad * Math.cos(phi)
+    return {
+      ox, oy, oz,
+      x:ox, y:oy, z:oz,
+      px:0, py:0, scale:1,
+      size: Math.random() < 0.12 ? 2 + Math.random() * 2 : 0.7 + Math.random() * 1.3,
+      nucleus: Math.random() < 0.12,
+      pulse: Math.random() * Math.PI * 2,
+      ps: 0.015 + Math.random() * 0.02
+    }
+  }
+
+  function rotateNode(n, rx, ry){
+    // Y axis
+    let x1 = n.ox * Math.cos(ry) - n.oz * Math.sin(ry)
+    let z1 = n.ox * Math.sin(ry) + n.oz * Math.cos(ry)
+    // X axis
+    let y2 = n.oy * Math.cos(rx) - z1 * Math.sin(rx)
+    let z2 = n.oy * Math.sin(rx) + z1 * Math.cos(rx)
+    n.x = x1; n.y = y2; n.z = z2
+  }
+
+  function project(n){
+    const fov = 420
+    const s = fov / (fov + n.z + 250)
+    n.px = W/2 + n.x * s
+    n.py = H/2 + n.y * s
+    n.scale = s
+  }
+
+  function drawNebulae(){
+    nebulae.forEach(nb => {
+      nb.x += nb.vx; nb.y += nb.vy; nb.pulse += nb.ps
+      if(nb.x > 1.2 || nb.x < -1.2) nb.vx *= -1
+      if(nb.y > 1.2 || nb.y < -1.2) nb.vy *= -1
+      const cx = W/2 + nb.x * W/2
+      const cy = H/2 + nb.y * H/2
+      const rr = nb.r * Math.min(W, H)
+      const a = nb.alpha * (0.8 + Math.sin(nb.pulse) * 0.2)
+      const grd = ctx.createRadialGradient(cx, cy, 0, cx, cy, rr)
+      grd.addColorStop(0,   `rgba(${rgb},${a})`)
+      grd.addColorStop(0.4, `rgba(${rgb},${a * 0.4})`)
+      grd.addColorStop(1,   `rgba(${rgb},0)`)
+      ctx.beginPath()
+      ctx.fillStyle = grd
+      ctx.arc(cx, cy, rr, 0, Math.PI*2)
+      ctx.fill()
+    })
+  }
+
+  function drawConnections(){
+    const DIST = 190
+    for(let i = 0; i < nodes.length; i++){
+      for(let j = i+1; j < nodes.length; j++){
+        const a = nodes[i], b = nodes[j]
+        const dx = a.x-b.x, dy = a.y-b.y, dz = a.z-b.z
+        const d3 = Math.sqrt(dx*dx + dy*dy + dz*dz)
+        if(d3 > DIST) continue
+        const t = 1 - d3/DIST
+        const op = t * t * 0.35 * Math.min(a.scale, b.scale) * 2.2
+        const grd = ctx.createLinearGradient(a.px, a.py, b.px, b.py)
+        grd.addColorStop(0,   `rgba(${rgb},${op})`)
+        grd.addColorStop(0.5, `rgba(${rgb},${Math.min(op*1.8, 0.5)})`)
+        grd.addColorStop(1,   `rgba(${rgb},${op})`)
+        ctx.beginPath()
+        ctx.strokeStyle = grd
+        ctx.lineWidth = t * Math.min(a.scale, b.scale) * 1.2
+        ctx.moveTo(a.px, a.py)
+        ctx.lineTo(b.px, b.py)
+        ctx.stroke()
+      }
+    }
+  }
+
+  function drawNodes(){
+    nodes.forEach(n => {
+      n.pulse += n.ps
+      const p = Math.sin(n.pulse) * 0.25 + 0.75
+      const r = n.size * n.scale * 1.8 * p
+      const a = Math.min(n.scale * 1.1, 0.95)
+
+      if(n.nucleus){
+        // outer atmospheric glow
+        const grd = ctx.createRadialGradient(n.px, n.py, 0, n.px, n.py, r*6)
+        grd.addColorStop(0,   `rgba(${rgb},${a * 0.5})`)
+        grd.addColorStop(0.25,`rgba(${rgb},${a * 0.15})`)
+        grd.addColorStop(1,   `rgba(${rgb},0)`)
+        ctx.beginPath()
+        ctx.fillStyle = grd
+        ctx.arc(n.px, n.py, r*6, 0, Math.PI*2)
+        ctx.fill()
+        // ring
+        ctx.beginPath()
+        ctx.strokeStyle = `rgba(${rgb},${a * 0.25})`
+        ctx.lineWidth = 0.8
+        ctx.arc(n.px, n.py, r*3.5, 0, Math.PI*2)
+        ctx.stroke()
+      }
+
+      // inner glow halo
+      const halo = ctx.createRadialGradient(n.px, n.py, 0, n.px, n.py, r*1.8)
+      halo.addColorStop(0, `rgba(${rgb},${a * 0.5})`)
+      halo.addColorStop(1, `rgba(${rgb},0)`)
+      ctx.beginPath()
+      ctx.fillStyle = halo
+      ctx.arc(n.px, n.py, r*1.8, 0, Math.PI*2)
+      ctx.fill()
+
+      // core
+      ctx.beginPath()
+      ctx.shadowBlur = r * 2.5
+      ctx.shadowColor = `rgba(${rgb},0.7)`
+      ctx.fillStyle = `rgba(${rgb},${a})`
+      ctx.arc(n.px, n.py, Math.max(r * 0.4, 0.6), 0, Math.PI*2)
+      ctx.fill()
+      ctx.shadowBlur = 0
+    })
+  }
+
+  function frame(){
+    ctx.clearRect(0, 0, W, H)
+
+    rotY += 0.00035 + (mouse.x/W - 0.5) * 0.00025
+    rotX += 0.00014 + (mouse.y/H - 0.5) * 0.0001
+
+    nodes.forEach(n => { rotateNode(n, rotX, rotY); project(n) })
+    nodes.sort((a,b) => a.z - b.z)
+
+    drawNebulae()
+    drawConnections()
+    drawNodes()
+
+    requestAnimationFrame(frame)
+  }
+
+  function init(){
+    resize()
+    nebulae = Array.from({length: 5}, makeNebula)
+    nodes   = Array.from({length: 85}, makeNode)
+  }
+
+  window.addEventListener('resize', resize)
+  window.addEventListener('mousemove', e => { mouse.x = e.clientX; mouse.y = e.clientY })
+
+  init()
+  frame()
+})()
 </script>
 </body>
 </html>
