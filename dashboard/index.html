@@ -1,0 +1,1297 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard — Atendente24h</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:          #0a0a0a;
+  --surface:     #111111;
+  --surface-2:   #161616;
+  --border:      #1f1f1f;
+  --border-soft: rgba(255,255,255,0.05);
+  --text:        #ffffff;
+  --text-2:      #a1a1aa;
+  --text-3:      #52525b;
+  --green:       #16a34a;
+  --green-light: #22c55e;
+  --green-glow:  rgba(34,197,94,0.12);
+  --yellow:      #eab308;
+  --yellow-glow: rgba(234,179,8,0.12);
+  --red:         #ef4444;
+  --red-glow:    rgba(239,68,68,0.12);
+  --radius:      12px;
+  --radius-lg:   16px;
+}
+
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', -apple-system, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: "ss01" on, "cv01" on, "liga" on;
+  min-height: 100vh;
+}
+
+/* ─── LOGIN SCREEN ─── */
+#login-screen {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background:
+    radial-gradient(ellipse 70% 50% at 50% 0%, rgba(34,197,94,0.07), transparent 60%),
+    var(--bg);
+}
+
+.login-card {
+  width: 100%;
+  max-width: 400px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 40px 32px;
+}
+
+.login-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 32px;
+}
+
+.login-logo-icon {
+  width: 36px;
+  height: 36px;
+  background: var(--green-light);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.login-logo-text {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: var(--text);
+}
+
+.login-title {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 1.2;
+  margin-bottom: 6px;
+}
+
+.login-sub {
+  font-size: 13px;
+  color: var(--text-2);
+  margin-bottom: 28px;
+}
+
+.field {
+  margin-bottom: 16px;
+}
+
+.field label {
+  display: block;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: var(--text-2);
+  margin-bottom: 6px;
+}
+
+.field input {
+  width: 100%;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 10px 14px;
+  font-size: 14px;
+  font-family: inherit;
+  color: var(--text);
+  outline: none;
+  transition: border-color 0.15s ease;
+}
+
+.field input::placeholder { color: var(--text-3); }
+.field input:focus { border-color: rgba(34,197,94,0.4); }
+
+.btn-primary {
+  width: 100%;
+  background: var(--green-light);
+  color: #000;
+  border: none;
+  border-radius: 9999px;
+  padding: 12px 20px;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: inherit;
+  letter-spacing: -0.01em;
+  cursor: pointer;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+  margin-top: 4px;
+}
+
+.btn-primary:hover { opacity: 0.88; transform: translateY(-1px); }
+.btn-primary:active { transform: translateY(0); }
+
+.login-footer {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 11px;
+  color: var(--text-3);
+}
+
+/* ─── DASHBOARD ─── */
+#dashboard-screen { display: none; min-height: 100vh; }
+
+/* Header */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(10,10,10,0.9);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  border-bottom: 1px solid var(--border);
+  padding: 0 20px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header-logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.header-logo-icon {
+  width: 28px;
+  height: 28px;
+  background: var(--green-light);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.header-logo-text {
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.header-email {
+  font-size: 12px;
+  color: var(--text-2);
+  display: none;
+}
+
+@media (min-width: 480px) {
+  .header-email { display: block; }
+}
+
+.btn-ghost {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 9999px;
+  padding: 6px 12px;
+  font-size: 12px;
+  font-weight: 500;
+  font-family: inherit;
+  color: var(--text-2);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.btn-ghost:hover {
+  border-color: rgba(255,255,255,0.12);
+  color: var(--text);
+}
+
+/* Main layout */
+.main {
+  padding: 24px 20px 80px;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+/* Section label */
+.section-label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  margin-bottom: 12px;
+}
+
+/* Cards grid */
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+@media (min-width: 640px) {
+  .grid-2 { grid-template-columns: 1fr 1fr; }
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  transition: border-color 0.15s ease;
+}
+
+.card:hover { border-color: rgba(255,255,255,0.1); }
+
+.card-full {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  margin-bottom: 12px;
+  transition: border-color 0.15s ease;
+}
+
+.card-full:hover { border-color: rgba(255,255,255,0.1); }
+
+/* ─── Status do Plano ─── */
+.plan-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.plan-title {
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  margin-bottom: 2px;
+}
+
+.plan-price {
+  font-size: 12px;
+  color: var(--text-2);
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 10px;
+  border-radius: 9999px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.badge-active {
+  background: rgba(34,197,94,0.12);
+  color: var(--green-light);
+  border: 1px solid rgba(34,197,94,0.2);
+}
+
+.badge-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: currentColor;
+  animation: pulse-dot 2s infinite;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+.plan-meta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--text-2);
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 8px 12px;
+}
+
+/* ─── Mensagens ─── */
+.usage-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 10px;
+}
+
+.usage-title {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.usage-count {
+  font-size: 12px;
+  color: var(--text-2);
+  font-variant-numeric: tabular-nums;
+}
+
+.progress-track {
+  height: 6px;
+  background: var(--surface-2);
+  border-radius: 9999px;
+  overflow: hidden;
+  margin-bottom: 8px;
+  border: 1px solid var(--border);
+}
+
+.progress-fill {
+  height: 100%;
+  border-radius: 9999px;
+  transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.progress-green { background: linear-gradient(90deg, #16a34a, #22c55e); }
+.progress-yellow { background: linear-gradient(90deg, #ca8a04, #eab308); }
+.progress-red { background: linear-gradient(90deg, #dc2626, #ef4444); }
+
+.usage-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.usage-percent {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.usage-warning {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  font-weight: 500;
+  padding: 4px 10px;
+  border-radius: 9999px;
+}
+
+.warning-yellow {
+  background: rgba(234,179,8,0.1);
+  color: var(--yellow);
+  border: 1px solid rgba(234,179,8,0.2);
+}
+
+.warning-red {
+  background: rgba(239,68,68,0.1);
+  color: var(--red);
+  border: 1px solid rgba(239,68,68,0.2);
+}
+
+/* ─── Atendente ─── */
+.atendente-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--green-light);
+  box-shadow: 0 0 0 3px rgba(34,197,94,0.15);
+  animation: pulse-dot 2s infinite;
+  flex-shrink: 0;
+}
+
+.status-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--green-light);
+}
+
+.info-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.info-row:last-of-type { border-bottom: none; }
+
+.info-key {
+  font-size: 11px;
+  color: var(--text-3);
+  letter-spacing: 0.02em;
+}
+
+.info-val {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-2);
+  font-variant-numeric: tabular-nums;
+}
+
+.btn-config {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 14px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 8px 14px;
+  font-size: 12px;
+  font-weight: 500;
+  font-family: inherit;
+  color: var(--text-2);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.btn-config:hover {
+  border-color: rgba(34,197,94,0.3);
+  color: var(--text);
+}
+
+/* ─── Histórico ─── */
+.history-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+}
+
+.history-table th {
+  text-align: left;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  padding: 0 0 10px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.history-table td {
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+  vertical-align: middle;
+}
+
+.history-table tr:last-child td { border-bottom: none; }
+
+.history-table td:nth-child(1) {
+  color: var(--text-3);
+  white-space: nowrap;
+  width: 120px;
+  font-variant-numeric: tabular-nums;
+  font-size: 11px;
+}
+
+.history-table td:nth-child(2) {
+  color: var(--text-2);
+  padding-right: 12px;
+}
+
+.msg-trecho {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.badge-respondido {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  border-radius: 9999px;
+  font-size: 10px;
+  font-weight: 500;
+  background: rgba(34,197,94,0.1);
+  color: var(--green-light);
+  border: 1px solid rgba(34,197,94,0.15);
+  white-space: nowrap;
+}
+
+/* ─── Upgrade Section ─── */
+.upgrade-section {
+  margin-top: 32px;
+  padding-top: 32px;
+  border-top: 1px solid var(--border);
+}
+
+.upgrade-title {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  margin-bottom: 4px;
+}
+
+.upgrade-sub {
+  font-size: 13px;
+  color: var(--text-2);
+  margin-bottom: 20px;
+}
+
+.plans-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+
+@media (min-width: 640px) {
+  .plans-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+.plan-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  position: relative;
+  transition: border-color 0.15s ease;
+}
+
+.plan-card:hover { border-color: rgba(255,255,255,0.1); }
+
+.plan-card.current {
+  border-color: rgba(34,197,94,0.3);
+  background: rgba(34,197,94,0.04);
+}
+
+.plan-card.featured {
+  border-color: rgba(34,197,94,0.2);
+}
+
+.plan-card-tag {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  margin-bottom: 10px;
+  display: block;
+}
+
+.plan-card.current .plan-card-tag { color: var(--green-light); }
+
+.plan-card-name {
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  margin-bottom: 2px;
+}
+
+.plan-card-price {
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: -0.05em;
+  line-height: 1.1;
+  margin-bottom: 2px;
+}
+
+.plan-card-period {
+  font-size: 11px;
+  color: var(--text-3);
+  margin-bottom: 14px;
+}
+
+.plan-features {
+  list-style: none;
+  margin-bottom: 16px;
+}
+
+.plan-features li {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 12px;
+  color: var(--text-2);
+  margin-bottom: 6px;
+}
+
+.plan-features li .feat-icon {
+  color: var(--green-light);
+  flex-shrink: 0;
+}
+
+.btn-upgrade {
+  width: 100%;
+  display: block;
+  text-align: center;
+  text-decoration: none;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 9999px;
+  padding: 9px 16px;
+  font-size: 12px;
+  font-weight: 600;
+  font-family: inherit;
+  color: var(--text-2);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.btn-upgrade:hover {
+  border-color: rgba(255,255,255,0.14);
+  color: var(--text);
+}
+
+.btn-upgrade-green {
+  background: var(--green-light);
+  border-color: var(--green-light);
+  color: #000;
+}
+
+.btn-upgrade-green:hover {
+  opacity: 0.88;
+  border-color: var(--green-light);
+  color: #000;
+}
+
+.btn-current {
+  width: 100%;
+  display: block;
+  text-align: center;
+  background: transparent;
+  border: 1px solid rgba(34,197,94,0.25);
+  border-radius: 9999px;
+  padding: 9px 16px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--green-light);
+  cursor: default;
+}
+
+/* ─── MODAL ─── */
+#modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  z-index: 200;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+#modal-overlay.open { display: flex; }
+
+.modal {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  width: 100%;
+  max-width: 520px;
+  position: relative;
+}
+
+.modal-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+
+.modal-title {
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+.modal-close {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text-3);
+  padding: 2px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  transition: color 0.1s ease;
+}
+
+.modal-close:hover { color: var(--text); }
+
+.modal-sub {
+  font-size: 12px;
+  color: var(--text-2);
+  margin-bottom: 16px;
+}
+
+.modal-textarea {
+  width: 100%;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 12px 14px;
+  font-size: 13px;
+  font-family: inherit;
+  color: var(--text);
+  line-height: 1.6;
+  resize: vertical;
+  min-height: 140px;
+  outline: none;
+  transition: border-color 0.15s ease;
+}
+
+.modal-textarea::placeholder { color: var(--text-3); }
+.modal-textarea:focus { border-color: rgba(34,197,94,0.4); }
+
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.btn-modal-cancel {
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 9999px;
+  padding: 8px 16px;
+  font-size: 13px;
+  font-weight: 500;
+  font-family: inherit;
+  color: var(--text-2);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.btn-modal-cancel:hover { border-color: rgba(255,255,255,0.12); color: var(--text); }
+
+.btn-modal-save {
+  background: var(--green-light);
+  border: none;
+  border-radius: 9999px;
+  padding: 8px 20px;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: inherit;
+  color: #000;
+  cursor: pointer;
+  transition: opacity 0.15s ease;
+}
+
+.btn-modal-save:hover { opacity: 0.88; }
+
+/* ─── TOAST ─── */
+#toast {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--green-light);
+  border-radius: var(--radius);
+  padding: 12px 18px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  z-index: 300;
+  opacity: 0;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  pointer-events: none;
+  white-space: nowrap;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.4);
+}
+
+#toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* ─── DIVIDER ─── */
+.section-divider {
+  height: 1px;
+  background: var(--border);
+  margin: 24px 0;
+}
+
+/* Spacing helpers */
+.mb-12 { margin-bottom: 12px; }
+.mb-20 { margin-bottom: 20px; }
+.mb-24 { margin-bottom: 24px; }
+</style>
+</head>
+<body>
+
+<!-- LOGIN SCREEN -->
+<div id="login-screen">
+  <div class="login-card">
+    <div class="login-logo">
+      <div class="login-logo-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+        </svg>
+      </div>
+      <span class="login-logo-text">Atendente24h</span>
+    </div>
+
+    <div class="login-title">Acessar sua conta</div>
+    <p class="login-sub">Entre com seu e-mail para gerenciar seu atendente.</p>
+
+    <form id="login-form">
+      <div class="field">
+        <label>E-mail</label>
+        <input type="email" id="login-email" placeholder="voce@empresa.com" autocomplete="email" required>
+      </div>
+      <div class="field">
+        <label>Senha</label>
+        <input type="password" id="login-password" placeholder="••••••••" autocomplete="current-password" required>
+      </div>
+      <button type="submit" class="btn-primary">Entrar no dashboard</button>
+    </form>
+
+    <p class="login-footer">Suporte: suporte@atendente24h.com</p>
+  </div>
+</div>
+
+<!-- DASHBOARD SCREEN -->
+<div id="dashboard-screen">
+
+  <!-- Header -->
+  <header class="header">
+    <div class="header-logo">
+      <div class="header-logo-icon">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+        </svg>
+      </div>
+      <span class="header-logo-text">Atendente24h</span>
+    </div>
+    <div class="header-right">
+      <span class="header-email" id="header-email">joao@empresa.com</span>
+      <button class="btn-ghost" id="btn-sair">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+          <polyline points="16 17 21 12 16 7"/>
+          <line x1="21" y1="12" x2="9" y2="12"/>
+        </svg>
+        Sair
+      </button>
+    </div>
+  </header>
+
+  <!-- Main -->
+  <main class="main">
+
+    <!-- Plano + Mensagens -->
+    <div class="grid-2 mb-12">
+
+      <!-- Card: Status do Plano -->
+      <div class="card">
+        <div class="plan-header">
+          <div>
+            <div class="plan-title" id="card-plano-nome">Recomendado</div>
+            <div class="plan-price" id="card-plano-valor">R$397/mês</div>
+          </div>
+          <span class="badge badge-active">
+            <span class="badge-dot"></span>
+            Ativo
+          </span>
+        </div>
+        <div class="plan-meta">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--text-3);flex-shrink:0">
+            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+            <line x1="16" y1="2" x2="16" y2="6"/>
+            <line x1="8" y1="2" x2="8" y2="6"/>
+            <line x1="3" y1="10" x2="21" y2="10"/>
+          </svg>
+          <span style="font-size:12px;color:var(--text-2)">Renova em <strong id="card-renovacao" style="color:var(--text)">15 dias</strong></span>
+        </div>
+      </div>
+
+      <!-- Card: Uso de Mensagens -->
+      <div class="card">
+        <div class="usage-header">
+          <span class="usage-title">Mensagens</span>
+          <span class="usage-count"><span id="msg-usadas">1.847</span> / <span id="msg-limite">2.500</span></span>
+        </div>
+        <div class="progress-track">
+          <div class="progress-fill progress-green" id="progress-bar" style="width: 0%"></div>
+        </div>
+        <div class="usage-footer">
+          <span class="usage-percent" id="usage-percent">74%</span>
+          <span class="usage-warning" id="usage-warning" style="display:none"></span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Card: Seu Atendente -->
+    <div class="card-full mb-12">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
+        <span class="section-label" style="margin:0">Seu Atendente</span>
+        <div class="atendente-status" style="margin:0">
+          <div class="status-dot"></div>
+          <span class="status-label">Ativo</span>
+        </div>
+      </div>
+
+      <div class="info-row">
+        <span class="info-key">Instancia WhatsApp</span>
+        <span class="info-val" id="info-instancia">empresa_joao</span>
+      </div>
+      <div class="info-row">
+        <span class="info-key">Conectado em</span>
+        <span class="info-val" id="info-conexao">22/03/2026</span>
+      </div>
+      <div class="info-row">
+        <span class="info-key">Empresa</span>
+        <span class="info-val" id="info-empresa">Empresa do Joao</span>
+      </div>
+
+      <button class="btn-config" id="btn-configurar">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="3"/>
+          <path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/>
+        </svg>
+        Configurar Contexto
+      </button>
+    </div>
+
+    <!-- Card: Historico -->
+    <div class="card-full">
+      <div class="section-label" style="margin-bottom:14px">Ultimas mensagens processadas</div>
+      <div style="overflow-x:auto">
+        <table class="history-table">
+          <thead>
+            <tr>
+              <th>Data / Hora</th>
+              <th>Mensagem</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="history-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Upgrade Section -->
+    <div class="upgrade-section">
+      <div class="upgrade-title">Evolua seu plano</div>
+      <p class="upgrade-sub">Mais mensagens, mais recursos, mais atendimentos.</p>
+
+      <div class="plans-grid" id="plans-grid"></div>
+    </div>
+
+  </main>
+</div>
+
+<!-- Modal Configurar Contexto -->
+<div id="modal-overlay">
+  <div class="modal" id="modal-box">
+    <div class="modal-header">
+      <span class="modal-title">Contexto do Atendente</span>
+      <button class="modal-close" id="modal-close-btn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"/>
+          <line x1="6" y1="6" x2="18" y2="18"/>
+        </svg>
+      </button>
+    </div>
+    <p class="modal-sub">Descreva seu negocio para o atendente. Quanto mais detalhe, melhor ele responde.</p>
+    <textarea
+      class="modal-textarea"
+      id="modal-textarea"
+      placeholder="Ex: Somos uma clinica odontologica em SP. Atendemos de seg a sex 8h-18h. Fazemos clareamento, implantes e ortodontia. Para agendar, pedimos nome, telefone e qual tratamento...">
+    </textarea>
+    <div class="modal-footer">
+      <button class="btn-modal-cancel" id="modal-cancel-btn">Cancelar</button>
+      <button class="btn-modal-save" id="modal-save-btn">Salvar</button>
+    </div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div id="toast">
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--green-light)">
+    <polyline points="20 6 9 17 4 12"/>
+  </svg>
+  <span id="toast-text">Salvo com sucesso!</span>
+</div>
+
+<script>
+// ─── DADOS MOCK ───────────────────────────────────────────────────────────────
+const clienteDemo = {
+  nome: "Joao Silva",
+  email: "joao@empresa.com",
+  empresa: "Empresa do Joao",
+  plano: "Recomendado",
+  plano_valor: "R$397/mes",
+  status: "active",
+  mensagens_usadas: 1847,
+  mensagens_limite: 2500,
+  instancia: "empresa_joao",
+  data_conexao: "22/03/2026",
+  proxima_renovacao: "15 dias",
+  system_prompt: "Somos uma empresa de tecnologia. Respondemos duvidas sobre nossos produtos..."
+};
+
+const historico = [
+  { dt: "28/03 14:23", msg: "Ola! Gostaria de saber o horario de atendimento de voces", respondido: true },
+  { dt: "28/03 13:55", msg: "Voces fazem entrega para o interior de SP?", respondido: true },
+  { dt: "28/03 11:40", msg: "Qual o prazo de garantia do produto que comprei?", respondido: true },
+  { dt: "27/03 18:07", msg: "Boa tarde, tenho uma duvida sobre o meu pedido #4821", respondido: true },
+  { dt: "27/03 16:30", msg: "Preciso de um orcamento para contratar o servico Plus", respondido: true }
+];
+
+const planos = [
+  {
+    tag: "Basico",
+    nome: "Basico",
+    preco: "R$197",
+    periodo: "/mes",
+    msgs: "500 mensagens/mes",
+    features: ["1 numero WhatsApp", "Respostas automaticas 24/7", "Suporte por email"],
+    link: "https://pay.kiwify.com.br/6ahByUz",
+    featured: false
+  },
+  {
+    tag: "Recomendado",
+    nome: "Recomendado",
+    preco: "R$397",
+    periodo: "/mes",
+    msgs: "2.500 mensagens/mes",
+    features: ["1 numero WhatsApp", "Respostas automaticas 24/7", "Contexto personalizado", "Suporte prioritario"],
+    link: "https://pay.kiwify.com.br/NoT2pJ2",
+    featured: true
+  },
+  {
+    tag: "Pro",
+    nome: "Pro",
+    preco: "R$797",
+    periodo: "/mes",
+    msgs: "Mensagens ilimitadas",
+    features: ["3 numeros WhatsApp", "Respostas automaticas 24/7", "Contexto avancado", "Integracao CRM", "Suporte dedicado"],
+    link: "https://pay.kiwify.com.br/ZHeaXQC",
+    featured: false
+  }
+];
+
+// ─── ESTADO ───────────────────────────────────────────────────────────────────
+const SESSION_KEY = "a24h_session";
+
+function getSession() {
+  try { return JSON.parse(sessionStorage.getItem(SESSION_KEY)); } catch { return null; }
+}
+
+function setSession(data) {
+  sessionStorage.setItem(SESSION_KEY, JSON.stringify(data));
+}
+
+function clearSession() {
+  sessionStorage.removeItem(SESSION_KEY);
+}
+
+// ─── LOGIN ────────────────────────────────────────────────────────────────────
+document.getElementById("login-form").addEventListener("submit", function(e) {
+  e.preventDefault();
+  const email = document.getElementById("login-email").value.trim();
+  if (!email) return;
+  setSession({ email });
+  showDashboard(email);
+});
+
+// ─── SAIR ─────────────────────────────────────────────────────────────────────
+document.getElementById("btn-sair").addEventListener("click", function() {
+  clearSession();
+  document.getElementById("dashboard-screen").style.display = "none";
+  document.getElementById("login-screen").style.display = "flex";
+});
+
+// ─── RENDER DASHBOARD ─────────────────────────────────────────────────────────
+function showDashboard(email) {
+  document.getElementById("login-screen").style.display = "none";
+  const dash = document.getElementById("dashboard-screen");
+  dash.style.display = "block";
+
+  // Header
+  document.getElementById("header-email").textContent = email || clienteDemo.email;
+
+  // Plano
+  document.getElementById("card-plano-nome").textContent = clienteDemo.plano;
+  document.getElementById("card-plano-valor").textContent = clienteDemo.plano_valor;
+  document.getElementById("card-renovacao").textContent = clienteDemo.proxima_renovacao;
+
+  // Mensagens
+  const usadas = clienteDemo.mensagens_usadas;
+  const limite = clienteDemo.mensagens_limite;
+  const pct = Math.round((usadas / limite) * 100);
+
+  document.getElementById("msg-usadas").textContent = usadas.toLocaleString("pt-BR");
+  document.getElementById("msg-limite").textContent = limite.toLocaleString("pt-BR");
+  document.getElementById("usage-percent").textContent = pct + "%";
+
+  const bar = document.getElementById("progress-bar");
+  const warning = document.getElementById("usage-warning");
+
+  setTimeout(() => { bar.style.width = pct + "%"; }, 80);
+
+  if (pct >= 95) {
+    bar.className = "progress-fill progress-red";
+    warning.style.display = "inline-flex";
+    warning.className = "usage-warning warning-red";
+    warning.innerHTML = `<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg> Limite critico!`;
+  } else if (pct >= 80) {
+    bar.className = "progress-fill progress-yellow";
+    warning.style.display = "inline-flex";
+    warning.className = "usage-warning warning-yellow";
+    warning.innerHTML = `<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg> Proximo do limite`;
+  } else {
+    bar.className = "progress-fill progress-green";
+    warning.style.display = "none";
+  }
+
+  // Atendente
+  document.getElementById("info-instancia").textContent = clienteDemo.instancia;
+  document.getElementById("info-conexao").textContent = clienteDemo.data_conexao;
+  document.getElementById("info-empresa").textContent = clienteDemo.empresa;
+
+  // Historico
+  const tbody = document.getElementById("history-tbody");
+  tbody.innerHTML = historico.map(h => `
+    <tr>
+      <td>${h.dt}</td>
+      <td><span class="msg-trecho">${h.msg}</span></td>
+      <td><span class="badge-respondido">Respondido</span></td>
+    </tr>
+  `).join("");
+
+  // Planos
+  renderPlanos();
+}
+
+// ─── RENDER PLANOS ────────────────────────────────────────────────────────────
+function renderPlanos() {
+  const grid = document.getElementById("plans-grid");
+  grid.innerHTML = planos.map(p => {
+    const isCurrent = p.nome === clienteDemo.plano;
+    const cardClass = isCurrent ? "plan-card current" : p.featured ? "plan-card featured" : "plan-card";
+    const btn = isCurrent
+      ? `<span class="btn-current">Seu plano atual</span>`
+      : `<a href="${p.link}" target="_blank" class="btn-upgrade ${p.featured ? 'btn-upgrade-green' : ''}">Fazer Upgrade</a>`;
+
+    const tagLabel = isCurrent ? "Plano atual" : p.tag;
+
+    return `
+      <div class="${cardClass}">
+        <span class="plan-card-tag">${tagLabel}</span>
+        <div class="plan-card-name">${p.nome}</div>
+        <div class="plan-card-price">${p.preco}</div>
+        <div class="plan-card-period">${p.periodo} &bull; ${p.msgs}</div>
+        <ul class="plan-features">
+          ${p.features.map(f => `
+            <li>
+              <svg class="feat-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"/>
+              </svg>
+              ${f}
+            </li>
+          `).join("")}
+        </ul>
+        ${btn}
+      </div>
+    `;
+  }).join("");
+}
+
+// ─── MODAL ────────────────────────────────────────────────────────────────────
+const overlay = document.getElementById("modal-overlay");
+const textarea = document.getElementById("modal-textarea");
+
+document.getElementById("btn-configurar").addEventListener("click", function() {
+  textarea.value = clienteDemo.system_prompt;
+  overlay.classList.add("open");
+  setTimeout(() => textarea.focus(), 100);
+});
+
+function closeModal() {
+  overlay.classList.remove("open");
+}
+
+document.getElementById("modal-close-btn").addEventListener("click", closeModal);
+document.getElementById("modal-cancel-btn").addEventListener("click", closeModal);
+
+overlay.addEventListener("click", function(e) {
+  if (e.target === overlay) closeModal();
+});
+
+document.addEventListener("keydown", function(e) {
+  if (e.key === "Escape") closeModal();
+});
+
+document.getElementById("modal-save-btn").addEventListener("click", function() {
+  clienteDemo.system_prompt = textarea.value;
+  closeModal();
+  showToast("Contexto salvo com sucesso!");
+});
+
+// ─── TOAST ────────────────────────────────────────────────────────────────────
+function showToast(msg) {
+  const toast = document.getElementById("toast");
+  document.getElementById("toast-text").textContent = msg;
+  toast.classList.add("show");
+  setTimeout(() => toast.classList.remove("show"), 3000);
+}
+
+// ─── INIT ─────────────────────────────────────────────────────────────────────
+(function init() {
+  const session = getSession();
+  if (session && session.email) {
+    showDashboard(session.email);
+  } else {
+    document.getElementById("login-screen").style.display = "flex";
+  }
+})();
+</script>
+</body>
+</html>
