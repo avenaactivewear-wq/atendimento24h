@@ -273,6 +273,10 @@ textarea{resize:vertical;min-height:120px}
     </div>
     <div class="step-item" id="si-3">
       <div class="step-circle">4</div>
+      <div class="step-line"></div>
+    </div>
+    <div class="step-item" id="si-4">
+      <div class="step-circle">5</div>
     </div>
   </div>
   <div class="step-labels">
@@ -280,6 +284,7 @@ textarea{resize:vertical;min-height:120px}
     <span class="step-label" id="sl-1">Atendente</span>
     <span class="step-label" id="sl-2">Conhecimento</span>
     <span class="step-label" id="sl-3">Ativar</span>
+    <span class="step-label" id="sl-4">Conectar</span>
   </div>
   <div class="progress-bar-outer">
     <div class="progress-bar-inner" id="progress-bar" style="width:12.5%"></div>
@@ -292,56 +297,41 @@ textarea{resize:vertical;min-height:120px}
   <div class="step-panel active" id="panel-0">
     <div class="step-header">
       <div class="step-num-label">Passo 1 de 4</div>
-      <div class="step-title">Conecte seu WhatsApp</div>
-      <div class="step-desc">Escaneie o QR code com o celular e seu número estará conectado em segundos.</div>
+      <div class="step-title">Seus dados de acesso</div>
+      <div class="step-desc">Informe seu número do WhatsApp e email para ativarmos sua conta.</div>
     </div>
 
-    <div class="qr-card">
-      <div class="qr-box">
-        <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
-          <rect x="4" y="4" width="28" height="28" rx="3" stroke="white" stroke-width="2.5"/>
-          <rect x="10" y="10" width="16" height="16" rx="1" fill="white"/>
-          <rect x="48" y="4" width="28" height="28" rx="3" stroke="white" stroke-width="2.5"/>
-          <rect x="54" y="10" width="16" height="16" rx="1" fill="white"/>
-          <rect x="4" y="48" width="28" height="28" rx="3" stroke="white" stroke-width="2.5"/>
-          <rect x="10" y="54" width="16" height="16" rx="1" fill="white"/>
-          <rect x="48" y="48" width="8" height="8" fill="white"/>
-          <rect x="60" y="48" width="8" height="8" fill="white"/>
-          <rect x="48" y="60" width="8" height="8" fill="white"/>
-          <rect x="60" y="60" width="8" height="16" fill="white"/>
-          <rect x="72" y="60" width="4" height="8" fill="white"/>
-        </svg>
-        <div class="qr-box-label">QR Code aparece aqui</div>
-      </div>
-      <div class="qr-status">
-        <div class="qr-spinner"></div>
-        Aguardando conexão...
-      </div>
+    <div class="field" id="f-email">
+      <label>Email da conta <span>*</span></label>
+      <input type="email" id="i-email" placeholder="seuemail@empresa.com">
+      <div class="error-msg">Informe um email válido</div>
     </div>
 
-    <div class="qr-instructions">
-      <div class="step-num-label" style="margin-bottom:16px">Como conectar</div>
+    <div class="field" id="f-whatsapp">
+      <label>Número do WhatsApp que será atendido <span>*</span></label>
+      <input type="text" id="i-whatsapp" placeholder="Ex: 11999887766 (só números, com DDD)">
+      <div class="error-msg">Informe o número com DDD, sem espaços ou símbolos</div>
+    </div>
+
+    <div class="qr-instructions" style="margin-top:28px">
+      <div class="step-num-label" style="margin-bottom:16px">O que acontece depois</div>
       <div class="qr-step">
         <div class="qr-step-n">1</div>
-        <div class="qr-step-t">Abra o WhatsApp no seu celular</div>
+        <div class="qr-step-t">Você preenche as informações do seu negócio</div>
       </div>
       <div class="qr-step">
         <div class="qr-step-n">2</div>
-        <div class="qr-step-t">Toque nos 3 pontos (menu) e selecione <strong>Aparelhos conectados</strong></div>
+        <div class="qr-step-t">Nossa equipe configura o atendente e envia o link de conexão do WhatsApp em até 24h</div>
       </div>
       <div class="qr-step">
         <div class="qr-step-n">3</div>
-        <div class="qr-step-t">Toque em <strong>Conectar um aparelho</strong> e aponte a câmera para o QR code</div>
-      </div>
-      <div class="qr-step">
-        <div class="qr-step-n">4</div>
-        <div class="qr-step-t">Pronto! Seu número será conectado automaticamente</div>
+        <div class="qr-step-t">Você escaneia o QR code e o atendente entra em ação imediatamente</div>
       </div>
     </div>
 
     <div class="nav-btns" style="justify-content:flex-end">
-      <button class="btn-next" onclick="nextStep()">
-        Já conectei meu WhatsApp
+      <button class="btn-next" onclick="validateStep0()">
+        Continuar
         <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </button>
     </div>
@@ -480,6 +470,14 @@ Políticas:
 
     <div class="summary-card">
       <div class="summary-row">
+        <span class="summary-key">Email</span>
+        <span class="summary-val" id="s-email">—</span>
+      </div>
+      <div class="summary-row">
+        <span class="summary-key">WhatsApp</span>
+        <span class="summary-val" id="s-whatsapp">—</span>
+      </div>
+      <div class="summary-row">
         <span class="summary-key">Atendente</span>
         <span class="summary-val" id="s-nome">—</span>
       </div>
@@ -525,13 +523,51 @@ Políticas:
     </div>
   </div>
 
+  <!-- STEP 5: QR CODE -->
+  <div class="step-panel" id="panel-4">
+    <div class="step-header">
+      <div class="step-num-label">Passo 5 de 5</div>
+      <div class="step-title">Conectar seu WhatsApp</div>
+      <div class="step-desc">Abra o WhatsApp no celular e escaneie o QR code abaixo para ativar seu atendente.</div>
+    </div>
+
+    <div style="display:flex;flex-direction:column;align-items:center;gap:24px;margin-bottom:36px">
+
+      <!-- QR Code container -->
+      <div id="qr-container" style="background:#fff;border-radius:16px;padding:20px;display:flex;align-items:center;justify-content:center;width:260px;height:260px">
+        <div id="qr-loading" style="text-align:center;color:#888">
+          <div style="width:40px;height:40px;border:3px solid #eee;border-top-color:#25D366;border-radius:50%;animation:spin 1s linear infinite;margin:0 auto 12px"></div>
+          <div style="font-size:13px">Gerando QR code...</div>
+        </div>
+        <img id="qr-image" src="" alt="QR Code" style="display:none;width:220px;height:220px;border-radius:8px">
+      </div>
+
+      <!-- Status -->
+      <div id="qr-status-msg" style="text-align:center;color:var(--text2);font-size:14px">
+        Aguardando escaneamento...
+      </div>
+
+      <!-- Como escanear -->
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px;max-width:340px;width:100%">
+        <div style="font-size:13px;font-weight:700;color:var(--green);margin-bottom:12px">Como escanear:</div>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <div style="display:flex;gap:10px;align-items:flex-start;font-size:13px;color:var(--text2)"><span style="color:var(--green);font-weight:700;flex-shrink:0">1.</span> Abra o WhatsApp no celular</div>
+          <div style="display:flex;gap:10px;align-items:flex-start;font-size:13px;color:var(--text2)"><span style="color:var(--green);font-weight:700;flex-shrink:0">2.</span> Toque em <strong style="color:var(--text)">Dispositivos conectados</strong></div>
+          <div style="display:flex;gap:10px;align-items:flex-start;font-size:13px;color:var(--text2)"><span style="color:var(--green);font-weight:700;flex-shrink:0">3.</span> Toque em <strong style="color:var(--text)">Conectar dispositivo</strong></div>
+          <div style="display:flex;gap:10px;align-items:flex-start;font-size:13px;color:var(--text2)"><span style="color:var(--green);font-weight:700;flex-shrink:0">4.</span> Aponte a câmera para o QR code acima</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
   <!-- SUCCESS -->
   <div class="success-panel" id="success-panel">
     <div class="success-circle">⚡</div>
     <div class="success-title">Atendente ativo!</div>
-    <p class="success-sub" id="success-msg">Seu WhatsApp já está sendo atendido automaticamente. Você pode fechar esta aba.</p>
+    <p class="success-sub" id="success-msg">Seu WhatsApp já está conectado e o atendente está ativo 24h. Você pode fechar esta aba.</p>
     <div style="margin-top:36px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
-      <a href="#" class="btn-next" style="flex:0;padding:14px 28px;border-radius:12px;text-decoration:none">Ver painel</a>
+      <a href="/dashboard/" class="btn-next" style="flex:0;padding:14px 28px;border-radius:12px;text-decoration:none">Ver meu painel</a>
       <a href="../landing/" class="btn-back" style="text-decoration:none">Ir para o site</a>
     </div>
   </div>
@@ -539,14 +575,24 @@ Políticas:
 </main>
 
 <script>
+const WEBHOOK_BASE = 'https://crista-oleographic-frightfully.ngrok-free.dev'
+const WEBHOOK_ONBOARDING = WEBHOOK_BASE + '/webhook/atendente24h-onboarding'
+const WEBHOOK_QR = WEBHOOK_BASE + '/webhook/atendente24h-qr'
+const WEBHOOK_STATUS = WEBHOOK_BASE + '/webhook/atendente24h-status'
+const NGROK_HEADERS = { 'Content-Type': 'application/json', 'ngrok-skip-browser-warning': 'true' }
+
 let currentStep = 0
-const totalSteps = 4
-const progresses = [12.5, 37.5, 62.5, 87.5, 100]
+const totalSteps = 5
+const progresses = [10, 30, 50, 70, 90, 100]
+let currentInstance = null
+let qrPollInterval = null
+let statusPollInterval = null
 
 function updateStepper() {
   for (let i = 0; i < totalSteps; i++) {
     const si = document.getElementById('si-'+i)
     const sl = document.getElementById('sl-'+i)
+    if (!si) continue
     si.className = 'step-item' + (i < currentStep ? ' done' : i === currentStep ? ' active' : '')
     sl.className = 'step-label' + (i < currentStep ? ' done' : i === currentStep ? ' active' : '')
     const circle = si.querySelector('.step-circle')
@@ -583,6 +629,16 @@ function setError(fieldId, show) {
   f.classList.toggle('error', show)
 }
 
+function validateStep0() {
+  const email = document.getElementById('i-email').value.trim()
+  const whatsapp = document.getElementById('i-whatsapp').value.trim().replace(/\D/g,'')
+  let ok = true
+  const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
+  setError('f-email', !emailOk); if (!emailOk) ok = false
+  setError('f-whatsapp', whatsapp.length < 10); if (whatsapp.length < 10) ok = false
+  if (ok) nextStep()
+}
+
 function validateStep1() {
   const nome = document.getElementById('i-nome').value.trim()
   const empresa = document.getElementById('i-empresa').value.trim()
@@ -615,24 +671,102 @@ function validateStep2() {
 function fillSummary() {
   const tomMap = {amigavel:'Amigável e descontraído',profissional:'Profissional e formal',empatico:'Empático e acolhedor',direto:'Direto e objetivo'}
   const segMap = {loja:'Loja / E-commerce',clinica:'Clínica / Saúde',salao:'Salão / Estética',restaurante:'Restaurante / Delivery',servicos:'Serviços Gerais',educacao:'Educação / Cursos',outro:'Outro'}
+  document.getElementById('s-email').textContent = document.getElementById('i-email').value || '—'
+  document.getElementById('s-whatsapp').textContent = document.getElementById('i-whatsapp').value || '—'
   document.getElementById('s-nome').textContent = document.getElementById('i-nome').value || '—'
   document.getElementById('s-empresa').textContent = document.getElementById('i-empresa').value || '—'
   document.getElementById('s-tom').textContent = tomMap[document.getElementById('i-tom').value] || '—'
   document.getElementById('s-segmento').textContent = segMap[document.getElementById('i-segmento').value] || '—'
-  document.getElementById('success-msg').textContent = `${document.getElementById('i-nome').value || 'Seu atendente'} está ativo e respondendo pelo WhatsApp. Você pode fechar esta aba.`
+  document.getElementById('success-msg').textContent = `Recebemos tudo! Nossa equipe vai configurar ${document.getElementById('i-nome').value || 'seu atendente'} em até 24h e avisamos pelo email cadastrado.`
 }
 
-function activate() {
+async function activate() {
   const btn = document.getElementById('activate-btn')
   const label = document.getElementById('activate-label')
   btn.disabled = true
-  label.innerHTML = '<div style="width:20px;height:20px;border:2px solid rgba(0,0,0,0.2);border-top-color:#000;border-radius:50%;animation:spin 1s linear infinite"></div> Ativando...'
-  setTimeout(() => {
-    document.getElementById('progress-bar').style.width = '100%'
-    document.querySelectorAll('.step-panel').forEach(p => p.classList.remove('active'))
-    document.getElementById('success-panel').style.display = 'block'
-    window.scrollTo({top:0,behavior:'smooth'})
-  }, 2200)
+  label.innerHTML = '<div style="width:20px;height:20px;border:2px solid rgba(0,0,0,0.2);border-top-color:#000;border-radius:50%;animation:spin 1s linear infinite;display:inline-block;vertical-align:middle;margin-right:8px"></div> Ativando...'
+
+  const payload = {
+    email: document.getElementById('i-email').value.trim(),
+    whatsapp: document.getElementById('i-whatsapp').value.trim().replace(/\D/g,''),
+    nome_atendente: document.getElementById('i-nome').value.trim(),
+    nome_empresa: document.getElementById('i-empresa').value.trim(),
+    segmento: document.getElementById('i-segmento').value,
+    tom_de_voz: document.getElementById('i-tom').value,
+    horario: document.getElementById('i-horario').value.trim(),
+    contexto: document.getElementById('i-info').value.trim(),
+    plano_badge: document.getElementById('plan-label').textContent,
+    origem: 'onboarding',
+    data_envio: new Date().toISOString()
+  }
+
+  try {
+    const resp = await fetch(WEBHOOK_ONBOARDING, {
+      method: 'POST',
+      headers: NGROK_HEADERS,
+      body: JSON.stringify(payload)
+    })
+    const data = await resp.json()
+    if (data.instanceName) currentInstance = data.instanceName
+  } catch(e) {
+    // fallback: gera instanceName local
+    currentInstance = payload.nome_empresa.toLowerCase().replace(/[^a-z0-9]/g, '_').replace(/__+/g,'_')
+  }
+
+  // Vai para step QR code
+  currentStep = 4
+  updateStepper()
+  document.querySelectorAll('.step-panel').forEach(p => p.classList.remove('active'))
+  document.getElementById('panel-4').classList.add('active')
+  window.scrollTo({top:0,behavior:'smooth'})
+
+  // Inicia polling do QR code
+  startQRPolling()
+}
+
+async function startQRPolling() {
+  if (!currentInstance) return
+  let attempts = 0
+  clearInterval(qrPollInterval)
+  qrPollInterval = setInterval(async () => {
+    attempts++
+    if (attempts > 60) { clearInterval(qrPollInterval); return } // timeout 2min
+    try {
+      const resp = await fetch(`${WEBHOOK_QR}?instance=${currentInstance}`, { headers: NGROK_HEADERS })
+      const data = await resp.json()
+      if (data.qrBase64) {
+        document.getElementById('qr-loading').style.display = 'none'
+        const img = document.getElementById('qr-image')
+        img.src = data.qrBase64
+        img.style.display = 'block'
+        clearInterval(qrPollInterval)
+        startStatusPolling()
+      }
+    } catch(e) {}
+  }, 2000)
+}
+
+async function startStatusPolling() {
+  if (!currentInstance) return
+  clearInterval(statusPollInterval)
+  statusPollInterval = setInterval(async () => {
+    try {
+      const resp = await fetch(`${WEBHOOK_STATUS}?instance=${currentInstance}`, { headers: NGROK_HEADERS })
+      const data = await resp.json()
+      if (data.status === 'connected') {
+        clearInterval(statusPollInterval)
+        document.getElementById('qr-status-msg').innerHTML = '<span style="color:#25D366;font-weight:700">✓ WhatsApp conectado com sucesso!</span>'
+        setTimeout(() => {
+          document.getElementById('progress-bar').style.width = '100%'
+          document.querySelectorAll('.step-panel').forEach(p => p.classList.remove('active'))
+          document.getElementById('success-panel').style.display = 'block'
+          window.scrollTo({top:0,behavior:'smooth'})
+        }, 1500)
+      } else if (data.status === 'authenticated') {
+        document.getElementById('qr-status-msg').textContent = 'Autenticando... quase lá!'
+      }
+    } catch(e) {}
+  }, 3000)
 }
 
 function handleFiles(input, listId) {
