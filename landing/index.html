@@ -200,11 +200,16 @@ h1 span{
 @media(max-width:900px){.wpp-phone{width:280px}}
 .wpp-frame{
   background:#111;
-  border-radius:40px;
-  border:2px solid rgba(255,255,255,0.1);
+  border-radius:44px;
+  border:1px solid rgba(255,255,255,0.06);
   padding:16px 12px 24px;
-  box-shadow:0 40px 80px rgba(0,0,0,0.6),0 0 0 1px rgba(255,255,255,0.04),inset 0 1px 0 rgba(255,255,255,0.08);
+  box-shadow:
+    0 40px 80px rgba(0,0,0,0.7),
+    0 0 0 6px rgba(255,255,255,0.03),
+    0 0 0 7px rgba(255,255,255,0.04),
+    inset 0 1px 0 rgba(255,255,255,0.1);
   position:relative;overflow:hidden;
+  outline:8px solid rgba(0,0,0,0.5);
 }
 .wpp-frame::before{
   content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);
@@ -472,38 +477,59 @@ section{padding:120px 24px;position:relative;z-index:1}
 .testi-biz{font-size:12px;color:var(--text3)}
 
 /* ─── COMPARE ─── */
-.compare-section{background:var(--surface);border-top:1px solid var(--border)}
+.compare-section{background:var(--bg);border-top:1px solid var(--border)}
 .compare-table{
   margin-top:56px;
-  border:1px solid var(--border);
   border-radius:var(--radius-xl);overflow:hidden;
+  border:1px solid var(--border);
 }
 .compare-header{
-  display:grid;grid-template-columns:1fr 1fr 1fr;
+  display:grid;grid-template-columns:1.6fr 1fr 1fr 1.2fr;
   background:var(--card);
   border-bottom:1px solid var(--border);
 }
-.compare-col{padding:20px 24px;text-align:center}
+.compare-col{padding:20px 20px;text-align:center}
 .compare-col:first-child{text-align:left}
-.compare-col-title{font-size:14px;font-weight:700;letter-spacing:0.3px}
-.compare-col-sub{font-size:12px;color:var(--text3);margin-top:4px}
-.compare-col.featured-col{background:rgba(37,211,102,0.05)}
+.compare-col-title{font-size:13px;font-weight:700;letter-spacing:0.2px}
+.compare-col-sub{font-size:11px;color:var(--text3);margin-top:3px}
+.compare-col.featured-col{
+  background:rgba(37,211,102,0.06);
+  border-left:1px solid var(--border-green);
+  border-right:1px solid var(--border-green);
+}
 .compare-col.featured-col .compare-col-title{color:var(--green)}
 .compare-row{
-  display:grid;grid-template-columns:1fr 1fr 1fr;
+  display:grid;grid-template-columns:1.6fr 1fr 1fr 1.2fr;
   border-bottom:1px solid var(--border);
   transition:background .15s;
 }
 .compare-row:last-child{border-bottom:none}
-.compare-row:hover{background:rgba(255,255,255,0.02)}
-.compare-cell{padding:16px 24px;font-size:14px;display:flex;align-items:center}
-.compare-cell:not(:first-child){justify-content:center}
-.compare-cell:first-child{color:var(--text2)}
-.compare-check{color:var(--green);font-size:18px}
-.compare-x{color:var(--text3);font-size:18px}
-.compare-cell.featured-cell{background:rgba(37,211,102,0.03)}
-@media(max-width:600px){
-  .compare-header,.compare-row{grid-template-columns:1fr 1fr}
+.compare-row:hover{background:rgba(255,255,255,0.015)}
+.compare-cell{padding:14px 20px;font-size:13px;display:flex;align-items:center}
+.compare-cell:not(:first-child){justify-content:center;text-align:center}
+.compare-cell:first-child{color:var(--text2);font-size:13px}
+.compare-check{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:24px;height:24px;border-radius:50%;
+  background:rgba(37,211,102,0.15);
+  color:var(--green);font-size:13px;font-weight:700;
+}
+.compare-x{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:24px;height:24px;border-radius:50%;
+  background:rgba(255,255,255,0.04);
+  color:var(--text3);font-size:13px;
+}
+.compare-cell.featured-cell{
+  background:rgba(37,211,102,0.04);
+  border-left:1px solid rgba(37,211,102,0.1);
+  border-right:1px solid rgba(37,211,102,0.1);
+}
+.compare-val-bad{font-size:12px;font-weight:700;color:#f87171}
+.compare-val-ok{font-size:12px;font-weight:700;color:var(--text2)}
+.compare-val-good{font-size:12px;font-weight:700;color:var(--green)}
+@media(max-width:700px){
+  .compare-header,.compare-row{grid-template-columns:1.4fr 0.8fr 1.2fr}
   .compare-col:nth-child(2),.compare-cell:nth-child(2){display:none}
 }
 
@@ -571,10 +597,10 @@ footer{
 /* ─── ENTERPRISE ─── */
 .enterprise-block{
   margin-top:24px;
-  border:1px solid rgba(255,255,255,0.09);
+  border:1px solid rgba(99,102,241,0.2);
   border-radius:var(--radius-xl);
   padding:40px 48px;
-  background:linear-gradient(135deg,rgba(99,102,241,0.06) 0%,rgba(37,211,102,0.04) 100%);
+  background:linear-gradient(135deg,rgba(99,102,241,0.13) 0%,rgba(139,92,246,0.08) 60%,rgba(17,17,34,0.9) 100%);
   display:grid;grid-template-columns:1fr auto;
   gap:40px;align-items:center;
   position:relative;overflow:hidden;
@@ -729,7 +755,7 @@ footer{
             <div class="msg-time">14:22</div>
           </div>
           <div class="msg msg-out" style="display:none" id="wpp-r1">
-            Oi, Paulo! Temos sim 😊<br>O modelo <strong style="color:#fff">Ultralight</strong> está disponível nos tamanhos 38–44. No 42 temos em <strong style="color:#fff">preto, branco e cinza</strong>.
+            Oi, Paulo! Temos sim 😊<br>O modelo <strong style="color:#fff">Ultralight</strong> está disponível nos tamanhos 38 ao 44. No 42 temos em <strong style="color:#fff">preto, branco e cinza</strong>.
             <div class="msg-time">14:22</div>
           </div>
           <div class="msg msg-in" style="display:none" id="wpp-q2">
@@ -737,7 +763,7 @@ footer{
             <div class="msg-time">14:23</div>
           </div>
           <div class="msg msg-out" style="display:none" id="wpp-r2">
-            <strong style="color:#fff">R$189,90</strong> — parcelamos em até <strong style="color:#fff">6x sem juros</strong> no cartão. Ou à vista com 5% de desconto 🖤
+            <strong style="color:#fff">R$189,90</strong>, parcelamos em até <strong style="color:#fff">6x sem juros</strong> no cartão. Ou à vista com 5% de desconto 🖤
             <div class="msg-time">14:23</div>
           </div>
           <div class="msg msg-in" style="display:none" id="wpp-q3">
@@ -1109,60 +1135,76 @@ footer{
   <div class="wrap">
     <div class="reveal" style="text-align:center">
       <div class="sec-eyebrow">Comparativo</div>
-      <div class="sec-title">Por que o Atendente24h<br>e não outro bot?</div>
-      <p class="sec-sub" style="margin:16px auto 0">A maioria dos bots trava na primeira pergunta fora do script. O Atendente24h pensa e responde como um atendente real.</p>
+      <div class="sec-title">Por que nao as outras opcoes?</div>
+      <p class="sec-sub" style="margin:16px auto 0">Funcionario custa caro e dorme. Outros bots travam no roteiro. O Atendente24h pensa, responde e converte 24h por dia.</p>
     </div>
     <div class="compare-table reveal reveal-delay-1">
       <div class="compare-header">
+        <div class="compare-col"></div>
         <div class="compare-col">
-          <div class="compare-col-title">Característica</div>
+          <div class="compare-col-title">Funcionario</div>
+          <div class="compare-col-sub">R$1.500 a R$2.500/mes</div>
         </div>
         <div class="compare-col">
           <div class="compare-col-title">Outros bots</div>
-          <div class="compare-col-sub">ManyChat, Typebot e similares</div>
+          <div class="compare-col-sub">ManyChat, Typebot...</div>
         </div>
         <div class="compare-col featured-col">
           <div class="compare-col-title">Atendente24h</div>
-          <div class="compare-col-sub">A partir de R$197/mês</div>
+          <div class="compare-col-sub">A partir de R$197/mes</div>
         </div>
       </div>
       <div class="compare-row">
-        <div class="compare-cell">Responde qualquer pergunta</div>
+        <div class="compare-cell">Custo mensal</div>
+        <div class="compare-cell"><span class="compare-val-bad">R$1.500+</span></div>
+        <div class="compare-cell"><span class="compare-val-ok">R$50 a R$300</span></div>
+        <div class="compare-cell featured-cell"><span class="compare-val-good">R$197 a R$797</span></div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-cell">Disponivel 24h por dia</div>
         <div class="compare-cell"><span class="compare-x">✕</span></div>
+        <div class="compare-cell"><span class="compare-check">✓</span></div>
+        <div class="compare-cell featured-cell"><span class="compare-check">✓</span></div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-cell">Responde qualquer pergunta</div>
+        <div class="compare-cell"><span class="compare-check">✓</span></div>
+        <div class="compare-cell"><span class="compare-x">✕</span></div>
+        <div class="compare-cell featured-cell"><span class="compare-check">✓</span></div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-cell">Resposta em menos de 2 segundos</div>
+        <div class="compare-cell"><span class="compare-x">✕</span></div>
+        <div class="compare-cell"><span class="compare-check">✓</span></div>
         <div class="compare-cell featured-cell"><span class="compare-check">✓</span></div>
       </div>
       <div class="compare-row">
         <div class="compare-cell">Sem roteiro fixo</div>
-        <div class="compare-cell"><span class="compare-x">✕</span></div>
-        <div class="compare-cell featured-cell"><span class="compare-check">✓</span></div>
-      </div>
-      <div class="compare-row">
-        <div class="compare-cell">Responde em menos de 2 segundos</div>
+        <div class="compare-cell"><span class="compare-check">✓</span></div>
         <div class="compare-cell"><span class="compare-x">✕</span></div>
         <div class="compare-cell featured-cell"><span class="compare-check">✓</span></div>
       </div>
       <div class="compare-row">
         <div class="compare-cell">Ativo em menos de 5 minutos</div>
         <div class="compare-cell"><span class="compare-x">✕</span></div>
-        <div class="compare-cell featured-cell"><span class="compare-check">✓</span></div>
-      </div>
-      <div class="compare-row">
-        <div class="compare-cell">Sem conhecimento técnico necessário</div>
         <div class="compare-cell"><span class="compare-x">✕</span></div>
         <div class="compare-cell featured-cell"><span class="compare-check">✓</span></div>
       </div>
       <div class="compare-row">
-        <div class="compare-cell">Suporte humano disponível 24h</div>
+        <div class="compare-cell">Suporte humano 24h</div>
+        <div class="compare-cell"><span class="compare-x">✕</span></div>
         <div class="compare-cell"><span class="compare-x">✕</span></div>
         <div class="compare-cell featured-cell"><span class="compare-check">✓</span></div>
       </div>
       <div class="compare-row">
         <div class="compare-cell">Cancele quando quiser</div>
         <div class="compare-cell"><span class="compare-x">✕</span></div>
+        <div class="compare-cell"><span class="compare-x">✕</span></div>
         <div class="compare-cell featured-cell"><span class="compare-check">✓</span></div>
       </div>
       <div class="compare-row">
-        <div class="compare-cell">Reembolso gratuito em 7 dias</div>
+        <div class="compare-cell">Garantia de 7 dias</div>
+        <div class="compare-cell"><span class="compare-x">✕</span></div>
         <div class="compare-cell"><span class="compare-x">✕</span></div>
         <div class="compare-cell featured-cell"><span class="compare-check">✓</span></div>
       </div>
@@ -1184,7 +1226,7 @@ footer{
           <div class="faq-icon">+</div>
         </div>
         <div class="faq-a" style="max-height:200px">
-          <div class="faq-a-inner">Para dúvidas sobre produtos, preços, pedidos e informações gerais — sim, em 90% dos casos. Para situações complexas como reclamações graves ou negociações especiais, o atendente identifica e pode encaminhar para você. O objetivo é resolver a grande maioria automaticamente e só escalar o que realmente precisa da sua atenção.</div>
+          <div class="faq-a-inner">Para dúvidas sobre produtos, preços, pedidos e informações gerais, sim, em 90% dos casos. Para situações complexas como reclamações graves ou negociações especiais, o atendente identifica e encaminha para você. O objetivo é resolver a grande maioria automaticamente e só escalar o que realmente precisa da sua atenção.</div>
         </div>
       </div>
       <div class="faq-item">
@@ -1193,7 +1235,7 @@ footer{
           <div class="faq-icon">+</div>
         </div>
         <div class="faq-a">
-          <div class="faq-a-inner">Sim, funciona com número comum e com WhatsApp Business. Para melhor experiência, recomendamos o WhatsApp Business pois permite configurar nome da empresa, horários e informações adicionais. A conexão é feita via QR code — sem complicações técnicas.</div>
+          <div class="faq-a-inner">Sim, funciona com número comum e com WhatsApp Business. Para melhor experiência, recomendamos o WhatsApp Business pois permite configurar nome da empresa, horários e informações adicionais. A conexão é feita via QR code, sem complicações técnicas.</div>
         </div>
       </div>
       <div class="faq-item">
@@ -1202,7 +1244,7 @@ footer{
           <div class="faq-icon">+</div>
         </div>
         <div class="faq-a">
-          <div class="faq-a-inner">Você recebe um alerta quando estiver em 80% do limite. Ao atingir o limite, o atendente para de responder até o próximo ciclo mensal ou até você fazer upgrade de plano — o que preferir. Nunca cobraremos automaticamente por mensagens extras sem sua autorização.</div>
+          <div class="faq-a-inner">Você recebe um alerta quando estiver em 80% do limite. Ao atingir o limite, o atendente para de responder até o próximo ciclo mensal ou até você fazer upgrade de plano. Nunca cobraremos automaticamente por mensagens extras sem sua autorização. Nunca cobraremos automaticamente por mensagens extras sem sua autorização.</div>
         </div>
       </div>
       <div class="faq-item">
