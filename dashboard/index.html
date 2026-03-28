@@ -640,16 +640,15 @@ function showDashboard(email, clienteData) {
   // Buy More Card
   const buyCard = document.getElementById("buy-more-card");
   buyCard.style.display = "block";
-  if (pct >= 80) {
-    if (pct >= 95) {
-      buyCard.classList.add("critical");
-      document.getElementById("buy-more-title").textContent = "Limite crítico! Seu bot vai parar de responder.";
-    } else {
-      buyCard.classList.remove("critical");
-      document.getElementById("buy-more-title").textContent = "Seus créditos estão acabando";
-    }
+  if (pct >= 95) {
+    buyCard.classList.add("critical");
+    document.getElementById("buy-more-title").textContent = "Limite crítico! Seu bot vai parar de responder.";
+  } else if (pct >= 80) {
+    buyCard.classList.remove("critical");
+    document.getElementById("buy-more-title").textContent = "Seus créditos estão acabando";
   } else {
-    buyCard.style.display = "none";
+    buyCard.classList.remove("critical");
+    document.getElementById("buy-more-title").textContent = "Precisando de mais mensagens?";
   }
 
   // ROI Card

@@ -2058,13 +2058,13 @@ window.addEventListener('scroll', () => {
 <!-- Desktop pill -->
 <div id="sb-desktop">
   <span style="width:6px;height:6px;border-radius:50%;background:#22c55e;flex-shrink:0;animation:sb-pulse 2s infinite"></span>
-  <span style="font-size:12px;font-weight:600;color:rgba(255,255,255,0.9)"><span id="sb-num" style="display:inline-block">1.381</span> empresas usando nossa plataforma</span>
+  <span style="font-size:12px;font-weight:600;color:rgba(255,255,255,0.9)">Primeiros acessos disponíveis este mês</span>
 </div>
 
 <!-- Mobile top bar: social proof -->
 <div id="sb-mobile-top">
   <span style="width:6px;height:6px;border-radius:50%;background:#22c55e;flex-shrink:0;animation:sb-pulse 2s infinite"></span>
-  <span style="font-size:12px;font-weight:600;color:rgba(255,255,255,0.88)"><span id="sb-num-mobile" style="display:inline-block">1.381</span> empresas usando nossa plataforma</span>
+  <span style="font-size:12px;font-weight:600;color:rgba(255,255,255,0.88)">Primeiros acessos disponíveis este mês</span>
 </div>
 
 <!-- Mobile bottom bar: sticky CTA -->
@@ -2076,24 +2076,5 @@ window.addEventListener('scroll', () => {
   </a>
 </div>
 
-<script>
-(function(){
-  function rand(){return Math.floor(Math.random()*(1394-1360+1))+1360;}
-  function fmt(n){return n.toLocaleString('pt-BR');}
-  function tick(){
-    var ids=['sb-num','sb-num-mobile'];
-    var v=fmt(rand());
-    ids.forEach(function(id){
-      var el=document.getElementById(id);
-      if(!el)return;
-      el.style.animation='none';
-      void el.offsetWidth;
-      el.style.animation='sb-flip .45s ease';
-      setTimeout(function(){el.textContent=v;},200);
-    });
-  }
-  setInterval(tick,5000);
-})();
-</script>
 </body>
 </html>
