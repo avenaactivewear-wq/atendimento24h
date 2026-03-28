@@ -329,9 +329,9 @@ section{padding:120px 24px;position:relative;z-index:1}
 .feat-row{
   display:grid;grid-template-columns:1fr 1fr;
   align-items:center;
-  padding:56px 0;
+  padding:36px 0;
   border-bottom:1px solid var(--border);
-  gap:60px;
+  gap:48px;
 }
 .feat-row:last-child{border-bottom:none}
 @media(max-width:700px){.feat-row{grid-template-columns:1fr;gap:24px;padding:40px 0}}
@@ -544,6 +544,7 @@ section{padding:120px 24px;position:relative;z-index:1}
 .cc-tags{display:flex;flex-wrap:wrap;gap:8px}
 .cc-tag-x{background:rgba(248,113,113,0.06);color:rgba(248,113,113,0.7);border:1px solid rgba(248,113,113,0.12);padding:5px 14px;border-radius:100px;font-size:12px;font-weight:600}
 .cc-tag-ok{background:rgba(37,211,102,0.08);color:var(--green);border:1px solid rgba(37,211,102,0.2);padding:5px 14px;border-radius:100px;font-size:12px;font-weight:600}
+.cc-tag-neutral{background:rgba(255,255,255,0.04);color:var(--text2);border:1px solid rgba(255,255,255,0.08);padding:5px 14px;border-radius:100px;font-size:12px;font-weight:600}
 .cc-winner-badge{
   position:absolute;top:18px;right:28px;
   background:var(--green);color:#000;
@@ -934,14 +935,14 @@ footer{
         <div class="feat-copy feat-anim">
           <div class="feat-label">Velocidade</div>
           <div class="feat-title">Responde antes do cliente perder o interesse</div>
-          <div class="feat-desc">A IA processa e responde qualquer mensagem em menos de 2 segundos. Enquanto concorrentes demoram minutos, seu negocio ja converteu.</div>
+          <div class="feat-desc">Em menos de 2 segundos, qualquer mensagem já tem resposta. Enquanto concorrentes demoram minutos, você já converteu.</div>
         </div>
       </div>
       <div class="feat-row">
         <div class="feat-copy feat-anim" style="order:1">
-          <div class="feat-label">Inteligencia</div>
+          <div class="feat-label">Inteligência</div>
           <div class="feat-title">Sem roteiro. Sem limite de perguntas.</div>
-          <div class="feat-desc">Diferente de bots com fluxo fixo, o Atendente24h entende contexto, lembra do que foi dito e responde qualquer pergunta sobre seu negocio com naturalidade.</div>
+          <div class="feat-desc">Entende contexto, lembra da conversa e responde qualquer pergunta sobre seu negócio com naturalidade, sem travar.</div>
         </div>
         <div class="feat-num feat-anim" style="order:2;text-align:right">100<span class="feat-num-unit">%</span></div>
       </div>
@@ -949,25 +950,17 @@ footer{
         <div class="feat-num feat-anim">5<span class="feat-num-unit">min</span></div>
         <div class="feat-copy feat-anim">
           <div class="feat-label">Simplicidade</div>
-          <div class="feat-title">Qualquer pessoa configura. Sem ajuda tecnica.</div>
-          <div class="feat-desc">Conecte o WhatsApp, descreva seu negocio, suba os arquivos. Pronto. Em 5 minutos seu atendente ja esta respondendo clientes no seu lugar.</div>
+          <div class="feat-title">Qualquer pessoa configura. Sem ajuda técnica.</div>
+          <div class="feat-desc">Conecte o WhatsApp, descreva seu negócio, suba os arquivos. Em 5 minutos seu atendente já está no ar.</div>
         </div>
       </div>
       <div class="feat-row">
         <div class="feat-copy feat-anim" style="order:1">
           <div class="feat-label">Disponibilidade</div>
           <div class="feat-title">Feriado, madrugada, fim de semana. Sempre.</div>
-          <div class="feat-desc">Enquanto voce dorme, viaja ou descansa, seu atendente esta la respondendo, convertendo e encaminhando clientes. Sem parar. Sem faltar. Sem reclamar.</div>
+          <div class="feat-desc">Enquanto você dorme ou descansa, seu atendente está lá. Respondendo, convertendo, encaminhando. Sem parar.</div>
         </div>
         <div class="feat-num feat-anim" style="order:2;text-align:right">24<span class="feat-num-unit">/7</span></div>
-      </div>
-      <div class="feat-row">
-        <div class="feat-num feat-anim">7<span class="feat-num-unit">dias</span></div>
-        <div class="feat-copy feat-anim">
-          <div class="feat-label">Garantia</div>
-          <div class="feat-title">Teste sem risco. Devolucao garantida.</div>
-          <div class="feat-desc">Tem 7 dias para testar com clientes reais. Se nao gostar por qualquer motivo, devolvemos tudo sem perguntas. Voce nao tem nada a perder.</div>
-        </div>
       </div>
     </div>
   </div>
@@ -1468,35 +1461,71 @@ const featObs = new IntersectionObserver((entries) => {
 }, {threshold:0.15})
 document.querySelectorAll('.feat-anim').forEach(el => featObs.observe(el))
 
-// ── Testimonials carousel
+// ── "Sem Roteiro" interactive tabs
 ;(function(){
-  const scroll = document.getElementById('testi-scroll')
-  const dots = document.querySelectorAll('.testi-dot')
-  if(!scroll) return
-  let current = 0
-  const cards = scroll.querySelectorAll('.testi-card')
-  const total = cards.length
-
-  function updateDots(i){
-    dots.forEach((d,j) => d.classList.toggle('active', i===j))
+  const nsData = [
+    {
+      label:'Trava', goodLabel:'Converte',
+      q: 'Esse tênis vai dar chulé?',
+      aBad: 'Desculpe, não entendi. Escolha uma opção: 1 - Ver produtos  2 - Rastrear pedido  3 - Falar com humano',
+      aGood: 'Haha, boa pergunta! O solado tem ventilação e o tecido é anti-odor. Temos também o modelo com palmilha antibacteriana no seu tamanho. Qual prefere? 😄'
+    },
+    {
+      label:'Piora', goodLabel:'Resolve',
+      q: 'Que empresa péssima, meu produto não chegou!',
+      aBad: 'Opção inválida. Por favor, escolha: 1 - Produtos  2 - Pedidos  3 - Sair',
+      aGood: 'Entendo sua frustração e sinto muito. Me passa o número do pedido e resolvo agora mesmo. 🙏'
+    },
+    {
+      label:'Trava', goodLabel:'Negocia',
+      q: 'Tem desconto se eu comprar 3 pares?',
+      aBad: 'Desculpe, essa opção não está disponível. Digite 1 para continuar.',
+      aGood: 'Sim! Para 3 pares damos 10% de desconto automático, já aplicado no checkout. Posso te mandar o link com os 3 já selecionados? 😊'
+    },
+    {
+      label:'Trava', goodLabel:'Responde',
+      q: 'Qual a capital da França?',
+      aBad: 'Não entendi sua mensagem. Por favor escolha: 1 - Produtos  2 - Pedidos  3 - Suporte',
+      aGood: 'Paris! 😄 Mas posso te ajudar com algo da nossa loja também. Está procurando algum produto em especial?'
+    }
+  ]
+  function renderNs(i){
+    const d = nsData[i]
+    document.getElementById('ns-badge-bad').textContent = d.label
+    document.getElementById('ns-badge-good').textContent = d.goodLabel
+    document.getElementById('ns-q-bad').textContent = d.q
+    document.getElementById('ns-a-bad').textContent = d.aBad
+    document.getElementById('ns-q-good').textContent = d.q
+    document.getElementById('ns-a-good').textContent = d.aGood
+    document.querySelectorAll('.ns-tab').forEach((t,j) => t.classList.toggle('active', i===j))
   }
-  function scrollTo(i){
-    current = Math.max(0, Math.min(total-1, i))
-    cards[current].scrollIntoView({behavior:'smooth', block:'nearest', inline:'start'})
+  window.showNs = renderNs
+  renderNs(0)
+})()
+
+// ── Testimonials auto-scroll
+;(function(){
+  const wrap = document.getElementById('testi-wrap')
+  const track = document.getElementById('testi-track')
+  const dots = document.querySelectorAll('.testi-dot')
+  if(!wrap || !track) return
+  let current = 0
+  const cards = track.querySelectorAll('.testi-card')
+  const total = cards.length
+  const CARD_W = 320 + 16 // width + gap
+
+  function updateDots(i){ dots.forEach((d,j) => d.classList.toggle('active', i===j)) }
+  function goTo(i){
+    current = ((i % total) + total) % total
+    track.style.transform = `translateX(-${current * CARD_W}px)`
     updateDots(current)
   }
-  window.testiNav = function(dir){ scrollTo(current + dir) }
-  window.testiGo  = function(i){ scrollTo(i) }
+  window.testiGo = goTo
+  window.testiNav = function(dir){ goTo(current + dir) }
 
-  const scrollObs = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if(e.isIntersecting){
-        const idx = Array.from(cards).indexOf(e.target)
-        if(idx >= 0){ current = idx; updateDots(idx) }
-      }
-    })
-  }, {root: scroll, threshold: 0.6})
-  cards.forEach(c => scrollObs.observe(c))
+  let timer = setInterval(() => goTo(current + 1), 4000)
+  wrap.addEventListener('mouseenter', () => clearInterval(timer))
+  wrap.addEventListener('mouseleave', () => { timer = setInterval(() => goTo(current + 1), 4000) })
 })()
 
 // ── WhatsApp mockup animation
@@ -1667,7 +1696,7 @@ window.addEventListener('scroll', () => {
       ox, oy, oz,
       x:ox, y:oy, z:oz,
       px:0, py:0, scale:1,
-      size: Math.random() < 0.12 ? 4 + Math.random() * 4 : 1.5 + Math.random() * 2.5,
+      size: Math.random() < 0.12 ? 2 + Math.random() * 2 : 0.7 + Math.random() * 1.3,
       nucleus: Math.random() < 0.12,
       pulse: Math.random() * Math.PI * 2,
       ps: 0.015 + Math.random() * 0.02
@@ -1740,7 +1769,7 @@ window.addEventListener('scroll', () => {
     nodes.forEach(n => {
       n.pulse += n.ps
       const p = Math.sin(n.pulse) * 0.25 + 0.75
-      const r = n.size * n.scale * 3.5 * p
+      const r = n.size * n.scale * 1.8 * p
       const a = Math.min(n.scale * 1.1, 0.95)
 
       if(n.nucleus){
