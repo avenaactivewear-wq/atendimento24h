@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Configurar Atendente — Atendente24h</title>
+<title>Configurar Atendente | Atendente24h</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
@@ -406,8 +406,9 @@ textarea{resize:vertical;min-height:120px}
         <input type="text" id="i-nome" placeholder="Ex: Ana, Carlos, Sofia" maxlength="20">
         <div class="error-msg">Informe um nome para o atendente</div>
       </div>
-      <div class="field">
+      <div class="field" id="f-tom">
         <label>Tom de voz <span>*</span></label>
+        <div class="error-msg">Selecione o tom de voz</div>
         <select id="i-tom">
           <option value="">Selecione...</option>
           <option value="amigavel">Amigável e descontraído</option>
@@ -429,8 +430,9 @@ textarea{resize:vertical;min-height:120px}
     </div>
 
     <div class="field-row">
-      <div class="field">
+      <div class="field" id="f-segmento">
         <label>Segmento <span>*</span></label>
+        <div class="error-msg">Selecione o segmento</div>
         <select id="i-segmento">
           <option value="">Selecione...</option>
           <optgroup label="Saúde &amp; Beleza">
@@ -546,7 +548,7 @@ textarea{resize:vertical;min-height:120px}
     </div>
 
     <div class="field">
-      <label>Informações da empresa <span>*</span></label>
+      <label>Informações da empresa <span style="color:var(--text2);font-weight:400;font-size:12px">(opcional)</span></label>
       <textarea id="i-info" placeholder="Minha empresa se chama [nome] e atua em [segmento]. Nossos principais produtos são...
 
 Produtos e precos:
@@ -631,15 +633,19 @@ Dica: quanto mais voce escrever ou colar aqui, melhor seu atendente vai responde
         <span class="summary-val" id="s-tom">—</span>
       </div>
       <div class="summary-row">
+        <span class="summary-key">Horario</span>
+        <span class="summary-val" id="s-horario">--</span>
+      </div>
+      <div class="summary-row">
         <span class="summary-key">Plano ativo</span>
-        <span class="summary-val" style="color:var(--green)" id="s-plano">Recomendado · 2.500 msg/mês</span>
+        <span class="summary-val" style="color:var(--green)" id="s-plano">Recomendado · 2.500 msg/mes</span>
       </div>
     </div>
 
     <div class="checklist">
       <div class="check-item">
-        <div class="check-icon">✅</div>
-        <div class="check-text">WhatsApp conectado com sucesso</div>
+        <div class="check-icon">📱</div>
+        <div class="check-text">Numero de WhatsApp informado</div>
       </div>
       <div class="check-item">
         <div class="check-icon">✅</div>
@@ -882,10 +888,16 @@ function validateStep0() {
 function validateStep1() {
   const nome = document.getElementById('i-nome').value.trim()
   const empresa = document.getElementById('i-empresa').value.trim()
+  const tom = document.getElementById('i-tom').value
+  const segmento = document.getElementById('i-segmento').value
+  const segOutro = document.getElementById('i-segmento-outro').value.trim()
   const hours = getHoursString()
   let ok = true
   setError('f-nome', !nome); if (!nome) ok = false
   setError('f-empresa', !empresa); if (!empresa) ok = false
+  setError('f-tom', !tom); if (!tom) ok = false
+  const segInvalido = !segmento || (segmento === 'outro' && !segOutro)
+  setError('f-segmento', segInvalido); if (segInvalido) ok = false
   const hoursErr = document.getElementById('hours-error')
   if (!hours) {
     hoursErr.style.display = 'block'
@@ -900,11 +912,6 @@ function validateStep1() {
 }
 
 function validateStep2() {
-  const info = document.getElementById('i-info').value.trim()
-  if (!info) {
-    document.getElementById('i-info').style.borderColor = '#f87171'
-    return
-  }
   document.getElementById('i-info').style.borderColor = ''
   const docCount = document.querySelectorAll('#files-list-1 .file-item').length
   if (docCount > 0) {
@@ -925,6 +932,7 @@ function fillSummary() {
   document.getElementById('s-empresa').textContent = document.getElementById('i-empresa').value || '--'
   document.getElementById('s-tom').textContent = tomMap[document.getElementById('i-tom').value] || '--'
   document.getElementById('s-segmento').textContent = segText
+  document.getElementById('s-horario').textContent = getHoursString() || '--'
   document.getElementById('success-msg').textContent = `${document.getElementById('i-nome').value || 'Seu atendente'} foi criado com sucesso. Agora escaneie o QR code para ativar o WhatsApp.`
 }
 
