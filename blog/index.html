@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blog — Atendente24h | Automacao de Atendimento com IA para PMEs</title>
+<meta name="description" content="Guias e estrategias de automacao de atendimento via WhatsApp para pequenas e medias empresas brasileiras. Aprenda com especialistas.">
+<link rel="canonical" href="https://atendente24h.com/blog/">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<meta property="og:title" content="Blog Atendente24h — Automacao de Atendimento com IA">
+<meta property="og:description" content="Guias praticos para automatizar o atendimento da sua empresa no WhatsApp com inteligencia artificial.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://atendente24h.com/blog/">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Blog",
+  "name": "Blog Atendente24h",
+  "url": "https://atendente24h.com/blog/",
+  "description": "Guias e estrategias de automacao de atendimento via WhatsApp para PMEs brasileiras",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Atendente24h",
+    "url": "https://atendente24h.com",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://atendente24h.com/favicon.svg"
+    }
+  }
+}
+</script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --green:#25D366;--green-dark:#128C7E;--green-glow:rgba(37,211,102,0.12);
+  --bg:#080808;--surface:#0f0f0f;--card:#141414;--card2:#1a1a1a;
+  --border:rgba(255,255,255,0.08);--border-green:rgba(37,211,102,0.25);
+  --text:#fff;--text2:#a1a1aa;--text3:#52525b;
+  --radius:12px;--radius-lg:20px;
+}
+html,body{height:100%}
+body{
+  background:var(--bg);color:var(--text);
+  font-family:'Plus Jakarta Sans',system-ui,sans-serif;
+  font-size:15px;line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  min-height:100vh;
+}
+a{color:inherit;text-decoration:none}
+nav{
+  padding:20px 24px;
+  border-bottom:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;
+  max-width:900px;margin:0 auto;width:100%;
+}
+.nav-wrap{border-bottom:1px solid var(--border)}
+.logo{font-size:16px;font-weight:800;background:linear-gradient(135deg,#fff,var(--green));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.nav-links{display:flex;gap:24px;align-items:center}
+.nav-links a{color:var(--text2);font-size:14px;font-weight:500;transition:color .2s}
+.nav-links a:hover{color:var(--text)}
+.btn-nav{background:var(--green);color:#000;padding:8px 18px;border-radius:100px;font-weight:700;font-size:13px;transition:opacity .2s}
+.btn-nav:hover{opacity:.85}
+main{max-width:900px;margin:0 auto;padding:60px 24px 80px}
+.blog-header{margin-bottom:48px}
+.blog-label{font-size:12px;font-weight:600;color:var(--green);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:12px}
+.blog-title{font-size:clamp(28px,5vw,42px);font-weight:800;letter-spacing:-1px;margin-bottom:12px}
+.blog-desc{font-size:16px;color:var(--text2);max-width:560px}
+.articles-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:24px}
+.article-card{
+  background:var(--card);border:1px solid var(--border);border-radius:var(--radius-lg);
+  padding:28px;display:flex;flex-direction:column;gap:16px;
+  transition:border-color .2s,transform .2s;
+}
+.article-card:hover{border-color:var(--border-green);transform:translateY(-2px)}
+.card-tag{
+  display:inline-flex;align-items:center;gap:6px;
+  background:var(--green-glow);border:1px solid var(--border-green);
+  color:var(--green);padding:4px 10px;border-radius:100px;font-size:11px;font-weight:600;
+  width:fit-content;
+}
+.card-title{font-size:18px;font-weight:700;letter-spacing:-0.3px;line-height:1.4}
+.card-excerpt{color:var(--text2);font-size:14px;line-height:1.6;flex:1}
+.card-meta{display:flex;justify-content:space-between;align-items:center;margin-top:auto;padding-top:16px;border-top:1px solid var(--border)}
+.card-date{font-size:12px;color:var(--text3)}
+.card-read{font-size:12px;color:var(--green);font-weight:600}
+.read-arrow{display:inline-flex;align-items:center;gap:6px;color:var(--green);font-size:14px;font-weight:600;margin-top:8px;transition:gap .2s}
+.article-card:hover .read-arrow{gap:10px}
+footer{border-top:1px solid var(--border);padding:32px 24px;text-align:center;color:var(--text3);font-size:13px}
+footer a{color:var(--green)}
+</style>
+</head>
+<body>
+<div class="nav-wrap">
+  <nav>
+    <a href="https://atendente24h.com" class="logo">Atendente24h</a>
+    <div class="nav-links">
+      <a href="https://atendente24h.com">Home</a>
+      <a href="https://atendente24h.com/blog/" style="color:var(--green)">Blog</a>
+      <a href="https://atendente24h.com" class="btn-nav">Comecar agora</a>
+    </div>
+  </nav>
+</div>
+
+<main>
+  <div class="blog-header">
+    <p class="blog-label">Blog</p>
+    <h1 class="blog-title">Automacao de Atendimento<br>para Empresas Brasileiras</h1>
+    <p class="blog-desc">Guias praticos sobre como usar inteligencia artificial para atender clientes no WhatsApp 24 horas por dia, sem contratar mais funcionarios.</p>
+  </div>
+
+  <div class="articles-grid">
+
+    <a href="/blog/como-automatizar-atendimento-whatsapp.html" class="article-card">
+      <span class="card-tag">Guia Completo</span>
+      <h2 class="card-title">Como Automatizar o Atendimento no WhatsApp em 2026</h2>
+      <p class="card-excerpt">Passo a passo para PMEs que querem responder clientes automaticamente, sem perder a qualidade no atendimento e sem contratar mais funcionarios.</p>
+      <div class="card-meta">
+        <span class="card-date">28 Mar 2026</span>
+        <span class="card-read">8 min de leitura</span>
+      </div>
+      <span class="read-arrow">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+    </a>
+
+    <a href="/blog/bot-whatsapp-para-pequenas-empresas.html" class="article-card">
+      <span class="card-tag">Estrategia</span>
+      <h2 class="card-title">Bot de WhatsApp para Pequenas Empresas: Vale a Pena?</h2>
+      <p class="card-excerpt">Analise honesta de quando um chatbot resolve o problema de atendimento de uma PME e quando ele pode atrapalhar. Com exemplos reais do mercado brasileiro.</p>
+      <div class="card-meta">
+        <span class="card-date">28 Mar 2026</span>
+        <span class="card-read">7 min de leitura</span>
+      </div>
+      <span class="read-arrow">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+    </a>
+
+    <a href="/blog/atendente-virtual-whatsapp-quanto-custa.html" class="article-card">
+      <span class="card-tag">Custos e ROI</span>
+      <h2 class="card-title">Quanto Custa um Atendente Virtual no WhatsApp?</h2>
+      <p class="card-excerpt">Comparativo de precos de chatbots e atendentes IA para WhatsApp em 2026. Entenda o que esta incluso em cada plano e como calcular o retorno do investimento.</p>
+      <div class="card-meta">
+        <span class="card-date">28 Mar 2026</span>
+        <span class="card-read">9 min de leitura</span>
+      </div>
+      <span class="read-arrow">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+    </a>
+
+  </div>
+</main>
+
+<footer>
+  <p>Atendente24h &copy; 2026 — Atendimento automatizado com IA para PMEs brasileiras</p>
+  <p style="margin-top:8px"><a href="https://atendente24h.com">atendente24h.com</a></p>
+</footer>
+</body>
+</html>

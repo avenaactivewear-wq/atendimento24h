@@ -16,4 +16,32 @@
     <priority>0.7</priority>
   </url>
 
+  <url>
+    <loc>https://atendente24h.com/blog/</loc>
+    <lastmod>2026-03-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://atendente24h.com/blog/como-automatizar-atendimento-whatsapp/</loc>
+    <lastmod>2026-03-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://atendente24h.com/blog/bot-whatsapp-para-pequenas-empresas/</loc>
+    <lastmod>2026-03-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://atendente24h.com/blog/atendente-virtual-whatsapp-quanto-custa/</loc>
+    <lastmod>2026-03-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
 </urlset>
