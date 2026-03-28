@@ -1319,16 +1319,20 @@ footer{
     <div class="enterprise-block reveal">
       <div>
         <div class="enterprise-tag">Enterprise</div>
-        <div class="enterprise-title">Volume alto ou operação complexa?<br>A gente monta o plano do seu tamanho.</div>
-        <p class="enterprise-sub">Múltiplos números, integrações personalizadas, SLA dedicado e onboarding com nossa equipe. Fale com a gente e receba uma proposta em até 24h.</p>
+        <div class="enterprise-title">Sua operação é maior?<br>A gente se adapta a ela.</div>
+        <p class="enterprise-sub">Vários números ao mesmo tempo, integrações com seu sistema, suporte dedicado e onboarding hands-on. Conta pra gente o que precisa e montamos um plano sob medida.</p>
       </div>
-      <form class="enterprise-form" onsubmit="submitEnterprise(event)">
+      <form class="enterprise-form" onsubmit="submitEnterprise(event)" id="enterprise-form">
         <input class="enterprise-input" type="text" id="ent-nome" placeholder="Seu nome" required>
+        <input class="enterprise-input" type="email" id="ent-email" placeholder="Seu e-mail" required>
         <input class="enterprise-input" type="tel" id="ent-wpp" placeholder="WhatsApp (com DDD)" required>
-        <button class="enterprise-btn" type="submit">
+        <button class="enterprise-btn" type="submit" id="enterprise-btn">
           Quero uma proposta
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
+        <div id="enterprise-success" style="display:none;background:rgba(37,211,102,0.1);border:1px solid rgba(37,211,102,0.3);border-radius:10px;padding:14px 16px;color:#25D366;font-size:14px;font-weight:600;text-align:center">
+          Recebemos! Vamos entrar em contato em ate 24h.
+        </div>
       </form>
     </div>
 
@@ -1600,12 +1604,24 @@ footer{
 
 <script>
 // ── Enterprise lead capture
-function submitEnterprise(e) {
+async function submitEnterprise(e) {
   e.preventDefault()
+  const btn = document.getElementById('enterprise-btn')
+  const success = document.getElementById('enterprise-success')
   const nome = document.getElementById('ent-nome').value.trim()
-  const wpp  = document.getElementById('ent-wpp').value.trim().replace(/\D/g,'')
-  const msg = encodeURIComponent(`Oi! Sou ${nome} e tenho interesse no plano Enterprise do Atendente24h. Meu WhatsApp é ${wpp}. Quero receber uma proposta.`)
-  window.location.href = `mailto:suporte@atendente24h.com?subject=Interesse%20no%20plano%20Enterprise&body=${msg}`
+  const email = document.getElementById('ent-email').value.trim()
+  const wpp = document.getElementById('ent-wpp').value.trim()
+  btn.disabled = true
+  btn.textContent = 'Enviando...'
+  try {
+    await fetch('https://n8n.atendente24h.com/webhook/enterprise-lead', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({nome, email, whatsapp: wpp})
+    })
+  } catch(_) {}
+  document.getElementById('enterprise-form').querySelectorAll('input,button').forEach(el => el.style.display = 'none')
+  success.style.display = 'block'
 }
 
 // ── Scroll reveal
