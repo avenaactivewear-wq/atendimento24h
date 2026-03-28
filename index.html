@@ -827,25 +827,28 @@ footer{
 /* ─── PLAN GUARANTEES ─── */
 .plan-guarantees{margin-top:48px}
 .guarantee-items{
-  display:grid;grid-template-columns:repeat(4,1fr);
-  gap:1px;background:var(--border);
-  border-radius:var(--radius-xl);overflow:hidden;
+  display:flex;align-items:stretch;
+  border:1px solid var(--border);border-radius:var(--radius-xl);
+  overflow:hidden;background:var(--card);
 }
-@media(max-width:700px){.guarantee-items{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:700px){.guarantee-items{flex-direction:column}}
 .guarantee-item{
-  background:var(--card);padding:40px 24px;
-  text-align:center;
-  display:flex;flex-direction:column;align-items:center;gap:6px;
+  flex:1;padding:32px 28px;
+  display:flex;flex-direction:column;gap:4px;
+  border-right:1px solid var(--border);
   transition:background .2s;
 }
+.guarantee-item:last-child{border-right:none}
+@media(max-width:700px){.guarantee-item{border-right:none;border-bottom:1px solid var(--border)}}
+@media(max-width:700px){.guarantee-item:last-child{border-bottom:none}}
 .guarantee-item:hover{background:var(--card2)}
 .guarantee-big{
-  font-size:clamp(22px,2.5vw,28px);font-weight:900;
-  letter-spacing:-0.5px;line-height:1;
-  color:var(--green);margin-bottom:6px;
+  font-size:clamp(20px,2vw,24px);font-weight:900;
+  letter-spacing:-0.5px;line-height:1.1;
+  color:var(--green);margin-bottom:2px;
 }
-.guarantee-title{font-size:15px;font-weight:700;letter-spacing:-0.3px;color:var(--text)}
-.guarantee-sub{font-size:13px;color:var(--text3);line-height:1.45;max-width:150px}
+.guarantee-title{font-size:14px;font-weight:600;letter-spacing:-0.2px;color:var(--text)}
+.guarantee-sub{font-size:12px;color:var(--text3);line-height:1.5;margin-top:2px}
 
 /* ─── ANIMATIONS ─── */
 .reveal{opacity:0;transform:translateY(32px);transition:all .7s cubic-bezier(0.16,1,0.3,1)}
@@ -1339,33 +1342,21 @@ footer{
     <div class="plan-guarantees reveal">
       <div class="guarantee-items">
         <div class="guarantee-item">
-          <div style="width:48px;height:48px;background:rgba(37,211,102,0.1);border-radius:14px;display:flex;align-items:center;justify-content:center;margin-bottom:16px">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 2L3 7v5c0 5.25 3.75 10.15 9 11.35C17.25 22.15 21 17.25 21 12V7l-9-5z" fill="rgba(37,211,102,0.2)" stroke="#22c55e" stroke-width="1.5" stroke-linejoin="round"/><path d="M9 12l2 2 4-4" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </div>
           <div class="guarantee-big">7 dias</div>
           <div class="guarantee-title">Garantia total</div>
           <div class="guarantee-sub">Não gostou? Devolvemos 100% sem perguntas.</div>
         </div>
         <div class="guarantee-item">
-          <div style="width:48px;height:48px;background:rgba(37,211,102,0.1);border-radius:14px;display:flex;align-items:center;justify-content:center;margin-bottom:16px">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" fill="rgba(37,211,102,0.2)" stroke="#22c55e" stroke-width="1.5"/><path d="M15 9l-4.5 4.5L8 11" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </div>
           <div class="guarantee-big">Sem multa</div>
           <div class="guarantee-title">Cancele quando quiser</div>
-          <div class="guarantee-sub">Sem fidelidade. Sem burocracia. Você decide.</div>
+          <div class="guarantee-sub">Sem fidelidade, sem burocracia. Você decide.</div>
         </div>
         <div class="guarantee-item">
-          <div style="width:48px;height:48px;background:rgba(37,211,102,0.1);border-radius:14px;display:flex;align-items:center;justify-content:center;margin-bottom:16px">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" stroke="#22c55e" stroke-width="1.5" stroke-linecap="round"/><circle cx="9" cy="7" r="4" fill="rgba(37,211,102,0.2)" stroke="#22c55e" stroke-width="1.5"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" stroke="#22c55e" stroke-width="1.5" stroke-linecap="round"/></svg>
-          </div>
           <div class="guarantee-big">Time real</div>
           <div class="guarantee-title">Suporte humano 24h</div>
           <div class="guarantee-sub">Pessoas reais. Não outro bot te respondendo.</div>
         </div>
         <div class="guarantee-item">
-          <div style="width:48px;height:48px;background:rgba(37,211,102,0.1);border-radius:14px;display:flex;align-items:center;justify-content:center;margin-bottom:16px">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" fill="rgba(37,211,102,0.2)" stroke="#22c55e" stroke-width="1.5"/><path d="M12 7v5l3 3" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </div>
           <div class="guarantee-big">5 min</div>
           <div class="guarantee-title">Ativo em minutos</div>
           <div class="guarantee-sub">Zero código. Zero técnico. Tudo pelo navegador.</div>
