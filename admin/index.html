@@ -916,7 +916,7 @@ async function cancelar(id) {
   const a = assinantes.find(x => x.id === id);
   if (!confirm(`Cancelar assinatura de ${a.nome}? Um email sera enviado ao cliente.`)) return;
   try {
-    const r = await fetch(WEBHOOK_ACTION, { method:'POST', headers: NGROK_H, body: JSON.stringify({ action:'cancel', id }) });
+    const r = await fetch(WEBHOOK_ACTION, { method:'POST', headers: NGROK_H, body: JSON.stringify({ action:'cancel', email: a.email }) });
     if (!r.ok) throw new Error('HTTP ' + r.status);
   } catch(e) {
     alert('Erro ao cancelar no servidor: ' + e.message + '\nTente novamente.');
@@ -931,7 +931,7 @@ async function reativar(id) {
   const a = assinantes.find(x => x.id === id);
   if (!confirm(`Reativar assinatura de ${a.nome}? Um email sera enviado ao cliente.`)) return;
   try {
-    const r = await fetch(WEBHOOK_ACTION, { method:'POST', headers: NGROK_H, body: JSON.stringify({ action:'reativar', id }) });
+    const r = await fetch(WEBHOOK_ACTION, { method:'POST', headers: NGROK_H, body: JSON.stringify({ action:'reativar', email: a.email }) });
     if (!r.ok) throw new Error('HTTP ' + r.status);
   } catch(e) {
     alert('Erro ao reativar no servidor: ' + e.message + '\nTente novamente.');
@@ -952,7 +952,7 @@ function abrirBonus(id) {
 async function darBonus(id, bonus_msgs) {
   const a = assinantes.find(x => x.id === id);
   try {
-    const r = await fetch(WEBHOOK_ACTION, { method:'POST', headers: NGROK_H, body: JSON.stringify({ action:'bonus', id, bonus_msgs }) });
+    const r = await fetch(WEBHOOK_ACTION, { method:'POST', headers: NGROK_H, body: JSON.stringify({ action:'bonus', email: a.email, bonus_msgs }) });
     if (!r.ok) throw new Error('HTTP ' + r.status);
   } catch(e) {
     alert('Erro ao adicionar bonus: ' + e.message + '\nTente novamente.');
