@@ -91,15 +91,12 @@ nav::before{
 @media(max-width:640px){.nav-links{display:none}}
 /* Mobile: hide canvas (causa resize-jank com address bar iOS/Android) */
 @media(max-width:640px){#particle-canvas{display:none}}
-/* Mobile: hero badge vira contador social proof */
+/* Mobile sticky bars: compensate space */
 @media(max-width:640px){
   .hero-badge-static{display:none}
-  .hero-badge-mobile-counter{display:inline-flex!important}
-  .btn-primary{width:100%;justify-content:center;padding:18px 24px;font-size:17px;border-radius:16px}
-  .hero-ctas{flex-direction:column;gap:12px;width:100%}
-  .btn-secondary{justify-content:center}
+  .hero-badge-mobile-counter{display:none!important}
+  body{padding-top:52px;padding-bottom:72px}
 }
-@media(min-width:641px){.hero-badge-mobile-counter{display:none!important}}
 
 /* ─── HERO ─── */
 .hero{
@@ -785,10 +782,6 @@ footer{
       <div class="hero-badge hero-badge-static">
         <span class="hero-badge-dot"></span>
         Ativo 24h por dia, 7 dias por semana
-      </div>
-      <div class="hero-badge hero-badge-mobile-counter" style="display:none">
-        <span class="hero-badge-dot"></span>
-        <span id="sb-num-hero">1.381</span> usando agora
       </div>
       <h1>Seu negócio nunca mais fica <span>sem resposta</span></h1>
       <p class="hero-sub">Atendente de WhatsApp com IA que conhece seus produtos, responde dúvidas, consulta pedidos e converte clientes enquanto você dorme, trabalha ou descansa.</p>
@@ -1855,24 +1848,88 @@ window.addEventListener('scroll', () => {
 })()
 </script>
 
-<!-- FLOATING SOCIAL PROOF BAR (desktop only) -->
+<!-- SOCIAL PROOF + STICKY MOBILE BARS -->
 <style>
-@keyframes sb-pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.4)}}
-@keyframes sb-flip{0%{opacity:1;transform:translateY(0)}40%{opacity:0;transform:translateY(-6px)}60%{opacity:0;transform:translateY(6px)}100%{opacity:1;transform:translateY(0)}}
-@media(max-width:640px){#social-bar{display:none!important}}
+@keyframes sb-pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(1.5)}}
+@keyframes sb-flip{0%{opacity:1;transform:translateY(0)}40%{opacity:0;transform:translateY(-5px)}60%{opacity:0;transform:translateY(5px)}100%{opacity:1;transform:translateY(0)}}
+
+/* Desktop: floating bottom pill */
+#sb-desktop{
+  position:fixed;bottom:20px;left:50%;transform:translateX(-50%);
+  z-index:9999;
+  background:rgba(255,255,255,0.12);
+  backdrop-filter:blur(20px) saturate(180%);
+  -webkit-backdrop-filter:blur(20px) saturate(180%);
+  border:1px solid rgba(255,255,255,0.25);
+  border-radius:100px;padding:8px 16px;
+  display:flex;align-items:center;gap:7px;
+  box-shadow:0 6px 24px rgba(0,0,0,0.18),inset 0 1px 0 rgba(255,255,255,0.25);
+  white-space:nowrap;
+  font-family:'Plus Jakarta Sans',system-ui,sans-serif;
+}
+@media(max-width:640px){#sb-desktop{display:none!important}}
+
+/* Mobile: social proof TOP bar */
+#sb-mobile-top{
+  display:none;
+  position:fixed;top:0;left:0;right:0;
+  z-index:9999;
+  background:rgba(10,15,10,0.55);
+  backdrop-filter:blur(18px) saturate(180%);
+  -webkit-backdrop-filter:blur(18px) saturate(180%);
+  border-bottom:1px solid rgba(255,255,255,0.1);
+  padding:10px 20px;
+  align-items:center;justify-content:center;gap:7px;
+  font-family:'Plus Jakarta Sans',system-ui,sans-serif;
+}
+@media(max-width:640px){#sb-mobile-top{display:flex!important}}
+
+/* Mobile: sticky CTA BOTTOM bar */
+#sb-mobile-bottom{
+  display:none;
+  position:fixed;bottom:0;left:0;right:0;
+  z-index:9999;
+  background:rgba(8,12,8,0.75);
+  backdrop-filter:blur(20px) saturate(180%);
+  -webkit-backdrop-filter:blur(20px) saturate(180%);
+  border-top:1px solid rgba(255,255,255,0.1);
+  padding:12px 20px;
+  align-items:center;justify-content:space-between;gap:12px;
+  font-family:'Plus Jakarta Sans',system-ui,sans-serif;
+}
+@media(max-width:640px){#sb-mobile-bottom{display:flex!important}}
 </style>
-<div id="social-bar" style="position:fixed;bottom:20px;left:50%;transform:translateX(-50%);z-index:9999;background:rgba(255,255,255,0.12);backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);border:1px solid rgba(255,255,255,0.25);border-radius:100px;padding:8px 16px;display:flex;align-items:center;gap:7px;box-shadow:0 6px 24px rgba(0,0,0,0.18),inset 0 1px 0 rgba(255,255,255,0.25);white-space:nowrap;font-family:'Plus Jakarta Sans',system-ui,sans-serif;">
+
+<!-- Desktop pill -->
+<div id="sb-desktop">
   <span style="width:6px;height:6px;border-radius:50%;background:#22c55e;flex-shrink:0;animation:sb-pulse 2s infinite"></span>
-  <span style="font-size:12px;font-weight:600;color:rgba(255,255,255,0.9)"><span id="sb-num" style="display:inline-block">1.381</span> online agora</span>
+  <span style="font-size:12px;font-weight:600;color:rgba(255,255,255,0.9)"><span id="sb-num" style="display:inline-block">1.381</span> usando nossa ferramenta</span>
 </div>
+
+<!-- Mobile top bar: social proof -->
+<div id="sb-mobile-top">
+  <span style="width:6px;height:6px;border-radius:50%;background:#22c55e;flex-shrink:0;animation:sb-pulse 2s infinite"></span>
+  <span style="font-size:12px;font-weight:600;color:rgba(255,255,255,0.88)"><span id="sb-num-mobile" style="display:inline-block">1.381</span> usando nossa ferramenta</span>
+</div>
+
+<!-- Mobile bottom bar: sticky CTA -->
+<div id="sb-mobile-bottom">
+  <div style="font-size:15px;font-weight:800;color:#fff;letter-spacing:-0.3px">Atendente<span style="color:#22c55e">24h</span></div>
+  <a href="#planos" style="background:#25D366;color:#000;font-size:14px;font-weight:700;padding:11px 22px;border-radius:100px;text-decoration:none;display:inline-flex;align-items:center;gap:6px;box-shadow:0 4px 16px rgba(37,211,102,0.35);flex-shrink:0">
+    Começar agora
+    <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </a>
+</div>
+
 <script>
 (function(){
   function rand(){return Math.floor(Math.random()*(1394-1360+1))+1360;}
   function fmt(n){return n.toLocaleString('pt-BR');}
   function tick(){
-    var els=[document.getElementById('sb-num'),document.getElementById('sb-num-hero')];
+    var ids=['sb-num','sb-num-mobile'];
     var v=fmt(rand());
-    els.forEach(function(el){
+    ids.forEach(function(id){
+      var el=document.getElementById(id);
       if(!el)return;
       el.style.animation='none';
       void el.offsetWidth;
