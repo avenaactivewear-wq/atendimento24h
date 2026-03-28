@@ -746,19 +746,20 @@ function renderTable() {
   } else {
     tbody.innerHTML = pagina.map(a => {
       const limite = LIMITES[a.plano] || 500;
-      const pct = a.status === 'cancelado' ? 0 : Math.min(100, Math.round((a.msgs / limite) * 100));
+      const isCancelado = a.status === 'cancelado' || a.status === 'suspenso';
+      const pct = isCancelado ? 0 : Math.min(100, Math.round((a.msgs / limite) * 100));
       const fillClass = pct >= 90 ? 'fill-danger' : pct >= 70 ? 'fill-warn' : 'fill-ok';
       const renovacao = calcRenovacao(a.desde);
       const [c1, c2] = avatarColor(a.nome);
       const ini = iniciais(a.nome);
       const planClass = a.plano === 'Pro' ? 'plan-pro' : a.plano === 'Recomendado' ? 'plan-recomendado' : '';
-      const acoes = a.status === 'cancelado'
+      const acoes = isCancelado
         ? `<button class="action-btn reativar" onclick="reativar(${a.id})">Reativar</button>`
         : `<button class="action-btn" onclick="abrirLicenca(${a.id})">Licenca</button>
            <button class="action-btn" style="color:var(--blue);border-color:rgba(37,99,235,0.25)" onclick="abrirBonus(${a.id})">+Bonus</button>
            <button class="action-btn danger" onclick="cancelar(${a.id})">Cancelar</button>`;
       return `
-      <tr class="${a.status === 'cancelado' ? 'row-cancelado' : ''}">
+      <tr class="${isCancelado ? 'row-cancelado' : ''}">
         <td>
           <div class="td-avatar-wrap">
             <div class="avatar-circle" style="background:linear-gradient(135deg,${c1},${c2})">${ini}</div>
@@ -769,10 +770,10 @@ function renderTable() {
             </div>
           </div>
         </td>
-        <td><span class="status-badge status-${a.status}">${a.status === 'ativo' ? 'Ativo' : a.status === 'trial' ? 'Trial' : 'Cancelado'}</span></td>
+        <td><span class="status-badge status-${isCancelado ? 'cancelado' : a.status}">${a.status === 'ativo' ? 'Ativo' : a.status === 'trial' ? 'Trial' : 'Cancelado'}</span></td>
         <td><span class="plan-badge ${planClass}">${a.plano}</span></td>
         <td>
-          ${a.status === 'cancelado' ? '<span style="font-size:12px;color:var(--text3)">--</span>' : `
+          ${isCancelado ? '<span style="font-size:12px;color:var(--text3)">--</span>' : `
           <div class="usage-bar-wrap">
             <div class="usage-bar-labels"><span>${a.msgs} msgs</span><span>${limite}</span></div>
             <div class="usage-bar-track"><div class="usage-bar-fill ${fillClass}" style="width:${pct}%"></div></div>
