@@ -89,14 +89,14 @@ nav::before{
 }
 .nav-cta:hover{background:#1fba58;transform:translateY(-1px);box-shadow:0 4px 16px var(--green-glow-strong)}
 @media(max-width:640px){.nav-links{display:none}}
-/* Mobile: hide canvas (causa resize-jank com address bar iOS/Android) */
-@media(max-width:640px){#particle-canvas{display:none}}
+/* Mobile: canvas visível mas leve para evitar jank */
+@media(max-width:640px){#particle-canvas{opacity:0.4}}
 /* Mobile sticky bars: compensate space */
 @media(max-width:640px){
   .hero-badge-static{display:none}
   .hero-badge-mobile-counter{display:none!important}
   body{padding-top:44px;padding-bottom:72px}
-  .hero{padding-top:28px!important}
+  .hero{padding-top:60px!important}
 }
 
 /* ─── HERO ─── */
