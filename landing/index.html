@@ -568,6 +568,58 @@ footer{
 .footer-links a:hover{color:var(--text)}
 .footer-copy{color:var(--text3);font-size:13px}
 
+/* ─── ENTERPRISE ─── */
+.enterprise-block{
+  margin-top:24px;
+  border:1px solid rgba(255,255,255,0.09);
+  border-radius:var(--radius-xl);
+  padding:40px 48px;
+  background:linear-gradient(135deg,rgba(99,102,241,0.06) 0%,rgba(37,211,102,0.04) 100%);
+  display:grid;grid-template-columns:1fr auto;
+  gap:40px;align-items:center;
+  position:relative;overflow:hidden;
+}
+.enterprise-block::before{
+  content:'';position:absolute;top:-60px;right:-60px;
+  width:200px;height:200px;
+  background:radial-gradient(circle,rgba(99,102,241,0.12) 0%,transparent 70%);
+  pointer-events:none;
+}
+@media(max-width:700px){.enterprise-block{grid-template-columns:1fr;padding:32px 28px}}
+.enterprise-tag{
+  display:inline-flex;align-items:center;gap:6px;
+  background:rgba(99,102,241,0.15);border:1px solid rgba(99,102,241,0.3);
+  padding:4px 12px;border-radius:100px;
+  font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;
+  color:#a5b4fc;margin-bottom:14px;
+}
+.enterprise-title{font-size:clamp(20px,2.5vw,28px);font-weight:800;letter-spacing:-0.5px;margin-bottom:10px}
+.enterprise-sub{font-size:15px;color:var(--text2);line-height:1.6;max-width:480px}
+.enterprise-form{display:flex;flex-direction:column;gap:10px;min-width:280px}
+@media(max-width:700px){.enterprise-form{min-width:unset;width:100%}}
+.enterprise-input{
+  background:rgba(255,255,255,0.06);
+  border:1px solid rgba(255,255,255,0.1);
+  border-radius:12px;
+  padding:13px 16px;
+  font-size:14px;color:var(--text);
+  font-family:inherit;
+  outline:none;
+  transition:border-color .2s;
+  width:100%;
+}
+.enterprise-input::placeholder{color:var(--text3)}
+.enterprise-input:focus{border-color:rgba(99,102,241,0.5)}
+.enterprise-btn{
+  background:linear-gradient(135deg,#6366f1,#8b5cf6);
+  color:#fff;border:none;cursor:pointer;
+  padding:14px 20px;border-radius:12px;
+  font-size:15px;font-weight:700;font-family:inherit;
+  transition:all .2s;
+  display:flex;align-items:center;justify-content:center;gap:8px;
+}
+.enterprise-btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(99,102,241,0.35)}
+
 /* ─── PLAN GUARANTEES ─── */
 .plan-guarantees{
   border-top:1px solid var(--border);
@@ -954,6 +1006,23 @@ footer{
       </div>
     </div>
 
+    <!-- ENTERPRISE -->
+    <div class="enterprise-block reveal">
+      <div>
+        <div class="enterprise-tag">Enterprise</div>
+        <div class="enterprise-title">Volume alto ou operação complexa?<br>A gente monta o plano do seu tamanho.</div>
+        <p class="enterprise-sub">Múltiplos números, integrações personalizadas, SLA dedicado e onboarding com nossa equipe. Fale com a gente e receba uma proposta em até 24h.</p>
+      </div>
+      <form class="enterprise-form" onsubmit="submitEnterprise(event)">
+        <input class="enterprise-input" type="text" id="ent-nome" placeholder="Seu nome" required>
+        <input class="enterprise-input" type="tel" id="ent-wpp" placeholder="WhatsApp (com DDD)" required>
+        <button class="enterprise-btn" type="submit">
+          Quero uma proposta
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </form>
+    </div>
+
     <!-- GARANTIAS -->
     <div class="plan-guarantees reveal">
       <div class="guarantee-items">
@@ -1189,6 +1258,15 @@ footer{
 </footer>
 
 <script>
+// ── Enterprise lead capture
+function submitEnterprise(e) {
+  e.preventDefault()
+  const nome = document.getElementById('ent-nome').value.trim()
+  const wpp  = document.getElementById('ent-wpp').value.trim().replace(/\D/g,'')
+  const msg = encodeURIComponent(`Oi! Sou ${nome} e tenho interesse no plano Enterprise do Atendente24h. Meu WhatsApp é ${wpp}. Quero receber uma proposta.`)
+  window.open(`https://wa.me/5511999999999?text=${msg}`, '_blank')
+}
+
 // ── Scroll reveal
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible') })
