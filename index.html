@@ -2030,8 +2030,9 @@ window.addEventListener('scroll', () => {
     current = Math.min(base + range - 1, Math.max(base, current + delta));
     var d = document.getElementById('sb-count-desktop');
     var m = document.getElementById('sb-count-mobile');
-    if (d) d.textContent = current;
-    if (m) m.textContent = current;
+    var fmt = current.toLocaleString('pt-BR');
+    if (d) d.textContent = fmt;
+    if (m) m.textContent = fmt;
   }
   setInterval(update, Math.floor(Math.random() * 4000) + 3000);
 })();
@@ -2095,13 +2096,13 @@ window.addEventListener('scroll', () => {
 <!-- Desktop pill -->
 <div id="sb-desktop">
   <span style="width:6px;height:6px;border-radius:50%;background:#22c55e;flex-shrink:0;animation:sb-pulse 2s infinite"></span>
-  <span style="font-size:12px;font-weight:600;color:rgba(255,255,255,0.9)"><span id="sb-count-desktop">1354</span> empresas usam a plataforma</span>
+  <span style="font-size:12px;font-weight:600;color:rgba(255,255,255,0.9)"><span id="sb-count-desktop">1.354</span> empresas usam a plataforma</span>
 </div>
 
 <!-- Mobile top bar: social proof -->
 <div id="sb-mobile-top">
   <span style="width:6px;height:6px;border-radius:50%;background:#22c55e;flex-shrink:0;animation:sb-pulse 2s infinite"></span>
-  <span style="font-size:12px;font-weight:600;color:rgba(255,255,255,0.88)"><span id="sb-count-mobile">1354</span> empresas usam a plataforma</span>
+  <span style="font-size:12px;font-weight:600;color:rgba(255,255,255,0.88)"><span id="sb-count-mobile">1.354</span> empresas usam a plataforma</span>
 </div>
 
 <!-- Mobile bottom bar: sticky CTA -->
