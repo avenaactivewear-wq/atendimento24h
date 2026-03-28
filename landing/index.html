@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Atendimento24h — Seu negócio nunca mais fica sem resposta</title>
+<title>Atendente24h: Seu negócio nunca mais fica sem resposta</title>
 <meta name="description" content="Atendente de WhatsApp com IA que responde seus clientes 24 horas por dia, 7 dias por semana. Zero instalação. Ativa em minutos.">
-<meta property="og:title" content="Atendimento24h — Seu negócio nunca mais fica sem resposta">
+<meta property="og:title" content="Atendente24h: Seu negócio nunca mais fica sem resposta">
 <meta property="og:description" content="Atendente de WhatsApp com IA. 24/7. Zero instalação. A partir de R$197/mês.">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
@@ -46,18 +46,31 @@ body{
   overflow-x:hidden;
 }
 
-/* ─── NAV ─── */
+/* ─── NAV liquid glass ─── */
 nav{
   position:fixed;top:16px;left:50%;transform:translateX(-50%);
   z-index:100;
   display:flex;align-items:center;justify-content:space-between;
   padding:14px 28px;
   width:min(1000px,calc(100% - 32px));
-  background:rgba(8,8,8,0.85);
-  backdrop-filter:blur(24px) saturate(180%);
-  border:1px solid var(--border);
+  background:rgba(255,255,255,0.06);
+  backdrop-filter:blur(48px) saturate(220%) brightness(1.08);
+  -webkit-backdrop-filter:blur(48px) saturate(220%) brightness(1.08);
   border-radius:100px;
-  box-shadow:0 4px 32px rgba(0,0,0,0.4),inset 0 1px 0 rgba(255,255,255,0.05);
+  border:1px solid rgba(255,255,255,0.13);
+  box-shadow:
+    0 2px 0 0 rgba(255,255,255,0.12) inset,
+    0 -1px 0 0 rgba(255,255,255,0.04) inset,
+    0 8px 40px rgba(0,0,0,0.35),
+    0 1px 0 rgba(255,255,255,0.06);
+  position:fixed;
+}
+nav::before{
+  content:'';
+  position:absolute;inset:0;
+  border-radius:100px;
+  background:linear-gradient(135deg,rgba(255,255,255,0.08) 0%,rgba(255,255,255,0.01) 50%,rgba(37,211,102,0.04) 100%);
+  pointer-events:none;
 }
 .nav-logo{
   font-size:17px;font-weight:800;letter-spacing:-0.5px;
@@ -82,6 +95,7 @@ nav{
   display:flex;align-items:center;justify-content:center;
   padding:120px 24px 80px;
   position:relative;overflow:hidden;
+  z-index:1;
 }
 .hero-bg{
   position:absolute;inset:0;
@@ -242,6 +256,7 @@ h1 span{
   border-top:1px solid var(--border);
   border-bottom:1px solid var(--border);
   padding:32px 24px;
+  position:relative;z-index:1;
 }
 .proof-inner{
   max-width:1000px;margin:0 auto;
@@ -253,7 +268,7 @@ h1 span{
 .proof-n{font-size:22px;font-weight:800;color:var(--text)}
 
 /* ─── SECTIONS SHARED ─── */
-section{padding:120px 24px}
+section{padding:120px 24px;position:relative;z-index:1}
 .wrap{max-width:1000px;margin:0 auto}
 .sec-eyebrow{
   font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
@@ -553,6 +568,28 @@ footer{
 .footer-links a:hover{color:var(--text)}
 .footer-copy{color:var(--text3);font-size:13px}
 
+/* ─── PLAN GUARANTEES ─── */
+.plan-guarantees{
+  border-top:1px solid var(--border);
+  padding-top:48px;
+  margin-top:48px;
+}
+.guarantee-items{
+  display:flex;flex-wrap:wrap;justify-content:center;gap:40px;
+}
+.guarantee-item{
+  display:flex;align-items:flex-start;gap:14px;
+  flex:1;min-width:180px;max-width:220px;
+}
+.guarantee-icon{
+  width:40px;height:40px;border-radius:10px;
+  background:var(--green-glow);border:1px solid var(--border-green);
+  display:flex;align-items:center;justify-content:center;
+  font-size:18px;flex-shrink:0;
+}
+.guarantee-title{font-size:14px;font-weight:700;margin-bottom:3px}
+.guarantee-sub{font-size:13px;color:var(--text3);line-height:1.4}
+
 /* ─── ANIMATIONS ─── */
 .reveal{opacity:0;transform:translateY(32px);transition:all .7s cubic-bezier(0.16,1,0.3,1)}
 .reveal.visible{opacity:1;transform:translateY(0)}
@@ -565,9 +602,12 @@ footer{
 </head>
 <body>
 
+<!-- PARTICLE CANVAS -->
+<canvas id="particle-canvas" style="position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:0.55"></canvas>
+
 <!-- NAV -->
 <nav>
-  <div class="nav-logo">Atendimento24h</div>
+  <div class="nav-logo">Atendente24h</div>
   <div class="nav-links">
     <a href="#como-funciona">Como funciona</a>
     <a href="#recursos">Recursos</a>
@@ -588,7 +628,7 @@ footer{
         Ativo 24h por dia, 7 dias por semana
       </div>
       <h1>Seu negócio nunca mais fica <span>sem resposta</span></h1>
-      <p class="hero-sub">Atendente de WhatsApp com IA que conhece seus produtos, responde dúvidas, consulta pedidos e converte clientes — enquanto você dorme, trabalha ou descansa.</p>
+      <p class="hero-sub">Atendente de WhatsApp com IA que conhece seus produtos, responde dúvidas, consulta pedidos e converte clientes enquanto você dorme, trabalha ou descansa.</p>
       <div class="hero-ctas">
         <a href="#planos" class="btn-primary">
           Ativar meu atendente
@@ -623,9 +663,11 @@ footer{
     <div class="wpp-phone" style="position:relative">
       <div class="wpp-frame">
         <div class="wpp-header">
-          <div class="wpp-avatar">A</div>
+          <div class="wpp-avatar" style="background:none;overflow:hidden;padding:0">
+            <img src="ana-avatar.jpg" alt="Ana Goulart" style="width:100%;height:100%;object-fit:cover;border-radius:50%">
+          </div>
           <div>
-            <div class="wpp-contact-name">Ana · Atendente Virtual</div>
+            <div class="wpp-contact-name">Ana Goulart</div>
             <div class="wpp-contact-status">Online agora</div>
           </div>
         </div>
@@ -635,7 +677,7 @@ footer{
             <div class="msg-time">14:22</div>
           </div>
           <div class="msg msg-out" style="display:none" id="wpp-r1">
-            Oi, Paulo! Temos sim 😊 O modelo Ultralight está disponível nos tamanhos 38 ao 44. No 42 temos em preto, branco e cinza.
+            Oi, Paulo! Temos sim 😊<br>O modelo <strong style="color:#fff">Ultralight</strong> está disponível nos tamanhos 38–44. No 42 temos em <strong style="color:#fff">preto, branco e cinza</strong>.
             <div class="msg-time">14:22</div>
           </div>
           <div class="msg msg-in" style="display:none" id="wpp-q2">
@@ -643,8 +685,21 @@ footer{
             <div class="msg-time">14:23</div>
           </div>
           <div class="msg msg-out" style="display:none" id="wpp-r2">
-            R$189,90. Parcelamos em até 6x sem juros no cartão. Ou à vista com 5% de desconto 🖤 Quer que eu reserve o 42 preto pra você?
+            <strong style="color:#fff">R$189,90</strong> — parcelamos em até <strong style="color:#fff">6x sem juros</strong> no cartão. Ou à vista com 5% de desconto 🖤
             <div class="msg-time">14:23</div>
+          </div>
+          <div class="msg msg-in" style="display:none" id="wpp-q3">
+            Quero o preto! Me manda o link
+            <div class="msg-time">14:23</div>
+          </div>
+          <div class="msg msg-out" style="display:none" id="wpp-r3">
+            Claro! Aqui está 👇<br>
+            <div style="margin-top:8px;background:rgba(255,255,255,0.08);border-radius:8px;padding:8px 10px;border-left:3px solid var(--green)">
+              <div style="font-size:11px;color:var(--green);font-weight:600;margin-bottom:2px">loja.exemplo.com.br</div>
+              <div style="font-size:12px;color:#e9edef;font-weight:500">Ultralight 42 Preto</div>
+              <div style="font-size:11px;color:#8696a0">R$189,90 · Frete grátis</div>
+            </div>
+            <div class="msg-time">14:24</div>
           </div>
           <div class="msg msg-typing" style="display:none" id="wpp-typing">
             <span class="typing-dot"></span>
@@ -667,27 +722,14 @@ footer{
 
 <!-- SOCIAL PROOF -->
 <div class="proof-bar">
-  <div class="proof-inner">
-    <div class="proof-item">
-      <span class="proof-icon">🏪</span>
-      <span>Lojas e e-commerces</span>
-    </div>
-    <div class="proof-item">
-      <span class="proof-icon">🏥</span>
-      <span>Clínicas e consultórios</span>
-    </div>
-    <div class="proof-item">
-      <span class="proof-icon">💈</span>
-      <span>Salões e estéticas</span>
-    </div>
-    <div class="proof-item">
-      <span class="proof-icon">🍽️</span>
-      <span>Restaurantes e deliveries</span>
-    </div>
-    <div class="proof-item">
-      <span class="proof-icon">🔧</span>
-      <span>Prestadores de serviço</span>
-    </div>
+  <div class="proof-inner" style="gap:0">
+    <div class="proof-item" style="padding:0 28px;border-right:1px solid var(--border)">Lojas e e-commerces</div>
+    <div class="proof-item" style="padding:0 28px;border-right:1px solid var(--border)">Clinicas e consultórios</div>
+    <div class="proof-item" style="padding:0 28px;border-right:1px solid var(--border)">Salões e estéticas</div>
+    <div class="proof-item" style="padding:0 28px;border-right:1px solid var(--border)">Restaurantes e deliveries</div>
+    <div class="proof-item" style="padding:0 28px;border-right:1px solid var(--border)">Prestadores de serviço</div>
+    <div class="proof-item" style="padding:0 28px;border-right:1px solid var(--border)">Imobiliárias</div>
+    <div class="proof-item" style="padding:0 28px">Escolas e cursos</div>
   </div>
 </div>
 
@@ -702,21 +744,18 @@ footer{
     <div class="steps-grid">
       <div class="step reveal reveal-delay-1">
         <div class="step-num">01</div>
-        <div class="step-icon">📱</div>
         <div class="step-title">Conecte seu WhatsApp</div>
         <div class="step-desc">Abra o app, escaneie o QR code na tela e seu número está conectado. Funciona com WhatsApp Business ou número comum.</div>
       </div>
       <div class="step reveal reveal-delay-2">
         <div class="step-num">02</div>
-        <div class="step-icon">🧠</div>
         <div class="step-title">Ensine seu negócio</div>
         <div class="step-desc">Preencha informações da sua empresa e suba arquivos: catálogo, tabela de preços, FAQ, políticas. O atendente aprende tudo.</div>
       </div>
       <div class="step reveal reveal-delay-3">
         <div class="step-num">03</div>
-        <div class="step-icon">✅</div>
         <div class="step-title">Atendente vai ao ar</div>
-        <div class="step-desc">Pronto. Seu atendente começa a responder instantaneamente. Você pode fechar o computador — ele roda nos nossos servidores.</div>
+        <div class="step-desc">Pronto. Seu atendente começa a responder instantaneamente. Você pode fechar o computador, ele roda nos nossos servidores.</div>
       </div>
     </div>
   </div>
@@ -731,32 +770,32 @@ footer{
     </div>
     <div class="features-grid">
       <div class="feat reveal reveal-delay-1">
-        <div class="feat-icon">⚡</div>
-        <div class="feat-title">Responde em menos de 3 segundos</div>
+        <div class="feat-icon" style="font-size:15px;font-weight:800;letter-spacing:-0.5px">&lt;2s</div>
+        <div class="feat-title">Responde em menos de 2 segundos</div>
         <div class="feat-desc">Nenhum cliente espera. A IA responde instantaneamente, a qualquer hora, em qualquer dia.</div>
       </div>
       <div class="feat reveal reveal-delay-2">
-        <div class="feat-icon">📚</div>
+        <div class="feat-icon" style="font-size:15px;font-weight:800">IQ</div>
         <div class="feat-title">Conhece seus produtos de cor</div>
         <div class="feat-desc">Suba seu catálogo e o atendente domina preços, variações, disponibilidade e diferenciais.</div>
       </div>
       <div class="feat reveal reveal-delay-3">
-        <div class="feat-icon">📦</div>
+        <div class="feat-icon" style="font-size:15px;font-weight:800">PKG</div>
         <div class="feat-title">Consulta status de pedidos</div>
         <div class="feat-desc">Integrado com seu sistema, informa rastreamento e prazo sem precisar de atendente humano.</div>
       </div>
       <div class="feat reveal reveal-delay-4">
-        <div class="feat-icon">🎯</div>
+        <div class="feat-icon" style="font-size:15px;font-weight:800">VOZ</div>
         <div class="feat-title">Tom de voz da sua marca</div>
         <div class="feat-desc">Formal, descontraído, empático. Configure a personalidade e o nome do atendente livremente.</div>
       </div>
       <div class="feat reveal reveal-delay-5">
-        <div class="feat-icon">📈</div>
+        <div class="feat-icon" style="font-size:15px;font-weight:800">INF</div>
         <div class="feat-title">Escala sem custo fixo</div>
-        <div class="feat-desc">100 ou 10.000 clientes simultâneos — o atendente responde todos. Sem contratar, sem treinar.</div>
+        <div class="feat-desc">100 ou 10.000 clientes simultâneos, o atendente responde todos. Sem contratar, sem treinar.</div>
       </div>
       <div class="feat reveal reveal-delay-1">
-        <div class="feat-icon">🔒</div>
+        <div class="feat-icon" style="font-size:15px;font-weight:800">SSL</div>
         <div class="feat-title">Dados seguros e privados</div>
         <div class="feat-desc">Suas informações e as dos seus clientes ficam protegidas. Nunca compartilhamos com terceiros.</div>
       </div>
@@ -793,9 +832,11 @@ footer{
       </div>
       <div class="demo-window reveal reveal-delay-2">
         <div class="demo-wpp-header">
-          <div class="demo-avatar" id="demo-avatar">A</div>
+          <div class="demo-avatar" id="demo-avatar" style="background:none;overflow:hidden;padding:0">
+            <img src="ana-avatar.jpg" alt="Ana Goulart" style="width:100%;height:100%;object-fit:cover;border-radius:50%">
+          </div>
           <div>
-            <div class="demo-contact" id="demo-name">Ana · Atendente</div>
+            <div class="demo-contact" id="demo-name">Ana Goulart</div>
             <div class="demo-online">Online agora</div>
           </div>
         </div>
@@ -877,7 +918,8 @@ footer{
       </div>
 
       <!-- PRO -->
-      <div class="plan">
+      <div class="plan" style="position:relative">
+        <div class="plan-badge" style="background:linear-gradient(135deg,#6366f1,#8b5cf6);color:#fff">Mais vantajoso</div>
         <div class="plan-name">Pro</div>
         <div class="plan-price"><sup>R$</sup>797<span>/mês</span></div>
         <div class="plan-cycle">Cobrado mensalmente</div>
@@ -903,14 +945,47 @@ footer{
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
             Suporte VIP via WhatsApp
           </div>
+          <div class="plan-feat" style="color:var(--text);font-weight:600">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8l3 3 7-7" stroke="var(--green)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            🎯 Onboarding com nosso gestor via Google Meet
+          </div>
         </div>
         <a href="#comecar" class="plan-cta">Começar com Pro</a>
       </div>
     </div>
 
-    <!-- COMPARATIVO -->
-    <div class="reveal" style="margin-top:48px;text-align:center">
-      <p style="color:var(--text3);font-size:14px">Atendente humano parcial: <strong style="color:var(--text2)">R$1.500+/mês</strong> · Seu atendente IA: a partir de <strong style="color:var(--green)">R$6,57/dia</strong> · Cancele quando quiser</p>
+    <!-- GARANTIAS -->
+    <div class="plan-guarantees reveal">
+      <div class="guarantee-items">
+        <div class="guarantee-item">
+          <div class="guarantee-icon">7</div>
+          <div>
+            <div class="guarantee-title">7 dias de garantia</div>
+            <div class="guarantee-sub">Não gostou, devolvemos tudo sem perguntas</div>
+          </div>
+        </div>
+        <div class="guarantee-item">
+          <div class="guarantee-icon" style="font-size:14px;font-weight:800">OFF</div>
+          <div>
+            <div class="guarantee-title">Cancele quando quiser</div>
+            <div class="guarantee-sub">Sem multa, sem fidelidade, sem burocracia</div>
+          </div>
+        </div>
+        <div class="guarantee-item">
+          <div class="guarantee-icon" style="font-size:14px;font-weight:800">24h</div>
+          <div>
+            <div class="guarantee-title">Suporte humano 24h</div>
+            <div class="guarantee-sub">Time real, não outro bot respondendo</div>
+          </div>
+        </div>
+        <div class="guarantee-item">
+          <div class="guarantee-icon" style="font-size:14px;font-weight:800">5min</div>
+          <div>
+            <div class="guarantee-title">Ativo em 5 minutos</div>
+            <div class="guarantee-sub">Zero código, zero conhecimento técnico</div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -965,7 +1040,8 @@ footer{
   <div class="wrap">
     <div class="reveal" style="text-align:center">
       <div class="sec-eyebrow">Comparativo</div>
-      <div class="sec-title">Por que não contratar<br>um atendente humano?</div>
+      <div class="sec-title">Por que o Atendente24h<br>e não outro bot?</div>
+      <p class="sec-sub" style="margin:16px auto 0">A maioria dos bots trava na primeira pergunta fora do script. O Atendente24h pensa e responde como um atendente real.</p>
     </div>
     <div class="compare-table reveal reveal-delay-1">
       <div class="compare-header">
@@ -973,48 +1049,53 @@ footer{
           <div class="compare-col-title">Característica</div>
         </div>
         <div class="compare-col">
-          <div class="compare-col-title">Atendente humano</div>
-          <div class="compare-col-sub">R$1.500–2.500/mês</div>
+          <div class="compare-col-title">Outros bots</div>
+          <div class="compare-col-sub">ManyChat, Typebot e similares</div>
         </div>
         <div class="compare-col featured-col">
-          <div class="compare-col-title">Atendimento24h</div>
+          <div class="compare-col-title">Atendente24h</div>
           <div class="compare-col-sub">A partir de R$197/mês</div>
         </div>
       </div>
       <div class="compare-row">
-        <div class="compare-cell">Disponível 24/7</div>
+        <div class="compare-cell">Responde qualquer pergunta</div>
         <div class="compare-cell"><span class="compare-x">✕</span></div>
         <div class="compare-cell featured-cell"><span class="compare-check">✓</span></div>
       </div>
       <div class="compare-row">
-        <div class="compare-cell">Responde em menos de 3 segundos</div>
+        <div class="compare-cell">Sem roteiro fixo</div>
         <div class="compare-cell"><span class="compare-x">✕</span></div>
         <div class="compare-cell featured-cell"><span class="compare-check">✓</span></div>
       </div>
       <div class="compare-row">
-        <div class="compare-cell">Custo fixo mensal</div>
-        <div class="compare-cell" style="color:#f87171;font-weight:600">R$1.500+</div>
-        <div class="compare-cell featured-cell" style="color:var(--green);font-weight:600">R$197–797</div>
-      </div>
-      <div class="compare-row">
-        <div class="compare-cell">Nunca fica doente ou de férias</div>
+        <div class="compare-cell">Responde em menos de 2 segundos</div>
         <div class="compare-cell"><span class="compare-x">✕</span></div>
         <div class="compare-cell featured-cell"><span class="compare-check">✓</span></div>
       </div>
       <div class="compare-row">
-        <div class="compare-cell">Atende múltiplos clientes simultâneos</div>
+        <div class="compare-cell">Ativo em menos de 5 minutos</div>
         <div class="compare-cell"><span class="compare-x">✕</span></div>
         <div class="compare-cell featured-cell"><span class="compare-check">✓</span></div>
       </div>
       <div class="compare-row">
-        <div class="compare-cell">Ativo em minutos</div>
+        <div class="compare-cell">Sem conhecimento técnico necessário</div>
         <div class="compare-cell"><span class="compare-x">✕</span></div>
         <div class="compare-cell featured-cell"><span class="compare-check">✓</span></div>
       </div>
       <div class="compare-row">
-        <div class="compare-cell">Precisa de treinamento</div>
-        <div class="compare-cell"><span class="compare-x" style="color:#f87171">Semanas</span></div>
-        <div class="compare-cell featured-cell"><span class="compare-check">Não</span></div>
+        <div class="compare-cell">Suporte humano disponível 24h</div>
+        <div class="compare-cell"><span class="compare-x">✕</span></div>
+        <div class="compare-cell featured-cell"><span class="compare-check">✓</span></div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-cell">Cancele quando quiser</div>
+        <div class="compare-cell"><span class="compare-x">✕</span></div>
+        <div class="compare-cell featured-cell"><span class="compare-check">✓</span></div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-cell">Reembolso gratuito em 7 dias</div>
+        <div class="compare-cell"><span class="compare-x">✕</span></div>
+        <div class="compare-cell featured-cell"><span class="compare-check">✓</span></div>
       </div>
     </div>
   </div>
@@ -1095,7 +1176,7 @@ footer{
 <!-- FOOTER -->
 <footer>
   <div class="footer-inner">
-    <div class="footer-logo">Atendimento24h</div>
+    <div class="footer-logo">Atendente24h</div>
     <div class="footer-links">
       <a href="#planos">Planos</a>
       <a href="#faq">FAQ</a>
@@ -1115,28 +1196,57 @@ const observer = new IntersectionObserver((entries) => {
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el))
 
 // ── WhatsApp mockup animation
-const msgs = {
+const wppMsgs = {
   r1: document.getElementById('wpp-r1'),
   q2: document.getElementById('wpp-q2'),
   r2: document.getElementById('wpp-r2'),
+  q3: document.getElementById('wpp-q3'),
+  r3: document.getElementById('wpp-r3'),
   typing: document.getElementById('wpp-typing'),
 }
-function showWppMsg(el, delay) {
-  return new Promise(r => setTimeout(() => { el.style.display=''; r() }, delay))
+const wppContainer = document.getElementById('wpp-msgs')
+function showWppMsg(el) {
+  return new Promise(r => {
+    el.style.display = ''
+    el.style.opacity = '0'
+    el.style.transform = 'translateY(6px)'
+    el.style.transition = 'all 0.3s ease'
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      el.style.opacity = '1'
+      el.style.transform = 'translateY(0)'
+    }))
+    setTimeout(r, 350)
+    wppContainer.scrollTop = wppContainer.scrollHeight
+  })
 }
+function showTyping(ms) {
+  return new Promise(r => {
+    wppMsgs.typing.style.display = ''
+    wppContainer.scrollTop = wppContainer.scrollHeight
+    setTimeout(() => { wppMsgs.typing.style.display = 'none'; r() }, ms)
+  })
+}
+function wait(ms){ return new Promise(r => setTimeout(r, ms)) }
 async function animateWpp() {
-  await new Promise(r => setTimeout(r, 1200))
-  msgs.typing.style.display = ''
-  await new Promise(r => setTimeout(r, 1200))
-  msgs.typing.style.display = 'none'
-  await showWppMsg(msgs.r1, 0)
-  await new Promise(r => setTimeout(r, 1800))
-  await showWppMsg(msgs.q2, 0)
-  await new Promise(r => setTimeout(r, 600))
-  msgs.typing.style.display = ''
-  await new Promise(r => setTimeout(r, 1200))
-  msgs.typing.style.display = 'none'
-  await showWppMsg(msgs.r2, 0)
+  await wait(1200)
+  await showTyping(1000)
+  await showWppMsg(wppMsgs.r1)
+  await wait(1600)
+  await showWppMsg(wppMsgs.q2)
+  await wait(600)
+  await showTyping(1000)
+  await showWppMsg(wppMsgs.r2)
+  await wait(1800)
+  await showWppMsg(wppMsgs.q3)
+  await wait(500)
+  await showTyping(1200)
+  await showWppMsg(wppMsgs.r3)
+  await wait(6000)
+  // loop
+  Object.values(wppMsgs).forEach(el => { if(el.id !== 'wpp-msgs') el.style.display = 'none' })
+  const firstMsg = document.querySelector('#wpp-msgs .msg-in')
+  if(firstMsg){ firstMsg.style.display = '' }
+  animateWpp()
 }
 animateWpp()
 
@@ -1198,9 +1308,112 @@ requestAnimationFrame(() => {
 // ── Smooth nav active
 window.addEventListener('scroll', () => {
   const scrolled = window.scrollY > 50
-  document.querySelector('nav').style.background = scrolled
-    ? 'rgba(8,8,8,0.95)' : 'rgba(8,8,8,0.85)'
+  const nav = document.querySelector('nav')
+  nav.style.background = scrolled
+    ? 'rgba(255,255,255,0.09)' : 'rgba(255,255,255,0.06)'
 })
+
+// ── Particle background
+;(function(){
+  const canvas = document.getElementById('particle-canvas')
+  const ctx = canvas.getContext('2d')
+  let W, H, particles, mouse = {x: -9999, y: -9999}
+
+  const GREEN = '37,211,102'
+  const COUNT = 80
+
+  function resize(){
+    W = canvas.width = window.innerWidth
+    H = canvas.height = window.innerHeight
+  }
+
+  function Particle(){
+    this.reset = function(){
+      this.x = Math.random() * W
+      this.y = Math.random() * H
+      this.z = Math.random() * 0.8 + 0.2      // depth 0.2–1.0
+      this.vx = (Math.random() - 0.5) * 0.4 * this.z
+      this.vy = (Math.random() - 0.5) * 0.4 * this.z
+      this.r = (Math.random() * 1.5 + 0.8) * this.z
+      this.alpha = (Math.random() * 0.4 + 0.2) * this.z
+    }
+    this.reset()
+    this.x = Math.random() * W   // spread on init
+    this.y = Math.random() * H
+  }
+
+  Particle.prototype.update = function(){
+    this.x += this.vx
+    this.y += this.vy
+    // mouse repulsion
+    const dx = this.x - mouse.x, dy = this.y - mouse.y
+    const dist = Math.sqrt(dx*dx + dy*dy)
+    if(dist < 100){
+      this.x += dx / dist * 0.6
+      this.y += dy / dist * 0.6
+    }
+    if(this.x < 0) this.x = W
+    if(this.x > W) this.x = 0
+    if(this.y < 0) this.y = H
+    if(this.y > H) this.y = 0
+  }
+
+  function init(){
+    resize()
+    particles = Array.from({length: COUNT}, () => new Particle())
+  }
+
+  function draw(){
+    ctx.clearRect(0, 0, W, H)
+
+    // connections
+    for(let i = 0; i < particles.length; i++){
+      for(let j = i+1; j < particles.length; j++){
+        const a = particles[i], b = particles[j]
+        const dx = a.x - b.x, dy = a.y - b.y
+        const dist = Math.sqrt(dx*dx + dy*dy)
+        const maxDist = 140
+        if(dist < maxDist){
+          const opacity = (1 - dist/maxDist) * 0.18 * Math.min(a.z, b.z)
+          ctx.beginPath()
+          ctx.strokeStyle = `rgba(${GREEN},${opacity})`
+          ctx.lineWidth = 0.8
+          ctx.moveTo(a.x, a.y)
+          ctx.lineTo(b.x, b.y)
+          ctx.stroke()
+        }
+      }
+    }
+
+    // dots
+    particles.forEach(p => {
+      ctx.beginPath()
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI*2)
+      ctx.fillStyle = `rgba(${GREEN},${p.alpha})`
+      ctx.fill()
+      // glow
+      ctx.beginPath()
+      ctx.arc(p.x, p.y, p.r * 2.5, 0, Math.PI*2)
+      const grad = ctx.createRadialGradient(p.x,p.y,0, p.x,p.y, p.r*2.5)
+      grad.addColorStop(0, `rgba(${GREEN},${p.alpha * 0.3})`)
+      grad.addColorStop(1, `rgba(${GREEN},0)`)
+      ctx.fillStyle = grad
+      ctx.fill()
+    })
+  }
+
+  function loop(){
+    particles.forEach(p => p.update())
+    draw()
+    requestAnimationFrame(loop)
+  }
+
+  window.addEventListener('resize', resize)
+  window.addEventListener('mousemove', e => { mouse.x = e.clientX; mouse.y = e.clientY })
+
+  init()
+  loop()
+})()
 </script>
 </body>
 </html>
