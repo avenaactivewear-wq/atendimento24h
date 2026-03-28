@@ -760,13 +760,18 @@ async function checkToken() {
         const el = document.getElementById('i-email')
         if (el) { el.value = email; el.readOnly = true; el.style.opacity = '0.7'; el.style.cursor = 'not-allowed'; }
       }
+      // Update plan badge from token data
+      if (data.plano) {
+        const badge = document.getElementById('plan-label')
+        if (badge) badge.textContent = 'Plano ' + data.plano
+      }
       document.getElementById('main-content').style.display = 'block'
     } else {
       showAccessDenied(data.message || 'Link inválido ou já utilizado.')
     }
   } catch(e) {
-    // Se webhook falhar (ngrok down), liberar mesmo assim para não bloquear cliente
-    document.getElementById('main-content').style.display = 'block'
+    // Se webhook falhar, bloquear com mensagem de erro temporário
+    showAccessDenied('Serviço temporariamente indisponível. Aguarde alguns minutos e tente novamente ou entre em contato: suporte@atendente24h.com')
   }
 }
 
@@ -988,7 +993,12 @@ async function startQRPolling() {
   clearInterval(qrPollInterval)
   qrPollInterval = setInterval(async () => {
     attempts++
-    if (attempts > 60) { clearInterval(qrPollInterval); return } // timeout 2min
+    if (attempts > 60) {
+      clearInterval(qrPollInterval)
+      document.getElementById('qr-loading').style.display = 'none'
+      document.getElementById('qr-status-msg').innerHTML = 'Tempo esgotado ao gerar o QR code.<br><button onclick="startQRPolling()" style="margin-top:12px;padding:10px 20px;background:#22c55e;color:#000;border:none;border-radius:8px;font-weight:700;cursor:pointer">Tentar novamente</button>'
+      return
+    }
     try {
       const resp = await fetch(`${WEBHOOK_QR}?instance=${currentInstance}`, { headers: NGROK_HEADERS })
       const data = await resp.json()
@@ -1007,7 +1017,14 @@ async function startQRPolling() {
 async function startStatusPolling() {
   if (!currentInstance) return
   clearInterval(statusPollInterval)
+  let statusAttempts = 0
   statusPollInterval = setInterval(async () => {
+    statusAttempts++
+    if (statusAttempts > 100) { // 5 min timeout at 3s interval
+      clearInterval(statusPollInterval)
+      document.getElementById('qr-status-msg').innerHTML = 'Conexao nao detectada. <a href="" style="color:#22c55e">Recarregue a pagina</a> e tente escanear novamente.'
+      return
+    }
     try {
       const resp = await fetch(`${WEBHOOK_STATUS}?instance=${currentInstance}`, { headers: NGROK_HEADERS })
       const data = await resp.json()
@@ -1034,7 +1051,17 @@ function handleFiles(input, listId) {
     item.className = 'file-item'
     const ext = file.name.split('.').pop().toLowerCase()
     const icons = {pdf:'📄',txt:'📝',docx:'📃',doc:'📃',zip:'🗜️'}
-    item.innerHTML = `<span class="file-icon">${icons[ext]||'📄'}</span><span class="file-name">${file.name}</span><button class="file-remove" onclick="this.parentElement.remove()">×</button>`
+    const icon = document.createElement('span')
+    icon.className = 'file-icon'
+    icon.textContent = icons[ext] || '📄'
+    const name = document.createElement('span')
+    name.className = 'file-name'
+    name.textContent = file.name
+    const btn = document.createElement('button')
+    btn.className = 'file-remove'
+    btn.textContent = '×'
+    btn.onclick = () => item.remove()
+    item.appendChild(icon); item.appendChild(name); item.appendChild(btn)
     list.appendChild(item)
   })
 }
