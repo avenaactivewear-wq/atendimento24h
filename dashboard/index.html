@@ -875,20 +875,38 @@ body {
       <span class="login-logo-text">Atendente24h</span>
     </div>
 
-    <div class="login-title">Acessar sua conta</div>
-    <p class="login-sub">Entre com seu e-mail para gerenciar seu atendente.</p>
+    <!-- STEP 1: Email -->
+    <div id="step-email">
+      <div class="login-title">Acessar sua conta</div>
+      <p class="login-sub">Use o e-mail que você cadastrou na compra.</p>
+      <form id="login-form">
+        <div class="field">
+          <label>E-mail</label>
+          <input type="email" id="login-email" placeholder="voce@empresa.com" autocomplete="email" required>
+        </div>
+        <button type="submit" class="btn-primary" id="btn-enviar-codigo">Enviar código de acesso</button>
+        <p id="login-error" style="color:#ef4444;font-size:13px;margin-top:12px;display:none;text-align:center"></p>
+      </form>
+    </div>
 
-    <form id="login-form">
-      <div class="field">
-        <label>E-mail</label>
-        <input type="email" id="login-email" placeholder="voce@empresa.com" autocomplete="email" required>
-      </div>
-      <div class="field">
-        <label>Senha</label>
-        <input type="password" id="login-password" placeholder="••••••••" autocomplete="current-password" required>
-      </div>
-      <button type="submit" class="btn-primary">Entrar no dashboard</button>
-    </form>
+    <!-- STEP 2: Código -->
+    <div id="step-codigo" style="display:none">
+      <button id="btn-voltar-email" style="background:none;border:none;color:var(--text-2);font-size:13px;cursor:pointer;display:flex;align-items:center;gap:6px;margin-bottom:24px;padding:0">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+        Voltar
+      </button>
+      <div class="login-title">Cheque seu e-mail</div>
+      <p class="login-sub" id="step-codigo-sub">Enviamos um código de 6 dígitos para <strong id="email-display"></strong></p>
+      <form id="codigo-form">
+        <div class="field">
+          <label>Código de acesso</label>
+          <input type="text" id="login-codigo" placeholder="000000" maxlength="6" pattern="[0-9]{6}" inputmode="numeric" autocomplete="one-time-code" required style="letter-spacing:6px;font-size:22px;text-align:center;font-weight:700">
+        </div>
+        <button type="submit" class="btn-primary" id="btn-verificar">Acessar dashboard</button>
+        <p id="codigo-error" style="color:#ef4444;font-size:13px;margin-top:12px;display:none;text-align:center"></p>
+        <p style="color:var(--text-3);font-size:12px;margin-top:16px;text-align:center">Não recebeu? <button type="button" id="btn-reenviar" style="background:none;border:none;color:var(--green-light);font-size:12px;cursor:pointer;text-decoration:underline">Reenviar código</button></p>
+      </form>
+    </div>
 
     <p class="login-footer">Suporte: suporte@atendente24h.com</p>
   </div>
@@ -1133,12 +1151,87 @@ function clearSession() {
 }
 
 // ─── LOGIN ────────────────────────────────────────────────────────────────────
-document.getElementById("login-form").addEventListener("submit", function(e) {
+const WEBHOOK_BASE = "https://crista-oleographic-frightfully.ngrok-free.dev";
+
+document.getElementById("login-form").addEventListener("submit", async function(e) {
   e.preventDefault();
   const email = document.getElementById("login-email").value.trim();
   if (!email) return;
-  setSession({ email });
-  showDashboard(email);
+
+  const btn = document.getElementById("btn-enviar-codigo");
+  const errEl = document.getElementById("login-error");
+  btn.textContent = "Enviando...";
+  btn.disabled = true;
+  errEl.style.display = "none";
+
+  try {
+    const resp = await fetch(WEBHOOK_BASE + "/webhook/atendente24h-login-request", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email })
+    });
+    const data = await resp.json();
+    if (data.ok) {
+      document.getElementById("email-display").textContent = email;
+      document.getElementById("step-email").style.display = "none";
+      document.getElementById("step-codigo").style.display = "block";
+      document.getElementById("login-codigo").focus();
+    } else {
+      errEl.textContent = data.message || "E-mail não encontrado. Verifique se é o mesmo da compra.";
+      errEl.style.display = "block";
+    }
+  } catch(err) {
+    errEl.textContent = "Erro ao enviar código. Tente novamente.";
+    errEl.style.display = "block";
+  } finally {
+    btn.textContent = "Enviar código de acesso";
+    btn.disabled = false;
+  }
+});
+
+document.getElementById("codigo-form").addEventListener("submit", async function(e) {
+  e.preventDefault();
+  const email = document.getElementById("login-email").value.trim();
+  const codigo = document.getElementById("login-codigo").value.trim();
+  if (!codigo || codigo.length !== 6) return;
+
+  const btn = document.getElementById("btn-verificar");
+  const errEl = document.getElementById("codigo-error");
+  btn.textContent = "Verificando...";
+  btn.disabled = true;
+  errEl.style.display = "none";
+
+  try {
+    const resp = await fetch(WEBHOOK_BASE + "/webhook/atendente24h-login-verify", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, codigo })
+    });
+    const data = await resp.json();
+    if (data.ok && data.cliente) {
+      setSession({ email, cliente: data.cliente });
+      showDashboard(email, data.cliente);
+    } else {
+      errEl.textContent = data.message || "Código inválido ou expirado. Tente novamente.";
+      errEl.style.display = "block";
+    }
+  } catch(err) {
+    errEl.textContent = "Erro ao verificar código. Tente novamente.";
+    errEl.style.display = "block";
+  } finally {
+    btn.textContent = "Acessar dashboard";
+    btn.disabled = false;
+  }
+});
+
+document.getElementById("btn-voltar-email").addEventListener("click", function() {
+  document.getElementById("step-codigo").style.display = "none";
+  document.getElementById("step-email").style.display = "block";
+  document.getElementById("login-codigo").value = "";
+});
+
+document.getElementById("btn-reenviar").addEventListener("click", function() {
+  document.getElementById("login-form").dispatchEvent(new Event("submit", { bubbles: true, cancelable: true }));
 });
 
 // ─── SAIR ─────────────────────────────────────────────────────────────────────
@@ -1149,22 +1242,23 @@ document.getElementById("btn-sair").addEventListener("click", function() {
 });
 
 // ─── RENDER DASHBOARD ─────────────────────────────────────────────────────────
-function showDashboard(email) {
+function showDashboard(email, clienteData) {
+  const c = clienteData || clienteDemo;
   document.getElementById("login-screen").style.display = "none";
   const dash = document.getElementById("dashboard-screen");
   dash.style.display = "block";
 
   // Header
-  document.getElementById("header-email").textContent = email || clienteDemo.email;
+  document.getElementById("header-email").textContent = email || c.email;
 
   // Plano
-  document.getElementById("card-plano-nome").textContent = clienteDemo.plano;
-  document.getElementById("card-plano-valor").textContent = clienteDemo.plano_valor;
-  document.getElementById("card-renovacao").textContent = clienteDemo.proxima_renovacao;
+  document.getElementById("card-plano-nome").textContent = c.plano || clienteDemo.plano;
+  document.getElementById("card-plano-valor").textContent = c.plano_valor || clienteDemo.plano_valor;
+  document.getElementById("card-renovacao").textContent = c.proxima_renovacao || clienteDemo.proxima_renovacao;
 
   // Mensagens
-  const usadas = clienteDemo.mensagens_usadas;
-  const limite = clienteDemo.mensagens_limite;
+  const usadas = c.mensagens_usadas != null ? c.mensagens_usadas : clienteDemo.mensagens_usadas;
+  const limite = c.mensagens_limite != null ? c.mensagens_limite : clienteDemo.mensagens_limite;
   const pct = Math.round((usadas / limite) * 100);
 
   document.getElementById("msg-usadas").textContent = usadas.toLocaleString("pt-BR");
