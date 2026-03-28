@@ -1839,5 +1839,29 @@ window.addEventListener('scroll', () => {
   frame()
 })()
 </script>
+
+<!-- FLOATING SOCIAL PROOF BAR -->
+<style>
+@keyframes sb-pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.4)}}
+@keyframes sb-flip{0%{opacity:1;transform:translateY(0)}40%{opacity:0;transform:translateY(-7px)}60%{opacity:0;transform:translateY(7px)}100%{opacity:1;transform:translateY(0)}}
+</style>
+<div id="social-bar" style="position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:9999;background:rgba(255,255,255,0.15);backdrop-filter:blur(24px) saturate(200%);-webkit-backdrop-filter:blur(24px) saturate(200%);border:1px solid rgba(255,255,255,0.3);border-radius:100px;padding:11px 22px;display:flex;align-items:center;gap:10px;box-shadow:0 8px 32px rgba(0,0,0,0.2),inset 0 1px 0 rgba(255,255,255,0.3);white-space:nowrap;font-family:'Plus Jakarta Sans',system-ui,sans-serif;">
+  <span style="width:8px;height:8px;border-radius:50%;background:#22c55e;flex-shrink:0;box-shadow:0 0 0 2px rgba(34,197,94,0.3);animation:sb-pulse 2s infinite"></span>
+  <span id="sb-num" style="font-size:13px;font-weight:700;color:rgba(255,255,255,0.95);display:inline-block">1.381</span>
+  <span style="font-size:13px;font-weight:500;color:rgba(255,255,255,0.8)">utilizando Atendente24h agora</span>
+</div>
+<script>
+(function(){
+  var el=document.getElementById('sb-num');
+  function rand(){return Math.floor(Math.random()*(1394-1360+1))+1360;}
+  function fmt(n){return n.toLocaleString('pt-BR');}
+  setInterval(function(){
+    el.style.animation='none';
+    void el.offsetWidth;
+    el.style.animation='sb-flip .5s ease';
+    setTimeout(function(){el.textContent=fmt(rand());},220);
+  },5000);
+})();
+</script>
 </body>
 </html>
