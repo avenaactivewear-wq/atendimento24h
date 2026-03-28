@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Admin · Atendimento24h</title>
+<title>Admin · Atendente24h</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
@@ -134,6 +134,29 @@ td{padding:12px 16px;font-size:13px;vertical-align:middle}
 /* EMPTY */
 .empty-row td{text-align:center;padding:48px;color:var(--text3)}
 
+/* MODAL LICENCA */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:1000;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(4px)}
+.modal-box{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:28px;width:100%;max-width:440px}
+.modal-title{font-size:15px;font-weight:700;margin-bottom:4px}
+.modal-sub{font-size:12px;color:var(--text3);margin-bottom:20px}
+.modal-field{margin-bottom:16px}
+.modal-label{font-size:11px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px}
+.modal-value{font-size:13px;color:var(--text);font-weight:500}
+.modal-email{color:var(--blue);font-size:13px}
+.license-key{background:var(--card2);border:1px solid var(--border);border-radius:8px;padding:10px 14px;font-family:monospace;font-size:13px;color:var(--green);letter-spacing:.05em;word-break:break-all;display:flex;align-items:center;justify-content:space-between;gap:8px}
+.copy-btn{background:none;border:1px solid var(--border);border-radius:6px;padding:4px 8px;color:var(--text3);font-size:11px;font-weight:600;cursor:pointer;font-family:inherit;transition:.15s;white-space:nowrap}
+.copy-btn:hover{color:var(--text);border-color:rgba(255,255,255,0.2)}
+.modal-actions{display:flex;gap:8px;margin-top:20px;flex-wrap:wrap}
+.modal-btn{flex:1;display:flex;align-items:center;justify-content:center;gap:7px;padding:10px 14px;border-radius:10px;border:1px solid var(--border);background:var(--card2);color:var(--text);font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;transition:.15s;min-width:130px}
+.modal-btn:hover{background:var(--card);border-color:rgba(255,255,255,0.15)}
+.modal-btn.wpp{border-color:rgba(37,211,102,0.3);color:var(--green)}
+.modal-btn.wpp:hover{background:var(--green-glow)}
+.modal-btn.email{border-color:rgba(59,130,246,0.3);color:var(--blue)}
+.modal-btn.email:hover{background:rgba(59,130,246,0.08)}
+.modal-close{background:none;border:none;color:var(--text3);font-size:20px;cursor:pointer;position:absolute;top:20px;right:20px;line-height:1;padding:4px}
+.modal-wrap{position:relative}
+.td-email{font-size:11px;color:var(--text3);margin-top:1px}
+
 /* MOBILE */
 @media(max-width:768px){
   .layout{grid-template-columns:1fr}
@@ -152,7 +175,7 @@ td{padding:12px 16px;font-size:13px;vertical-align:middle}
 <!-- LOGIN OVERLAY -->
 <div class="login-overlay" id="loginOverlay">
   <div class="login-box">
-    <div class="login-logo">Atendimento<span>24h</span></div>
+    <div class="login-logo">Atendente<span>24h</span></div>
     <div class="login-sub">Painel Administrativo</div>
     <div class="login-field">
       <label>Usuario</label>
@@ -167,12 +190,50 @@ td{padding:12px 16px;font-size:13px;vertical-align:middle}
   </div>
 </div>
 
+<!-- MODAL LICENCA -->
+<div class="modal-overlay" id="modalLicenca" style="display:none" onclick="if(event.target===this)fecharModal()">
+  <div class="modal-box modal-wrap">
+    <button class="modal-close" onclick="fecharModal()">&#x2715;</button>
+    <div class="modal-title" id="modal-nome"></div>
+    <div class="modal-sub" id="modal-empresa"></div>
+    <div class="modal-field">
+      <div class="modal-label">Email</div>
+      <div class="modal-email" id="modal-email"></div>
+    </div>
+    <div class="modal-field">
+      <div class="modal-label">WhatsApp</div>
+      <div class="modal-value" id="modal-wpp"></div>
+    </div>
+    <div class="modal-field">
+      <div class="modal-label">Plano</div>
+      <div class="modal-value" id="modal-plano"></div>
+    </div>
+    <div class="modal-field">
+      <div class="modal-label">Chave de Licenca</div>
+      <div class="license-key">
+        <span id="modal-licenca-key"></span>
+        <button class="copy-btn" onclick="copiarLicenca()">Copiar</button>
+      </div>
+    </div>
+    <div class="modal-actions">
+      <button class="modal-btn email" onclick="reenviarEmail()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        Reenviar por Email
+      </button>
+      <button class="modal-btn wpp" onclick="reenviarWpp()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Reenviar por WhatsApp
+      </button>
+    </div>
+  </div>
+</div>
+
 <div class="layout">
 
   <!-- SIDEBAR -->
   <aside class="sidebar">
     <div class="sidebar-logo">
-      <div class="brand">Atendimento<span>24h</span></div>
+      <div class="brand">Atendente<span>24h</span></div>
       <div class="tagline">Painel Administrativo</div>
     </div>
 
@@ -280,16 +341,16 @@ td{padding:12px 16px;font-size:13px;vertical-align:middle}
 <script>
 // DADOS MOCK - substituir por chamada API quando backend estiver pronto
 const assinantes = [
-  { id:1, nome:'Carlos Mendes', empresa:'Barbearia do Carlos', whatsapp:'(11) 99123-4567', plano:'Essencial', status:'ativo', desde:'2026-02-10', mrr:197 },
-  { id:2, nome:'Fernanda Lima', empresa:'Clinica Estetica FL', whatsapp:'(21) 98765-3210', plano:'Pro', status:'ativo', desde:'2026-01-22', mrr:397 },
-  { id:3, nome:'Ricardo Souza', empresa:'RS Eletrica', whatsapp:'(31) 97654-8901', plano:'Essencial', status:'trial', desde:'2026-03-20', mrr:0 },
-  { id:4, nome:'Ana Paula Costa', empresa:'Salao Ana Paula', whatsapp:'(51) 96543-7890', plano:'Pro', status:'ativo', desde:'2026-02-05', mrr:397 },
-  { id:5, nome:'Marcos Oliveira', empresa:'Auto Pecas MO', whatsapp:'(41) 95432-6789', plano:'Essencial', status:'ativo', desde:'2026-01-15', mrr:197 },
-  { id:6, nome:'Julia Ferreira', empresa:'Studio Julia', whatsapp:'(85) 94321-5678', plano:'Pro', status:'trial', desde:'2026-03-22', mrr:0 },
-  { id:7, nome:'Pedro Alves', empresa:'Construa Mais', whatsapp:'(62) 93210-4567', plano:'Essencial', status:'cancelado', desde:'2026-01-08', mrr:0 },
-  { id:8, nome:'Camila Santos', empresa:'Doces da Camila', whatsapp:'(71) 92109-3456', plano:'Essencial', status:'ativo', desde:'2026-03-01', mrr:197 },
-  { id:9, nome:'Bruno Rodrigues', empresa:'BR Consultoria', whatsapp:'(11) 91098-2345', plano:'Pro', status:'ativo', desde:'2026-02-18', mrr:397 },
-  { id:10, nome:'Leticia Martins', empresa:'Farmacia Saudavel', whatsapp:'(47) 90987-1234', plano:'Essencial', status:'ativo', desde:'2026-03-10', mrr:197 },
+  { id:1, nome:'Carlos Mendes', empresa:'Barbearia do Carlos', email:'carlos@barbeariadorcarlos.com.br', whatsapp:'(11) 99123-4567', plano:'Essencial', status:'ativo', desde:'2026-02-10', mrr:197, licenca:'A24H-ESS-1A2B-3C4D' },
+  { id:2, nome:'Fernanda Lima', empresa:'Clinica Estetica FL', email:'fernanda@clinicafl.com.br', whatsapp:'(21) 98765-3210', plano:'Pro', status:'ativo', desde:'2026-01-22', mrr:397, licenca:'A24H-PRO-5E6F-7G8H' },
+  { id:3, nome:'Ricardo Souza', empresa:'RS Eletrica', email:'ricardo@rseletrica.com.br', whatsapp:'(31) 97654-8901', plano:'Essencial', status:'trial', desde:'2026-03-20', mrr:0, licenca:'A24H-ESS-9I0J-1K2L' },
+  { id:4, nome:'Ana Paula Costa', empresa:'Salao Ana Paula', email:'anapaula@salaoanapaula.com.br', whatsapp:'(51) 96543-7890', plano:'Pro', status:'ativo', desde:'2026-02-05', mrr:397, licenca:'A24H-PRO-3M4N-5O6P' },
+  { id:5, nome:'Marcos Oliveira', empresa:'Auto Pecas MO', email:'marcos@autopecasmo.com.br', whatsapp:'(41) 95432-6789', plano:'Essencial', status:'ativo', desde:'2026-01-15', mrr:197, licenca:'A24H-ESS-7Q8R-9S0T' },
+  { id:6, nome:'Julia Ferreira', empresa:'Studio Julia', email:'julia@studiojulia.com.br', whatsapp:'(85) 94321-5678', plano:'Pro', status:'trial', desde:'2026-03-22', mrr:0, licenca:'A24H-PRO-1U2V-3W4X' },
+  { id:7, nome:'Pedro Alves', empresa:'Construa Mais', email:'pedro@construamais.com.br', whatsapp:'(62) 93210-4567', plano:'Essencial', status:'cancelado', desde:'2026-01-08', mrr:0, licenca:'A24H-ESS-5Y6Z-7A8B' },
+  { id:8, nome:'Camila Santos', empresa:'Doces da Camila', email:'camila@docesdacamila.com.br', whatsapp:'(71) 92109-3456', plano:'Essencial', status:'ativo', desde:'2026-03-01', mrr:197, licenca:'A24H-ESS-9C0D-1E2F' },
+  { id:9, nome:'Bruno Rodrigues', empresa:'BR Consultoria', email:'bruno@brconsultoria.com.br', whatsapp:'(11) 91098-2345', plano:'Pro', status:'ativo', desde:'2026-02-18', mrr:397, licenca:'A24H-PRO-3G4H-5I6J' },
+  { id:10, nome:'Leticia Martins', empresa:'Farmacia Saudavel', email:'leticia@farmaciasaudavel.com.br', whatsapp:'(47) 90987-1234', plano:'Essencial', status:'ativo', desde:'2026-03-10', mrr:197, licenca:'A24H-ESS-7K8L-9M0N' },
 ];
 
 let filtroAtual = 'todos';
@@ -308,7 +369,7 @@ function filtrar() {
   const q = document.getElementById('searchInput').value.toLowerCase();
   return assinantes.filter(a => {
     const matchStatus = filtroAtual === 'todos' || a.status === filtroAtual;
-    const matchSearch = !q || a.nome.toLowerCase().includes(q) || a.whatsapp.includes(q) || a.empresa.toLowerCase().includes(q);
+    const matchSearch = !q || a.nome.toLowerCase().includes(q) || a.whatsapp.includes(q) || a.empresa.toLowerCase().includes(q) || a.email.toLowerCase().includes(q);
     return matchStatus && matchSearch;
   });
 }
@@ -328,13 +389,14 @@ function renderTable() {
         <td>
           <div class="td-name">${a.nome}</div>
           <div class="td-sub">${a.empresa}</div>
+          <div class="td-email">${a.email}</div>
         </td>
         <td><span class="status-badge status-${a.status}">${a.status === 'ativo' ? 'Ativo' : a.status === 'trial' ? 'Trial' : 'Cancelado'}</span></td>
         <td><span class="plan-badge ${a.plano === 'Pro' ? 'plan-pro' : ''}">${a.plano}</span></td>
         <td><a class="whatsapp-link" href="https://wa.me/55${a.whatsapp.replace(/\D/g,'')}" target="_blank">${a.whatsapp}</a></td>
         <td style="color:var(--text2);font-size:12px">${formatDate(a.desde)}</td>
-        <td style="display:flex;gap:6px">
-          <button class="action-btn" onclick="verDetalhes(${a.id})">Ver</button>
+        <td style="display:flex;gap:6px;flex-wrap:wrap">
+          <button class="action-btn" onclick="abrirLicenca(${a.id})">Licenca</button>
           <button class="action-btn danger" onclick="cancelar(${a.id})">Cancelar</button>
         </td>
       </tr>
@@ -375,9 +437,48 @@ function formatDate(d) {
   return `${day}/${m}/${y}`;
 }
 
-function verDetalhes(id) {
+let modalClienteAtual = null;
+
+function abrirLicenca(id) {
   const a = assinantes.find(x => x.id === id);
-  alert(`${a.nome}\n${a.empresa}\n${a.whatsapp}\nPlano: ${a.plano} · ${a.status}\nAssinante desde: ${formatDate(a.desde)}\nMRR: R$${a.mrr}`);
+  modalClienteAtual = a;
+  document.getElementById('modal-nome').textContent = a.nome;
+  document.getElementById('modal-empresa').textContent = a.empresa + ' · ' + (a.status === 'ativo' ? 'Ativo' : a.status === 'trial' ? 'Trial' : 'Cancelado') + ' · ' + a.plano;
+  document.getElementById('modal-email').textContent = a.email;
+  document.getElementById('modal-wpp').textContent = a.whatsapp;
+  document.getElementById('modal-plano').textContent = a.plano + ' — desde ' + formatDate(a.desde);
+  document.getElementById('modal-licenca-key').textContent = a.licenca;
+  document.getElementById('modalLicenca').style.display = 'flex';
+}
+
+function fecharModal() {
+  document.getElementById('modalLicenca').style.display = 'none';
+  modalClienteAtual = null;
+}
+
+function copiarLicenca() {
+  if (!modalClienteAtual) return;
+  navigator.clipboard.writeText(modalClienteAtual.licenca).then(() => {
+    const btn = document.querySelector('.copy-btn');
+    btn.textContent = 'Copiado!';
+    setTimeout(() => btn.textContent = 'Copiar', 2000);
+  });
+}
+
+function reenviarEmail() {
+  if (!modalClienteAtual) return;
+  const a = modalClienteAtual;
+  const subject = encodeURIComponent('Sua licenca Atendente24h');
+  const body = encodeURIComponent(`Ola ${a.nome},\n\nSegue sua chave de licenca Atendente24h:\n\n${a.licenca}\n\nPlano: ${a.plano}\n\nPara ativar acesse: https://atendente24h.com/onboarding/\n\nQualquer duvida estamos a disposicao.\n\nEquipe Atendente24h`);
+  window.open(`mailto:${a.email}?subject=${subject}&body=${body}`, '_blank');
+}
+
+function reenviarWpp() {
+  if (!modalClienteAtual) return;
+  const a = modalClienteAtual;
+  const num = a.whatsapp.replace(/\D/g, '');
+  const msg = encodeURIComponent(`Ola ${a.nome}! Segue sua chave de licenca Atendente24h:\n\n*${a.licenca}*\n\nPlano: ${a.plano}\n\nPara ativar acesse: https://atendente24h.com/onboarding/`);
+  window.open(`https://wa.me/55${num}?text=${msg}`, '_blank');
 }
 
 function cancelar(id) {
@@ -389,8 +490,8 @@ function cancelar(id) {
 }
 
 function exportCSV() {
-  const rows = [['Nome','Empresa','WhatsApp','Plano','Status','Desde']];
-  assinantes.forEach(a => rows.push([a.nome, a.empresa, a.whatsapp, a.plano, a.status, a.desde]));
+  const rows = [['Nome','Empresa','Email','WhatsApp','Plano','Status','Desde','Licenca']];
+  assinantes.forEach(a => rows.push([a.nome, a.empresa, a.email, a.whatsapp, a.plano, a.status, a.desde, a.licenca]));
   const csv = rows.map(r => r.join(',')).join('\n');
   const blob = new Blob([csv], {type:'text/csv'});
   const url = URL.createObjectURL(blob);
