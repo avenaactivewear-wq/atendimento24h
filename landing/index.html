@@ -324,17 +324,31 @@ section{padding:120px 24px;position:relative;z-index:1}
   border:1px solid var(--border);
   border-radius:var(--radius-lg);
   padding:32px 28px;
-  transition:all .25s;
+  transition:all .3s;
+  position:relative;overflow:hidden;
 }
-.feat:hover{border-color:var(--border-green);transform:translateY(-4px);box-shadow:0 16px 40px rgba(0,0,0,0.3)}
+.feat::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(circle at 30% 30%, rgba(37,211,102,0.05) 0%, transparent 60%);
+  opacity:0;transition:opacity .3s;
+}
+.feat:hover::before{opacity:1}
+.feat:hover{border-color:var(--border-green);transform:translateY(-5px);box-shadow:0 20px 48px rgba(0,0,0,0.35),0 0 0 1px rgba(37,211,102,0.1)}
 .feat-icon{
   width:48px;height:48px;border-radius:12px;
-  background:var(--green-glow);
+  background:rgba(37,211,102,0.08);
+  border:1px solid rgba(37,211,102,0.15);
   display:flex;align-items:center;justify-content:center;
-  font-size:22px;margin-bottom:20px;
+  margin-bottom:20px;
+  transition:all .3s;
 }
+.feat:hover .feat-icon{background:rgba(37,211,102,0.15);box-shadow:0 0 20px rgba(37,211,102,0.2)}
+.feat-icon svg{width:22px;height:22px;stroke:var(--green);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .feat-title{font-size:17px;font-weight:700;margin-bottom:8px;letter-spacing:-0.3px}
 .feat-desc{font-size:14px;color:var(--text2);line-height:1.6}
+/* counter animation */
+.feat-stat{font-size:36px;font-weight:800;letter-spacing:-1.5px;color:var(--green);line-height:1;margin-bottom:4px}
+.feat-stat-label{font-size:12px;color:var(--text3);font-weight:500;margin-bottom:16px}
 
 /* ─── CONVERSATION DEMO ─── */
 .demo-section{background:var(--surface)}
@@ -597,10 +611,11 @@ footer{
 /* ─── ENTERPRISE ─── */
 .enterprise-block{
   margin-top:24px;
-  border:1px solid rgba(99,102,241,0.2);
+  border:1px solid rgba(139,92,246,0.35);
   border-radius:var(--radius-xl);
   padding:40px 48px;
-  background:linear-gradient(135deg,rgba(99,102,241,0.13) 0%,rgba(139,92,246,0.08) 60%,rgba(17,17,34,0.9) 100%);
+  background:linear-gradient(135deg,rgba(99,102,241,0.22) 0%,rgba(139,92,246,0.16) 40%,rgba(88,28,135,0.12) 100%);
+  box-shadow:0 0 60px rgba(99,102,241,0.12), inset 0 1px 0 rgba(255,255,255,0.08);
   display:grid;grid-template-columns:1fr auto;
   gap:40px;align-items:center;
   position:relative;overflow:hidden;
@@ -848,34 +863,58 @@ footer{
     </div>
     <div class="features-grid">
       <div class="feat reveal reveal-delay-1">
-        <div class="feat-icon" style="font-size:15px;font-weight:800;letter-spacing:-0.5px">&lt;2s</div>
-        <div class="feat-title">Responde em menos de 2 segundos</div>
+        <div class="feat-icon">
+          <svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+        </div>
+        <div class="feat-stat" data-target="2" data-suffix="s">&lt;2s</div>
+        <div class="feat-stat-label">tempo de resposta</div>
+        <div class="feat-title">Responde na hora</div>
         <div class="feat-desc">Nenhum cliente espera. A IA responde instantaneamente, a qualquer hora, em qualquer dia.</div>
       </div>
       <div class="feat reveal reveal-delay-2">
-        <div class="feat-icon" style="font-size:15px;font-weight:800">IQ</div>
-        <div class="feat-title">Conhece seus produtos de cor</div>
-        <div class="feat-desc">Suba seu catálogo e o atendente domina preços, variações, disponibilidade e diferenciais.</div>
+        <div class="feat-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        </div>
+        <div class="feat-stat" data-target="100" data-suffix="%">100%</div>
+        <div class="feat-stat-label">das perguntas respondidas</div>
+        <div class="feat-title">Sem roteiro, sem limite</div>
+        <div class="feat-desc">Responde qualquer pergunta sobre seu negocio. Nao trava, nao diz "nao entendi".</div>
       </div>
       <div class="feat reveal reveal-delay-3">
-        <div class="feat-icon" style="font-size:15px;font-weight:800">PKG</div>
-        <div class="feat-title">Consulta status de pedidos</div>
-        <div class="feat-desc">Integrado com seu sistema, informa rastreamento e prazo sem precisar de atendente humano.</div>
+        <div class="feat-icon">
+          <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+        </div>
+        <div class="feat-stat" data-target="5" data-suffix="min">5min</div>
+        <div class="feat-stat-label">para estar no ar</div>
+        <div class="feat-title">Ativo em minutos</div>
+        <div class="feat-desc">Conecte seu WhatsApp, suba seu catalogo e pronto. Zero codigo, zero tecnico, zero dor de cabeca.</div>
       </div>
       <div class="feat reveal reveal-delay-4">
-        <div class="feat-icon" style="font-size:15px;font-weight:800">VOZ</div>
-        <div class="feat-title">Tom de voz da sua marca</div>
-        <div class="feat-desc">Formal, descontraído, empático. Configure a personalidade e o nome do atendente livremente.</div>
+        <div class="feat-icon">
+          <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <div class="feat-stat" data-target="1000" data-suffix="+">&infin;</div>
+        <div class="feat-stat-label">clientes simultaneos</div>
+        <div class="feat-title">Escala sem limite</div>
+        <div class="feat-desc">100 ou 10.000 mensagens ao mesmo tempo. O atendente responde todas sem contratar ninguem.</div>
       </div>
       <div class="feat reveal reveal-delay-5">
-        <div class="feat-icon" style="font-size:15px;font-weight:800">INF</div>
-        <div class="feat-title">Escala sem custo fixo</div>
-        <div class="feat-desc">100 ou 10.000 clientes simultâneos, o atendente responde todos. Sem contratar, sem treinar.</div>
+        <div class="feat-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        </div>
+        <div class="feat-stat" data-target="24" data-suffix="/7">24/7</div>
+        <div class="feat-stat-label">sempre online</div>
+        <div class="feat-title">Nunca dorme, nunca falta</div>
+        <div class="feat-desc">Feriado, madrugada, fim de semana. Seu atendente esta sempre la para converter clientes.</div>
       </div>
       <div class="feat reveal reveal-delay-1">
-        <div class="feat-icon" style="font-size:15px;font-weight:800">SSL</div>
-        <div class="feat-title">Dados seguros e privados</div>
-        <div class="feat-desc">Suas informações e as dos seus clientes ficam protegidas. Nunca compartilhamos com terceiros.</div>
+        <div class="feat-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div class="feat-stat" data-target="7" data-suffix=" dias">7 dias</div>
+        <div class="feat-stat-label">garantia de reembolso</div>
+        <div class="feat-title">Sem risco nenhum</div>
+        <div class="feat-desc">Nao gostou nos primeiros 7 dias, devolvemos tudo. Sem perguntas, sem burocracia.</div>
       </div>
     </div>
   </div>
@@ -1467,7 +1506,7 @@ window.addEventListener('scroll', () => {
   function makeNode(){
     const theta = Math.random() * Math.PI * 2
     const phi   = Math.acos(2 * Math.random() - 1)
-    const rad   = 160 + Math.random() * 200
+    const rad   = 220 + Math.random() * 280
     const ox = rad * Math.sin(phi) * Math.cos(theta)
     const oy = rad * Math.sin(phi) * Math.sin(theta)
     const oz = rad * Math.cos(phi)
@@ -1475,10 +1514,10 @@ window.addEventListener('scroll', () => {
       ox, oy, oz,
       x:ox, y:oy, z:oz,
       px:0, py:0, scale:1,
-      size: Math.random() < 0.1 ? 3 + Math.random() * 3 : 1 + Math.random() * 1.8,
-      nucleus: Math.random() < 0.1,
+      size: Math.random() < 0.12 ? 4 + Math.random() * 4 : 1.5 + Math.random() * 2.5,
+      nucleus: Math.random() < 0.12,
       pulse: Math.random() * Math.PI * 2,
-      ps: 0.018 + Math.random() * 0.02
+      ps: 0.015 + Math.random() * 0.02
     }
   }
 
@@ -1608,7 +1647,7 @@ window.addEventListener('scroll', () => {
   function init(){
     resize()
     nebulae = Array.from({length: 5}, makeNebula)
-    nodes   = Array.from({length: 65}, makeNode)
+    nodes   = Array.from({length: 85}, makeNode)
   }
 
   window.addEventListener('resize', resize)
