@@ -945,7 +945,7 @@ footer{
           <div class="hero-stat-l">Sempre online</div>
         </div>
         <div class="hero-stat">
-          <div class="hero-stat-n">&lt;3s</div>
+          <div class="hero-stat-n">&lt;2s</div>
           <div class="hero-stat-l">Para responder</div>
         </div>
         <div class="hero-stat">
@@ -1020,7 +1020,7 @@ footer{
 <div class="proof-bar">
   <div class="proof-track">
     <span class="proof-item">Lojas e e-commerces</span>
-    <span class="proof-item">Clinicas e consultórios</span>
+    <span class="proof-item">Clínicas e consultórios</span>
     <span class="proof-item">Salões e estéticas</span>
     <span class="proof-item">Restaurantes e deliveries</span>
     <span class="proof-item">Prestadores de serviço</span>
@@ -1030,7 +1030,7 @@ footer{
     <span class="proof-item">Pet shops</span>
     <span class="proof-item">Academias</span>
     <span class="proof-item">Lojas e e-commerces</span>
-    <span class="proof-item">Clinicas e consultórios</span>
+    <span class="proof-item">Clínicas e consultórios</span>
     <span class="proof-item">Salões e estéticas</span>
     <span class="proof-item">Restaurantes e deliveries</span>
     <span class="proof-item">Prestadores de serviço</span>
@@ -1120,7 +1120,7 @@ footer{
     <div class="demo-inner">
       <div class="demo-text reveal">
         <div class="sec-eyebrow">Demo ao vivo</div>
-        <h2 class="sec-title" style="font-size:clamp(32px,4vw,46px)">Qualquer pergunta.<br>Qualquer situacao.</h2>
+        <h2 class="sec-title" style="font-size:clamp(32px,4vw,46px)">Qualquer pergunta.<br>Qualquer situação.</h2>
         <p style="color:var(--text2);font-size:16px;line-height:1.65;margin-top:16px">O Atendente24h não segue um roteiro fixo. Clique nos cenários abaixo, incluindo perguntas fora do padrão.</p>
         <div class="demo-examples">
           <button class="demo-btn active" onclick="showDemo(0)" data-demo="0">
@@ -1459,8 +1459,8 @@ footer{
 <section class="compare-section">
   <div class="wrap">
     <div class="reveal" style="text-align:center">
-      <div class="sec-eyebrow">Por que nao as outras opcoes</div>
-      <h2 class="sec-title">Funcionario dorme.<br>Bot trava. A gente resolve.</h2>
+      <div class="sec-eyebrow">Por que não as outras opções</div>
+      <h2 class="sec-title">Funcionário dorme.<br>Bot trava. A gente resolve.</h2>
       <p class="sec-sub" style="margin:16px auto 0">Cada alternativa resolve uma parte do problema. <strong>Apenas o Atendente24h resolve tudo.</strong></p>
     </div>
     <div class="compare-cards reveal reveal-delay-1">
@@ -1556,7 +1556,7 @@ footer{
           <div class="faq-icon">+</div>
         </div>
         <div class="faq-a">
-          <div class="faq-a-inner">Você recebe um alerta quando estiver em 80% do limite. Ao atingir o limite, o atendente para de responder até o próximo ciclo mensal ou até você fazer upgrade de plano. Nunca cobraremos automaticamente por mensagens extras sem sua autorização. Nunca cobraremos automaticamente por mensagens extras sem sua autorização.</div>
+          <div class="faq-a-inner">Você recebe um alerta quando estiver em 80% do limite. Ao atingir o limite, o atendente para de responder até o próximo ciclo mensal ou até você fazer upgrade de plano. Nunca cobraremos automaticamente por mensagens extras sem sua autorização.</div>
         </div>
       </div>
       <div class="faq-item">
@@ -1618,7 +1618,7 @@ function submitEnterprise(e) {
   const nome = document.getElementById('ent-nome').value.trim()
   const wpp  = document.getElementById('ent-wpp').value.trim().replace(/\D/g,'')
   const msg = encodeURIComponent(`Oi! Sou ${nome} e tenho interesse no plano Enterprise do Atendente24h. Meu WhatsApp é ${wpp}. Quero receber uma proposta.`)
-  window.open(`https://wa.me/5511999999999?text=${msg}`, '_blank')
+  window.location.href = `mailto:suporte@atendente24h.com?subject=Interesse%20no%20plano%20Enterprise&body=`
 }
 
 // ── Scroll reveal
