@@ -681,7 +681,7 @@ footer{
 <body>
 
 <!-- PARTICLE CANVAS -->
-<canvas id="particle-canvas" style="position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:0.55"></canvas>
+<canvas id="particle-canvas" style="position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:0.75"></canvas>
 
 <!-- NAV -->
 <nav>
@@ -1437,102 +1437,185 @@ window.addEventListener('scroll', () => {
 ;(function(){
   const canvas = document.getElementById('particle-canvas')
   const ctx = canvas.getContext('2d')
-  let W, H, particles, mouse = {x: -9999, y: -9999}
-
-  const GREEN = '37,211,102'
-  const COUNT = 80
+  let W, H
+  const G = {r:37, g:211, b:102}
+  const rgb = `${G.r},${G.g},${G.b}`
+  let rotX = 0, rotY = 0
+  let mouse = {x:0, y:0}
+  let nodes = [], nebulae = []
 
   function resize(){
     W = canvas.width = window.innerWidth
     H = canvas.height = window.innerHeight
   }
 
-  function Particle(){
-    this.reset = function(){
-      this.x = Math.random() * W
-      this.y = Math.random() * H
-      this.z = Math.random() * 0.8 + 0.2      // depth 0.2–1.0
-      this.vx = (Math.random() - 0.5) * 0.4 * this.z
-      this.vy = (Math.random() - 0.5) * 0.4 * this.z
-      this.r = (Math.random() * 1.5 + 0.8) * this.z
-      this.alpha = (Math.random() * 0.4 + 0.2) * this.z
+  // Nebula blobs: large atmospheric glows that drift slowly
+  function makeNebula(){
+    return {
+      x: (Math.random() - 0.5) * 1.4,
+      y: (Math.random() - 0.5) * 1.4,
+      r: 0.2 + Math.random() * 0.25,
+      alpha: 0.04 + Math.random() * 0.05,
+      vx: (Math.random() - 0.5) * 0.00015,
+      vy: (Math.random() - 0.5) * 0.00015,
+      pulse: Math.random() * Math.PI * 2,
+      ps: 0.003 + Math.random() * 0.003
     }
-    this.reset()
-    this.x = Math.random() * W   // spread on init
-    this.y = Math.random() * H
   }
 
-  Particle.prototype.update = function(){
-    this.x += this.vx
-    this.y += this.vy
-    // mouse repulsion
-    const dx = this.x - mouse.x, dy = this.y - mouse.y
-    const dist = Math.sqrt(dx*dx + dy*dy)
-    if(dist < 100){
-      this.x += dx / dist * 0.6
-      this.y += dy / dist * 0.6
+  // 3-D molecular node
+  function makeNode(){
+    const theta = Math.random() * Math.PI * 2
+    const phi   = Math.acos(2 * Math.random() - 1)
+    const rad   = 160 + Math.random() * 200
+    const ox = rad * Math.sin(phi) * Math.cos(theta)
+    const oy = rad * Math.sin(phi) * Math.sin(theta)
+    const oz = rad * Math.cos(phi)
+    return {
+      ox, oy, oz,
+      x:ox, y:oy, z:oz,
+      px:0, py:0, scale:1,
+      size: Math.random() < 0.1 ? 3 + Math.random() * 3 : 1 + Math.random() * 1.8,
+      nucleus: Math.random() < 0.1,
+      pulse: Math.random() * Math.PI * 2,
+      ps: 0.018 + Math.random() * 0.02
     }
-    if(this.x < 0) this.x = W
-    if(this.x > W) this.x = 0
-    if(this.y < 0) this.y = H
-    if(this.y > H) this.y = 0
   }
 
-  function init(){
-    resize()
-    particles = Array.from({length: COUNT}, () => new Particle())
+  function rotateNode(n, rx, ry){
+    // Y axis
+    let x1 = n.ox * Math.cos(ry) - n.oz * Math.sin(ry)
+    let z1 = n.ox * Math.sin(ry) + n.oz * Math.cos(ry)
+    // X axis
+    let y2 = n.oy * Math.cos(rx) - z1 * Math.sin(rx)
+    let z2 = n.oy * Math.sin(rx) + z1 * Math.cos(rx)
+    n.x = x1; n.y = y2; n.z = z2
   }
 
-  function draw(){
-    ctx.clearRect(0, 0, W, H)
+  function project(n){
+    const fov = 420
+    const s = fov / (fov + n.z + 250)
+    n.px = W/2 + n.x * s
+    n.py = H/2 + n.y * s
+    n.scale = s
+  }
 
-    // connections
-    for(let i = 0; i < particles.length; i++){
-      for(let j = i+1; j < particles.length; j++){
-        const a = particles[i], b = particles[j]
-        const dx = a.x - b.x, dy = a.y - b.y
-        const dist = Math.sqrt(dx*dx + dy*dy)
-        const maxDist = 140
-        if(dist < maxDist){
-          const opacity = (1 - dist/maxDist) * 0.18 * Math.min(a.z, b.z)
-          ctx.beginPath()
-          ctx.strokeStyle = `rgba(${GREEN},${opacity})`
-          ctx.lineWidth = 0.8
-          ctx.moveTo(a.x, a.y)
-          ctx.lineTo(b.x, b.y)
-          ctx.stroke()
-        }
-      }
-    }
-
-    // dots
-    particles.forEach(p => {
+  function drawNebulae(){
+    nebulae.forEach(nb => {
+      nb.x += nb.vx; nb.y += nb.vy; nb.pulse += nb.ps
+      if(nb.x > 1.2 || nb.x < -1.2) nb.vx *= -1
+      if(nb.y > 1.2 || nb.y < -1.2) nb.vy *= -1
+      const cx = W/2 + nb.x * W/2
+      const cy = H/2 + nb.y * H/2
+      const rr = nb.r * Math.min(W, H)
+      const a = nb.alpha * (0.8 + Math.sin(nb.pulse) * 0.2)
+      const grd = ctx.createRadialGradient(cx, cy, 0, cx, cy, rr)
+      grd.addColorStop(0,   `rgba(${rgb},${a})`)
+      grd.addColorStop(0.4, `rgba(${rgb},${a * 0.4})`)
+      grd.addColorStop(1,   `rgba(${rgb},0)`)
       ctx.beginPath()
-      ctx.arc(p.x, p.y, p.r, 0, Math.PI*2)
-      ctx.fillStyle = `rgba(${GREEN},${p.alpha})`
-      ctx.fill()
-      // glow
-      ctx.beginPath()
-      ctx.arc(p.x, p.y, p.r * 2.5, 0, Math.PI*2)
-      const grad = ctx.createRadialGradient(p.x,p.y,0, p.x,p.y, p.r*2.5)
-      grad.addColorStop(0, `rgba(${GREEN},${p.alpha * 0.3})`)
-      grad.addColorStop(1, `rgba(${GREEN},0)`)
-      ctx.fillStyle = grad
+      ctx.fillStyle = grd
+      ctx.arc(cx, cy, rr, 0, Math.PI*2)
       ctx.fill()
     })
   }
 
-  function loop(){
-    particles.forEach(p => p.update())
-    draw()
-    requestAnimationFrame(loop)
+  function drawConnections(){
+    const DIST = 190
+    for(let i = 0; i < nodes.length; i++){
+      for(let j = i+1; j < nodes.length; j++){
+        const a = nodes[i], b = nodes[j]
+        const dx = a.x-b.x, dy = a.y-b.y, dz = a.z-b.z
+        const d3 = Math.sqrt(dx*dx + dy*dy + dz*dz)
+        if(d3 > DIST) continue
+        const t = 1 - d3/DIST
+        const op = t * t * 0.35 * Math.min(a.scale, b.scale) * 2.2
+        const grd = ctx.createLinearGradient(a.px, a.py, b.px, b.py)
+        grd.addColorStop(0,   `rgba(${rgb},${op})`)
+        grd.addColorStop(0.5, `rgba(${rgb},${Math.min(op*1.8, 0.5)})`)
+        grd.addColorStop(1,   `rgba(${rgb},${op})`)
+        ctx.beginPath()
+        ctx.strokeStyle = grd
+        ctx.lineWidth = t * Math.min(a.scale, b.scale) * 1.2
+        ctx.moveTo(a.px, a.py)
+        ctx.lineTo(b.px, b.py)
+        ctx.stroke()
+      }
+    }
+  }
+
+  function drawNodes(){
+    nodes.forEach(n => {
+      n.pulse += n.ps
+      const p = Math.sin(n.pulse) * 0.25 + 0.75
+      const r = n.size * n.scale * 3.5 * p
+      const a = Math.min(n.scale * 1.1, 0.95)
+
+      if(n.nucleus){
+        // outer atmospheric glow
+        const grd = ctx.createRadialGradient(n.px, n.py, 0, n.px, n.py, r*6)
+        grd.addColorStop(0,   `rgba(${rgb},${a * 0.5})`)
+        grd.addColorStop(0.25,`rgba(${rgb},${a * 0.15})`)
+        grd.addColorStop(1,   `rgba(${rgb},0)`)
+        ctx.beginPath()
+        ctx.fillStyle = grd
+        ctx.arc(n.px, n.py, r*6, 0, Math.PI*2)
+        ctx.fill()
+        // ring
+        ctx.beginPath()
+        ctx.strokeStyle = `rgba(${rgb},${a * 0.25})`
+        ctx.lineWidth = 0.8
+        ctx.arc(n.px, n.py, r*3.5, 0, Math.PI*2)
+        ctx.stroke()
+      }
+
+      // inner glow halo
+      const halo = ctx.createRadialGradient(n.px, n.py, 0, n.px, n.py, r*2.5)
+      halo.addColorStop(0, `rgba(${rgb},${a * 0.7})`)
+      halo.addColorStop(1, `rgba(${rgb},0)`)
+      ctx.beginPath()
+      ctx.fillStyle = halo
+      ctx.arc(n.px, n.py, r*2.5, 0, Math.PI*2)
+      ctx.fill()
+
+      // core
+      ctx.beginPath()
+      ctx.shadowBlur = r * 4
+      ctx.shadowColor = `rgba(${rgb},0.9)`
+      ctx.fillStyle = `rgba(${rgb},${a})`
+      ctx.arc(n.px, n.py, Math.max(r * 0.5, 0.8), 0, Math.PI*2)
+      ctx.fill()
+      ctx.shadowBlur = 0
+    })
+  }
+
+  function frame(){
+    ctx.clearRect(0, 0, W, H)
+
+    rotY += 0.00035 + (mouse.x/W - 0.5) * 0.00025
+    rotX += 0.00014 + (mouse.y/H - 0.5) * 0.0001
+
+    nodes.forEach(n => { rotateNode(n, rotX, rotY); project(n) })
+    nodes.sort((a,b) => a.z - b.z)
+
+    drawNebulae()
+    drawConnections()
+    drawNodes()
+
+    requestAnimationFrame(frame)
+  }
+
+  function init(){
+    resize()
+    nebulae = Array.from({length: 5}, makeNebula)
+    nodes   = Array.from({length: 65}, makeNode)
   }
 
   window.addEventListener('resize', resize)
   window.addEventListener('mousemove', e => { mouse.x = e.clientX; mouse.y = e.clientY })
 
   init()
-  loop()
+  frame()
 })()
 </script>
 </body>
