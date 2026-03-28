@@ -618,7 +618,7 @@ async function checkToken() {
   try {
     const resp = await fetch(WEBHOOK_TOKEN, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'application/json', 'ngrok-skip-browser-warning': 'true' },
       body: JSON.stringify({ token })
     })
     const data = await resp.json()
