@@ -660,7 +660,8 @@ tr.row-cancelado:hover{background:rgba(220,38,38,0.045)}
 
 <script>
 const WEBHOOK_ADMIN = 'https://crista-oleographic-frightfully.ngrok-free.dev/webhook/atendente24h-admin';
-const NGROK_H = { 'ngrok-skip-browser-warning': 'true' };
+const WEBHOOK_ACTION = 'https://crista-oleographic-frightfully.ngrok-free.dev/webhook/atendente24h-admin-action';
+const NGROK_H = { 'ngrok-skip-browser-warning': 'true', 'Content-Type': 'application/json' };
 const LIMITES = { Essencial: 500, Basico: 500, Recomendado: 2500, Pro: 15000 };
 let assinantes = [];
 
@@ -750,7 +751,8 @@ function renderTable() {
       const planClass = a.plano === 'Pro' ? 'plan-pro' : a.plano === 'Recomendado' ? 'plan-recomendado' : '';
       const acoes = a.status === 'cancelado'
         ? `<button class="action-btn reativar" onclick="reativar(${a.id})">Reativar</button>`
-        : `<button class="action-btn" onclick="abrirLicenca(${a.id})">Licença</button>
+        : `<button class="action-btn" onclick="abrirLicenca(${a.id})">Licenca</button>
+           <button class="action-btn" style="color:var(--blue);border-color:rgba(37,99,235,0.25)" onclick="abrirBonus(${a.id})">+Bonus</button>
            <button class="action-btn danger" onclick="cancelar(${a.id})">Cancelar</button>`;
       return `
       <tr class="${a.status === 'cancelado' ? 'row-cancelado' : ''}">
@@ -838,8 +840,17 @@ function updateSidebarChart() {
 }
 
 function formatDate(d) {
-  const [y,m,day] = d.split('-');
-  return `${day}/${m}/${y}`;
+  if (!d) return '--';
+  try {
+    const dt = new Date(d);
+    if (!isNaN(dt)) {
+      const day = String(dt.getUTCDate()).padStart(2,'0');
+      const m = String(dt.getUTCMonth()+1).padStart(2,'0');
+      return `${day}/${m}/${dt.getUTCFullYear()}`;
+    }
+  } catch(e) {}
+  const parts = d.split('-');
+  return parts.length >= 3 ? `${parts[2].slice(0,2)}/${parts[1]}/${parts[0]}` : d;
 }
 
 let modalClienteAtual = null;
@@ -895,19 +906,42 @@ function calcRenovacao(desde) {
   return `${dia}/${String(mesNorm + 1).padStart(2,'0')}/${ano}`;
 }
 
-function cancelar(id) {
-  if (!confirm('Cancelar assinatura deste cliente?')) return;
+async function cancelar(id) {
   const a = assinantes.find(x => x.id === id);
+  if (!confirm(`Cancelar assinatura de ${a.nome}? Um email sera enviado ao cliente.`)) return;
+  try {
+    await fetch(WEBHOOK_ACTION, { method:'POST', headers: NGROK_H, body: JSON.stringify({ action:'cancel', id }) });
+  } catch(e) {}
   a.status = 'cancelado';
   a.mrr = 0;
   renderTable();
 }
 
-function reativar(id) {
+async function reativar(id) {
   const a = assinantes.find(x => x.id === id);
-  if (!confirm(`Reativar assinatura de ${a.nome}?`)) return;
+  if (!confirm(`Reativar assinatura de ${a.nome}? Um email sera enviado ao cliente.`)) return;
+  try {
+    await fetch(WEBHOOK_ACTION, { method:'POST', headers: NGROK_H, body: JSON.stringify({ action:'reativar', id }) });
+  } catch(e) {}
   a.status = 'ativo';
   a.mrr = a.plano === 'Pro' ? 797 : a.plano === 'Recomendado' ? 397 : 197;
+  renderTable();
+}
+
+function abrirBonus(id) {
+  const a = assinantes.find(x => x.id === id);
+  const qty = prompt(`Quantas mensagens de bonus para ${a.nome}?\n(Atual: ${a.msgs_limite} disponíveis)`);
+  if (!qty || isNaN(Number(qty)) || Number(qty) <= 0) return;
+  darBonus(id, Number(qty));
+}
+
+async function darBonus(id, bonus_msgs) {
+  const a = assinantes.find(x => x.id === id);
+  try {
+    await fetch(WEBHOOK_ACTION, { method:'POST', headers: NGROK_H, body: JSON.stringify({ action:'bonus', id, bonus_msgs }) });
+  } catch(e) {}
+  a.msgs_limite = (a.msgs_limite || 0) + bonus_msgs;
+  alert(`+${bonus_msgs} mensagens adicionadas para ${a.nome}`);
   renderTable();
 }
 
