@@ -4,90 +4,40 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Blog — Atendente24h | Automacao de Atendimento com IA para PMEs</title>
-<meta name="description" content="Guias e estrategias de automacao de atendimento via WhatsApp para pequenas e medias empresas brasileiras. Aprenda com especialistas.">
+<meta name="description" content="Guias praticos sobre automacao de atendimento no WhatsApp com inteligencia artificial para pequenas e medias empresas brasileiras.">
 <link rel="canonical" href="https://atendente24h.com/blog/">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<meta property="og:title" content="Blog Atendente24h - Automacao de Atendimento com IA">
-<meta property="og:description" content="Guias praticos para automatizar o atendimento da sua empresa no WhatsApp com inteligencia artificial.">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://atendente24h.com/blog/">
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Blog",
-  "name": "Blog Atendente24h",
-  "url": "https://atendente24h.com/blog/",
-  "description": "Guias e estrategias de automacao de atendimento via WhatsApp para PMEs brasileiras",
-  "publisher": {
-    "@type": "Organization",
-    "name": "Atendente24h",
-    "url": "https://atendente24h.com",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://atendente24h.com/favicon.svg"
-    }
-  }
-}
-</script>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{
-  --green:#25D366;--green-dark:#128C7E;--green-glow:rgba(37,211,102,0.12);
-  --bg:#080808;--surface:#0f0f0f;--card:#141414;--card2:#1a1a1a;
-  --border:rgba(255,255,255,0.08);--border-green:rgba(37,211,102,0.25);
-  --text:#fff;--text2:#a1a1aa;--text3:#52525b;
-  --radius:12px;--radius-lg:20px;
-}
-html,body{height:100%}
-body{
-  background:var(--bg);color:var(--text);
-  font-family:'Plus Jakarta Sans',system-ui,sans-serif;
-  font-size:15px;line-height:1.6;
-  -webkit-font-smoothing:antialiased;
-  min-height:100vh;
-}
-a{color:inherit;text-decoration:none}
-nav{
-  padding:20px 24px;
-  border-bottom:1px solid var(--border);
-  display:flex;align-items:center;justify-content:space-between;
-  max-width:900px;margin:0 auto;width:100%;
-}
+:root{--green:#25D366;--green-glow:rgba(37,211,102,0.12);--bg:#080808;--card:#141414;--border:rgba(255,255,255,0.08);--border-green:rgba(37,211,102,0.25);--text:#fff;--text2:#a1a1aa;--text3:#52525b;--radius:12px;}
+body{background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans',system-ui,sans-serif;font-size:16px;line-height:1.7;-webkit-font-smoothing:antialiased;}
+a{color:var(--green);text-decoration:none}
+a:hover{text-decoration:underline}
 .nav-wrap{border-bottom:1px solid var(--border)}
+nav{padding:20px 24px;display:flex;align-items:center;justify-content:space-between;max-width:1100px;margin:0 auto;}
 .logo{font-size:16px;font-weight:800;background:linear-gradient(135deg,#fff,var(--green));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.logo:hover{text-decoration:none}
 .nav-links{display:flex;gap:24px;align-items:center}
-.nav-links a{color:var(--text2);font-size:14px;font-weight:500;transition:color .2s}
-.nav-links a:hover{color:var(--text)}
-.btn-nav{background:var(--green);color:#000;padding:8px 18px;border-radius:100px;font-weight:700;font-size:13px;transition:opacity .2s}
-.btn-nav:hover{opacity:.85}
-main{max-width:900px;margin:0 auto;padding:60px 24px 80px}
-.blog-header{margin-bottom:48px}
-.blog-label{font-size:12px;font-weight:600;color:var(--green);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:12px}
-.blog-title{font-size:clamp(28px,5vw,42px);font-weight:800;letter-spacing:-1px;margin-bottom:12px}
-.blog-desc{font-size:16px;color:var(--text2);max-width:560px}
-.blog-count{margin-top:8px;font-size:14px;color:var(--text3)}
-.articles-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:24px}
-.article-card{
-  background:var(--card);border:1px solid var(--border);border-radius:var(--radius-lg);
-  padding:28px;display:flex;flex-direction:column;gap:16px;
-  transition:border-color .2s,transform .2s;
-}
-.article-card:hover{border-color:var(--border-green);transform:translateY(-2px)}
-.card-tag{
-  display:inline-flex;align-items:center;gap:6px;
-  background:var(--green-glow);border:1px solid var(--border-green);
-  color:var(--green);padding:4px 10px;border-radius:100px;font-size:11px;font-weight:600;
-  width:fit-content;
-}
-.card-title{font-size:17px;font-weight:700;letter-spacing:-0.3px;line-height:1.4}
-.card-excerpt{color:var(--text2);font-size:13px;line-height:1.6;flex:1}
-.card-meta{display:flex;justify-content:space-between;align-items:center;margin-top:auto;padding-top:16px;border-top:1px solid var(--border)}
+.nav-links a{color:var(--text2);font-size:14px;font-weight:500}
+.nav-links a:hover{color:var(--text);text-decoration:none}
+.btn-nav{background:var(--green);color:#000 !important;padding:8px 18px;border-radius:100px;font-weight:700;font-size:13px}
+.hero{max-width:1100px;margin:0 auto;padding:64px 24px 48px}
+.hero-label{color:var(--green);font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:16px}
+.hero h1{font-size:clamp(32px,5vw,52px);font-weight:800;letter-spacing:-1.5px;line-height:1.1;margin-bottom:20px}
+.hero h1 span{color:var(--green)}
+.hero p{color:var(--text2);font-size:18px;max-width:600px}
+.grid{max-width:1100px;margin:0 auto;padding:0 24px 80px;display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:24px;display:flex;flex-direction:column;gap:12px;transition:border-color .2s;text-decoration:none;color:var(--text);}
+.card:hover{border-color:var(--border-green);text-decoration:none}
+.card-tag{background:var(--green-glow);border:1px solid var(--border-green);color:var(--green);padding:3px 10px;border-radius:100px;font-size:11px;font-weight:700;width:fit-content}
+.card h2{font-size:16px;font-weight:700;line-height:1.3;color:var(--text)}
+.card p{font-size:13px;color:var(--text2);line-height:1.5;flex:1}
+.card-meta{display:flex;gap:12px;align-items:center}
 .card-date{font-size:12px;color:var(--text3)}
-.card-read{font-size:12px;color:var(--green);font-weight:600}
-.read-arrow{display:inline-flex;align-items:center;gap:6px;color:var(--green);font-size:13px;font-weight:600;margin-top:8px;transition:gap .2s}
-.article-card:hover .read-arrow{gap:10px}
+.card-read{font-size:12px;color:var(--text3)}
+.card-link{font-size:13px;font-weight:600;color:var(--green);display:flex;align-items:center;gap:6px}
 footer{border-top:1px solid var(--border);padding:32px 24px;text-align:center;color:var(--text3);font-size:13px}
 footer a{color:var(--green)}
 </style>
@@ -98,1125 +48,1638 @@ footer a{color:var(--green)}
     <a href="https://atendente24h.com" class="logo">Atendente24h</a>
     <div class="nav-links">
       <a href="https://atendente24h.com">Home</a>
-      <a href="https://atendente24h.com/blog/" style="color:var(--green)">Blog</a>
+      <a href="/blog/">Blog</a>
       <a href="https://atendente24h.com" class="btn-nav">Comecar agora</a>
     </div>
   </nav>
 </div>
-
-<main>
-  <div class="blog-header">
-    <p class="blog-label">Blog</p>
-    <h1 class="blog-title">Automacao de Atendimento<br>para Empresas Brasileiras</h1>
-    <p class="blog-desc">Guias praticos sobre como usar inteligencia artificial para atender clientes no WhatsApp 24 horas por dia, sem contratar mais funcionarios.</p>
-    <p class="blog-count">100 artigos publicados</p>
-  </div>
-
-  <div class="articles-grid">
-
-    <a href="/blog/atendente-ia-agencia-viagem-whatsapp.html" class="article-card">
-      <span class="card-tag">Turismo</span>
-      <h2 class="card-title">Atendente IA para Agencia de Viagem no WhatsApp</h2>
-      <p class="card-excerpt">O WhatsApp e o principal canal de comunicacao no Brasil, com mais de 148 milhoes de usuarios. Empresas que automatizam o...</p>
-      <div class="card-meta">
-        <span class="card-date">28 Mar 2026</span>
-        <span class="card-read">7 min de leitura</span>
-      </div>
-      <span class="read-arrow">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-    </a>
-
-    <a href="/blog/atendente-ia-aluguel-whatsapp.html" class="article-card">
-      <span class="card-tag">Imobiliarias</span>
-      <h2 class="card-title">Atendente IA para Gestao de Alugueis no WhatsApp</h2>
-      <p class="card-excerpt">O WhatsApp e o principal canal de comunicacao no Brasil, com mais de 148 milhoes de usuarios. Empresas que automatizam o...</p>
-      <div class="card-meta">
-        <span class="card-date">28 Mar 2026</span>
-        <span class="card-read">6 min de leitura</span>
-      </div>
-      <span class="read-arrow">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-    </a>
-
-    <a href="/blog/atendente-ia-contador-whatsapp.html" class="article-card">
-      <span class="card-tag">Contabilidade</span>
-      <h2 class="card-title">Atendente IA para Contador: Organize o Atendimento no WhatsApp</h2>
-      <p class="card-excerpt">O WhatsApp e o principal canal de comunicacao no Brasil, com mais de 148 milhoes de usuarios. Empresas que automatizam o...</p>
-      <div class="card-meta">
-        <span class="card-date">28 Mar 2026</span>
-        <span class="card-read">6 min de leitura</span>
-      </div>
-      <span class="read-arrow">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-    </a>
-
-    <a href="/blog/atendente-ia-ecommerce.html" class="article-card">
-      <span class="card-tag">E-commerce</span>
-      <h2 class="card-title">Atendente IA para E-commerce: Suporte 24h no WhatsApp</h2>
-      <p class="card-excerpt">O WhatsApp e o principal canal de comunicacao no Brasil, com mais de 148 milhoes de usuarios. Empresas que automatizam o...</p>
-      <div class="card-meta">
-        <span class="card-date">28 Mar 2026</span>
-        <span class="card-read">7 min de leitura</span>
-      </div>
-      <span class="read-arrow">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-    </a>
-
-    <a href="/blog/atendente-ia-faculdade-whatsapp.html" class="article-card">
-      <span class="card-tag">Educacao</span>
-      <h2 class="card-title">Atendente IA para Faculdade e Instituto de Ensino</h2>
-      <p class="card-excerpt">O WhatsApp e o principal canal de comunicacao no Brasil, com mais de 148 milhoes de usuarios. Empresas que automatizam o...</p>
-      <div class="card-meta">
-        <span class="card-date">28 Mar 2026</span>
-        <span class="card-read">6 min de leitura</span>
-      </div>
-      <span class="read-arrow">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-    </a>
-
-    <a href="/blog/atendente-ia-multicanal-whatsapp-instagram.html" class="article-card">
-      <span class="card-tag">Estrategia</span>
-      <h2 class="card-title">Atendente IA no WhatsApp e Instagram ao Mesmo Tempo</h2>
-      <p class="card-excerpt">O WhatsApp e o principal canal de comunicacao no Brasil, com mais de 148 milhoes de usuarios. Empresas que automatizam o...</p>
-      <div class="card-meta">
-        <span class="card-date">28 Mar 2026</span>
-        <span class="card-read">6 min de leitura</span>
-      </div>
-      <span class="read-arrow">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-    </a>
-
-    <a href="/blog/atendente-ia-veterinaria-whatsapp.html" class="article-card">
-      <span class="card-tag">Pet Shop</span>
-      <h2 class="card-title">Atendente IA para Clinica Veterinaria no WhatsApp</h2>
-      <p class="card-excerpt">O WhatsApp e o principal canal de comunicacao no Brasil, com mais de 148 milhoes de usuarios. Empresas que automatizam o...</p>
-      <div class="card-meta">
-        <span class="card-date">28 Mar 2026</span>
-        <span class="card-read">6 min de leitura</span>
-      </div>
-      <span class="read-arrow">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-    </a>
-
-    <a href="/blog/atendente-virtual-barbearia-whatsapp.html" class="article-card">
-      <span class="card-tag">Beleza</span>
-      <h2 class="card-title">Atendente Virtual para Barbearia no WhatsApp</h2>
-      <p class="card-excerpt">O WhatsApp e o principal canal de comunicacao no Brasil, com mais de 148 milhoes de usuarios. Empresas que automatizam o...</p>
-      <div class="card-meta">
-        <span class="card-date">28 Mar 2026</span>
-        <span class="card-read">6 min de leitura</span>
-      </div>
-      <span class="read-arrow">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-    </a>
-
-    <a href="/blog/atendente-virtual-clinica-odontologica.html" class="article-card">
-      <span class="card-tag">Odontologia</span>
-      <h2 class="card-title">Atendente Virtual para Clinica Odontologica</h2>
-      <p class="card-excerpt">O WhatsApp e o principal canal de comunicacao no Brasil, com mais de 148 milhoes de usuarios. Empresas que automatizam o...</p>
-      <div class="card-meta">
-        <span class="card-date">28 Mar 2026</span>
-        <span class="card-read">6 min de leitura</span>
-      </div>
-      <span class="read-arrow">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-    </a>
-
-    <a href="/blog/atendente-virtual-concessionaria.html" class="article-card">
-      <span class="card-tag">Automotivo</span>
-      <h2 class="card-title">Atendente Virtual para Concessionaria no WhatsApp</h2>
-      <p class="card-excerpt">O WhatsApp e o principal canal de comunicacao no Brasil, com mais de 148 milhoes de usuarios. Empresas que automatizam o...</p>
-      <div class="card-meta">
-        <span class="card-date">28 Mar 2026</span>
-        <span class="card-read">7 min de leitura</span>
-      </div>
-      <span class="read-arrow">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-    </a>
-
-    <a href="/blog/atendente-virtual-escritorio-advocacia.html" class="article-card">
-      <span class="card-tag">Juridico</span>
-      <h2 class="card-title">Atendente Virtual para Escritorio de Advocacia</h2>
-      <p class="card-excerpt">O WhatsApp e o principal canal de comunicacao no Brasil, com mais de 148 milhoes de usuarios. Empresas que automatizam o...</p>
-      <div class="card-meta">
-        <span class="card-date">28 Mar 2026</span>
-        <span class="card-read">6 min de leitura</span>
-      </div>
-      <span class="read-arrow">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-    </a>
-
-    <a href="/blog/atendente-virtual-loja-varejo.html" class="article-card">
-      <span class="card-tag">Varejo</span>
-      <h2 class="card-title">Atendente Virtual para Loja de Varejo no WhatsApp</h2>
-      <p class="card-excerpt">O WhatsApp e o principal canal de comunicacao no Brasil, com mais de 148 milhoes de usuarios. Empresas que automatizam o...</p>
-      <div class="card-meta">
-        <span class="card-date">28 Mar 2026</span>
-        <span class="card-read">6 min de leitura</span>
-      </div>
-      <span class="read-arrow">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-    </a>
-
-    <a href="/blog/atendente-virtual-studio-pilates.html" class="article-card">
-      <span class="card-tag">Fitness</span>
-      <h2 class="card-title">Atendente Virtual para Studio de Pilates no WhatsApp</h2>
-      <p class="card-excerpt">O WhatsApp e o principal canal de comunicacao no Brasil, com mais de 148 milhoes de usuarios. Empresas que automatizam o...</p>
-      <div class="card-meta">
-        <span class="card-date">28 Mar 2026</span>
-        <span class="card-read">6 min de leitura</span>
-      </div>
-      <span class="read-arrow">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-    </a>
-
-    <a href="/blog/atendente-virtual-whatsapp-quanto-custa.html" class="article-card">
-      <span class="card-tag">Custos e ROI</span>
-      <h2 class="card-title">Quanto Custa um Atendente Virtual no WhatsApp em 2026?</h2>
-      <p class="card-excerpt">Entender o preco de chatbot WhatsApp e mais complicado do que parece. O mercado tem opcoes que vao de R$0 (com limitacoe...</p>
-      <div class="card-meta">
-        <span class="card-date">28 Mar 2026</span>
-        <span class="card-read">9 min de leitura</span>
-      </div>
-      <span class="read-arrow">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-    </a>
-
-    <a href="/blog/atendente24h-vs-take-blip.html" class="article-card">
-      <span class="card-tag">Comparativo</span>
-      <h2 class="card-title">Atendente24h vs Take Blip: Comparativo Honesto 2026</h2>
-      <p class="card-excerpt">O WhatsApp e o principal canal de comunicacao no Brasil, com mais de 148 milhoes de usuarios. Empresas que automatizam o...</p>
-      <div class="card-meta">
-        <span class="card-date">28 Mar 2026</span>
-        <span class="card-read">7 min de leitura</span>
-      </div>
-      <span class="read-arrow">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-    </a>
-
-    <a href="/blog/atendente24h-vs-zenvia-comparativo.html" class="article-card">
-      <span class="card-tag">Comparativo</span>
-      <h2 class="card-title">Atendente24h vs Zenvia: Qual Escolher para sua PME?</h2>
-      <p class="card-excerpt">O WhatsApp e o principal canal de comunicacao no Brasil, com mais de 148 milhoes de usuarios. Empresas que automatizam o...</p>
-      <div class="card-meta">
-        <span class="card-date">28 Mar 2026</span>
-        <span class="card-read">7 min de leitura</span>
-      </div>
-      <span class="read-arrow">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-    </a>
-
-    <a href="/blog/atendimento-24h-sem-funcionario.html" class="article-card">
-      <span class="card-tag">Estrategia</span>
-      <h2 class="card-title">Como Atender Clientes 24h sem Contratar Funcionario</h2>
-      <p class="card-excerpt">O WhatsApp e o principal canal de comunicacao no Brasil, com mais de 148 milhoes de usuarios. Empresas que automatizam o...</p>
-      <div class="card-meta">
-        <span class="card-date">28 Mar 2026</span>
-        <span class="card-read">7 min de leitura</span>
-      </div>
-      <span class="read-arrow">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-    </a>
-
-    <a href="/blog/atendimento-automatico-construtora-whatsapp.html" class="article-card">
-      <span class="card-tag">Imobiliarias</span>
-      <h2 class="card-title">Atendimento Automatico para Construtoras no WhatsApp</h2>
-      <p class="card-excerpt">O WhatsApp e o principal canal de comunicacao no Brasil, com mais de 148 milhoes de usuarios ativos. Empresas que automa...</p>
-      <div class="card-meta">
-        <span class="card-date">28 Mar 2026</span>
-        <span class="card-read">7 min de leitura</span>
-      </div>
-      <span class="read-arrow">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-    </a>
-
-    <a href="/blog/atendimento-automatico-consultorio.html" class="article-card">
-      <span class="card-tag">Saude</span>
-      <h2 class="card-title">Atendimento Automatico no Consultorio: Reduza Faltas com IA</h2>
-      <p class="card-excerpt">O WhatsApp e o principal canal de comunicacao no Brasil, com mais de 148 milhoes de usuarios. Empresas que automatizam o...</p>
-      <div class="card-meta">
-        <span class="card-date">28 Mar 2026</span>
-        <span class="card-read">6 min de leitura</span>
-      </div>
-      <span class="read-arrow">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-    </a>
-
-    <a href="/blog/atendimento-automatico-escola.html" class="article-card">
-      <span class="card-tag">Educacao</span>
-      <h2 class="card-title">Atendimento Automatico para Escola pelo WhatsApp</h2>
-      <p class="card-excerpt">O WhatsApp e o principal canal de comunicacao no Brasil, com mais de 148 milhoes de usuarios. Empresas que automatizam o...</p>
-      <div class="card-meta">
-        <span class="card-date">28 Mar 2026</span>
-        <span class="card-read">7 min de leitura</span>
-      </div>
-      <span class="read-arrow">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-    </a>
-
-    <a href="/blog/atendimento-automatico-farmacia-whatsapp.html" class="article-card">
-      <span class="card-tag">Farmacias</span>
-      <h2 class="card-title">Atendimento Automatico para Farmacia no WhatsApp</h2>
-      <p class="card-excerpt">O WhatsApp e o principal canal de comunicacao no Brasil, com mais de 148 milhoes de usuarios. Empresas que automatizam o...</p>
-      <div class="card-meta">
-        <span class="card-date">28 Mar 2026</span>
-        <span class="card-read">6 min de leitura</span>
-      </div>
-      <span class="read-arrow">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-    </a>
-
-    <a href="/blog/atendimento-automatico-loja-presentes.html" class="article-card">
-      <span class="card-tag">Varejo</span>
-      <h2 class="card-title">Atendimento Automatico para Loja de Presentes no WhatsApp</h2>
-      <p class="card-excerpt">O WhatsApp e o principal canal de comunicacao no Brasil, com mais de 148 milhoes de usuarios. Empresas que automatizam o...</p>
-      <div class="card-meta">
-        <span class="card-date">28 Mar 2026</span>
-        <span class="card-read">5 min de leitura</span>
-      </div>
-      <span class="read-arrow">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-    </a>
-
-    <a href="/blog/atendimento-ia-empresa-medio-porte.html" class="article-card">
-      <span class="card-tag">Estrategia</span>
-      <h2 class="card-title">Atendimento com IA para Empresa de Medio Porte no WhatsApp</h2>
-      <p class="card-excerpt">O WhatsApp e o principal canal de comunicacao no Brasil, com mais de 148 milhoes de usuarios. Empresas que automatizam o...</p>
-      <div class="card-meta">
-        <span class="card-date">28 Mar 2026</span>
-        <span class="card-read">6 min de leitura</span>
-      </div>
-      <span class="read-arrow">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-    </a>
-
-    <a href="/blog/atendimento-whatsapp-dropshipping.html" class="article-card">
-      <span class="card-tag">E-commerce</span>
-      <h2 class="card-title">Atendimento WhatsApp para Dropshipping com IA</h2>
-      <p class="card-excerpt">O WhatsApp e o principal canal de comunicacao no Brasil, com mais de 148 milhoes de usuarios. Empresas que automatizam o...</p>
-      <div class="card-meta">
-        <span class="card-date">28 Mar 2026</span>
-        <span class="card-read">6 min de leitura</span>
-      </div>
-      <span class="read-arrow">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-    </a>
-
-    <a href="/blog/atendimento-whatsapp-ia-restaurante.html" class="article-card">
-      <span class="card-tag">Restaurantes</span>
-      <h2 class="card-title">Atendimento WhatsApp com IA para Restaurantes</h2>
-      <p class="card-excerpt">O WhatsApp e o principal canal de comunicacao no Brasil, com mais de 148 milhoes de usuarios. Empresas que automatizam o...</p>
-      <div class="card-meta">
-        <span class="card-date">28 Mar 2026</span>
-        <span class="card-read">6 min de leitura</span>
-      </div>
-      <span class="read-arrow">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-    </a>
-
-    <a href="/blog/automacao-whatsapp-microempresa.html" class="article-card">
-      <span class="card-tag">Estrategia</span>
-      <h2 class="card-title">Automacao WhatsApp para Microempresa: Por Onde Comecar</h2>
-      <p class="card-excerpt">O WhatsApp e o principal canal de comunicacao no Brasil, com mais de 148 milhoes de usuarios. Empresas que automatizam o...</p>
-      <div class="card-meta">
-        <span class="card-date">28 Mar 2026</span>
-        <span class="card-read">6 min de leitura</span>
-      </div>
-      <span class="read-arrow">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-    </a>
-
-    <a href="/blog/automatizar-whatsapp-salao-beleza.html" class="article-card">
-      <span class="card-tag">Beleza</span>
-      <h2 class="card-title">Como Automatizar o WhatsApp do Salao de Beleza</h2>
-      <p class="card-excerpt">O WhatsApp e o principal canal de comunicacao no Brasil, com mais de 148 milhoes de usuarios. Empresas que automatizam o...</p>
-      <div class="card-meta">
-        <span class="card-date">28 Mar 2026</span>
-        <span class="card-read">6 min de leitura</span>
-      </div>
-      <span class="read-arrow">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-    </a>
-
-    <a href="/blog/bot-agendamento-consulta-juridica.html" class="article-card">
-      <span class="card-tag">Juridico</span>
-      <h2 class="card-title">Bot para Agendamento de Consulta Juridica no WhatsApp</h2>
-      <p class="card-excerpt">O WhatsApp e o principal canal de comunicacao no Brasil, com mais de 148 milhoes de usuarios. Empresas que automatizam o...</p>
-      <div class="card-meta">
-        <span class="card-date">28 Mar 2026</span>
-        <span class="card-read">5 min de leitura</span>
-      </div>
-      <span class="read-arrow">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-    </a>
-
-    <a href="/blog/bot-agendamento-visita-imovel.html" class="article-card">
-      <span class="card-tag">Imobiliarias</span>
-      <h2 class="card-title">Bot para Agendar Visitas a Imoveis pelo WhatsApp</h2>
-      <p class="card-excerpt">O WhatsApp e o principal canal de comunicacao no Brasil, com mais de 148 milhoes de usuarios. Empresas que automatizam o...</p>
-      <div class="card-meta">
-        <span class="card-date">28 Mar 2026</span>
-        <span class="card-read">5 min de leitura</span>
-      </div>
-      <span class="read-arrow">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-    </a>
-
-    <a href="/blog/bot-banho-tosa-agendamento-whatsapp.html" class="article-card">
-      <span class="card-tag">Pet Shop</span>
-      <h2 class="card-title">Bot de Agendamento de Banho e Tosa pelo WhatsApp</h2>
-      <p class="card-excerpt">O WhatsApp e o principal canal de comunicacao no Brasil, com mais de 148 milhoes de usuarios. Empresas que automatizam o...</p>
-      <div class="card-meta">
-        <span class="card-date">28 Mar 2026</span>
-        <span class="card-read">5 min de leitura</span>
-      </div>
-      <span class="read-arrow">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-    </a>
-
-    <a href="/blog/bot-cardapio-whatsapp.html" class="article-card">
-      <span class="card-tag">Restaurantes</span>
-      <h2 class="card-title">Bot de Cardapio no WhatsApp: Guia para Donos de Restaurante</h2>
-      <p class="card-excerpt">O WhatsApp e o principal canal de comunicacao no Brasil, com mais de 148 milhoes de usuarios. Empresas que automatizam o...</p>
-      <div class="card-meta">
-        <span class="card-date">28 Mar 2026</span>
-        <span class="card-read">6 min de leitura</span>
-      </div>
-      <span class="read-arrow">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-    </a>
-
-    <a href="/blog/bot-confirmacao-consulta-dentista.html" class="article-card">
-      <span class="card-tag">Odontologia</span>
-      <h2 class="card-title">Bot de Confirmacao de Consulta para Dentistas via WhatsApp</h2>
-      <p class="card-excerpt">O WhatsApp e o principal canal de comunicacao no Brasil, com mais de 148 milhoes de usuarios. Empresas que automatizam o...</p>
-      <div class="card-meta">
-        <span class="card-date">28 Mar 2026</span>
-        <span class="card-read">5 min de leitura</span>
-      </div>
-      <span class="read-arrow">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-    </a>
-
-    <a href="/blog/bot-duvidas-fiscais-whatsapp.html" class="article-card">
-      <span class="card-tag">Contabilidade</span>
-      <h2 class="card-title">Bot para Responder Duvidas Fiscais no WhatsApp</h2>
-      <p class="card-excerpt">O WhatsApp e o principal canal de comunicacao no Brasil, com mais de 148 milhoes de usuarios. Empresas que automatizam o...</p>
-      <div class="card-meta">
-        <span class="card-date">28 Mar 2026</span>
-        <span class="card-read">5 min de leitura</span>
-      </div>
-      <span class="read-arrow">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-    </a>
-
-    <a href="/blog/bot-matriculas-escola-whatsapp-ia.html" class="article-card">
-      <span class="card-tag">Educacao</span>
-      <h2 class="card-title">Bot de Matriculas para Escola pelo WhatsApp com IA</h2>
-      <p class="card-excerpt">O WhatsApp e o principal canal de comunicacao no Brasil, com mais de 148 milhoes de usuarios. Empresas que automatizam o...</p>
-      <div class="card-meta">
-        <span class="card-date">28 Mar 2026</span>
-        <span class="card-read">6 min de leitura</span>
-      </div>
-      <span class="read-arrow">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-    </a>
-
-    <a href="/blog/bot-trocas-devolucoes-ecommerce-whatsapp.html" class="article-card">
-      <span class="card-tag">E-commerce</span>
-      <h2 class="card-title">Bot para Trocas e Devolucoes no E-commerce via WhatsApp</h2>
-      <p class="card-excerpt">O WhatsApp e o principal canal de comunicacao no Brasil, com mais de 148 milhoes de usuarios. Empresas que automatizam o...</p>
-      <div class="card-meta">
-        <span class="card-date">28 Mar 2026</span>
-        <span class="card-read">6 min de leitura</span>
-      </div>
-      <span class="read-arrow">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-    </a>
-
-    <a href="/blog/bot-whatsapp-confirmacao-pagamento.html" class="article-card">
-      <span class="card-tag">Financeiro</span>
-      <h2 class="card-title">Bot WhatsApp para Confirmacao Automatica de Pagamentos</h2>
-      <p class="card-excerpt">O WhatsApp e o principal canal de comunicacao no Brasil, com mais de 148 milhoes de usuarios. Empresas que automatizam o...</p>
-      <div class="card-meta">
-        <span class="card-date">28 Mar 2026</span>
-        <span class="card-read">5 min de leitura</span>
-      </div>
-      <span class="read-arrow">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-    </a>
-
-    <a href="/blog/bot-whatsapp-crossfit-matriculas.html" class="article-card">
-      <span class="card-tag">Fitness</span>
-      <h2 class="card-title">Bot WhatsApp para CrossFit: Matriculas e Renovacoes Automaticas</h2>
-      <p class="card-excerpt">O WhatsApp e o principal canal de comunicacao no Brasil, com mais de 148 milhoes de usuarios. Empresas que automatizam o...</p>
-      <div class="card-meta">
-        <span class="card-date">28 Mar 2026</span>
-        <span class="card-read">5 min de leitura</span>
-      </div>
-      <span class="read-arrow">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-    </a>
-
-    <a href="/blog/bot-whatsapp-drogaria-pedidos.html" class="article-card">
-      <span class="card-tag">Farmacias</span>
-      <h2 class="card-title">Bot WhatsApp para Drogaria: Pedidos e Disponibilidade de Medicamentos</h2>
-      <p class="card-excerpt">O WhatsApp e o principal canal de comunicacao no Brasil, com mais de 148 milhoes de usuarios. Empresas que automatizam o...</p>
-      <div class="card-meta">
-        <span class="card-date">28 Mar 2026</span>
-        <span class="card-read">6 min de leitura</span>
-      </div>
-      <span class="read-arrow">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-    </a>
-
-    <a href="/blog/bot-whatsapp-imobiliaria.html" class="article-card">
-      <span class="card-tag">Imobiliarias</span>
-      <h2 class="card-title">Bot WhatsApp para Imobiliaria: Qualifique Leads 24h</h2>
-      <p class="card-excerpt">O WhatsApp e o principal canal de comunicacao no Brasil, com mais de 148 milhoes de usuarios. Empresas que automatizam o...</p>
-      <div class="card-meta">
-        <span class="card-date">28 Mar 2026</span>
-        <span class="card-read">7 min de leitura</span>
-      </div>
-      <span class="read-arrow">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-    </a>
-
-    <a href="/blog/bot-whatsapp-loja-calcados.html" class="article-card">
-      <span class="card-tag">Varejo</span>
-      <h2 class="card-title">Bot WhatsApp para Loja de Calcados: Consulta de Estoque Automatica</h2>
-      <p class="card-excerpt">O WhatsApp e o principal canal de comunicacao no Brasil, com mais de 148 milhoes de usuarios. Empresas que automatizam o...</p>
-      <div class="card-meta">
-        <span class="card-date">28 Mar 2026</span>
-        <span class="card-read">5 min de leitura</span>
-      </div>
-      <span class="read-arrow">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-    </a>
-
-    <a href="/blog/bot-whatsapp-oficina-mecanica.html" class="article-card">
-      <span class="card-tag">Automotivo</span>
-      <h2 class="card-title">Bot WhatsApp para Oficina Mecanica: Agendamentos e Orcamentos</h2>
-      <p class="card-excerpt">O WhatsApp e o principal canal de comunicacao no Brasil, com mais de 148 milhoes de usuarios. Empresas que automatizam o...</p>
-      <div class="card-meta">
-        <span class="card-date">28 Mar 2026</span>
-        <span class="card-read">6 min de leitura</span>
-      </div>
-      <span class="read-arrow">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-    </a>
-
-    <a href="/blog/bot-whatsapp-para-pequenas-empresas.html" class="article-card">
-      <span class="card-tag">Estrategia</span>
-      <h2 class="card-title">Bot WhatsApp para Pequenas Empresas: Vale a Pena em 2026?</h2>
-      <p class="card-excerpt">Todo dono de pequena empresa ja recebeu aquela pitch: "instale um bot no seu WhatsApp e nunca mais perca um cliente". A ...</p>
-      <div class="card-meta">
-        <span class="card-date">28 Mar 2026</span>
-        <span class="card-read">7 min de leitura</span>
-      </div>
-      <span class="read-arrow">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-    </a>
-
-    <a href="/blog/bot-whatsapp-pousada-hotel.html" class="article-card">
-      <span class="card-tag">Turismo</span>
-      <h2 class="card-title">Bot WhatsApp para Pousada e Hotel: Reservas Automaticas</h2>
-      <p class="card-excerpt">O WhatsApp e o principal canal de comunicacao no Brasil, com mais de 148 milhoes de usuarios. Empresas que automatizam o...</p>
-      <div class="card-meta">
-        <span class="card-date">28 Mar 2026</span>
-        <span class="card-read">6 min de leitura</span>
-      </div>
-      <span class="read-arrow">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-    </a>
-
-    <a href="/blog/bot-whatsapp-psicologos.html" class="article-card">
-      <span class="card-tag">Saude</span>
-      <h2 class="card-title">Bot WhatsApp para Psicologos: Agendamento sem Interrupcoes</h2>
-      <p class="card-excerpt">O WhatsApp e o principal canal de comunicacao no Brasil, com mais de 148 milhoes de usuarios. Empresas que automatizam o...</p>
-      <div class="card-meta">
-        <span class="card-date">28 Mar 2026</span>
-        <span class="card-read">6 min de leitura</span>
-      </div>
-      <span class="read-arrow">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-    </a>
-
-    <a href="/blog/bot-whatsapp-studio-maquiagem.html" class="article-card">
-      <span class="card-tag">Beleza</span>
-      <h2 class="card-title">Bot WhatsApp para Studio de Maquiagem e Estetica</h2>
-      <p class="card-excerpt">O WhatsApp e o principal canal de comunicacao no Brasil, com mais de 148 milhoes de usuarios. Empresas que automatizam o...</p>
-      <div class="card-meta">
-        <span class="card-date">28 Mar 2026</span>
-        <span class="card-read">5 min de leitura</span>
-      </div>
-      <span class="read-arrow">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-    </a>
-
-    <a href="/blog/chatbot-advogados-whatsapp.html" class="article-card">
-      <span class="card-tag">Juridico</span>
-      <h2 class="card-title">Chatbot no WhatsApp para Advogados e Escritorios Juridicos</h2>
-      <p class="card-excerpt">O WhatsApp e o principal canal de comunicacao no Brasil, com mais de 148 milhoes de usuarios. Empresas que automatizam o...</p>
-      <div class="card-meta">
-        <span class="card-date">28 Mar 2026</span>
-        <span class="card-read">7 min de leitura</span>
-      </div>
-      <span class="read-arrow">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-    </a>
-
-    <a href="/blog/chatbot-agendamento-salao-whatsapp.html" class="article-card">
-      <span class="card-tag">Beleza</span>
-      <h2 class="card-title">Chatbot de Agendamento para Salao pelo WhatsApp</h2>
-      <p class="card-excerpt">O WhatsApp e o principal canal de comunicacao no Brasil, com mais de 148 milhoes de usuarios. Empresas que automatizam o...</p>
-      <div class="card-meta">
-        <span class="card-date">28 Mar 2026</span>
-        <span class="card-read">5 min de leitura</span>
-      </div>
-      <span class="read-arrow">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-    </a>
-
-    <a href="/blog/chatbot-clinica-estetica-whatsapp.html" class="article-card">
-      <span class="card-tag">Estetica</span>
-      <h2 class="card-title">Chatbot para Clinica Estetica no WhatsApp</h2>
-      <p class="card-excerpt">O WhatsApp e o principal canal de comunicacao no Brasil, com mais de 148 milhoes de usuarios. Empresas que automatizam o...</p>
-      <div class="card-meta">
-        <span class="card-date">28 Mar 2026</span>
-        <span class="card-read">6 min de leitura</span>
-      </div>
-      <span class="read-arrow">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-    </a>
-
-    <a href="/blog/chatbot-dentista-whatsapp-agendamento.html" class="article-card">
-      <span class="card-tag">Odontologia</span>
-      <h2 class="card-title">Chatbot para Dentista no WhatsApp: Agendamento Automatico</h2>
-      <p class="card-excerpt">O WhatsApp e o principal canal de comunicacao no Brasil, com mais de 148 milhoes de usuarios. Empresas que automatizam o...</p>
-      <div class="card-meta">
-        <span class="card-date">28 Mar 2026</span>
-        <span class="card-read">6 min de leitura</span>
-      </div>
-      <span class="read-arrow">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-    </a>
-
-    <a href="/blog/chatbot-farmacia-delivery-whatsapp.html" class="article-card">
-      <span class="card-tag">Farmacias</span>
-      <h2 class="card-title">Chatbot para Farmacia com Delivery pelo WhatsApp</h2>
-      <p class="card-excerpt">O WhatsApp e o principal canal de comunicacao no Brasil, com mais de 148 milhoes de usuarios. Empresas que automatizam o...</p>
-      <div class="card-meta">
-        <span class="card-date">28 Mar 2026</span>
-        <span class="card-read">6 min de leitura</span>
-      </div>
-      <span class="read-arrow">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-    </a>
-
-    <a href="/blog/chatbot-ia-autocentro-whatsapp.html" class="article-card">
-      <span class="card-tag">Automotivo</span>
-      <h2 class="card-title">Chatbot IA para Centro Automotivo no WhatsApp</h2>
-      <p class="card-excerpt">O WhatsApp e o principal canal de comunicacao no Brasil, com mais de 148 milhoes de usuarios. Empresas que automatizam o...</p>
-      <div class="card-meta">
-        <span class="card-date">28 Mar 2026</span>
-        <span class="card-read">6 min de leitura</span>
-      </div>
-      <span class="read-arrow">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-    </a>
-
-    <a href="/blog/chatbot-ia-corretores-imoveis.html" class="article-card">
-      <span class="card-tag">Imobiliarias</span>
-      <h2 class="card-title">Chatbot IA para Corretores de Imoveis no WhatsApp</h2>
-      <p class="card-excerpt">O WhatsApp e o principal canal de comunicacao no Brasil, com mais de 148 milhoes de usuarios. Empresas que automatizam o...</p>
-      <div class="card-meta">
-        <span class="card-date">28 Mar 2026</span>
-        <span class="card-read">6 min de leitura</span>
-      </div>
-      <span class="read-arrow">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-    </a>
-
-    <a href="/blog/chatbot-ia-personal-trainer-whatsapp.html" class="article-card">
-      <span class="card-tag">Fitness</span>
-      <h2 class="card-title">Chatbot IA para Personal Trainer no WhatsApp</h2>
-      <p class="card-excerpt">O WhatsApp e o principal canal de comunicacao no Brasil, com mais de 148 milhoes de usuarios. Empresas que automatizam o...</p>
-      <div class="card-meta">
-        <span class="card-date">28 Mar 2026</span>
-        <span class="card-read">5 min de leitura</span>
-      </div>
-      <span class="read-arrow">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-    </a>
-
-    <a href="/blog/chatbot-pet-shop-whatsapp.html" class="article-card">
-      <span class="card-tag">Pet Shop</span>
-      <h2 class="card-title">Chatbot WhatsApp para Pet Shop: Agendamentos e Pedidos</h2>
-      <p class="card-excerpt">O WhatsApp e o principal canal de comunicacao no Brasil, com mais de 148 milhoes de usuarios. Empresas que automatizam o...</p>
-      <div class="card-meta">
-        <span class="card-date">28 Mar 2026</span>
-        <span class="card-read">6 min de leitura</span>
-      </div>
-      <span class="read-arrow">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-    </a>
-
-    <a href="/blog/chatbot-turismo-whatsapp-reservas.html" class="article-card">
-      <span class="card-tag">Turismo</span>
-      <h2 class="card-title">Chatbot de Turismo no WhatsApp: Automatize Reservas</h2>
-      <p class="card-excerpt">O WhatsApp e o principal canal de comunicacao no Brasil, com mais de 148 milhoes de usuarios. Empresas que automatizam o...</p>
-      <div class="card-meta">
-        <span class="card-date">28 Mar 2026</span>
-        <span class="card-read">6 min de leitura</span>
-      </div>
-      <span class="read-arrow">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-    </a>
-
-    <a href="/blog/chatbot-vs-atendente-ia-diferenca.html" class="article-card">
-      <span class="card-tag">Comparativo</span>
-      <h2 class="card-title">Chatbot vs Atendente IA: Qual a Diferenca e Qual Escolher</h2>
-      <p class="card-excerpt">O WhatsApp e o principal canal de comunicacao no Brasil, com mais de 148 milhoes de usuarios. Empresas que automatizam o...</p>
-      <div class="card-meta">
-        <span class="card-date">28 Mar 2026</span>
-        <span class="card-read">6 min de leitura</span>
-      </div>
-      <span class="read-arrow">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-    </a>
-
-    <a href="/blog/chatbot-whatsapp-clinica-medica.html" class="article-card">
-      <span class="card-tag">Saude</span>
-      <h2 class="card-title">Chatbot WhatsApp para Clinica Medica: Agendamentos Automaticos</h2>
-      <p class="card-excerpt">O WhatsApp e o principal canal de comunicacao no Brasil, com mais de 148 milhoes de usuarios. Empresas que automatizam o...</p>
-      <div class="card-meta">
-        <span class="card-date">28 Mar 2026</span>
-        <span class="card-read">7 min de leitura</span>
-      </div>
-      <span class="read-arrow">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-    </a>
-
-    <a href="/blog/chatbot-whatsapp-curso-online.html" class="article-card">
-      <span class="card-tag">Educacao</span>
-      <h2 class="card-title">Chatbot WhatsApp para Curso Online: Suporte e Matriculas</h2>
-      <p class="card-excerpt">O WhatsApp e o principal canal de comunicacao no Brasil, com mais de 148 milhoes de usuarios. Empresas que automatizam o...</p>
-      <div class="card-meta">
-        <span class="card-date">28 Mar 2026</span>
-        <span class="card-read">6 min de leitura</span>
-      </div>
-      <span class="read-arrow">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-    </a>
-
-    <a href="/blog/chatbot-whatsapp-delivery.html" class="article-card">
-      <span class="card-tag">Delivery</span>
-      <h2 class="card-title">Chatbot WhatsApp para Delivery: Como Automatizar Pedidos</h2>
-      <p class="card-excerpt">O WhatsApp e o principal canal de comunicacao no Brasil, com mais de 148 milhoes de usuarios. Empresas que automatizam o...</p>
-      <div class="card-meta">
-        <span class="card-date">28 Mar 2026</span>
-        <span class="card-read">7 min de leitura</span>
-      </div>
-      <span class="read-arrow">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-    </a>
-
-    <a href="/blog/chatbot-whatsapp-escritorio-contabilidade.html" class="article-card">
-      <span class="card-tag">Contabilidade</span>
-      <h2 class="card-title">Chatbot WhatsApp para Escritorio de Contabilidade</h2>
-      <p class="card-excerpt">O WhatsApp e o principal canal de comunicacao no Brasil, com mais de 148 milhoes de usuarios. Empresas que automatizam o...</p>
-      <div class="card-meta">
-        <span class="card-date">28 Mar 2026</span>
-        <span class="card-read">6 min de leitura</span>
-      </div>
-      <span class="read-arrow">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-    </a>
-
-    <a href="/blog/chatbot-whatsapp-loja-roupas.html" class="article-card">
-      <span class="card-tag">Varejo</span>
-      <h2 class="card-title">Chatbot WhatsApp para Loja de Roupas e Moda</h2>
-      <p class="card-excerpt">O WhatsApp e o principal canal de comunicacao no Brasil, com mais de 148 milhoes de usuarios. Empresas que automatizam o...</p>
-      <div class="card-meta">
-        <span class="card-date">28 Mar 2026</span>
-        <span class="card-read">6 min de leitura</span>
-      </div>
-      <span class="read-arrow">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-    </a>
-
-    <a href="/blog/chatbot-whatsapp-loja-virtual.html" class="article-card">
-      <span class="card-tag">E-commerce</span>
-      <h2 class="card-title">Chatbot WhatsApp para Loja Virtual: Do Pedido a Entrega</h2>
-      <p class="card-excerpt">O WhatsApp e o principal canal de comunicacao no Brasil, com mais de 148 milhoes de usuarios. Empresas que automatizam o...</p>
-      <div class="card-meta">
-        <span class="card-date">28 Mar 2026</span>
-        <span class="card-read">6 min de leitura</span>
-      </div>
-      <span class="read-arrow">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-    </a>
-
-    <a href="/blog/cobranca-automatica-whatsapp.html" class="article-card">
-      <span class="card-tag">Financeiro</span>
-      <h2 class="card-title">Cobranca Automatica pelo WhatsApp: Como Funciona com IA</h2>
-      <p class="card-excerpt">O WhatsApp e o principal canal de comunicacao no Brasil, com mais de 148 milhoes de usuarios. Empresas que automatizam o...</p>
-      <div class="card-meta">
-        <span class="card-date">28 Mar 2026</span>
-        <span class="card-read">6 min de leitura</span>
-      </div>
-      <span class="read-arrow">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-    </a>
-
-    <a href="/blog/como-automatizar-atendimento-whatsapp.html" class="article-card">
-      <span class="card-tag">Guia Completo</span>
-      <h2 class="card-title">Como Automatizar Atendimento no WhatsApp em 2026</h2>
-      <p class="card-excerpt">Automatizar o atendimento no WhatsApp deixou de ser exclusividade de grandes corporacoes. Em 2026, qualquer pequena ou m...</p>
-      <div class="card-meta">
-        <span class="card-date">28 Mar 2026</span>
-        <span class="card-read">8 min de leitura</span>
-      </div>
-      <span class="read-arrow">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-    </a>
-
-    <a href="/blog/como-conectar-whatsapp-business-ia.html" class="article-card">
-      <span class="card-tag">Tutorial</span>
-      <h2 class="card-title">Como Conectar o WhatsApp Business a uma IA de Atendimento</h2>
-      <p class="card-excerpt">O WhatsApp e o principal canal de comunicacao no Brasil, com mais de 148 milhoes de usuarios. Empresas que automatizam o...</p>
-      <div class="card-meta">
-        <span class="card-date">28 Mar 2026</span>
-        <span class="card-read">6 min de leitura</span>
-      </div>
-      <span class="read-arrow">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-    </a>
-
-    <a href="/blog/como-configurar-atendente24h-passo-a-passo.html" class="article-card">
-      <span class="card-tag">Tutorial</span>
-      <h2 class="card-title">Como Configurar o Atendente24h: Passo a Passo Completo</h2>
-      <p class="card-excerpt">O WhatsApp e o principal canal de comunicacao no Brasil, com mais de 148 milhoes de usuarios. Empresas que automatizam o...</p>
-      <div class="card-meta">
-        <span class="card-date">28 Mar 2026</span>
-        <span class="card-read">8 min de leitura</span>
-      </div>
-      <span class="read-arrow">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-    </a>
-
-    <a href="/blog/escalar-atendimento-whatsapp-sem-contratar.html" class="article-card">
-      <span class="card-tag">Estrategia</span>
-      <h2 class="card-title">Como Escalar o Atendimento no WhatsApp sem Contratar</h2>
-      <p class="card-excerpt">O WhatsApp e o principal canal de comunicacao no Brasil, com mais de 148 milhoes de usuarios. Empresas que automatizam o...</p>
-      <div class="card-meta">
-        <span class="card-date">28 Mar 2026</span>
-        <span class="card-read">6 min de leitura</span>
-      </div>
-      <span class="read-arrow">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-    </a>
-
-    <a href="/blog/faq-automatico-whatsapp-empresa.html" class="article-card">
-      <span class="card-tag">Tutorial</span>
-      <h2 class="card-title">Como Criar um FAQ Automatico para sua Empresa no WhatsApp</h2>
-      <p class="card-excerpt">O WhatsApp e o principal canal de comunicacao no Brasil, com mais de 148 milhoes de usuarios. Empresas que automatizam o...</p>
-      <div class="card-meta">
-        <span class="card-date">28 Mar 2026</span>
-        <span class="card-read">5 min de leitura</span>
-      </div>
-      <span class="read-arrow">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-    </a>
-
-    <a href="/blog/melhor-chatbot-whatsapp-brasil-2026.html" class="article-card">
-      <span class="card-tag">Comparativo</span>
-      <h2 class="card-title">Melhor Chatbot WhatsApp para Empresas Brasileiras em 2026</h2>
-      <p class="card-excerpt">O WhatsApp e o principal canal de comunicacao no Brasil, com mais de 148 milhoes de usuarios. Empresas que automatizam o...</p>
-      <div class="card-meta">
-        <span class="card-date">28 Mar 2026</span>
-        <span class="card-read">8 min de leitura</span>
-      </div>
-      <span class="read-arrow">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-    </a>
-
-    <a href="/blog/metricas-atendimento-whatsapp-ia.html" class="article-card">
-      <span class="card-tag">Estrategia</span>
-      <h2 class="card-title">Metricas de Atendimento no WhatsApp: O Que Acompanhar</h2>
-      <p class="card-excerpt">O WhatsApp e o principal canal de comunicacao no Brasil, com mais de 148 milhoes de usuarios. Empresas que automatizam o...</p>
-      <div class="card-meta">
-        <span class="card-date">28 Mar 2026</span>
-        <span class="card-read">6 min de leitura</span>
-      </div>
-      <span class="read-arrow">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-    </a>
-
-    <a href="/blog/perguntas-frequentes-automacao-whatsapp.html" class="article-card">
-      <span class="card-tag">FAQ</span>
-      <h2 class="card-title">Perguntas Frequentes sobre Automacao de WhatsApp para Empresas</h2>
-      <p class="card-excerpt">O WhatsApp e o principal canal de comunicacao no Brasil, com mais de 148 milhoes de usuarios. Empresas que automatizam o...</p>
-      <div class="card-meta">
-        <span class="card-date">28 Mar 2026</span>
-        <span class="card-read">7 min de leitura</span>
-      </div>
-      <span class="read-arrow">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-    </a>
-
-    <a href="/blog/personalizar-respostas-automaticas-whatsapp.html" class="article-card">
-      <span class="card-tag">Tutorial</span>
-      <h2 class="card-title">Como Personalizar Respostas Automaticas no WhatsApp</h2>
-      <p class="card-excerpt">O WhatsApp e o principal canal de comunicacao no Brasil, com mais de 148 milhoes de usuarios. Empresas que automatizam o...</p>
-      <div class="card-meta">
-        <span class="card-date">28 Mar 2026</span>
-        <span class="card-read">6 min de leitura</span>
-      </div>
-      <span class="read-arrow">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-    </a>
-
-    <a href="/blog/pesquisa-satisfacao-automatica-whatsapp.html" class="article-card">
-      <span class="card-tag">Estrategia</span>
-      <h2 class="card-title">Pesquisa de Satisfacao Automatica pelo WhatsApp com IA</h2>
-      <p class="card-excerpt">O WhatsApp e o principal canal de comunicacao no Brasil, com mais de 148 milhoes de usuarios. Empresas que automatizam o...</p>
-      <div class="card-meta">
-        <span class="card-date">28 Mar 2026</span>
-        <span class="card-read">5 min de leitura</span>
-      </div>
-      <span class="read-arrow">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-    </a>
-
-    <a href="/blog/qualificar-leads-whatsapp-automatico.html" class="article-card">
-      <span class="card-tag">Vendas</span>
-      <h2 class="card-title">Como Qualificar Leads Automaticamente pelo WhatsApp</h2>
-      <p class="card-excerpt">O WhatsApp e o principal canal de comunicacao no Brasil, com mais de 148 milhoes de usuarios. Empresas que automatizam o...</p>
-      <div class="card-meta">
-        <span class="card-date">28 Mar 2026</span>
-        <span class="card-read">7 min de leitura</span>
-      </div>
-      <span class="read-arrow">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-    </a>
-
-    <a href="/blog/recuperar-clientes-inativos-whatsapp-ia.html" class="article-card">
-      <span class="card-tag">Estrategia</span>
-      <h2 class="card-title">Como Recuperar Clientes Inativos pelo WhatsApp com IA</h2>
-      <p class="card-excerpt">O WhatsApp e o principal canal de comunicacao no Brasil, com mais de 148 milhoes de usuarios. Empresas que automatizam o...</p>
-      <div class="card-meta">
-        <span class="card-date">28 Mar 2026</span>
-        <span class="card-read">6 min de leitura</span>
-      </div>
-      <span class="read-arrow">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-    </a>
-
-    <a href="/blog/transferir-atendimento-ia-para-humano.html" class="article-card">
-      <span class="card-tag">Tutorial</span>
-      <h2 class="card-title">Como Configurar a Transferencia de Atendimento IA para Humano</h2>
-      <p class="card-excerpt">O WhatsApp e o principal canal de comunicacao no Brasil, com mais de 148 milhoes de usuarios. Empresas que automatizam o...</p>
-      <div class="card-meta">
-        <span class="card-date">28 Mar 2026</span>
-        <span class="card-read">5 min de leitura</span>
-      </div>
-      <span class="read-arrow">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-    </a>
-
-    <a href="/blog/vale-a-pena-ia-atendimento-whatsapp-2026.html" class="article-card">
-      <span class="card-tag">Estrategia</span>
-      <h2 class="card-title">Vale a Pena Investir em IA para Atendimento WhatsApp em 2026?</h2>
-      <p class="card-excerpt">O WhatsApp e o principal canal de comunicacao no Brasil, com mais de 148 milhoes de usuarios. Empresas que automatizam o...</p>
-      <div class="card-meta">
-        <span class="card-date">28 Mar 2026</span>
-        <span class="card-read">6 min de leitura</span>
-      </div>
-      <span class="read-arrow">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-    </a>
-
-    <a href="/blog/whatsapp-automatico-academia.html" class="article-card">
-      <span class="card-tag">Fitness</span>
-      <h2 class="card-title">WhatsApp Automatico para Academia: Matriculas e Renovacoes</h2>
-      <p class="card-excerpt">O WhatsApp e o principal canal de comunicacao no Brasil, com mais de 148 milhoes de usuarios. Empresas que automatizam o...</p>
-      <div class="card-meta">
-        <span class="card-date">28 Mar 2026</span>
-        <span class="card-read">6 min de leitura</span>
-      </div>
-      <span class="read-arrow">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-    </a>
-
-    <a href="/blog/whatsapp-automatico-contabilidade-pme.html" class="article-card">
-      <span class="card-tag">Contabilidade</span>
-      <h2 class="card-title">WhatsApp Automatico para Contabilidade de PMEs</h2>
-      <p class="card-excerpt">O WhatsApp e o principal canal de comunicacao no Brasil, com mais de 148 milhoes de usuarios. Empresas que automatizam o...</p>
-      <div class="card-meta">
-        <span class="card-date">28 Mar 2026</span>
-        <span class="card-read">6 min de leitura</span>
-      </div>
-      <span class="read-arrow">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-    </a>
-
-    <a href="/blog/whatsapp-automatico-escola-idiomas.html" class="article-card">
-      <span class="card-tag">Educacao</span>
-      <h2 class="card-title">WhatsApp Automatico para Escola de Idiomas</h2>
-      <p class="card-excerpt">O WhatsApp e o principal canal de comunicacao no Brasil, com mais de 148 milhoes de usuarios. Empresas que automatizam o...</p>
-      <div class="card-meta">
-        <span class="card-date">28 Mar 2026</span>
-        <span class="card-read">5 min de leitura</span>
-      </div>
-      <span class="read-arrow">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-    </a>
-
-    <a href="/blog/whatsapp-automatico-imoveis-leads.html" class="article-card">
-      <span class="card-tag">Imobiliarias</span>
-      <h2 class="card-title">Como Capturar e Qualificar Leads de Imoveis pelo WhatsApp</h2>
-      <p class="card-excerpt">O WhatsApp e o principal canal de comunicacao no Brasil, com mais de 148 milhoes de usuarios. Empresas que automatizam o...</p>
-      <div class="card-meta">
-        <span class="card-date">28 Mar 2026</span>
-        <span class="card-read">7 min de leitura</span>
-      </div>
-      <span class="read-arrow">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-    </a>
-
-    <a href="/blog/whatsapp-automatico-lava-rapido.html" class="article-card">
-      <span class="card-tag">Automotivo</span>
-      <h2 class="card-title">WhatsApp Automatico para Lava-Rapido e Estetica Automotiva</h2>
-      <p class="card-excerpt">O WhatsApp e o principal canal de comunicacao no Brasil, com mais de 148 milhoes de usuarios. Empresas que automatizam o...</p>
-      <div class="card-meta">
-        <span class="card-date">28 Mar 2026</span>
-        <span class="card-read">5 min de leitura</span>
-      </div>
-      <span class="read-arrow">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-    </a>
-
-    <a href="/blog/whatsapp-automatico-petshop-produtos.html" class="article-card">
-      <span class="card-tag">Pet Shop</span>
-      <h2 class="card-title">WhatsApp Automatico para Venda de Produtos para Pets</h2>
-      <p class="card-excerpt">O WhatsApp e o principal canal de comunicacao no Brasil, com mais de 148 milhoes de usuarios. Empresas que automatizam o...</p>
-      <div class="card-meta">
-        <span class="card-date">28 Mar 2026</span>
-        <span class="card-read">5 min de leitura</span>
-      </div>
-      <span class="read-arrow">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-    </a>
-
-    <a href="/blog/whatsapp-automatico-rastreio-pedido.html" class="article-card">
-      <span class="card-tag">E-commerce</span>
-      <h2 class="card-title">Como Automatizar Rastreio de Pedidos pelo WhatsApp</h2>
-      <p class="card-excerpt">O WhatsApp e o principal canal de comunicacao no Brasil, com mais de 148 milhoes de usuarios. Empresas que automatizam o...</p>
-      <div class="card-meta">
-        <span class="card-date">28 Mar 2026</span>
-        <span class="card-read">5 min de leitura</span>
-      </div>
-      <span class="read-arrow">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-    </a>
-
-    <a href="/blog/whatsapp-automatico-restaurante-reservas.html" class="article-card">
-      <span class="card-tag">Restaurantes</span>
-      <h2 class="card-title">Como Automatizar Reservas de Restaurante pelo WhatsApp</h2>
-      <p class="card-excerpt">O WhatsApp e o principal canal de comunicacao no Brasil, com mais de 148 milhoes de usuarios. Empresas que automatizam o...</p>
-      <div class="card-meta">
-        <span class="card-date">28 Mar 2026</span>
-        <span class="card-read">5 min de leitura</span>
-      </div>
-      <span class="read-arrow">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-    </a>
-
-    <a href="/blog/whatsapp-business-api-pme-como-usar.html" class="article-card">
-      <span class="card-tag">Tutorial</span>
-      <h2 class="card-title">WhatsApp Business API para PMEs: O Que E e Como Usar</h2>
-      <p class="card-excerpt">O WhatsApp e o principal canal de comunicacao no Brasil, com mais de 148 milhoes de usuarios. Empresas que automatizam o...</p>
-      <div class="card-meta">
-        <span class="card-date">28 Mar 2026</span>
-        <span class="card-read">7 min de leitura</span>
-      </div>
-      <span class="read-arrow">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-    </a>
-
-    <a href="/blog/whatsapp-ia-academia-aulas-agendamento.html" class="article-card">
-      <span class="card-tag">Fitness</span>
-      <h2 class="card-title">Como Agendar Aulas de Academia pelo WhatsApp com IA</h2>
-      <p class="card-excerpt">O WhatsApp e o principal canal de comunicacao no Brasil, com mais de 148 milhoes de usuarios. Empresas que automatizam o...</p>
-      <div class="card-meta">
-        <span class="card-date">28 Mar 2026</span>
-        <span class="card-read">6 min de leitura</span>
-      </div>
-      <span class="read-arrow">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-    </a>
-
-    <a href="/blog/whatsapp-ia-clinica-confirmacao-consulta.html" class="article-card">
-      <span class="card-tag">Saude</span>
-      <h2 class="card-title">Como Confirmar Consultas pelo WhatsApp com IA</h2>
-      <p class="card-excerpt">O WhatsApp e o principal canal de comunicacao no Brasil, com mais de 148 milhoes de usuarios. Empresas que automatizam o...</p>
-      <div class="card-meta">
-        <span class="card-date">28 Mar 2026</span>
-        <span class="card-read">5 min de leitura</span>
-      </div>
-      <span class="read-arrow">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-    </a>
-
-    <a href="/blog/whatsapp-ia-farmacia-manipulacao.html" class="article-card">
-      <span class="card-tag">Farmacias</span>
-      <h2 class="card-title">WhatsApp com IA para Farmacia de Manipulacao</h2>
-      <p class="card-excerpt">O WhatsApp e o principal canal de comunicacao no Brasil, com mais de 148 milhoes de usuarios. Empresas que automatizam o...</p>
-      <div class="card-meta">
-        <span class="card-date">28 Mar 2026</span>
-        <span class="card-read">6 min de leitura</span>
-      </div>
-      <span class="read-arrow">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-    </a>
-
-    <a href="/blog/whatsapp-ia-guia-turistico-atendimento.html" class="article-card">
-      <span class="card-tag">Turismo</span>
-      <h2 class="card-title">WhatsApp com IA para Guias Turisticos e Operadoras</h2>
-      <p class="card-excerpt">O WhatsApp e o principal canal de comunicacao no Brasil, com mais de 148 milhoes de usuarios. Empresas que automatizam o...</p>
-      <div class="card-meta">
-        <span class="card-date">28 Mar 2026</span>
-        <span class="card-read">6 min de leitura</span>
-      </div>
-      <span class="read-arrow">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-    </a>
-
-    <a href="/blog/whatsapp-ia-lgpd-conformidade.html" class="article-card">
-      <span class="card-tag">Juridico</span>
-      <h2 class="card-title">WhatsApp com IA e a LGPD: O Que sua Empresa Precisa Saber</h2>
-      <p class="card-excerpt">O WhatsApp e o principal canal de comunicacao no Brasil, com mais de 148 milhoes de usuarios. Empresas que automatizam o...</p>
-      <div class="card-meta">
-        <span class="card-date">28 Mar 2026</span>
-        <span class="card-read">6 min de leitura</span>
-      </div>
-      <span class="read-arrow">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-    </a>
-
-    <a href="/blog/whatsapp-ia-manicure-agenda.html" class="article-card">
-      <span class="card-tag">Beleza</span>
-      <h2 class="card-title">WhatsApp com IA para Manicure: Chega de Agenda Manual</h2>
-      <p class="card-excerpt">O WhatsApp e o principal canal de comunicacao no Brasil, com mais de 148 milhoes de usuarios. Empresas que automatizam o...</p>
-      <div class="card-meta">
-        <span class="card-date">28 Mar 2026</span>
-        <span class="card-read">5 min de leitura</span>
-      </div>
-      <span class="read-arrow">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-    </a>
-
-    <a href="/blog/whatsapp-ia-multilojas-franquia.html" class="article-card">
-      <span class="card-tag">Varejo</span>
-      <h2 class="card-title">WhatsApp com IA para Redes e Franquias de Varejo</h2>
-      <p class="card-excerpt">O WhatsApp e o principal canal de comunicacao no Brasil, com mais de 148 milhoes de usuarios. Empresas que automatizam o...</p>
-      <div class="card-meta">
-        <span class="card-date">28 Mar 2026</span>
-        <span class="card-read">7 min de leitura</span>
-      </div>
-      <span class="read-arrow">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-    </a>
-
-    <a href="/blog/whatsapp-ia-reducao-custo-atendimento.html" class="article-card">
-      <span class="card-tag">ROI e Custos</span>
-      <h2 class="card-title">Como a IA no WhatsApp Reduz o Custo de Atendimento</h2>
-      <p class="card-excerpt">O WhatsApp e o principal canal de comunicacao no Brasil, com mais de 148 milhoes de usuarios. Empresas que automatizam o...</p>
-      <div class="card-meta">
-        <span class="card-date">28 Mar 2026</span>
-        <span class="card-read">6 min de leitura</span>
-      </div>
-      <span class="read-arrow">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-    </a>
-
-    <a href="/blog/whatsapp-ia-reducao-faltas-odontologia.html" class="article-card">
-      <span class="card-tag">Odontologia</span>
-      <h2 class="card-title">Como Reduzir Faltas na Odontologia com WhatsApp IA</h2>
-      <p class="card-excerpt">O WhatsApp e o principal canal de comunicacao no Brasil, com mais de 148 milhoes de usuarios. Empresas que automatizam o...</p>
-      <div class="card-meta">
-        <span class="card-date">28 Mar 2026</span>
-        <span class="card-read">5 min de leitura</span>
-      </div>
-      <span class="read-arrow">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-    </a>
-
-    <a href="/blog/whatsapp-ia-solopreneur-autonomo.html" class="article-card">
-      <span class="card-tag">Estrategia</span>
-      <h2 class="card-title">WhatsApp com IA para Autonomos e Solopreneurs</h2>
-      <p class="card-excerpt">O WhatsApp e o principal canal de comunicacao no Brasil, com mais de 148 milhoes de usuarios. Empresas que automatizam o...</p>
-      <div class="card-meta">
-        <span class="card-date">28 Mar 2026</span>
-        <span class="card-read">5 min de leitura</span>
-      </div>
-      <span class="read-arrow">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-    </a>
-
-    <a href="/blog/whatsapp-ia-supermercado-atacado.html" class="article-card">
-      <span class="card-tag">Varejo</span>
-      <h2 class="card-title">WhatsApp com IA para Supermercado e Atacado</h2>
-      <p class="card-excerpt">O WhatsApp e o principal canal de comunicacao no Brasil, com mais de 148 milhoes de usuarios ativos. Empresas que automa...</p>
-      <div class="card-meta">
-        <span class="card-date">28 Mar 2026</span>
-        <span class="card-read">6 min de leitura</span>
-      </div>
-      <span class="read-arrow">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-    </a>
-
-    <a href="/blog/whatsapp-ia-triagem-casos-juridicos.html" class="article-card">
-      <span class="card-tag">Juridico</span>
-      <h2 class="card-title">Como Triar Casos Juridicos pelo WhatsApp com IA</h2>
-      <p class="card-excerpt">O WhatsApp e o principal canal de comunicacao no Brasil, com mais de 148 milhoes de usuarios. Empresas que automatizam o...</p>
-      <div class="card-meta">
-        <span class="card-date">28 Mar 2026</span>
-        <span class="card-read">6 min de leitura</span>
-      </div>
-      <span class="read-arrow">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-    </a>
-
-    <a href="/blog/whatsapp-ia-vendas-noite-feriado.html" class="article-card">
-      <span class="card-tag">Vendas</span>
-      <h2 class="card-title">Vender de Madrugada e em Feriados com WhatsApp IA</h2>
-      <p class="card-excerpt">O WhatsApp e o principal canal de comunicacao no Brasil, com mais de 148 milhoes de usuarios. Empresas que automatizam o...</p>
-      <div class="card-meta">
-        <span class="card-date">28 Mar 2026</span>
-        <span class="card-read">5 min de leitura</span>
-      </div>
-      <span class="read-arrow">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-    </a>
-
-    <a href="/blog/whatsapp-pedidos-automaticos-lanchonete.html" class="article-card">
-      <span class="card-tag">Restaurantes</span>
-      <h2 class="card-title">WhatsApp Automatico para Lanchonetes e Bares</h2>
-      <p class="card-excerpt">O WhatsApp e o principal canal de comunicacao no Brasil, com mais de 148 milhoes de usuarios. Empresas que automatizam o...</p>
-      <div class="card-meta">
-        <span class="card-date">28 Mar 2026</span>
-        <span class="card-read">5 min de leitura</span>
-      </div>
-      <span class="read-arrow">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-    </a>
-
-  </div>
-</main>
-
+<div class="hero">
+  <p class="hero-label">Blog</p>
+  <h1>Automacao de Atendimento<br><span>para Empresas Brasileiras</span></h1>
+  <p>Guias praticos sobre como usar inteligencia artificial para atender clientes no WhatsApp 24 horas por dia, sem contratar mais funcionarios.</p>
+</div>
+<div class="grid">
+      <a href="/blog/academia-crossfit-whatsapp.html" class="card">
+        <span class="card-tag">CrossFit</span>
+        <h2>CrossFit e Funcionais: Automatize Matriculas e Comunicacao com Alunos</h2>
+        <p>Como boxes de CrossFit e studios de treinamento funcional usam IA no WhatsApp para agendar aulas, controlar presenca e reter aluno</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">5 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/agencia-turismo-whatsapp.html" class="card">
+        <span class="card-tag">Turismo</span>
+        <h2>Agencia de Viagens: Automatize Cotacoes e Reservas pelo WhatsApp</h2>
+        <p>Como agencias de turismo e operadoras de viagem usam IA no WhatsApp para fazer cotacoes rapidas, tirar duvidas e fechar pacotes.</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">6 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/agendamento-consulta-whatsapp.html" class="card">
+        <span class="card-tag">Agendamento</span>
+        <h2>Como Automatizar Agendamento de Consultas pelo WhatsApp</h2>
+        <p>Passo a passo para clinicas e consultórios que querem automatizar o agendamento de consultas via WhatsApp, reducindo no-show e sob</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">6 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/agendamento-manicure-whatsapp.html" class="card">
+        <span class="card-tag">Beleza</span>
+        <h2>Agendamento Automatico de Manicure e Pedicure via WhatsApp</h2>
+        <p>Como manicures e profissionais de unha podem usar o WhatsApp para agendar clientes 24h por dia sem perder horario ou mensagem.</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">5 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/arquitetura-engenharia-whatsapp.html" class="card">
+        <span class="card-tag">Arquitetura</span>
+        <h2>Arquiteto e Engenheiro: Como Automatizar o Relacionamento com Clientes pelo WhatsApp</h2>
+        <p>Como escritorios de arquitetura e engenharia usam IA no WhatsApp para triagem de projetos, orcamentos e atualizacoes de obra.</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">5 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/atendente-ia-agencia-viagem-whatsapp.html" class="card">
+        <span class="card-tag">Turismo</span>
+        <h2>Atendente IA para Agencia de Viagem no WhatsApp</h2>
+        <p>Atendente IA para Agencia de Viagem no WhatsApp. Saiba como o Atendente24h automatiza o atendimento da sua empresa no WhatsApp 24h</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">7 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/atendente-ia-aluguel-whatsapp.html" class="card">
+        <span class="card-tag">Imobiliarias</span>
+        <h2>Atendente IA para Gestao de Alugueis no WhatsApp</h2>
+        <p>Atendente IA para Gestao de Alugueis no WhatsApp. Saiba como o Atendente24h automatiza o atendimento da sua empresa no WhatsApp 24</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">6 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/atendente-ia-contador-whatsapp.html" class="card">
+        <span class="card-tag">Contabilidade</span>
+        <h2>Atendente IA para Contador: Organize o Atendimento no WhatsApp</h2>
+        <p>Atendente IA para Contador: Organize o Atendimento no WhatsApp. Saiba como o Atendente24h automatiza o atendimento da sua empresa </p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">6 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/atendente-ia-ecommerce.html" class="card">
+        <span class="card-tag">E-commerce</span>
+        <h2>Atendente IA no WhatsApp para E-commerce: Aumente Conversoes</h2>
+        <p>Como lojas virtuais usam inteligencia artificial no WhatsApp para responder clientes, rastrear pedidos e reduzir abandono de carri</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">7 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/atendente-ia-faculdade-whatsapp.html" class="card">
+        <span class="card-tag">Educacao</span>
+        <h2>Atendente IA para Faculdade e Instituto de Ensino</h2>
+        <p>Atendente IA para Faculdade e Instituto de Ensino. Saiba como o Atendente24h automatiza o atendimento da sua empresa no WhatsApp 2</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">6 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/atendente-ia-multicanal-whatsapp-instagram.html" class="card">
+        <span class="card-tag">Estrategia</span>
+        <h2>Atendente IA no WhatsApp e Instagram ao Mesmo Tempo</h2>
+        <p>Atendente IA no WhatsApp e Instagram ao Mesmo Tempo. Saiba como o Atendente24h automatiza o atendimento da sua empresa no WhatsApp</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">6 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/atendente-ia-veterinaria-whatsapp.html" class="card">
+        <span class="card-tag">Pet Shop</span>
+        <h2>Atendente IA para Clinica Veterinaria no WhatsApp</h2>
+        <p>Atendente IA para Clinica Veterinaria no WhatsApp. Saiba como o Atendente24h automatiza o atendimento da sua empresa no WhatsApp 2</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">6 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/atendente-virtual-barbearia-whatsapp.html" class="card">
+        <span class="card-tag">Beleza</span>
+        <h2>Atendente Virtual para Barbearia no WhatsApp</h2>
+        <p>Atendente Virtual para Barbearia no WhatsApp. Saiba como o Atendente24h automatiza o atendimento da sua empresa no WhatsApp 24h.</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">6 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/atendente-virtual-clinica-odontologica.html" class="card">
+        <span class="card-tag">Odontologia</span>
+        <h2>Atendente Virtual para Clinica Odontologica</h2>
+        <p>Atendente Virtual para Clinica Odontologica. Saiba como o Atendente24h automatiza o atendimento da sua empresa no WhatsApp 24h.</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">6 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/atendente-virtual-concessionaria.html" class="card">
+        <span class="card-tag">Automotivo</span>
+        <h2>Atendente Virtual para Concessionaria no WhatsApp</h2>
+        <p>Atendente Virtual para Concessionaria no WhatsApp. Saiba como o Atendente24h automatiza o atendimento da sua empresa no WhatsApp 2</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">7 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/atendente-virtual-escritorio-advocacia.html" class="card">
+        <span class="card-tag">Juridico</span>
+        <h2>Atendente Virtual para Escritorio de Advocacia</h2>
+        <p>Atendente Virtual para Escritorio de Advocacia. Saiba como o Atendente24h automatiza o atendimento da sua empresa no WhatsApp 24h.</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">6 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/atendente-virtual-loja-varejo.html" class="card">
+        <span class="card-tag">Varejo</span>
+        <h2>Atendente Virtual para Loja de Varejo: Venda pelo WhatsApp 24h</h2>
+        <p>Como lojas de varejo fisico e online usam IA no WhatsApp para responder clientes, divulgar estoque e converter vendas fora do hora</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">6 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/atendente-virtual-studio-pilates.html" class="card">
+        <span class="card-tag">Fitness</span>
+        <h2>Atendente Virtual para Studio de Pilates no WhatsApp</h2>
+        <p>Atendente Virtual para Studio de Pilates no WhatsApp. Saiba como o Atendente24h automatiza o atendimento da sua empresa no WhatsAp</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">6 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/atendente-virtual-whatsapp-quanto-custa.html" class="card">
+        <span class="card-tag">Custos e ROI</span>
+        <h2>Quanto Custa um Atendente Virtual no WhatsApp em 2026?</h2>
+        <p>Comparativo completo de precos de chatbot WhatsApp em 2026. Entenda o que esta incluso em cada plano e como calcular o ROI para a </p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">9 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/atendente24h-vs-concorrentes.html" class="card">
+        <span class="card-tag">Comparativo</span>
+        <h2>Atendente24h vs Outros Chatbots de WhatsApp: Comparativo 2026</h2>
+        <p>Comparativo detalhado entre o Atendente24h e as principais alternativas de chatbot para WhatsApp disponíveis no mercado brasileiro</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">8 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/atendente24h-vs-take-blip.html" class="card">
+        <span class="card-tag">Comparativo</span>
+        <h2>Atendente24h vs Take Blip: Comparativo Honesto 2026</h2>
+        <p>Atendente24h vs Take Blip: Comparativo Honesto 2026. Saiba como o Atendente24h automatiza o atendimento da sua empresa no WhatsApp</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">7 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/atendente24h-vs-zenvia-comparativo.html" class="card">
+        <span class="card-tag">Comparativo</span>
+        <h2>Atendente24h vs Zenvia: Qual Escolher para sua PME?</h2>
+        <p>Atendente24h vs Zenvia: Qual Escolher para sua PME?. Saiba como o Atendente24h automatiza o atendimento da sua empresa no WhatsApp</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">7 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/atendimento-24h-sem-funcionario.html" class="card">
+        <span class="card-tag">Estrategia</span>
+        <h2>Como Atender Clientes 24h sem Contratar Funcionario</h2>
+        <p>Como Atender Clientes 24h sem Contratar Funcionario. Saiba como o Atendente24h automatiza o atendimento da sua empresa no WhatsApp</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">7 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/atendimento-autoescola-whatsapp.html" class="card">
+        <span class="card-tag">Autoescola</span>
+        <h2>Autoescola: Automatize o Atendimento e Agendamentos pelo WhatsApp</h2>
+        <p>Como autoescolas podem usar IA no WhatsApp para tirar duvidas sobre CNH, agendar aulas e informar sobre resultados de exames.</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">5 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/atendimento-automatico-construtora-whatsapp.html" class="card">
+        <span class="card-tag">Imobiliarias</span>
+        <h2>Atendimento Automatico para Construtoras no WhatsApp</h2>
+        <p>Atendimento Automatico para Construtoras no WhatsApp. Automatize o atendimento da sua empresa no WhatsApp com IA. Atenda clientes </p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">7 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/atendimento-automatico-consultorio.html" class="card">
+        <span class="card-tag">Saude</span>
+        <h2>Atendimento Automatico no Consultorio: Reduza Faltas com IA</h2>
+        <p>Atendimento Automatico no Consultorio: Reduza Faltas com IA. Saiba como o Atendente24h automatiza o atendimento da sua empresa no </p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">6 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/atendimento-automatico-escola.html" class="card">
+        <span class="card-tag">Educacao</span>
+        <h2>Atendimento Automatico para Escolas e Instituicoes de Ensino via WhatsApp</h2>
+        <p>Como escolas, colegios e universidades usam IA no WhatsApp para responder pais, agendar reunioes e comunicar ocorrencias.</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">6 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/atendimento-automatico-farmacia-whatsapp.html" class="card">
+        <span class="card-tag">Farmacias</span>
+        <h2>Atendimento Automatico para Farmacia no WhatsApp</h2>
+        <p>Atendimento Automatico para Farmacia no WhatsApp. Saiba como o Atendente24h automatiza o atendimento da sua empresa no WhatsApp 24</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">6 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/atendimento-automatico-loja-presentes.html" class="card">
+        <span class="card-tag">Varejo</span>
+        <h2>Atendimento Automatico para Loja de Presentes no WhatsApp</h2>
+        <p>Atendimento Automatico para Loja de Presentes no WhatsApp. Saiba como o Atendente24h automatiza o atendimento da sua empresa no Wh</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">5 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/atendimento-clientes-juridico-whatsapp.html" class="card">
+        <span class="card-tag">Juridico</span>
+        <h2>Atendimento ao Cliente para Escritorios Juridicos via WhatsApp</h2>
+        <p>Como automatizar a comunicacao com clientes juridicos pelo WhatsApp: atualizacoes processuais, documentos e agenda de reunioes.</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">5 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/atendimento-ia-empresa-medio-porte.html" class="card">
+        <span class="card-tag">Estrategia</span>
+        <h2>Atendimento com IA para Empresa de Medio Porte no WhatsApp</h2>
+        <p>Atendimento com IA para Empresa de Medio Porte no WhatsApp. Saiba como o Atendente24h automatiza o atendimento da sua empresa no W</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">6 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/atendimento-whatsapp-dropshipping.html" class="card">
+        <span class="card-tag">E-commerce</span>
+        <h2>Atendimento WhatsApp para Dropshipping com IA</h2>
+        <p>Atendimento WhatsApp para Dropshipping com IA. Saiba como o Atendente24h automatiza o atendimento da sua empresa no WhatsApp 24h.</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">6 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/atendimento-whatsapp-ia-restaurante.html" class="card">
+        <span class="card-tag">Restaurantes</span>
+        <h2>Atendimento WhatsApp com IA para Restaurantes</h2>
+        <p>Atendimento WhatsApp com IA para Restaurantes. Saiba como o Atendente24h automatiza o atendimento da sua empresa no WhatsApp 24h.</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">6 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/atendimento-whatsapp-restaurante.html" class="card">
+        <span class="card-tag">Restaurantes</span>
+        <h2>Atendimento via WhatsApp para Restaurantes: Como Nunca Perder um Pedido</h2>
+        <p>Como usar IA no WhatsApp do seu restaurante para receber pedidos, confirmar reservas e responder clientes 24h sem perder vendas.</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">6 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/automacao-whatsapp-microempresa.html" class="card">
+        <span class="card-tag">Estrategia</span>
+        <h2>Automacao WhatsApp para Microempresa: Por Onde Comecar</h2>
+        <p>Automacao WhatsApp para Microempresa: Por Onde Comecar. Saiba como o Atendente24h automatiza o atendimento da sua empresa no Whats</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">6 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/automatizar-whatsapp-salao-beleza.html" class="card">
+        <span class="card-tag">Saloes</span>
+        <h2>Como Automatizar o WhatsApp do Seu Salao de Beleza</h2>
+        <p>Guia completo para saloes de beleza que querem automatizar agendamentos, confirmacoes e atendimento via WhatsApp sem complicacao.</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">6 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/barbearia-whatsapp.html" class="card">
+        <span class="card-tag">Barbearia</span>
+        <h2>Barbearia: Automatize Agendamentos e Fidelize Clientes pelo WhatsApp</h2>
+        <p>Como barbearias usam IA no WhatsApp para agendar cortes, reduzir faltas e criar um relacionamento de fidelizacao com os clientes.</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">5 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/bot-agendamento-consulta-juridica.html" class="card">
+        <span class="card-tag">Juridico</span>
+        <h2>Bot para Agendamento de Consulta Juridica no WhatsApp</h2>
+        <p>Bot para Agendamento de Consulta Juridica no WhatsApp. Saiba como o Atendente24h automatiza o atendimento da sua empresa no WhatsA</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">5 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/bot-agendamento-visita-imovel.html" class="card">
+        <span class="card-tag">Imobiliarias</span>
+        <h2>Bot para Agendar Visitas a Imoveis pelo WhatsApp</h2>
+        <p>Bot para Agendar Visitas a Imoveis pelo WhatsApp. Saiba como o Atendente24h automatiza o atendimento da sua empresa no WhatsApp 24</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">5 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/bot-banho-tosa-agendamento-whatsapp.html" class="card">
+        <span class="card-tag">Pet Shop</span>
+        <h2>Bot de Agendamento de Banho e Tosa pelo WhatsApp</h2>
+        <p>Bot de Agendamento de Banho e Tosa pelo WhatsApp. Saiba como o Atendente24h automatiza o atendimento da sua empresa no WhatsApp 24</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">5 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/bot-cardapio-whatsapp.html" class="card">
+        <span class="card-tag">Restaurantes</span>
+        <h2>Bot de Cardapio no WhatsApp: Guia para Donos de Restaurante</h2>
+        <p>Bot de Cardapio no WhatsApp: Guia para Donos de Restaurante. Saiba como o Atendente24h automatiza o atendimento da sua empresa no </p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">6 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/bot-confirmacao-consulta-dentista.html" class="card">
+        <span class="card-tag">Odontologia</span>
+        <h2>Bot de Confirmacao de Consulta para Dentistas via WhatsApp</h2>
+        <p>Bot de Confirmacao de Consulta para Dentistas via WhatsApp. Saiba como o Atendente24h automatiza o atendimento da sua empresa no W</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">5 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/bot-duvidas-fiscais-whatsapp.html" class="card">
+        <span class="card-tag">Contabilidade</span>
+        <h2>Bot para Responder Duvidas Fiscais no WhatsApp</h2>
+        <p>Bot para Responder Duvidas Fiscais no WhatsApp. Saiba como o Atendente24h automatiza o atendimento da sua empresa no WhatsApp 24h.</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">5 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/bot-matriculas-escola-whatsapp-ia.html" class="card">
+        <span class="card-tag">Educacao</span>
+        <h2>Bot de Matriculas para Escola pelo WhatsApp com IA</h2>
+        <p>Bot de Matriculas para Escola pelo WhatsApp com IA. Saiba como o Atendente24h automatiza o atendimento da sua empresa no WhatsApp </p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">6 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/bot-trocas-devolucoes-ecommerce-whatsapp.html" class="card">
+        <span class="card-tag">E-commerce</span>
+        <h2>Bot para Trocas e Devolucoes no E-commerce via WhatsApp</h2>
+        <p>Bot para Trocas e Devolucoes no E-commerce via WhatsApp. Saiba como o Atendente24h automatiza o atendimento da sua empresa no What</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">6 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/bot-whatsapp-confirmacao-pagamento.html" class="card">
+        <span class="card-tag">Financeiro</span>
+        <h2>Bot WhatsApp para Confirmacao Automatica de Pagamentos</h2>
+        <p>Bot WhatsApp para Confirmacao Automatica de Pagamentos. Saiba como o Atendente24h automatiza o atendimento da sua empresa no Whats</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">5 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/bot-whatsapp-crossfit-matriculas.html" class="card">
+        <span class="card-tag">Fitness</span>
+        <h2>Bot WhatsApp para CrossFit: Matriculas e Renovacoes Automaticas</h2>
+        <p>Bot WhatsApp para CrossFit: Matriculas e Renovacoes Automaticas. Saiba como o Atendente24h automatiza o atendimento da sua empresa</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">5 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/bot-whatsapp-drogaria-pedidos.html" class="card">
+        <span class="card-tag">Farmacias</span>
+        <h2>Bot WhatsApp para Drogaria: Pedidos e Disponibilidade de Medicamentos</h2>
+        <p>Bot WhatsApp para Drogaria: Pedidos e Disponibilidade de Medicamentos. Saiba como o Atendente24h automatiza o atendimento da sua e</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">6 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/bot-whatsapp-imobiliaria.html" class="card">
+        <span class="card-tag">Imobiliarias</span>
+        <h2>Bot de WhatsApp para Imobiliaria: Qualifique Leads Automaticamente</h2>
+        <p>Como imobiliarias usam IA no WhatsApp para qualificar compradores, agendar visitas e responder sobre imoveis disponíveis 24h por d</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">7 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/bot-whatsapp-loja-calcados.html" class="card">
+        <span class="card-tag">Varejo</span>
+        <h2>Bot WhatsApp para Loja de Calcados: Consulta de Estoque Automatica</h2>
+        <p>Bot WhatsApp para Loja de Calcados: Consulta de Estoque Automatica. Saiba como o Atendente24h automatiza o atendimento da sua empr</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">5 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/bot-whatsapp-oficina-mecanica.html" class="card">
+        <span class="card-tag">Oficinas</span>
+        <h2>Bot de WhatsApp para Oficina Mecanica: Agende Servicos Automaticamente</h2>
+        <p>Como mecanicos e oficinas automotivas usam IA no WhatsApp para agendar servicos, enviar orcamentos e atualizar clientes sobre o an</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">6 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/bot-whatsapp-para-pequenas-empresas.html" class="card">
+        <span class="card-tag">Estrategia</span>
+        <h2>Bot WhatsApp para Pequenas Empresas: Vale a Pena em 2026?</h2>
+        <p>Bot de WhatsApp para pequenas empresas: analise honesta de quando o chatbot resolve e quando atrapalha. Exemplos reais e comparati</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">7 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/bot-whatsapp-pousada-hotel.html" class="card">
+        <span class="card-tag">Turismo</span>
+        <h2>Bot WhatsApp para Pousada e Hotel: Reservas Automaticas</h2>
+        <p>Bot WhatsApp para Pousada e Hotel: Reservas Automaticas. Saiba como o Atendente24h automatiza o atendimento da sua empresa no What</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">6 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/bot-whatsapp-psicologos.html" class="card">
+        <span class="card-tag">Saude</span>
+        <h2>Bot WhatsApp para Psicologos: Agendamento sem Interrupcoes</h2>
+        <p>Bot WhatsApp para Psicologos: Agendamento sem Interrupcoes. Saiba como o Atendente24h automatiza o atendimento da sua empresa no W</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">6 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/bot-whatsapp-studio-maquiagem.html" class="card">
+        <span class="card-tag">Beleza</span>
+        <h2>Bot WhatsApp para Studio de Maquiagem e Estetica</h2>
+        <p>Bot WhatsApp para Studio de Maquiagem e Estetica. Saiba como o Atendente24h automatiza o atendimento da sua empresa no WhatsApp 24</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">5 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/buffet-eventos-whatsapp.html" class="card">
+        <span class="card-tag">Eventos</span>
+        <h2>Buffet e Cerimonial: Como Automatizar Orcamentos e Comunicacao de Eventos</h2>
+        <p>Como buffets, casas de festas e cerimoniais usam IA no WhatsApp para receber pedidos de orcamento, planejar eventos e comunicar co</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">5 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/cardapio-digital-whatsapp.html" class="card">
+        <span class="card-tag">Cardapio</span>
+        <h2>Cardapio Digital no WhatsApp: A Solucao Para Restaurantes em 2026</h2>
+        <p>Como criar um cardapio digital interativo no WhatsApp que responde clientes, tira duvidas e converte pedidos automaticamente.</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">5 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/cartorio-whatsapp-automatico.html" class="card">
+        <span class="card-tag">Cartorios</span>
+        <h2>Cartorio: Como Modernizar o Atendimento com WhatsApp e IA</h2>
+        <p>Como cartorios de notas, registro e protesto usam IA no WhatsApp para informar sobre servicos, documentos e prazos.</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">5 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/chatbot-advogados-whatsapp.html" class="card">
+        <span class="card-tag">Advocacia</span>
+        <h2>Chatbot de WhatsApp para Escritorios de Advocacia</h2>
+        <p>Como escritorios de advocacia podem usar IA no WhatsApp para triagem de casos, agendamento de consultas e comunicacao com clientes</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">6 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/chatbot-agendamento-salao-whatsapp.html" class="card">
+        <span class="card-tag">Beleza</span>
+        <h2>Chatbot de Agendamento para Salao pelo WhatsApp</h2>
+        <p>Chatbot de Agendamento para Salao pelo WhatsApp. Saiba como o Atendente24h automatiza o atendimento da sua empresa no WhatsApp 24h</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">5 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/chatbot-clinica-estetica-whatsapp.html" class="card">
+        <span class="card-tag">Estetica</span>
+        <h2>Chatbot para Clinica Estetica no WhatsApp</h2>
+        <p>Chatbot para Clinica Estetica no WhatsApp. Saiba como o Atendente24h automatiza o atendimento da sua empresa no WhatsApp 24h.</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">6 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/chatbot-dentista-whatsapp-agendamento.html" class="card">
+        <span class="card-tag">Odontologia</span>
+        <h2>Chatbot para Dentista no WhatsApp: Agendamento Automatico</h2>
+        <p>Chatbot para Dentista no WhatsApp: Agendamento Automatico. Saiba como o Atendente24h automatiza o atendimento da sua empresa no Wh</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">6 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/chatbot-farmacia-delivery-whatsapp.html" class="card">
+        <span class="card-tag">Farmacias</span>
+        <h2>Chatbot para Farmacia com Delivery pelo WhatsApp</h2>
+        <p>Chatbot para Farmacia com Delivery pelo WhatsApp. Saiba como o Atendente24h automatiza o atendimento da sua empresa no WhatsApp 24</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">6 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/chatbot-ia-autocentro-whatsapp.html" class="card">
+        <span class="card-tag">Automotivo</span>
+        <h2>Chatbot IA para Centro Automotivo no WhatsApp</h2>
+        <p>Chatbot IA para Centro Automotivo no WhatsApp. Saiba como o Atendente24h automatiza o atendimento da sua empresa no WhatsApp 24h.</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">6 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/chatbot-ia-corretores-imoveis.html" class="card">
+        <span class="card-tag">Imobiliarias</span>
+        <h2>Chatbot IA para Corretores de Imoveis no WhatsApp</h2>
+        <p>Chatbot IA para Corretores de Imoveis no WhatsApp. Saiba como o Atendente24h automatiza o atendimento da sua empresa no WhatsApp 2</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">6 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/chatbot-ia-personal-trainer-whatsapp.html" class="card">
+        <span class="card-tag">Fitness</span>
+        <h2>Chatbot IA para Personal Trainer no WhatsApp</h2>
+        <p>Chatbot IA para Personal Trainer no WhatsApp. Saiba como o Atendente24h automatiza o atendimento da sua empresa no WhatsApp 24h.</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">5 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/chatbot-pet-shop-whatsapp.html" class="card">
+        <span class="card-tag">Pet Shop</span>
+        <h2>Chatbot WhatsApp para Pet Shop: Agendamentos e Pedidos</h2>
+        <p>Chatbot WhatsApp para Pet Shop: Agendamentos e Pedidos. Saiba como o Atendente24h automatiza o atendimento da sua empresa no Whats</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">6 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/chatbot-turismo-whatsapp-reservas.html" class="card">
+        <span class="card-tag">Turismo</span>
+        <h2>Chatbot de Turismo no WhatsApp: Automatize Reservas</h2>
+        <p>Chatbot de Turismo no WhatsApp: Automatize Reservas. Saiba como o Atendente24h automatiza o atendimento da sua empresa no WhatsApp</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">6 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/chatbot-vs-atendente-ia-diferenca.html" class="card">
+        <span class="card-tag">Comparativo</span>
+        <h2>Chatbot vs Atendente IA: Qual a Diferenca e Qual Escolher</h2>
+        <p>Chatbot vs Atendente IA: Qual a Diferenca e Qual Escolher. Saiba como o Atendente24h automatiza o atendimento da sua empresa no Wh</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">6 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/chatbot-whatsapp-clinica-medica.html" class="card">
+        <span class="card-tag">Clinicas</span>
+        <h2>Chatbot de WhatsApp para Clinica Medica: Agendamento 24h Sem Secretaria</h2>
+        <p>Como clinicas medicas usam IA no WhatsApp para agendar consultas, confirmar horarios e responder duvidas sem sobrecarregar a secre</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">7 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/chatbot-whatsapp-curso-online.html" class="card">
+        <span class="card-tag">Educacao</span>
+        <h2>Chatbot WhatsApp para Curso Online: Suporte e Matriculas</h2>
+        <p>Chatbot WhatsApp para Curso Online: Suporte e Matriculas. Saiba como o Atendente24h automatiza o atendimento da sua empresa no Wha</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">6 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/chatbot-whatsapp-delivery.html" class="card">
+        <span class="card-tag">Delivery</span>
+        <h2>Chatbot WhatsApp para Delivery: Como Automatizar Pedidos</h2>
+        <p>Chatbot WhatsApp para Delivery: Como Automatizar Pedidos. Saiba como o Atendente24h automatiza o atendimento da sua empresa no Wha</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">7 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/chatbot-whatsapp-dentista.html" class="card">
+        <span class="card-tag">Odontologia</span>
+        <h2>Chatbot de WhatsApp para Dentistas: Reduza Faltas e Otimize a Agenda</h2>
+        <p>Como clinicas odontologicas e dentistas autonomos usam IA no WhatsApp para agendar consultas, reduzir faltas e responder pacientes</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">6 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/chatbot-whatsapp-escritorio-contabilidade.html" class="card">
+        <span class="card-tag">Contabilidade</span>
+        <h2>Chatbot WhatsApp para Escritorio de Contabilidade</h2>
+        <p>Chatbot WhatsApp para Escritorio de Contabilidade. Saiba como o Atendente24h automatiza o atendimento da sua empresa no WhatsApp 2</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">6 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/chatbot-whatsapp-loja-roupas.html" class="card">
+        <span class="card-tag">Varejo</span>
+        <h2>Chatbot WhatsApp para Loja de Roupas e Moda</h2>
+        <p>Chatbot WhatsApp para Loja de Roupas e Moda. Saiba como o Atendente24h automatiza o atendimento da sua empresa no WhatsApp 24h.</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">6 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/chatbot-whatsapp-loja-virtual.html" class="card">
+        <span class="card-tag">E-commerce</span>
+        <h2>Chatbot WhatsApp para Loja Virtual: Do Pedido a Entrega</h2>
+        <p>Chatbot WhatsApp para Loja Virtual: Do Pedido a Entrega. Saiba como o Atendente24h automatiza o atendimento da sua empresa no What</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">6 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/clinica-dermatologia-whatsapp.html" class="card">
+        <span class="card-tag">Dermatologia</span>
+        <h2>Dermatologia: Automatize o Atendimento e Fidelizacao de Pacientes pelo WhatsApp</h2>
+        <p>Como clinicas dermatologicas usam IA no WhatsApp para agendamentos, pos-procedimento e fidelizacao de pacientes.</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">5 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/clinica-fisioterapia-whatsapp.html" class="card">
+        <span class="card-tag">Fisioterapia</span>
+        <h2>Fisioterapia: Automatize o Agendamento e Acompanhamento de Pacientes</h2>
+        <p>Como clinicas de fisioterapia e fisioterapeutas autonomos usam IA no WhatsApp para agendar sessoes, enviar exercicios e fazer foll</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">5 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/clinica-ortopedia-whatsapp.html" class="card">
+        <span class="card-tag">Ortopedia</span>
+        <h2>Ortopedia: Como Automatizar o Atendimento de Pacientes pelo WhatsApp</h2>
+        <p>Como clinicas ortopedicas e cirurgioes ortopedistas usam IA no WhatsApp para agendamentos, pre e pos-operatorio.</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">5 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/clinica-psiquiatria-whatsapp.html" class="card">
+        <span class="card-tag">Psiquiatria</span>
+        <h2>Psiquiatria: Como Automatizar Agendamentos Preservando a Privacidade do Paciente</h2>
+        <p>Como psiquiatras e clinicas de saude mental usam IA no WhatsApp para agendamento discreto, sem expor informacoes sensiveis do paci</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">5 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/cobranca-automatica-whatsapp.html" class="card">
+        <span class="card-tag">Financeiro</span>
+        <h2>Cobranca Automatica pelo WhatsApp: Como Funciona com IA</h2>
+        <p>Cobranca Automatica pelo WhatsApp: Como Funciona com IA. Saiba como o Atendente24h automatiza o atendimento da sua empresa no What</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">6 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/como-automatizar-atendimento-whatsapp.html" class="card">
+        <span class="card-tag">Guia Completo</span>
+        <h2>Como Automatizar Atendimento no WhatsApp em 2026</h2>
+        <p>Passo a passo completo para automatizar o atendimento no WhatsApp da sua empresa em 2026. Reduza custos e atenda clientes 24h com </p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">8 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/como-conectar-whatsapp-business-ia.html" class="card">
+        <span class="card-tag">Tutorial</span>
+        <h2>Como Conectar o WhatsApp Business a uma IA de Atendimento</h2>
+        <p>Como Conectar o WhatsApp Business a uma IA de Atendimento. Saiba como o Atendente24h automatiza o atendimento da sua empresa no Wh</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">6 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/como-configurar-atendente24h-passo-a-passo.html" class="card">
+        <span class="card-tag">Tutorial</span>
+        <h2>Como Configurar o Atendente24h: Passo a Passo Completo</h2>
+        <p>Como Configurar o Atendente24h: Passo a Passo Completo. Saiba como o Atendente24h automatiza o atendimento da sua empresa no Whats</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">8 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/como-medir-satisfacao-cliente-whatsapp.html" class="card">
+        <span class="card-tag">Satisfacao</span>
+        <h2>Como Medir a Satisfacao do Cliente no Atendimento via WhatsApp</h2>
+        <p>Estrategias praticas para coletar CSAT, NPS e feedback dos clientes diretamente pelo WhatsApp de forma automatizada.</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">5 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/concessionaria-carro-whatsapp.html" class="card">
+        <span class="card-tag">Automotivo</span>
+        <h2>Concessionaria de Carros: Como Usar o WhatsApp para Vender Mais Veiculos</h2>
+        <p>Como concessionarias e revendas de veiculos usam IA no WhatsApp para capturar leads, agendar test drives e fechar mais negócios.</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">6 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/construtora-obra-whatsapp.html" class="card">
+        <span class="card-tag">Construcao</span>
+        <h2>Construtora: Automatize a Comunicacao com Clientes Durante a Obra</h2>
+        <p>Como construtoras e empreiteiras usam IA no WhatsApp para atualizar clientes sobre o andamento da obra, responder duvidas e gerenc</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">5 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/consultoria-rh-whatsapp.html" class="card">
+        <span class="card-tag">RH</span>
+        <h2>Consultoria de RH: Automatize o Atendimento a Candidatos pelo WhatsApp</h2>
+        <p>Como empresas e consultorias de RH usam IA no WhatsApp para triagem de candidatos, agendamento de entrevistas e comunicacao de pro</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">5 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/corretora-seguros-whatsapp.html" class="card">
+        <span class="card-tag">Seguros</span>
+        <h2>Corretora de Seguros: Automatize Cotacoes e Renovacoes pelo WhatsApp</h2>
+        <p>Como corretoras de seguros usam IA no WhatsApp para fazer cotacoes rapidas, renovar apolices e responder sinistros de clientes.</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">6 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/curso-online-whatsapp.html" class="card">
+        <span class="card-tag">Cursos Online</span>
+        <h2>Como Vender e Suportar Cursos Online pelo WhatsApp com IA</h2>
+        <p>Estrategias para infoprodutores e plataformas de cursos usarem o WhatsApp para vender, onboarding e suporte a alunos.</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">6 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/delivery-farmacia-whatsapp.html" class="card">
+        <span class="card-tag">Delivery Farmacia</span>
+        <h2>Como Oferecer Delivery de Farmacias pelo WhatsApp com Automacao</h2>
+        <p>Estrategia completa para farmacias que querem implementar delivery de medicamentos pelo WhatsApp com atendimento automatizado.</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">5 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/distribuidora-atacado-whatsapp.html" class="card">
+        <span class="card-tag">Atacado</span>
+        <h2>Distribuidora e Atacado: Automatize Pedidos de Clientes pelo WhatsApp</h2>
+        <p>Como distribuidoras e empresas de atacado usam IA no WhatsApp para receber pedidos, verificar estoque e comunicar prazos de entreg</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">5 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/escalar-atendimento-whatsapp-sem-contratar.html" class="card">
+        <span class="card-tag">Estrategia</span>
+        <h2>Como Escalar o Atendimento no WhatsApp sem Contratar</h2>
+        <p>Como Escalar o Atendimento no WhatsApp sem Contratar. Saiba como o Atendente24h automatiza o atendimento da sua empresa no WhatsAp</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">6 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/escola-idiomas-whatsapp.html" class="card">
+        <span class="card-tag">Idiomas</span>
+        <h2>Escola de Idiomas: Automatize Matriculas e Comunicacao com Alunos pelo WhatsApp</h2>
+        <p>Como escolas de idiomas e professores autonomos de linguas usam IA no WhatsApp para matriculas, lembretes de aula e envio de mater</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">5 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/escola-natacao-whatsapp.html" class="card">
+        <span class="card-tag">Natacao</span>
+        <h2>Escola de Natacao: Automatize Matriculas e Comunicacao com Pais</h2>
+        <p>Como escolas de natacao e clubes esportivos usam IA no WhatsApp para matriculas, horarios de turmas e comunicacao com pais.</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">5 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/escritorio-contabilidade-whatsapp.html" class="card">
+        <span class="card-tag">Contabilidade</span>
+        <h2>Escritorio de Contabilidade: Automatize o Atendimento de Clientes pelo WhatsApp</h2>
+        <p>Como contadores e escritorios contabeis usam IA no WhatsApp para receber documentos, tirar duvidas fiscais basicas e se comunicar </p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">6 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/estetica-whatsapp-automatico.html" class="card">
+        <span class="card-tag">Estetica</span>
+        <h2>Clinica de Estetica: Automatize o Agendamento pelo WhatsApp</h2>
+        <p>Como clinicas de estetica e spas podem usar IA no WhatsApp para agendar procedimentos, enviar instrucoes pre-sessao e reduzir canc</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">6 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/estudio-yoga-whatsapp.html" class="card">
+        <span class="card-tag">Yoga</span>
+        <h2>Studio de Yoga: Automatize Matriculas, Horarios e Comunicacao com Alunos</h2>
+        <p>Como studios de yoga e professores autonomos usam IA no WhatsApp para agendamento de aulas, onboarding de novos alunos e comunicac</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">5 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/faq-automatico-whatsapp-empresa.html" class="card">
+        <span class="card-tag">Tutorial</span>
+        <h2>Como Criar um FAQ Automatico para sua Empresa no WhatsApp</h2>
+        <p>Como Criar um FAQ Automatico para sua Empresa no WhatsApp. Saiba como o Atendente24h automatiza o atendimento da sua empresa no Wh</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">5 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/farmacia-whatsapp-automatico.html" class="card">
+        <span class="card-tag">Farmacias</span>
+        <h2>Farmacia: Automatize Pedidos e Consultas pelo WhatsApp</h2>
+        <p>Como farmacias e drogarias usam IA no WhatsApp para receber pedidos, verificar disponibilidade de medicamentos e tirar duvidas.</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">6 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/fotografia-estudio-whatsapp.html" class="card">
+        <span class="card-tag">Fotografia</span>
+        <h2>Fotografo e Studio: Automatize Orcamentos e Agendamentos pelo WhatsApp</h2>
+        <p>Como fotografos e studios fotograficos usam IA no WhatsApp para enviar orcamentos, agendar ensaios e fazer followup de clientes.</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">5 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/franquias-whatsapp-automatico.html" class="card">
+        <span class="card-tag">Franquias</span>
+        <h2>Como Franquias Controlam o Atendimento de WhatsApp de Multiplas Unidades</h2>
+        <p>Como redes de franquias e empresas com multiplas filiais centralizam e padronizam o atendimento via WhatsApp sem perder personaliz</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">6 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/hotel-pousada-whatsapp.html" class="card">
+        <span class="card-tag">Hospedagem</span>
+        <h2>Hotel e Pousada: Automatize Reservas e Check-in pelo WhatsApp</h2>
+        <p>Como hoteis, pousadas e airbnbs usam IA no WhatsApp para receber reservas, confirmar disponibilidade e agilizar o check-in.</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">5 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/imobiliaria-lancamento-whatsapp.html" class="card">
+        <span class="card-tag">Lancamentos</span>
+        <h2>Lancamentos Imobiliarios: Como Capturar e Nutrir Leads pelo WhatsApp</h2>
+        <p>Estrategia completa para incorporadoras e imobiliarias usarem o WhatsApp para capturar leads em lancamentos e conduzir ate o fecha</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">7 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/influencer-digital-whatsapp.html" class="card">
+        <span class="card-tag">Criadores</span>
+        <h2>Criador de Conteudo: Como Usar o WhatsApp para Gerenciar Parcerias e Seguidores</h2>
+        <p>Como influenciadores digitais e criadores de conteudo usam IA no WhatsApp para gerenciar parcerias com marcas, responder fas e ven</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">5 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/integrar-whatsapp-crm.html" class="card">
+        <span class="card-tag">Integracao</span>
+        <h2>Como Integrar o WhatsApp com o CRM da sua Empresa</h2>
+        <p>Guia pratico para integrar o atendimento de WhatsApp com CRMs populares como HubSpot, Pipedrive, RD Station e sistemas proprios.</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">6 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/locacao-imovel-whatsapp.html" class="card">
+        <span class="card-tag">Locacao</span>
+        <h2>Automatize o Atendimento de Locacao de Imoveis pelo WhatsApp</h2>
+        <p>Como imobiliarias e proprietarios podem automatizar todo o processo de locacao via WhatsApp: triagem, documentacao e assinatura.</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">6 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/loja-roupas-whatsapp.html" class="card">
+        <span class="card-tag">Moda</span>
+        <h2>Como Vender Roupas pelo WhatsApp com Atendimento Automatizado</h2>
+        <p>Estrategias para lojas de roupas e boutiques que querem vender mais pelo WhatsApp usando IA para atender clientes e processar pedi</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">5 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/loja-suplementos-whatsapp.html" class="card">
+        <span class="card-tag">Suplementos</span>
+        <h2>Loja de Suplementos: Atendimento e Vendas pelo WhatsApp com IA</h2>
+        <p>Como lojas de suplementos alimentares usam IA no WhatsApp para tirar duvidas tecnicas, recomendar produtos e processar pedidos.</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">5 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/marketing-digital-agencia-whatsapp.html" class="card">
+        <span class="card-tag">Marketing Digital</span>
+        <h2>Agencia de Marketing Digital: Automatize o Atendimento e Onboarding de Clientes</h2>
+        <p>Como agencias de marketing digital usam IA no WhatsApp para qualificar leads, onboarding de novos clientes e comunicacao de result</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">5 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/medico-teleconsulta-whatsapp.html" class="card">
+        <span class="card-tag">Telemedicina</span>
+        <h2>Teleconsulta: Como Medicos Usam o WhatsApp para Consultas Remotas</h2>
+        <p>Como medicos e clinicas usam o WhatsApp para agendar teleconsultas, enviar orientacoes e fazer followup de pacientes remotamente.</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">5 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/mei-whatsapp-contador.html" class="card">
+        <span class="card-tag">MEI</span>
+        <h2>MEI: Como Usar o WhatsApp para Tirar Duvidas com seu Contador</h2>
+        <p>Como microempreendedores individuais podem ter um assistente contabil no WhatsApp que responde duvidas sobre DAS, notas fiscais e </p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">5 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/melhor-chatbot-whatsapp-brasil-2026.html" class="card">
+        <span class="card-tag">Comparativo</span>
+        <h2>Melhor Chatbot WhatsApp para Empresas Brasileiras em 2026</h2>
+        <p>Melhor Chatbot WhatsApp para Empresas Brasileiras em 2026. Saiba como o Atendente24h automatiza o atendimento da sua empresa no Wh</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">8 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/metricas-atendimento-whatsapp-ia.html" class="card">
+        <span class="card-tag">Estrategia</span>
+        <h2>Metricas de Atendimento no WhatsApp: O Que Acompanhar</h2>
+        <p>Metricas de Atendimento no WhatsApp: O Que Acompanhar. Saiba como o Atendente24h automatiza o atendimento da sua empresa no WhatsA</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">6 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/metricas-atendimento-whatsapp.html" class="card">
+        <span class="card-tag">Metricas</span>
+        <h2>Metricas de Atendimento no WhatsApp: O Que Medir e Como Melhorar</h2>
+        <p>Quais KPIs monitorar no atendimento via WhatsApp para garantir qualidade, velocidade e satisfacao do cliente.</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">6 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/nutricao-nutricionista-whatsapp.html" class="card">
+        <span class="card-tag">Nutricao</span>
+        <h2>Nutricionista: Como Organizar Consultas e Enviar Planos pelo WhatsApp</h2>
+        <p>Como nutricionistas autonomos e clinicas de nutricao usam IA no WhatsApp para agendar consultas, enviar planos alimentares e fazer</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">5 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/perguntas-frequentes-automacao-whatsapp.html" class="card">
+        <span class="card-tag">FAQ</span>
+        <h2>Perguntas Frequentes sobre Automacao de WhatsApp para Empresas</h2>
+        <p>Perguntas Frequentes sobre Automacao de WhatsApp para Empresas. Saiba como o Atendente24h automatiza o atendimento da sua empresa </p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">7 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/personal-trainer-whatsapp.html" class="card">
+        <span class="card-tag">Personal Trainer</span>
+        <h2>Personal Trainer: Como Gerenciar Alunos e Agendamentos pelo WhatsApp</h2>
+        <p>Como personal trainers autonomos podem usar IA no WhatsApp para agendar treinos, enviar planos e manter contato com alunos.</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">5 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/personalizar-respostas-automaticas-whatsapp.html" class="card">
+        <span class="card-tag">Tutorial</span>
+        <h2>Como Personalizar Respostas Automaticas no WhatsApp</h2>
+        <p>Como Personalizar Respostas Automaticas no WhatsApp. Saiba como o Atendente24h automatiza o atendimento da sua empresa no WhatsApp</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">6 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/pesquisa-satisfacao-automatica-whatsapp.html" class="card">
+        <span class="card-tag">Estrategia</span>
+        <h2>Pesquisa de Satisfacao Automatica pelo WhatsApp com IA</h2>
+        <p>Pesquisa de Satisfacao Automatica pelo WhatsApp com IA. Saiba como o Atendente24h automatiza o atendimento da sua empresa no Whats</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">5 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/pet-shop-whatsapp-automatico.html" class="card">
+        <span class="card-tag">Pet Shop</span>
+        <h2>Pet Shop: Como Usar o WhatsApp para Agendar Banho, Tosa e Veterinario</h2>
+        <p>Como pet shops e clinicas veterinarias usam IA no WhatsApp para agendar servicos, enviar lembretes de vacina e responder tutores.</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">6 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/plano-odontologico-whatsapp.html" class="card">
+        <span class="card-tag">Plano Dental</span>
+        <h2>Como Responder Duvidas sobre Plano Odontologico pelo WhatsApp Automaticamente</h2>
+        <p>Automatize as respostas sobre coberturas, carencias e autorizacoes de plano odontologico no WhatsApp da sua clinica.</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">5 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/psicologia-clinica-whatsapp.html" class="card">
+        <span class="card-tag">Psicologia</span>
+        <h2>Psicologo e Terapeuta: Como Usar o WhatsApp para Agendamento sem Violar a Etica</h2>
+        <p>Como psicologos e terapeutas podem automatizar agendamentos e comunicacao pelo WhatsApp respeitando o sigilo e a etica profissiona</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">6 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/qualificar-leads-whatsapp-automatico.html" class="card">
+        <span class="card-tag">Vendas</span>
+        <h2>Como Qualificar Leads Automaticamente pelo WhatsApp</h2>
+        <p>Como Qualificar Leads Automaticamente pelo WhatsApp. Saiba como o Atendente24h automatiza o atendimento da sua empresa no WhatsApp</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">7 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/recuperar-clientes-inativos-whatsapp-ia.html" class="card">
+        <span class="card-tag">Estrategia</span>
+        <h2>Como Recuperar Clientes Inativos pelo WhatsApp com IA</h2>
+        <p>Como Recuperar Clientes Inativos pelo WhatsApp com IA. Saiba como o Atendente24h automatiza o atendimento da sua empresa no WhatsA</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">6 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/revendedor-autonomo-whatsapp.html" class="card">
+        <span class="card-tag">Revendedores</span>
+        <h2>Revendedor Autonomo: Como Usar o WhatsApp para Vender Mais com Menos Esforco</h2>
+        <p>Como revendedores autonomos de cosmeticos, roupas e outros produtos usam IA no WhatsApp para gerenciar pedidos e atender clientes.</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">5 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/roi-chatbot-whatsapp.html" class="card">
+        <span class="card-tag">ROI</span>
+        <h2>ROI de Chatbot no WhatsApp: Como Calcular o Retorno do Investimento</h2>
+        <p>Como calcular o retorno financeiro real de um chatbot ou atendente IA no WhatsApp para justificar o investimento para sua empresa.</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">7 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/saude-mental-app-whatsapp.html" class="card">
+        <span class="card-tag">Bem-Estar</span>
+        <h2>Apps de Saude Mental e Bem-Estar: Como Usar o WhatsApp para Engajamento</h2>
+        <p>Estrategias para apps e programas de bem-estar que usam o WhatsApp para engajar usuarios, enviar lembretes e suporte emocional aut</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">5 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/seguranca-dados-whatsapp-empresas.html" class="card">
+        <span class="card-tag">Seguranca</span>
+        <h2>Segurança de Dados no Atendimento via WhatsApp para Empresas</h2>
+        <p>Como garantir a seguranca dos dados de clientes no atendimento via WhatsApp, em conformidade com a LGPD e boas praticas de privaci</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">5 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/studio-pilates-whatsapp.html" class="card">
+        <span class="card-tag">Pilates</span>
+        <h2>Studio de Pilates: Agendamento e Comunicacao com Alunos pelo WhatsApp</h2>
+        <p>Como studios de pilates usam IA no WhatsApp para agendar aulas, controlar turmas limitadas e fazer acompanhamento de evolucao.</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">5 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/tom-de-voz-chatbot-whatsapp.html" class="card">
+        <span class="card-tag">Branding</span>
+        <h2>Como Definir o Tom de Voz do seu Atendente Virtual no WhatsApp</h2>
+        <p>Guia para criar uma personalidade consistente para o seu atendente IA no WhatsApp que reflita a marca e construa confiança com cli</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">5 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/transferir-atendimento-ia-para-humano.html" class="card">
+        <span class="card-tag">Tutorial</span>
+        <h2>Como Configurar a Transferencia de Atendimento IA para Humano</h2>
+        <p>Como Configurar a Transferencia de Atendimento IA para Humano. Saiba como o Atendente24h automatiza o atendimento da sua empresa n</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">5 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/transportadora-frete-whatsapp.html" class="card">
+        <span class="card-tag">Logistica</span>
+        <h2>Transportadora: Automatize Cotacoes de Frete e Rastreamento pelo WhatsApp</h2>
+        <p>Como transportadoras e empresas de logistica usam IA no WhatsApp para cotar fretes, rastrear cargas e comunicar clientes.</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">5 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/vale-a-pena-ia-atendimento-whatsapp-2026.html" class="card">
+        <span class="card-tag">Estrategia</span>
+        <h2>Vale a Pena Investir em IA para Atendimento WhatsApp em 2026?</h2>
+        <p>Vale a Pena Investir em IA para Atendimento WhatsApp em 2026?. Saiba como o Atendente24h automatiza o atendimento da sua empresa n</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">6 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/veterinario-whatsapp.html" class="card">
+        <span class="card-tag">Veterinaria</span>
+        <h2>Clinica Veterinaria: Automatize Consultas e Emergencias pelo WhatsApp</h2>
+        <p>Como clinicas veterinarias usam IA no WhatsApp para triagem de emergencias, agendamento de consultas e acompanhamento pos-procedim</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">6 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/whatsapp-automatico-academia.html" class="card">
+        <span class="card-tag">Academias</span>
+        <h2>WhatsApp Automatico para Academia: Matriculas e Retencao de Alunos</h2>
+        <p>Como academias e studios fitness usam IA no WhatsApp para automatizar matriculas, cobrar mensalidades e reter alunos.</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">6 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/whatsapp-automatico-contabilidade-pme.html" class="card">
+        <span class="card-tag">Contabilidade</span>
+        <h2>WhatsApp Automatico para Contabilidade de PMEs</h2>
+        <p>WhatsApp Automatico para Contabilidade de PMEs. Saiba como o Atendente24h automatiza o atendimento da sua empresa no WhatsApp 24h.</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">6 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/whatsapp-automatico-escola-idiomas.html" class="card">
+        <span class="card-tag">Educacao</span>
+        <h2>WhatsApp Automatico para Escola de Idiomas</h2>
+        <p>WhatsApp Automatico para Escola de Idiomas. Saiba como o Atendente24h automatiza o atendimento da sua empresa no WhatsApp 24h.</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">5 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/whatsapp-automatico-imoveis-leads.html" class="card">
+        <span class="card-tag">Imobiliarias</span>
+        <h2>Como Capturar e Qualificar Leads de Imoveis pelo WhatsApp</h2>
+        <p>Como Capturar e Qualificar Leads de Imoveis pelo WhatsApp. Saiba como o Atendente24h automatiza o atendimento da sua empresa no Wh</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">7 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/whatsapp-automatico-lava-rapido.html" class="card">
+        <span class="card-tag">Automotivo</span>
+        <h2>WhatsApp Automatico para Lava-Rapido e Estetica Automotiva</h2>
+        <p>WhatsApp Automatico para Lava-Rapido e Estetica Automotiva. Saiba como o Atendente24h automatiza o atendimento da sua empresa no W</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">5 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/whatsapp-automatico-petshop-produtos.html" class="card">
+        <span class="card-tag">Pet Shop</span>
+        <h2>WhatsApp Automatico para Venda de Produtos para Pets</h2>
+        <p>WhatsApp Automatico para Venda de Produtos para Pets. Saiba como o Atendente24h automatiza o atendimento da sua empresa no WhatsAp</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">5 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/whatsapp-automatico-rastreio-pedido.html" class="card">
+        <span class="card-tag">E-commerce</span>
+        <h2>Como Automatizar Rastreio de Pedidos pelo WhatsApp</h2>
+        <p>Como Automatizar Rastreio de Pedidos pelo WhatsApp. Saiba como o Atendente24h automatiza o atendimento da sua empresa no WhatsApp </p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">5 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/whatsapp-automatico-restaurante-reservas.html" class="card">
+        <span class="card-tag">Restaurantes</span>
+        <h2>Como Automatizar Reservas de Restaurante pelo WhatsApp</h2>
+        <p>Como Automatizar Reservas de Restaurante pelo WhatsApp. Saiba como o Atendente24h automatiza o atendimento da sua empresa no Whats</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">5 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/whatsapp-business-api-diferenca.html" class="card">
+        <span class="card-tag">Tecnologia</span>
+        <h2>WhatsApp Business App vs API: Qual Usar para Automacao?</h2>
+        <p>Entenda a diferenca entre o WhatsApp Business gratuito e a API do WhatsApp, e qual e o melhor caminho para automatizar o atendimen</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">7 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/whatsapp-business-api-pme-como-usar.html" class="card">
+        <span class="card-tag">Tutorial</span>
+        <h2>WhatsApp Business API para PMEs: O Que E e Como Usar</h2>
+        <p>WhatsApp Business API para PMEs: O Que E e Como Usar. Saiba como o Atendente24h automatiza o atendimento da sua empresa no WhatsAp</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">7 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/whatsapp-convenio-medico.html" class="card">
+        <span class="card-tag">Convenios</span>
+        <h2>Como Responder Perguntas sobre Convenio Medico pelo WhatsApp Automaticamente</h2>
+        <p>Automatize as respostas sobre planos de saude, procedimentos cobertos e carencias pelo WhatsApp da sua clinica.</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">5 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/whatsapp-delivery-automatico.html" class="card">
+        <span class="card-tag">Delivery</span>
+        <h2>Como Automatizar Pedidos de Delivery pelo WhatsApp</h2>
+        <p>Guia pratico para restaurantes e dark kitchens que querem automatizar pedidos de delivery via WhatsApp sem depender de apps de ter</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">7 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/whatsapp-ia-academia-aulas-agendamento.html" class="card">
+        <span class="card-tag">Fitness</span>
+        <h2>Como Agendar Aulas de Academia pelo WhatsApp com IA</h2>
+        <p>Como Agendar Aulas de Academia pelo WhatsApp com IA. Saiba como o Atendente24h automatiza o atendimento da sua empresa no WhatsApp</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">6 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/whatsapp-ia-clinica-confirmacao-consulta.html" class="card">
+        <span class="card-tag">Saude</span>
+        <h2>Como Confirmar Consultas pelo WhatsApp com IA</h2>
+        <p>Como Confirmar Consultas pelo WhatsApp com IA. Saiba como o Atendente24h automatiza o atendimento da sua empresa no WhatsApp 24h.</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">5 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/whatsapp-ia-farmacia-manipulacao.html" class="card">
+        <span class="card-tag">Farmacias</span>
+        <h2>WhatsApp com IA para Farmacia de Manipulacao</h2>
+        <p>WhatsApp com IA para Farmacia de Manipulacao. Saiba como o Atendente24h automatiza o atendimento da sua empresa no WhatsApp 24h.</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">6 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/whatsapp-ia-guia-turistico-atendimento.html" class="card">
+        <span class="card-tag">Turismo</span>
+        <h2>WhatsApp com IA para Guias Turisticos e Operadoras</h2>
+        <p>WhatsApp com IA para Guias Turisticos e Operadoras. Saiba como o Atendente24h automatiza o atendimento da sua empresa no WhatsApp </p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">6 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/whatsapp-ia-lgpd-conformidade.html" class="card">
+        <span class="card-tag">Juridico</span>
+        <h2>WhatsApp com IA e a LGPD: O Que sua Empresa Precisa Saber</h2>
+        <p>WhatsApp com IA e a LGPD: O Que sua Empresa Precisa Saber. Saiba como o Atendente24h automatiza o atendimento da sua empresa no Wh</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">6 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/whatsapp-ia-manicure-agenda.html" class="card">
+        <span class="card-tag">Beleza</span>
+        <h2>WhatsApp com IA para Manicure: Chega de Agenda Manual</h2>
+        <p>WhatsApp com IA para Manicure: Chega de Agenda Manual. Saiba como o Atendente24h automatiza o atendimento da sua empresa no WhatsA</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">5 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/whatsapp-ia-multilojas-franquia.html" class="card">
+        <span class="card-tag">Varejo</span>
+        <h2>WhatsApp com IA para Redes e Franquias de Varejo</h2>
+        <p>WhatsApp com IA para Redes e Franquias de Varejo. Saiba como o Atendente24h automatiza o atendimento da sua empresa no WhatsApp 24</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">7 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/whatsapp-ia-reducao-custo-atendimento.html" class="card">
+        <span class="card-tag">ROI e Custos</span>
+        <h2>Como a IA no WhatsApp Reduz o Custo de Atendimento</h2>
+        <p>Como a IA no WhatsApp Reduz o Custo de Atendimento. Saiba como o Atendente24h automatiza o atendimento da sua empresa no WhatsApp </p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">6 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/whatsapp-ia-reducao-faltas-odontologia.html" class="card">
+        <span class="card-tag">Odontologia</span>
+        <h2>Como Reduzir Faltas na Odontologia com WhatsApp IA</h2>
+        <p>Como Reduzir Faltas na Odontologia com WhatsApp IA. Saiba como o Atendente24h automatiza o atendimento da sua empresa no WhatsApp </p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">5 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/whatsapp-ia-solopreneur-autonomo.html" class="card">
+        <span class="card-tag">Estrategia</span>
+        <h2>WhatsApp com IA para Autonomos e Solopreneurs</h2>
+        <p>WhatsApp com IA para Autonomos e Solopreneurs. Saiba como o Atendente24h automatiza o atendimento da sua empresa no WhatsApp 24h.</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">5 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/whatsapp-ia-supermercado-atacado.html" class="card">
+        <span class="card-tag">Varejo</span>
+        <h2>WhatsApp com IA para Supermercado e Atacado</h2>
+        <p>WhatsApp com IA para Supermercado e Atacado. Automatize o atendimento da sua empresa no WhatsApp com IA. Atenda clientes 24h sem a</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">6 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/whatsapp-ia-triagem-casos-juridicos.html" class="card">
+        <span class="card-tag">Juridico</span>
+        <h2>Como Triar Casos Juridicos pelo WhatsApp com IA</h2>
+        <p>Como Triar Casos Juridicos pelo WhatsApp com IA. Saiba como o Atendente24h automatiza o atendimento da sua empresa no WhatsApp 24h</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">6 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/whatsapp-ia-vendas-noite-feriado.html" class="card">
+        <span class="card-tag">Vendas</span>
+        <h2>Vender de Madrugada e em Feriados com WhatsApp IA</h2>
+        <p>Vender de Madrugada e em Feriados com WhatsApp IA. Saiba como o Atendente24h automatiza o atendimento da sua empresa no WhatsApp 2</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">5 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/whatsapp-pedidos-automaticos-lanchonete.html" class="card">
+        <span class="card-tag">Restaurantes</span>
+        <h2>WhatsApp Automatico para Lanchonetes e Bares</h2>
+        <p>WhatsApp Automatico para Lanchonetes e Bares. Saiba como o Atendente24h automatiza o atendimento da sua empresa no WhatsApp 24h.</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">5 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/blog/whatsapp-suporte-pos-venda.html" class="card">
+        <span class="card-tag">Suporte</span>
+        <h2>Como Automatizar o Suporte Pos-Venda pelo WhatsApp</h2>
+        <p>Estrategias para lojas e empresas automatizarem o atendimento pos-venda no WhatsApp: trocas, devolucoes, garantias e satisfacao.</p>
+        <div class="card-meta">
+          <span class="card-date">28 Mar 2026</span>
+          <span class="card-read">6 min de leitura</span>
+        </div>
+        <span class="card-link">Ler artigo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+</div>
 <footer>
   <p>Atendente24h &copy; 2026 - Atendimento automatizado com IA para PMEs brasileiras</p>
   <p style="margin-top:8px"><a href="https://atendente24h.com">atendente24h.com</a></p>
