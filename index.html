@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Atendente de WhatsApp com IA 24h | Atendente24h — A partir de R$197/mês</title>
+<title>Atendente de WhatsApp com IA 24h | Atendente24h - A partir de R$197/mes</title>
 <meta name="description" content="Atendente de WhatsApp com IA para pequenas e médias empresas brasileiras. Responde clientes em menos de 2 segundos, 24 horas por dia, 7 dias por semana. Zero instalação. Zero técnico. Ativo em minutos. A partir de R$197/mês.">
 <meta name="keywords" content="atendente WhatsApp IA, bot WhatsApp para empresas, atendimento automático WhatsApp, chatbot WhatsApp PME, atendente virtual WhatsApp, automação WhatsApp, atendimento 24h WhatsApp, robô WhatsApp">
 <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
@@ -1331,7 +1331,7 @@ footer{
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
         <div id="enterprise-success" style="display:none;background:rgba(37,211,102,0.1);border:1px solid rgba(37,211,102,0.3);border-radius:10px;padding:14px 16px;color:#25D366;font-size:14px;font-weight:600;text-align:center">
-          Recebemos! Vamos entrar em contato em ate 24h.
+          Recebemos! Vamos entrar em contato em até 24h.
         </div>
       </form>
     </div>
@@ -1594,9 +1594,9 @@ footer{
     <div class="footer-links">
       <a href="#planos">Planos</a>
       <a href="#faq">FAQ</a>
-      <a href="#">Suporte</a>
-      <a href="#">Termos</a>
-      <a href="#">Privacidade</a>
+      <a href="mailto:suporte@atendente24h.com">Suporte</a>
+      <a href="/termos">Termos</a>
+      <a href="/privacidade">Privacidade</a>
     </div>
     <div class="footer-copy">Feito com IA · 2026</div>
   </div>
@@ -1614,12 +1614,16 @@ async function submitEnterprise(e) {
   btn.disabled = true
   btn.textContent = 'Enviando...'
   try {
-    await fetch('https://n8n.atendente24h.com/webhook/enterprise-lead', {
+    await fetch('https://crista-oleographic-frightfully.ngrok-free.dev/webhook/enterprise-lead', {
       method: 'POST',
-      headers: {'Content-Type': 'application/json'},
+      headers: {'Content-Type': 'application/json', 'ngrok-skip-browser-warning': '1'},
       body: JSON.stringify({nome, email, whatsapp: wpp})
     })
-  } catch(_) {}
+  } catch(_) {
+    const msg = encodeURIComponent(`Oi! Sou ${nome} e tenho interesse no plano Enterprise do Atendente24h. Meu email e ${email} e meu WhatsApp e ${wpp}. Quero uma proposta.`)
+    window.location.href = `mailto:suporte@atendente24h.com?subject=Interesse%20no%20plano%20Enterprise&body=${msg}`
+    return
+  }
   document.getElementById('enterprise-form').querySelectorAll('input,button').forEach(el => el.style.display = 'none')
   success.style.display = 'block'
 }

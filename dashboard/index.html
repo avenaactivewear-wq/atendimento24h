@@ -402,11 +402,11 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',-apple-system,sa
 
       <div class="info-row">
         <span class="info-key">Empresa</span>
-        <span class="info-val" id="info-empresa">—</span>
+        <span class="info-val" id="info-empresa">--</span>
       </div>
       <div class="info-row" id="instancia-row" style="display:none">
         <span class="info-key">WhatsApp conectado</span>
-        <span class="info-val" id="info-instancia">—</span>
+        <span class="info-val" id="info-instancia">--</span>
       </div>
 
       <button class="btn-config-big" id="btn-configurar">
@@ -639,8 +639,8 @@ function showDashboard(email, clienteData) {
 
   // Buy More Card
   const buyCard = document.getElementById("buy-more-card");
+  buyCard.style.display = "block";
   if (pct >= 80) {
-    buyCard.style.display = "block";
     if (pct >= 95) {
       buyCard.classList.add("critical");
       document.getElementById("buy-more-title").textContent = "Limite crítico! Seu bot vai parar de responder.";
@@ -735,10 +735,15 @@ document.getElementById("modal-save-btn").addEventListener("click", async functi
   const btn = document.getElementById("modal-save-btn");
   btn.textContent = "Salvando..."; btn.disabled = true;
   if (currentCliente) currentCliente.system_prompt = textarea.value;
-  // TODO: enviar para webhook quando disponível
-  await new Promise(r => setTimeout(r, 500));
+  try {
+    await fetch(WEBHOOK_BASE + "/webhook/atendente24h-save-config", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "ngrok-skip-browser-warning": "1" },
+      body: JSON.stringify({ email: currentCliente ? currentCliente.email : "", contexto: textarea.value })
+    });
+  } catch(_) {}
   closeModal();
-  showToast("Configurações salvas com sucesso!");
+  showToast("Configuracoes salvas com sucesso!");
   btn.textContent = "Salvar"; btn.disabled = false;
 });
 
