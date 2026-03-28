@@ -727,6 +727,24 @@ footer{
 .ns-tags{display:flex;flex-wrap:wrap;gap:8px}
 .ns-tag{background:var(--card);border:1px solid var(--border);padding:7px 16px;border-radius:100px;font-size:13px;color:var(--text2);font-weight:500;white-space:nowrap}
 .ns-tag-accent{background:rgba(37,211,102,0.07);border-color:var(--border-green);color:var(--green)}
+.ns-tabs{display:flex;flex-wrap:wrap;gap:8px;margin-top:24px}
+.ns-tab{
+  background:var(--card);border:1px solid var(--border);
+  padding:8px 18px;border-radius:100px;
+  font-size:13px;color:var(--text2);font-weight:500;
+  cursor:pointer;transition:all .2s;font-family:inherit;
+}
+.ns-tab:hover{border-color:var(--border-green);color:var(--text)}
+.ns-tab.active{background:rgba(37,211,102,0.08);border-color:var(--border-green);color:var(--green)}
+
+/* ─── TESTI AUTO CAROUSEL ─── */
+.testi-track-wrap{overflow:hidden;margin-top:56px;cursor:grab}
+.testi-track-wrap:active{cursor:grabbing}
+.testi-track{
+  display:flex;gap:16px;
+  transition:transform .6s cubic-bezier(0.16,1,0.3,1);
+  will-change:transform;
+}
 </style>
 </head>
 <body>
@@ -962,11 +980,11 @@ footer{
       <div class="demo-text reveal">
         <div class="sec-eyebrow">Demo ao vivo</div>
         <div class="sec-title" style="font-size:clamp(32px,4vw,46px)">Qualquer pergunta.<br>Qualquer situacao.</div>
-        <p style="color:var(--text2);font-size:16px;line-height:1.65;margin-top:16px">O Atendente24h nao segue um roteiro fixo. Clique nos cenarios abaixo, incluindo perguntas fora do padrao.</p>
+        <p style="color:var(--text2);font-size:16px;line-height:1.65;margin-top:16px">O Atendente24h não segue um roteiro fixo. Clique nos cenários abaixo, incluindo perguntas fora do padrão.</p>
         <div class="demo-examples">
           <button class="demo-btn active" onclick="showDemo(0)" data-demo="0">
             <span class="demo-btn-dot"></span>
-            "Tem disponivel no tamanho 42?"
+            "Tem disponível no tamanho 42?"
           </button>
           <button class="demo-btn" onclick="showDemo(1)" data-demo="1">
             <span class="demo-btn-dot"></span>
@@ -974,19 +992,19 @@ footer{
           </button>
           <button class="demo-btn" onclick="showDemo(2)" data-demo="2">
             <span class="demo-btn-dot"></span>
-            "Quais sao os horarios de funcionamento?"
+            "Quais são os horários de funcionamento?"
           </button>
           <button class="demo-btn" onclick="showDemo(3)" data-demo="3">
             <span class="demo-btn-dot"></span>
-            "Voces fazem entrega?"
+            "Vocês fazem entrega?"
           </button>
           <button class="demo-btn" onclick="showDemo(4)" data-demo="4" style="border-color:rgba(37,211,102,0.25)">
             <span class="demo-btn-dot"></span>
-            "Esse tenis vai dar chule?" <span style="font-size:11px;color:var(--green);margin-left:4px;font-weight:700">fora do roteiro</span>
+            "Esse tênis vai dar chulé?" <span style="font-size:11px;color:var(--green);margin-left:4px;font-weight:700">fora do roteiro</span>
           </button>
           <button class="demo-btn" onclick="showDemo(5)" data-demo="5" style="border-color:rgba(37,211,102,0.25)">
             <span class="demo-btn-dot"></span>
-            "Produto horrivel, quero cancelar!" <span style="font-size:11px;color:var(--green);margin-left:4px;font-weight:700">cliente bravo</span>
+            "Produto horrível, quero cancelar!" <span style="font-size:11px;color:var(--green);margin-left:4px;font-weight:700">cliente bravo</span>
           </button>
         </div>
       </div>
@@ -1016,63 +1034,34 @@ footer{
       <div class="ns-battle reveal">
         <div class="sec-eyebrow">O maior diferencial</div>
         <div class="ns-proof-title">Pergunte o que quiser.<br><span style="color:var(--green)">Ele responde.</span></div>
-        <div class="ns-proof-sub">Outros bots travam quando o cliente sai do fluxo. O Atendente24h entende contexto e responde qualquer coisa, como um humano de verdade.</div>
-        <div class="ns-tags">
-          <span class="ns-tag ns-tag-accent">Sem roteiro fixo</span>
-          <span class="ns-tag">Perguntas fora do catalogo</span>
-          <span class="ns-tag">Clientes bravos e reclamacoes</span>
-          <span class="ns-tag">Pedidos em texto livre</span>
-          <span class="ns-tag">Negociacao de preco</span>
-          <span class="ns-tag">Perguntas esquisitas</span>
-          <span class="ns-tag">Qualquer idioma</span>
+        <div class="ns-proof-sub">Outros bots travam quando o cliente sai do fluxo. O Atendente24h entende contexto e responde qualquer coisa.</div>
+        <div class="ns-tabs">
+          <button class="ns-tab active" onclick="showNs(0)">Pergunta esquisita</button>
+          <button class="ns-tab" onclick="showNs(1)">Cliente bravo</button>
+          <button class="ns-tab" onclick="showNs(2)">Negociação</button>
+          <button class="ns-tab" onclick="showNs(3)">Fora do tema</button>
         </div>
       </div>
       <div class="reveal reveal-delay-2">
-        <!-- EXEMPLO 1: pergunta esquisita -->
-        <div style="margin-bottom:20px">
-          <div style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--text3);margin-bottom:10px">Pergunta fora do padrao</div>
+        <div id="ns-panel">
           <div class="ns-card ns-card-bad" style="margin-bottom:8px">
             <div class="ns-card-hdr">
               <span class="ns-card-label">Outros bots</span>
-              <span style="font-size:11px;color:#f87171;background:rgba(248,113,113,0.08);padding:3px 10px;border-radius:100px;font-weight:600">Trava</span>
+              <span id="ns-badge-bad" style="font-size:11px;color:#f87171;background:rgba(248,113,113,0.08);padding:3px 10px;border-radius:100px;font-weight:600">Trava</span>
             </div>
             <div class="ns-chat">
-              <div class="ns-msg-in">Esse tenis vai dar chule?</div>
-              <div class="ns-msg-out ns-msg-bad">Desculpe, nao entendi. Escolha uma opcao:<br>1 - Ver produtos &nbsp; 2 - Rastrear pedido &nbsp; 3 - Humano</div>
+              <div class="ns-msg-in" id="ns-q-bad"></div>
+              <div class="ns-msg-out ns-msg-bad" id="ns-a-bad"></div>
             </div>
           </div>
           <div class="ns-card ns-card-good">
             <div class="ns-card-hdr">
               <span class="ns-card-label">Atendente24h</span>
-              <span style="font-size:11px;color:var(--green);background:rgba(37,211,102,0.1);padding:3px 10px;border-radius:100px;font-weight:600">Converte</span>
+              <span id="ns-badge-good" style="font-size:11px;color:var(--green);background:rgba(37,211,102,0.1);padding:3px 10px;border-radius:100px;font-weight:600">Converte</span>
             </div>
             <div class="ns-chat">
-              <div class="ns-msg-in">Esse tenis vai dar chule?</div>
-              <div class="ns-msg-out ns-msg-ok">Haha, boa pergunta! O solado tem ventilacao e o tecido e anti-odor. Se quiser garantia extra, temos com palmilha antibacteriana no seu tamanho. 😄 Qual prefere?</div>
-            </div>
-          </div>
-        </div>
-        <!-- EXEMPLO 2: cliente bravo -->
-        <div>
-          <div style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--text3);margin-bottom:10px">Cliente irritado</div>
-          <div class="ns-card ns-card-bad" style="margin-bottom:8px">
-            <div class="ns-card-hdr">
-              <span class="ns-card-label">Outros bots</span>
-              <span style="font-size:11px;color:#f87171;background:rgba(248,113,113,0.08);padding:3px 10px;border-radius:100px;font-weight:600">Piora a situacao</span>
-            </div>
-            <div class="ns-chat">
-              <div class="ns-msg-in">Que empresa pessima, meu produto nao chegou!</div>
-              <div class="ns-msg-out ns-msg-bad">Opcao invalida. Digite 1, 2 ou 3 para continuar.</div>
-            </div>
-          </div>
-          <div class="ns-card ns-card-good">
-            <div class="ns-card-hdr">
-              <span class="ns-card-label">Atendente24h</span>
-              <span style="font-size:11px;color:var(--green);background:rgba(37,211,102,0.1);padding:3px 10px;border-radius:100px;font-weight:600">Resolve</span>
-            </div>
-            <div class="ns-chat">
-              <div class="ns-msg-in">Que empresa pessima, meu produto nao chegou!</div>
-              <div class="ns-msg-out ns-msg-ok">Entendo sua frustracao e sinto muito por isso. Me passa o numero do pedido que verifico agora mesmo o que aconteceu e te dou uma solucao. Voce merece uma resposta rapida. 🙏</div>
+              <div class="ns-msg-in" id="ns-q-good"></div>
+              <div class="ns-msg-out ns-msg-ok" id="ns-a-good"></div>
             </div>
           </div>
         </div>
@@ -1238,67 +1227,65 @@ footer{
       <div class="sec-eyebrow">Quem usa</div>
       <div class="sec-title">Negócios que nunca<br>mais perdem clientes.</div>
     </div>
-    <div class="testi-scroll" id="testi-scroll">
-      <div class="testi-card">
-        <div class="testi-stars">★★★★★</div>
-        <div class="testi-text">"Antes perdia 5 pedidos por semana por demora. Agora o atendente responde instantaneamente. Só entro quando é algo realmente complexo."</div>
-        <div class="testi-author">
-          <div class="testi-avatar" style="background:none;overflow:hidden;padding:0"><img src="testi-mariana.jpg" alt="Mariana S." style="width:100%;height:100%;object-fit:cover;border-radius:50%"></div>
-          <div><div class="testi-name">Mariana S.</div><div class="testi-biz">Loja de roupas femininas</div></div>
+    <div class="testi-track-wrap" id="testi-wrap">
+      <div class="testi-track" id="testi-track">
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <div class="testi-text">"Antes perdia 5 pedidos por semana por demora. Agora o atendente responde instantaneamente. Só entro quando é algo realmente complexo."</div>
+          <div class="testi-author">
+            <div class="testi-avatar" style="background:none;overflow:hidden;padding:0"><img src="testi-mariana.jpg" alt="Mariana S." style="width:100%;height:100%;object-fit:cover;border-radius:50%"></div>
+            <div><div class="testi-name">Mariana S.</div><div class="testi-biz">Loja de roupas femininas</div></div>
+          </div>
         </div>
-      </div>
-      <div class="testi-card">
-        <div class="testi-stars">★★★★★</div>
-        <div class="testi-text">"Minha clinica recebe agendamentos as 2h da manha agora. Paciente manda mensagem, o atendente informa disponibilidade e confirma. Incrivel."</div>
-        <div class="testi-author">
-          <div class="testi-avatar" style="background:none;overflow:hidden;padding:0"><img src="testi-ricardo.jpg" alt="Dr. Ricardo A." style="width:100%;height:100%;object-fit:cover;border-radius:50%"></div>
-          <div><div class="testi-name">Dr. Ricardo A.</div><div class="testi-biz">Clinica odontologica</div></div>
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <div class="testi-text">"Minha clínica recebe agendamentos às 2h da manhã agora. Paciente manda mensagem, o atendente informa disponibilidade e confirma. Incrível."</div>
+          <div class="testi-author">
+            <div class="testi-avatar" style="background:none;overflow:hidden;padding:0"><img src="testi-ricardo.jpg" alt="Dr. Ricardo A." style="width:100%;height:100%;object-fit:cover;border-radius:50%"></div>
+            <div><div class="testi-name">Dr. Ricardo A.</div><div class="testi-biz">Clínica odontológica</div></div>
+          </div>
         </div>
-      </div>
-      <div class="testi-card">
-        <div class="testi-stars">★★★★★</div>
-        <div class="testi-text">"Configurei em 10 minutos. Subi o cardapio e em menos de 1 hora o atendente ja estava tirando pedidos. Melhor investimento do restaurante no ano."</div>
-        <div class="testi-author">
-          <div class="testi-avatar" style="background:none;overflow:hidden;padding:0"><img src="testi-felipe.jpg" alt="Felipe M." style="width:100%;height:100%;object-fit:cover;border-radius:50%"></div>
-          <div><div class="testi-name">Felipe M.</div><div class="testi-biz">Restaurante delivery</div></div>
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <div class="testi-text">"Configurei em 10 minutos. Subi o cardápio e em menos de 1 hora o atendente já estava tirando pedidos. Melhor investimento do restaurante no ano."</div>
+          <div class="testi-author">
+            <div class="testi-avatar" style="background:none;overflow:hidden;padding:0"><img src="testi-felipe.jpg" alt="Felipe M." style="width:100%;height:100%;object-fit:cover;border-radius:50%"></div>
+            <div><div class="testi-name">Felipe M.</div><div class="testi-biz">Restaurante delivery</div></div>
+          </div>
         </div>
-      </div>
-      <div class="testi-card">
-        <div class="testi-stars">★★★★★</div>
-        <div class="testi-text">"Cliente perguntou uma coisa maluca fora do padrao e o atendente respondeu perfeitamente. Nunca vi outro bot fazer isso. Me vendeu na hora."</div>
-        <div class="testi-author">
-          <div class="testi-avatar" style="background:linear-gradient(135deg,#ec4899,#be185d)">C</div>
-          <div><div class="testi-name">Camila R.</div><div class="testi-biz">E-commerce de cosmeticos</div></div>
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <div class="testi-text">"Cliente perguntou algo totalmente fora do padrão e o atendente respondeu perfeitamente. Nunca vi outro bot fazer isso. Me vendeu na hora."</div>
+          <div class="testi-author">
+            <div class="testi-avatar" style="background:linear-gradient(135deg,#ec4899,#be185d)">C</div>
+            <div><div class="testi-name">Camila R.</div><div class="testi-biz">E-commerce de cosméticos</div></div>
+          </div>
         </div>
-      </div>
-      <div class="testi-card">
-        <div class="testi-stars">★★★★★</div>
-        <div class="testi-text">"Meu salao nao perde mais agendamento por falta de resposta no fim de semana. O atendente marca, confirma e ate manda lembrete. Virei fa."</div>
-        <div class="testi-author">
-          <div class="testi-avatar" style="background:linear-gradient(135deg,#14b8a6,#0d9488)">J</div>
-          <div><div class="testi-name">Juliana T.</div><div class="testi-biz">Salao de beleza</div></div>
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <div class="testi-text">"Meu salão não perde mais agendamento por falta de resposta no fim de semana. O atendente marca, confirma e ainda manda lembrete. Virei fã."</div>
+          <div class="testi-author">
+            <div class="testi-avatar" style="background:linear-gradient(135deg,#14b8a6,#0d9488)">J</div>
+            <div><div class="testi-name">Juliana T.</div><div class="testi-biz">Salão de beleza</div></div>
+          </div>
         </div>
-      </div>
-      <div class="testi-card">
-        <div class="testi-stars">★★★★★</div>
-        <div class="testi-text">"Tinha medo de parecer robotico pros clientes. Mas o atendente conversa tao bem que ninguem percebe. Varios clientes perguntaram o nome 'dela'."</div>
-        <div class="testi-author">
-          <div class="testi-avatar" style="background:linear-gradient(135deg,#3b82f6,#1d4ed8)">G</div>
-          <div><div class="testi-name">Gustavo N.</div><div class="testi-biz">Loja de eletronicos</div></div>
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <div class="testi-text">"Tinha medo de parecer robótico. Mas o atendente conversa tão bem que ninguém percebe. Vários clientes perguntaram o nome 'dela'."</div>
+          <div class="testi-author">
+            <div class="testi-avatar" style="background:linear-gradient(135deg,#3b82f6,#1d4ed8)">G</div>
+            <div><div class="testi-name">Gustavo N.</div><div class="testi-biz">Loja de eletrônicos</div></div>
+          </div>
         </div>
       </div>
     </div>
-    <div class="testi-nav">
-      <button class="testi-nav-btn" id="testi-prev" onclick="testiNav(-1)">&#8592;</button>
-      <div class="testi-dots" id="testi-dots">
-        <div class="testi-dot active" onclick="testiGo(0)"></div>
-        <div class="testi-dot" onclick="testiGo(1)"></div>
-        <div class="testi-dot" onclick="testiGo(2)"></div>
-        <div class="testi-dot" onclick="testiGo(3)"></div>
-        <div class="testi-dot" onclick="testiGo(4)"></div>
-        <div class="testi-dot" onclick="testiGo(5)"></div>
-      </div>
-      <button class="testi-nav-btn" id="testi-next" onclick="testiNav(1)">&#8594;</button>
+    <div class="testi-dots" id="testi-dots" style="display:flex;justify-content:center;gap:6px;align-items:center;margin-top:20px">
+      <div class="testi-dot active" onclick="testiGo(0)"></div>
+      <div class="testi-dot" onclick="testiGo(1)"></div>
+      <div class="testi-dot" onclick="testiGo(2)"></div>
+      <div class="testi-dot" onclick="testiGo(3)"></div>
+      <div class="testi-dot" onclick="testiGo(4)"></div>
+      <div class="testi-dot" onclick="testiGo(5)"></div>
     </div>
   </div>
 </section>
@@ -1316,16 +1303,16 @@ footer{
       <!-- CARD 1: FUNCIONARIO -->
       <div class="compare-card compare-card-bad">
         <div class="cc-top">
-          <div class="cc-name">Funcionario humano</div>
-          <div class="cc-price-bad">R$1.500 a R$2.500 / mes</div>
+          <div class="cc-name">Funcionário humano</div>
+          <div class="cc-price-bad">R$1.500 a R$2.500 / mês</div>
         </div>
-        <div class="cc-verdict">"Excelente para situacoes complexas. Impraticavel para escala e atendimento fora do horario."</div>
+        <div class="cc-verdict">"Ótimo para casos complexos. Mas cobre só 8h por dia, tira férias e não escala sem custo alto."</div>
         <div class="cc-tags">
-          <span class="cc-tag-x">Nao disponivel 24h</span>
-          <span class="cc-tag-x">Resposta lenta</span>
-          <span class="cc-tag-x">Pede ferias e folga</span>
-          <span class="cc-tag-x">Custo fixo alto</span>
-          <span class="cc-tag-x">Escalabilidade zero</span>
+          <span class="cc-tag-neutral">Responde qualquer pergunta</span>
+          <span class="cc-tag-neutral">Bom para negociações</span>
+          <span class="cc-tag-x">Fora de serviço 16h por dia</span>
+          <span class="cc-tag-x">Férias, doenças, turnover</span>
+          <span class="cc-tag-x">Custo fixo mesmo sem volume</span>
         </div>
       </div>
 
@@ -1333,30 +1320,34 @@ footer{
       <div class="compare-card compare-card-bad">
         <div class="cc-top">
           <div class="cc-name">ManyChat, Typebot e similares</div>
-          <div class="cc-price-bad">R$50 a R$300 / mes</div>
+          <div class="cc-price-bad">R$50 a R$300 / mês</div>
         </div>
-        <div class="cc-verdict">"Funciona bem enquanto o cliente faz perguntas que estao no fluxo. Fora disso: tranca, confunde, perde a venda."</div>
+        <div class="cc-verdict">"Funciona enquanto o cliente segue o fluxo. Qualquer pergunta fora do script: trava, confunde, perde a venda."</div>
         <div class="cc-tags">
-          <span class="cc-tag-x">Segue roteiro fixo</span>
-          <span class="cc-tag-x">"Opcao 1, 2 ou 3..."</span>
-          <span class="cc-tag-x">Sem suporte humano</span>
-          <span class="cc-tag-x">Configuracao complexa</span>
-          <span class="cc-tag-x">Nao entende contexto</span>
+          <span class="cc-tag-neutral">Disponível 24/7</span>
+          <span class="cc-tag-neutral">Custo de entrada baixo</span>
+          <span class="cc-tag-x">Trava fora do roteiro</span>
+          <span class="cc-tag-x">Não entende contexto</span>
+          <span class="cc-tag-x">Sem suporte humano real</span>
         </div>
       </div>
 
       <!-- CARD 3: ATENDENTE24H -->
       <div class="compare-card compare-card-winner">
-        <div class="cc-winner-badge">Melhor escolha</div>
         <div class="cc-top">
-          <div class="cc-name" style="color:var(--green)">Atendente24h</div>
-          <div class="cc-price-good">A partir de R$197 / mes</div>
+          <div style="flex:1">
+            <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:6px">
+              <div class="cc-name" style="color:var(--green)">Atendente24h</div>
+              <span style="background:var(--green);color:#000;padding:3px 12px;border-radius:100px;font-size:11px;font-weight:800;white-space:nowrap">Melhor escolha</span>
+            </div>
+            <div class="cc-price-good" style="display:inline-flex">A partir de R$197 / mês</div>
+          </div>
         </div>
-        <div class="cc-verdict" style="color:var(--text2)">"O unico que combina inteligencia real com disponibilidade total. Responde qualquer pergunta, a qualquer hora, sem travar."</div>
+        <div class="cc-verdict" style="color:var(--text2)">"Inteligência de humano, disponibilidade de máquina. Sem roteiro fixo, sem limite de perguntas, sem parar."</div>
         <div class="cc-tags">
-          <span class="cc-tag-ok">Disponivel 24h / 7 dias</span>
+          <span class="cc-tag-ok">Disponível 24h / 7 dias</span>
           <span class="cc-tag-ok">Sem roteiro fixo</span>
-          <span class="cc-tag-ok">Resposta em 2 segundos</span>
+          <span class="cc-tag-ok">Resposta em menos de 2s</span>
           <span class="cc-tag-ok">Suporte humano 24h</span>
           <span class="cc-tag-ok">Ativo em 5 minutos</span>
           <span class="cc-tag-ok">Garantia de 7 dias</span>
@@ -1566,28 +1557,28 @@ animateWpp()
 // ── Demo switcher
 const demos = [
   {
-    q: "Tem disponivel no tamanho 42?",
-    a: "Oi! Temos sim 😊 O modelo esta disponivel nos tamanhos 38 ao 44. No 42 temos preto, branco e cinza. Qual cor te interessa?"
+    q: "Tem disponível no tamanho 42?",
+    a: "Oi! Temos sim 😊 O modelo está disponível nos tamanhos 38 ao 44. No 42 temos preto, branco e cinza. Qual cor te interessa?"
   },
   {
     q: "Quando meu pedido vai chegar?",
-    a: "Oi! Deixa eu verificar aqui 🔍 Seu pedido #4821 foi despachado ontem. Codigo de rastreio: BR123456789. Previsao de entrega: amanha ate as 18h. Precisa de mais alguma coisa?"
+    a: "Oi! Deixa eu verificar aqui 🔍 Seu pedido #4821 foi despachado ontem. Código de rastreio: BR123456789. Previsão de entrega: amanhã até as 18h. Precisa de mais alguma coisa?"
   },
   {
-    q: "Quais sao os horarios de funcionamento?",
-    a: "Nosso atendimento humano funciona de segunda a sexta, das 9h as 18h, e sabado das 9h as 13h. Mas eu estou aqui 24 horas por dia, 7 dias por semana para te ajudar 😊"
+    q: "Quais são os horários de funcionamento?",
+    a: "Nosso atendimento humano funciona de segunda a sexta, das 9h às 18h, e sábado das 9h às 13h. Mas eu estou aqui 24 horas por dia, 7 dias por semana para te ajudar 😊"
   },
   {
-    q: "Voces fazem entrega?",
-    a: "Sim! Entregamos para todo o Brasil. Prazo de 2 a 7 dias uteis dependendo da sua regiao. Frete gratis em compras acima de R$199. Quer saber o prazo para o seu CEP?"
+    q: "Vocês fazem entrega?",
+    a: "Sim! Entregamos para todo o Brasil. Prazo de 2 a 7 dias úteis dependendo da sua região. Frete grátis em compras acima de R$199. Quer saber o prazo para o seu CEP?"
   },
   {
-    q: "Esse tenis vai dar chule?",
-    a: "Haha, boa pergunta! O solado tem ventilacao lateral e o tecido e anti-odor. Se quiser garantia extra, temos o modelo com palmilha antibacteriana disponivel no 42. Qual prefere? 😄"
+    q: "Esse tênis vai dar chulé?",
+    a: "Haha, boa pergunta! O solado tem ventilação lateral e o tecido é anti-odor. Se quiser garantia extra, temos o modelo com palmilha antibacteriana disponível no 42. Qual prefere? 😄"
   },
   {
-    q: "Produto horrivel, quero cancelar!",
-    a: "Entendo sua frustracao e sinto muito pela experiencia. Me conta o que aconteceu? Quero resolver isso pra voce agora mesmo. Se preferir, posso acionar nosso time de suporte em menos de 2 minutos. 🙏"
+    q: "Produto horrível, quero cancelar!",
+    a: "Entendo sua frustração e sinto muito pela experiência. Me conta o que aconteceu? Quero resolver isso pra você agora mesmo. Se preferir, posso acionar nosso time de suporte em menos de 2 minutos. 🙏"
   }
 ]
 function showDemo(i) {
