@@ -659,20 +659,36 @@ tr.row-cancelado:hover{background:rgba(220,38,38,0.045)}
 </div>
 
 <script>
-// DADOS MOCK
-const LIMITES = { Essencial: 500, Pro: 15000, Basico: 500, Recomendado: 2500 };
-const assinantes = [
-  { id:1, nome:'Carlos Mendes',   empresa:'Barbearia do Carlos',  email:'carlos@barbeariadorcarlos.com.br', whatsapp:'(11) 99123-4567', plano:'Essencial',   status:'ativo',     desde:'2026-02-10', mrr:197, licenca:'A24H-ESS-1A2B-3C4D', msgs:312  },
-  { id:2, nome:'Fernanda Lima',   empresa:'Clinica Estetica FL',  email:'fernanda@clinicafl.com.br',        whatsapp:'(21) 98765-3210', plano:'Pro',         status:'ativo',     desde:'2026-01-22', mrr:797, licenca:'A24H-PRO-5E6F-7G8H', msgs:8900 },
-  { id:3, nome:'Ricardo Souza',   empresa:'RS Eletrica',          email:'ricardo@rseletrica.com.br',        whatsapp:'(31) 97654-8901', plano:'Essencial',   status:'trial',     desde:'2026-03-20', mrr:0,   licenca:'A24H-ESS-9I0J-1K2L', msgs:47   },
-  { id:4, nome:'Ana Paula Costa', empresa:'Salao Ana Paula',      email:'anapaula@salaoanapaula.com.br',    whatsapp:'(51) 96543-7890', plano:'Recomendado', status:'ativo',     desde:'2026-02-05', mrr:397, licenca:'A24H-PRO-3M4N-5O6P', msgs:2310 },
-  { id:5, nome:'Marcos Oliveira', empresa:'Auto Pecas MO',        email:'marcos@autopecasmo.com.br',        whatsapp:'(41) 95432-6789', plano:'Essencial',   status:'ativo',     desde:'2026-01-15', mrr:197, licenca:'A24H-ESS-7Q8R-9S0T', msgs:198  },
-  { id:6, nome:'Julia Ferreira',  empresa:'Studio Julia',         email:'julia@studiojulia.com.br',         whatsapp:'(85) 94321-5678', plano:'Recomendado', status:'trial',     desde:'2026-03-22', mrr:0,   licenca:'A24H-PRO-1U2V-3W4X', msgs:203  },
-  { id:7, nome:'Pedro Alves',     empresa:'Construa Mais',        email:'pedro@construamais.com.br',        whatsapp:'(62) 93210-4567', plano:'Essencial',   status:'cancelado', desde:'2026-01-08', mrr:0,   licenca:'A24H-ESS-5Y6Z-7A8B', msgs:0    },
-  { id:8, nome:'Camila Santos',   empresa:'Doces da Camila',      email:'camila@docesdacamila.com.br',      whatsapp:'(71) 92109-3456', plano:'Essencial',   status:'ativo',     desde:'2026-03-01', mrr:197, licenca:'A24H-ESS-9C0D-1E2F', msgs:478  },
-  { id:9, nome:'Bruno Rodrigues', empresa:'BR Consultoria',       email:'bruno@brconsultoria.com.br',       whatsapp:'(11) 91098-2345', plano:'Recomendado', status:'ativo',     desde:'2026-02-18', mrr:397, licenca:'A24H-PRO-3G4H-5I6J', msgs:960  },
-  { id:10,nome:'Leticia Martins', empresa:'Farmacia Saudavel',    email:'leticia@farmaciasaudavel.com.br',  whatsapp:'(47) 90987-1234', plano:'Essencial',   status:'ativo',     desde:'2026-03-10', mrr:197, licenca:'A24H-ESS-7K8L-9M0N', msgs:115  },
-];
+const WEBHOOK_ADMIN = 'https://crista-oleographic-frightfully.ngrok-free.dev/webhook/atendente24h-admin';
+const NGROK_H = { 'ngrok-skip-browser-warning': 'true' };
+const LIMITES = { Essencial: 500, Basico: 500, Recomendado: 2500, Pro: 15000 };
+let assinantes = [];
+
+async function carregarDados() {
+  try {
+    const resp = await fetch(WEBHOOK_ADMIN, { headers: NGROK_H });
+    const data = await resp.json();
+    if (data.ok && data.clientes) {
+      assinantes = data.clientes.map(c => ({
+        id: c.id,
+        nome: c.nome || c.email,
+        empresa: c.empresa || c.nome || c.email,
+        email: c.email,
+        whatsapp: c.whatsapp || '',
+        plano: c.plano || 'Basico',
+        status: c.status === 'active' ? 'ativo' : c.status === 'suspended' ? 'cancelado' : c.status,
+        desde: c.desde || '',
+        mrr: c.mrr || 0,
+        licenca: c.subscription_id || ('A24H-' + String(c.id).padStart(4,'0')),
+        msgs: c.msgs || 0,
+        msgs_limite: c.msgs_limite || LIMITES[c.plano] || 500
+      }));
+    }
+  } catch(e) {
+    console.warn('Nao foi possivel carregar dados reais:', e.message);
+  }
+  renderTable();
+}
 
 let filtroAtual = 'todos';
 let paginaAtual = 1;
@@ -1052,8 +1068,8 @@ if (!sessionStorage.getItem('a24h_auth')) {
   document.getElementById('loginOverlay').style.display = 'none';
 }
 
-// INIT
-renderTable();
+// INIT — carrega dados reais do DataTable via n8n
+carregarDados();
 </script>
 </body>
 </html>
