@@ -659,8 +659,9 @@ tr.row-cancelado:hover{background:rgba(220,38,38,0.045)}
 </div>
 
 <script>
-const WEBHOOK_ADMIN = 'https://crista-oleographic-frightfully.ngrok-free.dev/webhook/atendente24h-admin';
-const WEBHOOK_ACTION = 'https://crista-oleographic-frightfully.ngrok-free.dev/webhook/atendente24h-admin-action';
+const WEBHOOK_BASE = 'https://crista-oleographic-frightfully.ngrok-free.dev';
+const WEBHOOK_ADMIN = WEBHOOK_BASE + '/webhook/atendente24h-admin';
+const WEBHOOK_ACTION = WEBHOOK_BASE + '/webhook/atendente24h-admin-action';
 const NGROK_H = { 'ngrok-skip-browser-warning': 'true', 'Content-Type': 'application/json' };
 const LIMITES = { Essencial: 500, Basico: 500, Recomendado: 2500, Pro: 15000 };
 let assinantes = [];
@@ -901,7 +902,9 @@ function reenviarWpp() {
 
 function calcRenovacao(desde) {
   if (!desde) return '--';
-  const dia = desde.split('-')[2];
+  const datePart = desde.split('T')[0]; // remove hora se for ISO
+  const partes = datePart.split('-');
+  const dia = String(parseInt(partes[2] || '1')).padStart(2,'0');
   const hoje = new Date();
   const mes = hoje.getDate() >= parseInt(dia) ? hoje.getMonth() + 1 : hoje.getMonth();
   const ano = mes > 11 ? hoje.getFullYear() + 1 : hoje.getFullYear();
@@ -1100,27 +1103,16 @@ function renderMensagens() {
 }
 
 // LOGIN
-async function doLogin() {
+function doLogin() {
   const u = document.getElementById('loginUser').value.trim().toLowerCase();
   const p = document.getElementById('loginPass').value;
-  const btn = document.querySelector('#loginOverlay button');
-  if (btn) { btn.disabled = true; btn.textContent = 'Verificando...'; }
-  try {
-    const r = await fetch(WEBHOOK_BASE + '/webhook/atendente24h-admin-auth', {
-      method: 'POST', headers: NGROK_H,
-      body: JSON.stringify({ user: u, pass: p })
-    });
-    const data = await r.json();
-    if (data.ok) {
-      document.getElementById('loginOverlay').style.display = 'none';
-      sessionStorage.setItem('a24h_auth', '1');
-    } else {
-      document.getElementById('loginError').textContent = 'Usuario ou senha incorretos.';
-    }
-  } catch(e) {
-    document.getElementById('loginError').textContent = 'Erro de conexao. Tente novamente.';
+  const USERS = { caco: 'Somzeira!', dudu: 'Somzeira!' };
+  if (USERS[u] && USERS[u] === p) {
+    document.getElementById('loginOverlay').style.display = 'none';
+    sessionStorage.setItem('a24h_auth', '1');
+  } else {
+    document.getElementById('loginError').textContent = 'Usuario ou senha incorretos.';
   }
-  if (btn) { btn.disabled = false; btn.textContent = 'Entrar'; }
 }
 if (!sessionStorage.getItem('a24h_auth')) {
   document.getElementById('loginOverlay').style.display = 'flex';

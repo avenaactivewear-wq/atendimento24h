@@ -918,7 +918,10 @@ footer{
     <a href="#planos">Planos</a>
     <a href="#faq">FAQ</a>
   </div>
-  <a href="#planos" class="nav-cta">Começar agora</a>
+  <div style="display:flex;gap:10px;align-items:center">
+    <a href="/dashboard/" style="font-size:14px;color:var(--text2);text-decoration:none;padding:8px 14px;border-radius:8px;border:1px solid var(--border);transition:all .2s" onmouseover="this.style.borderColor='rgba(99,102,241,.5)';this.style.color='var(--text)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--text2)'">Acessar painel</a>
+    <a href="#planos" class="nav-cta">Começar agora</a>
+  </div>
 </nav>
 
 <!-- HERO -->
@@ -1323,8 +1326,9 @@ footer{
       </div>
       <form class="enterprise-form" onsubmit="submitEnterprise(event)">
         <input class="enterprise-input" type="text" id="ent-nome" placeholder="Seu nome" required>
+        <input class="enterprise-input" type="email" id="ent-email" placeholder="Seu email" required>
         <input class="enterprise-input" type="tel" id="ent-wpp" placeholder="WhatsApp (com DDD)" required>
-        <button class="enterprise-btn" type="submit">
+        <button class="enterprise-btn" type="submit" id="ent-btn">
           Quero uma proposta
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
@@ -1599,12 +1603,29 @@ footer{
 
 <script>
 // ── Enterprise lead capture
-function submitEnterprise(e) {
+async function submitEnterprise(e) {
   e.preventDefault()
-  const nome = document.getElementById('ent-nome').value.trim()
-  const wpp  = document.getElementById('ent-wpp').value.trim().replace(/\D/g,'')
-  const msg = encodeURIComponent(`Oi! Sou ${nome} e tenho interesse no plano Enterprise do Atendente24h. Meu WhatsApp é ${wpp}. Quero receber uma proposta.`)
-  window.location.href = `mailto:suporte@atendente24h.com?subject=Interesse%20no%20plano%20Enterprise&body=${msg}`
+  const nome  = document.getElementById('ent-nome').value.trim()
+  const email = document.getElementById('ent-email').value.trim()
+  const wpp   = document.getElementById('ent-wpp').value.trim().replace(/\D/g,'')
+  const btn   = document.getElementById('ent-btn')
+  btn.textContent = 'Enviando...'
+  btn.disabled = true
+  try {
+    await fetch('http://localhost:5678/webhook/atendente24h-enterprise-lead', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ nome, email, whatsapp: wpp, origem: 'enterprise-form' })
+    })
+    btn.textContent = 'Proposta solicitada!'
+    btn.style.background = 'linear-gradient(135deg,#22c55e,#16a34a)'
+    document.getElementById('ent-nome').value = ''
+    document.getElementById('ent-email').value = ''
+    document.getElementById('ent-wpp').value = ''
+  } catch(err) {
+    btn.textContent = 'Quero uma proposta'
+    btn.disabled = false
+  }
 }
 
 // ── Scroll reveal

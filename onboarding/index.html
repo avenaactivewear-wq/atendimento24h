@@ -670,47 +670,62 @@ Dica: quanto mais voce escrever ou colar aqui, melhor seu atendente vai responde
   <div class="step-panel" id="panel-4">
     <div class="step-header">
       <div class="step-num-label">Passo 5 de 5</div>
-      <div class="step-title">Conectar seu WhatsApp</div>
-      <div class="step-desc">Abra o WhatsApp no celular e escaneie o QR code abaixo para ativar seu atendente.</div>
+      <div class="step-title">Quase lá! Escaneie o QR code</div>
+      <div class="step-desc">Em menos de 30 segundos seu atendente estará ativo.</div>
     </div>
 
-    <div style="background:rgba(37,211,102,0.05);border:1px solid rgba(37,211,102,0.2);border-radius:12px;padding:16px 18px;margin-bottom:24px">
-      <div style="font-size:13px;font-weight:700;color:var(--green);margin-bottom:10px">💾 Recomendado: faça um backup antes</div>
-      <div style="font-size:13px;color:var(--text2);line-height:1.6;margin-bottom:8px">Para garantir que não perde nada, ative o backup automático do WhatsApp:</div>
-      <div style="display:flex;flex-direction:column;gap:5px;font-size:13px;color:var(--text2)">
-        <span>No WhatsApp: <strong style="color:var(--text)">Configurações → Conversas → Backup de conversas → Fazer backup</strong></span>
-      </div>
-      <div style="margin-top:10px;font-size:12px;color:var(--text3)">Suas mensagens <strong style="color:var(--text2)">NÃO serão apagadas</strong>. O atendente funciona em paralelo — você continua usando o WhatsApp normalmente no celular.</div>
-    </div>
+    <!-- Layout dois lados: QR + Instruções -->
+    <div class="qr-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:24px;align-items:start">
 
-    <div style="display:flex;flex-direction:column;align-items:center;gap:24px;margin-bottom:36px">
-
-      <!-- QR Code container -->
-      <div id="qr-container" style="background:#fff;border-radius:16px;padding:20px;display:flex;align-items:center;justify-content:center;width:260px;height:260px">
-        <div id="qr-loading" style="text-align:center;color:#888">
-          <div style="width:40px;height:40px;border:3px solid #eee;border-top-color:#25D366;border-radius:50%;animation:spin 1s linear infinite;margin:0 auto 12px"></div>
-          <div style="font-size:13px">Gerando QR code...</div>
+      <!-- Lado esquerdo: QR Code -->
+      <div style="display:flex;flex-direction:column;align-items:center;gap:12px">
+        <div id="qr-container" style="background:#fff;border-radius:20px;padding:16px;display:flex;align-items:center;justify-content:center;width:220px;height:220px;box-shadow:0 4px 24px rgba(0,0,0,.15)">
+          <div id="qr-loading" style="text-align:center;color:#888">
+            <div style="width:36px;height:36px;border:3px solid #eee;border-top-color:#25D366;border-radius:50%;animation:spin 1s linear infinite;margin:0 auto 10px"></div>
+            <div style="font-size:12px">Gerando...</div>
+          </div>
+          <img id="qr-image" src="" alt="QR Code" style="display:none;width:188px;height:188px;border-radius:6px">
         </div>
-        <img id="qr-image" src="" alt="QR Code" style="display:none;width:220px;height:220px;border-radius:8px">
-      </div>
-
-      <!-- Status -->
-      <div id="qr-status-msg" style="text-align:center;color:var(--text2);font-size:14px">
-        Aguardando escaneamento...
-      </div>
-
-      <!-- Como escanear -->
-      <div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px;max-width:340px;width:100%">
-        <div style="font-size:13px;font-weight:700;color:var(--green);margin-bottom:12px">Como escanear:</div>
-        <div style="display:flex;flex-direction:column;gap:8px">
-          <div style="display:flex;gap:10px;align-items:flex-start;font-size:13px;color:var(--text2)"><span style="color:var(--green);font-weight:700;flex-shrink:0">1.</span> Abra o WhatsApp no celular</div>
-          <div style="display:flex;gap:10px;align-items:flex-start;font-size:13px;color:var(--text2)"><span style="color:var(--green);font-weight:700;flex-shrink:0">2.</span> Toque em <strong style="color:var(--text)">Dispositivos conectados</strong></div>
-          <div style="display:flex;gap:10px;align-items:flex-start;font-size:13px;color:var(--text2)"><span style="color:var(--green);font-weight:700;flex-shrink:0">3.</span> Toque em <strong style="color:var(--text)">Conectar dispositivo</strong></div>
-          <div style="display:flex;gap:10px;align-items:flex-start;font-size:13px;color:var(--text2)"><span style="color:var(--green);font-weight:700;flex-shrink:0">4.</span> Aponte a câmera para o QR code acima</div>
+        <div id="qr-status-msg" style="text-align:center;color:var(--text2);font-size:13px;font-weight:500">
+          Aguardando escaneamento...
         </div>
       </div>
 
+      <!-- Lado direito: Instruções visuais -->
+      <div style="display:flex;flex-direction:column;gap:12px;padding-top:8px">
+        <div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:4px">No seu celular:</div>
+
+        <div style="display:flex;gap:12px;align-items:flex-start">
+          <div style="width:28px;height:28px;border-radius:50%;background:var(--green);color:#fff;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0">1</div>
+          <div style="font-size:13px;color:var(--text2);padding-top:4px">Abra o <strong style="color:var(--text)">WhatsApp</strong></div>
+        </div>
+
+        <div style="display:flex;gap:12px;align-items:flex-start">
+          <div style="width:28px;height:28px;border-radius:50%;background:var(--green);color:#fff;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0">2</div>
+          <div style="font-size:13px;color:var(--text2);padding-top:4px">Toque nos <strong style="color:var(--text)">3 pontinhos</strong> (Android) ou <strong style="color:var(--text)">Configurações</strong> (iPhone)</div>
+        </div>
+
+        <div style="display:flex;gap:12px;align-items:flex-start">
+          <div style="width:28px;height:28px;border-radius:50%;background:var(--green);color:#fff;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0">3</div>
+          <div style="font-size:13px;color:var(--text2);padding-top:4px">Toque em <strong style="color:var(--text)">Dispositivos conectados</strong></div>
+        </div>
+
+        <div style="display:flex;gap:12px;align-items:flex-start">
+          <div style="width:28px;height:28px;border-radius:50%;background:var(--green);color:#fff;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0">4</div>
+          <div style="font-size:13px;color:var(--text2);padding-top:4px">Toque em <strong style="color:var(--text)">Conectar dispositivo</strong> e aponte para o QR ao lado</div>
+        </div>
+
+        <!-- Tranquilize o usuario -->
+        <div style="background:rgba(37,211,102,0.07);border:1px solid rgba(37,211,102,0.2);border-radius:10px;padding:10px 12px;margin-top:4px">
+          <div style="font-size:12px;color:var(--green);font-weight:600;margin-bottom:3px">Suas mensagens ficam seguras</div>
+          <div style="font-size:11px;color:var(--text3);line-height:1.5">O atendente age como um segundo dispositivo conectado. Voce continua usando o celular normalmente.</div>
+        </div>
+      </div>
     </div>
+
+    <!-- Mobile: empilha vertical -->
+    <style>@media(max-width:600px){#panel-4 .qr-grid{grid-template-columns:1fr!important}}</style>
+
   </div>
 
   <!-- SUCCESS -->
@@ -720,7 +735,7 @@ Dica: quanto mais voce escrever ou colar aqui, melhor seu atendente vai responde
     <p class="success-sub" id="success-msg">Seu WhatsApp já está conectado e o atendente está ativo 24h. Você pode fechar esta aba.</p>
     <div style="margin-top:36px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
       <a href="/dashboard/" class="btn-next" style="flex:0;padding:14px 28px;border-radius:12px;text-decoration:none">Ver meu painel</a>
-      <a href="../landing/" class="btn-back" style="text-decoration:none">Ir para o site</a>
+      <a href="/" class="btn-back" style="text-decoration:none">Ir para o site</a>
     </div>
   </div>
 
