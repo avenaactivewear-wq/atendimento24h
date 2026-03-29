@@ -349,85 +349,81 @@ h1 span{
 .hero-stat-n{font-size:28px;font-weight:800;letter-spacing:-1px;color:var(--green)}
 .hero-stat-l{font-size:12px;color:var(--text3);font-weight:500;margin-top:2px}
 
-/* ─── WHATSAPP MOCKUP ─── */
+/* ─── WHATSAPP MSGS FLUTUANTES ─── */
 .wpp-phone{
   position:relative;
-  width:320px;margin:0 auto;
+  width:300px;margin:0 auto;
 }
-@media(max-width:900px){.wpp-phone{width:300px}}
-.wpp-frame{
-  background:rgba(255,255,255,0.04);
-  backdrop-filter:blur(24px);
-  -webkit-backdrop-filter:blur(24px);
-  border-radius:20px;
-  border:1px solid rgba(255,255,255,0.10);
-  box-shadow:
-    0 32px 64px rgba(0,0,0,0.45),
-    0 0 0 1px rgba(255,255,255,0.04),
-    inset 0 1px 0 rgba(255,255,255,0.12);
-  overflow:hidden;
-}
+@media(max-width:900px){.wpp-phone{width:100%;max-width:320px}}
+.wpp-frame{ display:contents; }
 .wpp-header{
-  background:rgba(255,255,255,0.05);
-  border-bottom:1px solid rgba(255,255,255,0.07);
-  padding:16px 18px;
-  display:flex;align-items:center;gap:12px;
+  display:flex;align-items:center;gap:10px;
+  margin-bottom:16px;
 }
 .wpp-avatar{
-  width:36px;height:36px;border-radius:50%;
+  width:32px;height:32px;border-radius:50%;
   background:linear-gradient(135deg,var(--green) 0%,#0a7a5a 100%);
   display:flex;align-items:center;justify-content:center;
-  font-size:14px;font-weight:700;color:#fff;flex-shrink:0;
-  box-shadow:0 0 0 2px rgba(22,199,120,0.25);
-}
-.wpp-contact-name{font-size:14px;font-weight:600;color:rgba(255,255,255,0.92);letter-spacing:-0.2px}
-.wpp-contact-status{font-size:11px;color:var(--green);margin-top:1px;opacity:0.85}
-.wpp-msgs{
-  background:transparent;
-  padding:16px 14px 18px;
-  height:300px;
+  font-size:13px;font-weight:700;color:#fff;flex-shrink:0;
+  box-shadow:0 0 0 2px rgba(22,199,120,0.2);
   overflow:hidden;
+}
+.wpp-contact-name{font-size:13px;font-weight:600;color:rgba(255,255,255,0.85);letter-spacing:-0.2px}
+.wpp-contact-status{
+  font-size:10px;color:var(--green);margin-top:1px;opacity:0.8;
+  display:flex;align-items:center;gap:5px;
+}
+.wpp-contact-status::before{
+  content:'';width:6px;height:6px;border-radius:50%;
+  background:var(--green);display:inline-block;flex-shrink:0;
+}
+.wpp-msgs{
   display:flex;flex-direction:column;gap:8px;
-  justify-content:flex-end;
 }
 .msg{
-  max-width:85%;padding:8px 12px;
-  border-radius:12px;font-size:13px;line-height:1.5;
+  max-width:88%;padding:9px 13px;
+  border-radius:16px;font-size:13px;line-height:1.55;
   position:relative;
+  opacity:0;transform:translateY(10px) scale(0.97);
+  transition:opacity .3s ease, transform .3s ease;
 }
-.msg-time{font-size:10px;color:rgba(255,255,255,0.35);text-align:right;margin-top:3px}
+.msg.visible{opacity:1;transform:translateY(0) scale(1)}
+.msg-time{font-size:10px;color:rgba(255,255,255,0.3);text-align:right;margin-top:4px}
 .msg-in{
-  background:rgba(255,255,255,0.08);
-  color:rgba(255,255,255,0.85);
-  border-radius:12px 12px 12px 3px;
+  background:rgba(255,255,255,0.07);
+  color:rgba(255,255,255,0.82);
+  border-radius:16px 16px 16px 4px;
   align-self:flex-start;
-  border:1px solid rgba(255,255,255,0.08);
+  border:1px solid rgba(255,255,255,0.07);
+  backdrop-filter:blur(8px);
 }
 .msg-out{
-  background:rgba(22,199,120,0.18);
-  color:rgba(255,255,255,0.92);
-  border-radius:12px 12px 3px 12px;
+  background:rgba(22,199,120,0.15);
+  color:rgba(255,255,255,0.90);
+  border-radius:16px 16px 4px 16px;
   align-self:flex-end;
-  border:1px solid rgba(22,199,120,0.2);
+  border:1px solid rgba(22,199,120,0.18);
+  backdrop-filter:blur(8px);
 }
 .msg-typing{
-  background:rgba(255,255,255,0.07);
-  color:rgba(255,255,255,0.45);
-  border-radius:12px 12px 12px 3px;
+  background:rgba(255,255,255,0.06);
+  color:rgba(255,255,255,0.4);
+  border-radius:16px 16px 16px 4px;
   align-self:flex-start;
   display:flex;align-items:center;gap:4px;padding:10px 14px;
-  border:1px solid rgba(255,255,255,0.07);
+  border:1px solid rgba(255,255,255,0.06);
+  backdrop-filter:blur(8px);
 }
-.typing-dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,0.4);animation:typing .8s infinite}
+.typing-dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,0.35);animation:typing .8s infinite}
 .typing-dot:nth-child(2){animation-delay:.2s}
 .typing-dot:nth-child(3){animation-delay:.4s}
 @keyframes typing{0%,80%,100%{transform:scale(0.8);opacity:.5}40%{transform:scale(1);opacity:1}}
 
 .wpp-glow{
-  position:absolute;bottom:-80px;left:50%;transform:translateX(-50%);
-  width:240px;height:240px;
-  background:radial-gradient(circle,var(--green-glow) 0%,transparent 70%);
-  pointer-events:none;z-index:-1;
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:320px;height:320px;
+  background:radial-gradient(circle,var(--green-glow) 0%,transparent 65%);
+  pointer-events:none;z-index:-1;opacity:0.6;
 }
 
 /* ─── SOCIAL PROOF ─── */
@@ -959,54 +955,52 @@ footer{
       </div>
     </div>
 
-    <!-- WHATSAPP MOCKUP -->
-    <div class="wpp-phone" style="position:relative">
+    <!-- WHATSAPP MSGS FLUTUANTES -->
+    <div class="wpp-phone">
       <div class="wpp-glow"></div>
-      <div class="wpp-frame">
-        <div class="wpp-header">
-          <div class="wpp-avatar" style="background:none;overflow:hidden;padding:0">
-            <img src="/landing/ana-avatar.jpg" alt="Ana Goulart" style="width:100%;height:100%;object-fit:cover;border-radius:50%">
-          </div>
-          <div>
-            <div class="wpp-contact-name">Ana Goulart</div>
-            <div class="wpp-contact-status">Online agora</div>
-          </div>
+      <div class="wpp-header">
+        <div class="wpp-avatar">
+          <img src="/landing/ana-avatar.jpg" alt="Ana Goulart" style="width:100%;height:100%;object-fit:cover;border-radius:50%">
         </div>
-        <div class="wpp-msgs" id="wpp-msgs">
-          <div class="msg msg-in">
-            Oi! Vocês têm tênis masculino tamanho 42?
-            <div class="msg-time">14:22</div>
+        <div>
+          <div class="wpp-contact-name">Ana Goulart</div>
+          <div class="wpp-contact-status">Online agora</div>
+        </div>
+      </div>
+      <div class="wpp-msgs" id="wpp-msgs">
+        <div class="msg msg-in visible">
+          Oi! Vocês têm tênis masculino tamanho 42?
+          <div class="msg-time">14:22</div>
+        </div>
+        <div class="msg msg-out" id="wpp-r1">
+          Oi, Paulo! Temos sim 😊<br>O modelo <strong>Ultralight</strong> está disponível nos tamanhos 38 ao 44. No 42 temos em <strong>preto, branco e cinza</strong>.
+          <div class="msg-time">14:22</div>
+        </div>
+        <div class="msg msg-in" id="wpp-q2">
+          Qual o preço? Aceita parcelamento?
+          <div class="msg-time">14:23</div>
+        </div>
+        <div class="msg msg-out" id="wpp-r2">
+          <strong>R$189,90</strong>, parcelamos em até <strong>6x sem juros</strong> no cartão. Ou à vista com 5% de desconto 🖤
+          <div class="msg-time">14:23</div>
+        </div>
+        <div class="msg msg-in" id="wpp-q3">
+          Quero o preto! Me manda o link
+          <div class="msg-time">14:23</div>
+        </div>
+        <div class="msg msg-out" id="wpp-r3">
+          Claro! Aqui está 👇<br>
+          <div style="margin-top:8px;background:rgba(22,199,120,0.1);border-radius:8px;padding:8px 10px;border-left:3px solid var(--green)">
+            <div style="font-size:11px;color:var(--green);font-weight:600;margin-bottom:2px">atendente24h.com</div>
+            <div style="font-size:12px;color:rgba(255,255,255,0.88);font-weight:500">Ultralight 42 Preto</div>
+            <div style="font-size:11px;color:rgba(255,255,255,0.45)">R$189,90 · Frete grátis</div>
           </div>
-          <div class="msg msg-out" style="display:none" id="wpp-r1">
-            Oi, Paulo! Temos sim 😊<br>O modelo <strong>Ultralight</strong> está disponível nos tamanhos 38 ao 44. No 42 temos em <strong>preto, branco e cinza</strong>.
-            <div class="msg-time">14:22</div>
-          </div>
-          <div class="msg msg-in" style="display:none" id="wpp-q2">
-            Qual o preço? Aceita parcelamento?
-            <div class="msg-time">14:23</div>
-          </div>
-          <div class="msg msg-out" style="display:none" id="wpp-r2">
-            <strong>R$189,90</strong>, parcelamos em até <strong>6x sem juros</strong> no cartão. Ou à vista com 5% de desconto 🖤
-            <div class="msg-time">14:23</div>
-          </div>
-          <div class="msg msg-in" style="display:none" id="wpp-q3">
-            Quero o preto! Me manda o link
-            <div class="msg-time">14:23</div>
-          </div>
-          <div class="msg msg-out" style="display:none" id="wpp-r3">
-            Claro! Aqui está 👇<br>
-            <div style="margin-top:8px;background:rgba(22,199,120,0.1);border-radius:8px;padding:8px 10px;border-left:3px solid var(--green)">
-              <div style="font-size:11px;color:var(--green);font-weight:600;margin-bottom:2px">atendente24h.com</div>
-              <div style="font-size:12px;color:rgba(255,255,255,0.88);font-weight:500">Ultralight 42 Preto</div>
-              <div style="font-size:11px;color:rgba(255,255,255,0.45)">R$189,90 · Frete grátis</div>
-            </div>
-            <div class="msg-time">14:24</div>
-          </div>
-          <div class="msg msg-typing" style="display:none" id="wpp-typing">
-            <span class="typing-dot"></span>
-            <span class="typing-dot"></span>
-            <span class="typing-dot"></span>
-          </div>
+          <div class="msg-time">14:24</div>
+        </div>
+        <div class="msg msg-typing" id="wpp-typing">
+          <span class="typing-dot"></span>
+          <span class="typing-dot"></span>
+          <span class="typing-dot"></span>
         </div>
       </div>
       <div class="hero-notif">
@@ -1675,7 +1669,7 @@ document.querySelectorAll('.feat-card, .step').forEach((el,i) => {
   wrap.addEventListener('mouseleave', () => { timer = setInterval(() => goTo(current + 1), 4000) })
 })()
 
-// ── WhatsApp mockup animation
+// ── WhatsApp msgs flutuantes
 const wppMsgs = {
   r1: document.getElementById('wpp-r1'),
   q2: document.getElementById('wpp-q2'),
@@ -1684,26 +1678,16 @@ const wppMsgs = {
   r3: document.getElementById('wpp-r3'),
   typing: document.getElementById('wpp-typing'),
 }
-const wppContainer = document.getElementById('wpp-msgs')
 function showWppMsg(el) {
   return new Promise(r => {
-    el.style.display = ''
-    el.style.opacity = '0'
-    el.style.transform = 'translateY(6px)'
-    el.style.transition = 'all 0.3s ease'
-    requestAnimationFrame(() => requestAnimationFrame(() => {
-      el.style.opacity = '1'
-      el.style.transform = 'translateY(0)'
-    }))
+    el.classList.add('visible')
     setTimeout(r, 350)
-    wppContainer.scrollTop = wppContainer.scrollHeight
   })
 }
 function showTyping(ms) {
   return new Promise(r => {
-    wppMsgs.typing.style.display = ''
-    wppContainer.scrollTop = wppContainer.scrollHeight
-    setTimeout(() => { wppMsgs.typing.style.display = 'none'; r() }, ms)
+    wppMsgs.typing.classList.add('visible')
+    setTimeout(() => { wppMsgs.typing.classList.remove('visible'); r() }, ms)
   })
 }
 function wait(ms){ return new Promise(r => setTimeout(r, ms)) }
@@ -1722,10 +1706,10 @@ async function animateWpp() {
   await showTyping(1200)
   await showWppMsg(wppMsgs.r3)
   await wait(6000)
-  // loop
-  Object.values(wppMsgs).forEach(el => { if(el.id !== 'wpp-msgs') el.style.display = 'none' })
+  // loop — reset all except first msg
+  Object.values(wppMsgs).forEach(el => el.classList.remove('visible'))
   const firstMsg = document.querySelector('#wpp-msgs .msg-in')
-  if(firstMsg){ firstMsg.style.display = '' }
+  if(firstMsg){ firstMsg.classList.add('visible') }
   animateWpp()
 }
 animateWpp()
