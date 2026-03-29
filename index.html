@@ -329,15 +329,15 @@ h1 span{
 /* floating notification */
 .hero-notif{
   position:absolute;
-  bottom:40px;right:-20px;
+  bottom:-24px;left:50%;transform:translateX(-50%);
   background:var(--card);
   border:1px solid var(--border);
   border-radius:var(--radius);
-  padding:12px 16px;
+  padding:10px 16px;
   display:flex;align-items:center;gap:10px;
   box-shadow:0 16px 40px rgba(0,0,0,0.4);
   animation:floatUp 0.6s cubic-bezier(0.16,1,0.3,1) 1.5s both;
-  max-width:240px;
+  max-width:260px;white-space:nowrap;
   z-index:2;
 }
 @media(max-width:900px){.hero-notif{display:none}}
@@ -349,67 +349,81 @@ h1 span{
 .hero-stat-n{font-size:28px;font-weight:800;letter-spacing:-1px;color:var(--green)}
 .hero-stat-l{font-size:12px;color:var(--text3);font-weight:500;margin-top:2px}
 
-/* ─── WHATSAPP MOCKUP ─── */
+/* ─── WHATSAPP MSGS FLUTUANTES ─── */
 .wpp-phone{
   position:relative;
   width:300px;margin:0 auto;
 }
-@media(max-width:900px){.wpp-phone{width:280px}}
-.wpp-frame{
-  background:#111;
-  border-radius:44px;
-  border:1px solid rgba(255,255,255,0.06);
-  padding:16px 12px 24px;
-  box-shadow:
-    0 40px 80px rgba(0,0,0,0.7),
-    0 0 0 6px rgba(255,255,255,0.03),
-    0 0 0 7px rgba(255,255,255,0.04),
-    inset 0 1px 0 rgba(255,255,255,0.1);
-  position:relative;overflow:hidden;
-  outline:8px solid rgba(0,0,0,0.5);
-}
-.wpp-frame::before{
-  content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);
-  width:100px;height:28px;background:#000;border-radius:0 0 20px 20px;z-index:2;
-}
+@media(max-width:900px){.wpp-phone{width:100%;max-width:320px}}
+.wpp-frame{ display:contents; }
 .wpp-header{
-  background:#1f2c34;
-  margin:-16px -12px 0;padding:36px 16px 12px;
   display:flex;align-items:center;gap:10px;
+  margin-bottom:16px;
 }
 .wpp-avatar{
-  width:38px;height:38px;border-radius:50%;
-  background:linear-gradient(135deg,var(--green) 0%,#128C7E 100%);
+  width:32px;height:32px;border-radius:50%;
+  background:linear-gradient(135deg,var(--green) 0%,#0a7a5a 100%);
   display:flex;align-items:center;justify-content:center;
-  font-size:16px;font-weight:700;color:#fff;flex-shrink:0;
+  font-size:13px;font-weight:700;color:#fff;flex-shrink:0;
+  box-shadow:0 0 0 2px rgba(22,199,120,0.2);
+  overflow:hidden;
 }
-.wpp-contact-name{font-size:14px;font-weight:600;color:#e9edef}
-.wpp-contact-status{font-size:11px;color:var(--green);margin-top:1px}
+.wpp-contact-name{font-size:13px;font-weight:600;color:rgba(255,255,255,0.85);letter-spacing:-0.2px}
+.wpp-contact-status{
+  font-size:10px;color:var(--green);margin-top:1px;opacity:0.8;
+  display:flex;align-items:center;gap:5px;
+}
+.wpp-contact-status::before{
+  content:'';width:6px;height:6px;border-radius:50%;
+  background:var(--green);display:inline-block;flex-shrink:0;
+}
 .wpp-msgs{
-  background:#0b141a;
-  margin:0 -12px;padding:12px 10px;
-  min-height:320px;
   display:flex;flex-direction:column;gap:8px;
 }
 .msg{
-  max-width:85%;padding:8px 12px;
-  border-radius:8px;font-size:13px;line-height:1.5;
+  max-width:88%;padding:9px 13px;
+  border-radius:16px;font-size:13px;line-height:1.55;
   position:relative;
+  opacity:0;transform:translateY(10px) scale(0.97);
+  transition:opacity .3s ease, transform .3s ease;
 }
-.msg-time{font-size:10px;color:rgba(255,255,255,0.4);text-align:right;margin-top:3px}
-.msg-in{background:#202c33;color:#e9edef;border-radius:8px 8px 8px 2px;align-self:flex-start}
-.msg-out{background:#005c4b;color:#e9edef;border-radius:8px 8px 2px 8px;align-self:flex-end}
-.msg-typing{background:#202c33;color:#8696a0;border-radius:8px 8px 8px 2px;align-self:flex-start;display:flex;align-items:center;gap:4px;padding:10px 14px}
-.typing-dot{width:6px;height:6px;border-radius:50%;background:#8696a0;animation:typing .8s infinite}
+.msg.visible{opacity:1;transform:translateY(0) scale(1)}
+.msg-time{font-size:10px;color:rgba(255,255,255,0.3);text-align:right;margin-top:4px}
+.msg-in{
+  background:rgba(255,255,255,0.07);
+  color:rgba(255,255,255,0.82);
+  border-radius:16px 16px 16px 4px;
+  align-self:flex-start;
+  border:1px solid rgba(255,255,255,0.07);
+  backdrop-filter:blur(8px);
+}
+.msg-out{
+  background:rgba(22,199,120,0.15);
+  color:rgba(255,255,255,0.90);
+  border-radius:16px 16px 4px 16px;
+  align-self:flex-end;
+  border:1px solid rgba(22,199,120,0.18);
+  backdrop-filter:blur(8px);
+}
+.msg-typing{
+  background:rgba(255,255,255,0.06);
+  color:rgba(255,255,255,0.4);
+  border-radius:16px 16px 16px 4px;
+  align-self:flex-start;
+  display:flex;align-items:center;gap:4px;padding:10px 14px;
+  border:1px solid rgba(255,255,255,0.06);
+  backdrop-filter:blur(8px);
+}
+.typing-dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,0.35);animation:typing .8s infinite}
 .typing-dot:nth-child(2){animation-delay:.2s}
 .typing-dot:nth-child(3){animation-delay:.4s}
 @keyframes typing{0%,80%,100%{transform:scale(0.8);opacity:.5}40%{transform:scale(1);opacity:1}}
 
 .wpp-glow{
-  position:absolute;bottom:-60px;left:50%;transform:translateX(-50%);
-  width:200px;height:200px;
-  background:radial-gradient(circle,var(--green-glow) 0%,transparent 70%);
-  pointer-events:none;
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:320px;height:320px;
+  background:radial-gradient(circle,var(--green-glow) 0%,transparent 65%);
+  pointer-events:none;z-index:-1;opacity:0.6;
 }
 
 /* ─── SOCIAL PROOF ─── */
@@ -457,65 +471,62 @@ section{padding:120px 24px;position:relative;z-index:1}
 .steps-section{background:var(--surface)}
 .steps-grid{
   display:grid;grid-template-columns:repeat(3,1fr);
-  gap:2px;margin-top:64px;
+  gap:2px;margin-top:48px;
   background:var(--border);
   border-radius:var(--radius-xl);overflow:hidden;
 }
 @media(max-width:700px){.steps-grid{grid-template-columns:1fr}}
 .step{
-  background:var(--surface);padding:48px 36px;
+  background:var(--surface);padding:32px 28px;
   position:relative;
   transition:background .25s;
+  opacity:0;transform:translateY(18px);
+  transition:background .25s,opacity .55s cubic-bezier(0.16,1,0.3,1),transform .55s cubic-bezier(0.16,1,0.3,1);
 }
+.step.in{opacity:1;transform:translateY(0)}
 .step:hover{background:var(--card)}
 .step-num{
-  font-size:72px;font-weight:800;
-  letter-spacing:-3px;
-  background:linear-gradient(180deg,rgba(37,211,102,0.15) 0%,transparent 100%);
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-  line-height:1;margin-bottom:24px;
+  font-size:13px;font-weight:800;letter-spacing:2px;text-transform:uppercase;
+  color:var(--green);opacity:0.7;
+  line-height:1;margin-bottom:16px;
 }
-.step-icon{font-size:36px;margin-bottom:20px}
-.step-title{font-size:20px;font-weight:700;margin-bottom:12px;letter-spacing:-0.5px}
-.step-desc{font-size:15px;color:var(--text2);line-height:1.6}
+.step-icon{font-size:28px;margin-bottom:14px}
+.step-title{font-size:17px;font-weight:700;margin-bottom:8px;letter-spacing:-0.3px}
+.step-desc{font-size:14px;color:var(--text2);line-height:1.6}
 
-/* ─── FEATURES editorial ─── */
+/* ─── FEATURES grid ─── */
 .features-section{background:var(--bg)}
-.features-editorial{margin-top:80px;display:flex;flex-direction:column;gap:0}
-.feat-row{
-  display:grid;grid-template-columns:1fr 1fr;
-  align-items:center;
-  padding:36px 0;
-  border-bottom:1px solid var(--border);
-  gap:48px;
+.feat-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:2px;
+  margin-top:56px;
+  background:var(--border);
+  border-radius:var(--radius-xl);
+  overflow:hidden;
 }
-.feat-row:last-child{border-bottom:none}
-@media(max-width:700px){.feat-row{grid-template-columns:1fr;gap:24px;padding:40px 0}}
-.feat-num{
-  font-size:clamp(72px,10vw,120px);
-  font-weight:900;
-  letter-spacing:-4px;
-  line-height:1;
-  background:linear-gradient(135deg,var(--green) 0%,rgba(37,211,102,0.4) 100%);
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-  opacity:0;transform:translateX(-30px);
-  transition:all 0.7s cubic-bezier(0.16,1,0.3,1);
+@media(max-width:600px){.feat-grid{grid-template-columns:1fr}}
+.feat-card{
+  background:var(--surface);
+  padding:32px 28px;
+  opacity:0;transform:translateY(16px);
+  transition:opacity .55s cubic-bezier(0.16,1,0.3,1),transform .55s cubic-bezier(0.16,1,0.3,1),background .2s;
 }
-.feat-num.in{opacity:1;transform:translateX(0)}
-.feat-num-unit{
-  font-size:clamp(32px,4vw,52px);
-  font-weight:900;letter-spacing:-2px;
+.feat-card:hover{background:var(--card)}
+.feat-card.in{opacity:1;transform:translateY(0)}
+.feat-card:nth-child(2){transition-delay:.1s}
+.feat-card:nth-child(3){transition-delay:.2s}
+.feat-card:nth-child(4){transition-delay:.3s}
+.feat-stat{
+  font-size:clamp(40px,6vw,64px);font-weight:900;letter-spacing:-3px;line-height:1;
+  margin-bottom:16px;
   background:linear-gradient(135deg,var(--green) 0%,rgba(37,211,102,0.5) 100%);
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
 }
-.feat-copy{
-  opacity:0;transform:translateX(20px);
-  transition:all 0.7s cubic-bezier(0.16,1,0.3,1) 0.15s;
-}
-.feat-copy.in{opacity:1;transform:translateX(0)}
-.feat-label{font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--green);margin-bottom:14px}
-.feat-title{font-size:clamp(22px,3vw,30px);font-weight:800;letter-spacing:-0.8px;margin-bottom:12px;line-height:1.2}
-.feat-desc{font-size:16px;color:var(--text2);line-height:1.7}
+.feat-stat-unit{font-size:clamp(20px,3vw,32px);font-weight:900;letter-spacing:-1px}
+.feat-label{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--green);margin-bottom:8px}
+.feat-card-title{font-size:16px;font-weight:700;letter-spacing:-0.3px;margin-bottom:8px;line-height:1.3;color:var(--text)}
+.feat-card-desc{font-size:14px;color:var(--text2);line-height:1.65}
 
 /* ─── CONVERSATION DEMO ─── */
 .demo-section{background:var(--surface)}
@@ -536,37 +547,49 @@ section{padding:120px 24px;position:relative;z-index:1}
 }
 .demo-btn:hover,.demo-btn.active{border-color:var(--border-green);color:var(--text);background:var(--card2)}
 .demo-btn-dot{width:8px;height:8px;border-radius:50%;background:var(--green);flex-shrink:0}
-.demo-window{
-  background:var(--card);
-  border:1px solid var(--border);
-  border-radius:var(--radius-xl);
-  overflow:hidden;
-  box-shadow:0 32px 64px rgba(0,0,0,0.4);
-}
+.demo-window{position:relative}
 .demo-wpp-header{
-  background:#1f2c34;
-  padding:16px 20px;
-  display:flex;align-items:center;gap:12px;
+  display:flex;align-items:center;gap:10px;
+  margin-bottom:16px;
 }
 .demo-avatar{
-  width:36px;height:36px;border-radius:50%;
-  background:linear-gradient(135deg,var(--green),#128C7E);
+  width:32px;height:32px;border-radius:50%;
+  background:linear-gradient(135deg,var(--green) 0%,#0a7a5a 100%);
   display:flex;align-items:center;justify-content:center;
-  font-weight:700;font-size:14px;color:#fff;flex-shrink:0;
-}
-.demo-contact{font-size:14px;font-weight:600;color:#e9edef}
-.demo-online{font-size:11px;color:var(--green)}
-.demo-msgs{
-  background:#0b141a;
-  padding:20px 16px;
-  min-height:300px;height:300px;
-  display:flex;flex-direction:column;gap:10px;
+  font-weight:700;font-size:13px;color:#fff;flex-shrink:0;
+  box-shadow:0 0 0 2px rgba(22,199,120,0.2);
   overflow:hidden;
-  transition:height .4s ease;
 }
-.d-in{background:#202c33;color:#e9edef;padding:10px 14px;border-radius:8px 8px 8px 2px;font-size:14px;max-width:80%;align-self:flex-start;line-height:1.5}
-.d-out{background:#005c4b;color:#e9edef;padding:10px 14px;border-radius:8px 8px 2px 8px;font-size:14px;max-width:80%;align-self:flex-end;line-height:1.5}
-.d-time{font-size:10px;color:rgba(255,255,255,0.35);text-align:right;margin-top:4px}
+.demo-contact{font-size:13px;font-weight:600;color:rgba(255,255,255,0.85);letter-spacing:-0.2px}
+.demo-online{
+  font-size:10px;color:var(--green);opacity:0.8;
+  display:flex;align-items:center;gap:5px;
+}
+.demo-online::before{
+  content:'';width:6px;height:6px;border-radius:50%;
+  background:var(--green);display:inline-block;flex-shrink:0;
+}
+.demo-msgs{
+  display:flex;flex-direction:column;gap:8px;
+  min-height:200px;
+  overflow:hidden;
+  transition:all .4s ease;
+}
+.d-in{
+  background:rgba(255,255,255,0.07);
+  color:rgba(255,255,255,0.82);
+  padding:9px 13px;border-radius:16px 16px 16px 4px;
+  font-size:13px;max-width:88%;align-self:flex-start;line-height:1.55;
+  border:1px solid rgba(255,255,255,0.07);backdrop-filter:blur(8px);
+}
+.d-out{
+  background:rgba(22,199,120,0.15);
+  color:rgba(255,255,255,0.90);
+  padding:9px 13px;border-radius:16px 16px 4px 16px;
+  font-size:13px;max-width:88%;align-self:flex-end;line-height:1.55;
+  border:1px solid rgba(22,199,120,0.18);backdrop-filter:blur(8px);
+}
+.d-time{font-size:10px;color:rgba(255,255,255,0.3);text-align:right;margin-top:4px}
 
 /* ─── PRICING ─── */
 .pricing-section{background:var(--bg)}
@@ -827,25 +850,28 @@ footer{
 /* ─── PLAN GUARANTEES ─── */
 .plan-guarantees{margin-top:48px}
 .guarantee-items{
-  display:grid;grid-template-columns:repeat(4,1fr);
-  gap:1px;background:var(--border);
-  border-radius:var(--radius-xl);overflow:hidden;
+  display:flex;align-items:stretch;
+  border:1px solid var(--border);border-radius:var(--radius-xl);
+  overflow:hidden;background:var(--card);
 }
-@media(max-width:700px){.guarantee-items{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:700px){.guarantee-items{flex-direction:column}}
 .guarantee-item{
-  background:var(--card);padding:40px 24px;
-  text-align:center;
-  display:flex;flex-direction:column;align-items:center;gap:6px;
+  flex:1;padding:32px 28px;
+  display:flex;flex-direction:column;gap:4px;
+  border-right:1px solid var(--border);
   transition:background .2s;
 }
+.guarantee-item:last-child{border-right:none}
+@media(max-width:700px){.guarantee-item{border-right:none;border-bottom:1px solid var(--border)}}
+@media(max-width:700px){.guarantee-item:last-child{border-bottom:none}}
 .guarantee-item:hover{background:var(--card2)}
 .guarantee-big{
-  font-size:clamp(22px,2.5vw,28px);font-weight:900;
-  letter-spacing:-0.5px;line-height:1;
-  color:var(--green);margin-bottom:6px;
+  font-size:clamp(20px,2vw,24px);font-weight:900;
+  letter-spacing:-0.5px;line-height:1.1;
+  color:var(--green);margin-bottom:2px;
 }
-.guarantee-title{font-size:15px;font-weight:700;letter-spacing:-0.3px;color:var(--text)}
-.guarantee-sub{font-size:13px;color:var(--text3);line-height:1.45;max-width:150px}
+.guarantee-title{font-size:14px;font-weight:600;letter-spacing:-0.2px;color:var(--text)}
+.guarantee-sub{font-size:12px;color:var(--text3);line-height:1.5;margin-top:2px}
 
 /* ─── ANIMATIONS ─── */
 .reveal{opacity:0;transform:translateY(32px);transition:all .7s cubic-bezier(0.16,1,0.3,1)}
@@ -894,14 +920,11 @@ footer{
 .ns-tab:hover{border-color:var(--border-green);color:var(--text)}
 .ns-tab.active{background:rgba(37,211,102,0.08);border-color:var(--border-green);color:var(--green)}
 
-/* ─── TESTI AUTO CAROUSEL ─── */
-.testi-track-wrap{overflow:hidden;margin-top:56px;cursor:grab}
-.testi-track-wrap:active{cursor:grabbing}
-.testi-track{
-  display:flex;gap:16px;
-  transition:transform .6s cubic-bezier(0.16,1,0.3,1);
-  will-change:transform;
-}
+/* ─── TESTI MARQUEE INFINITO ─── */
+.testi-track-wrap{overflow:hidden;margin-top:56px;mask-image:linear-gradient(to right,transparent 0%,black 8%,black 92%,transparent 100%);-webkit-mask-image:linear-gradient(to right,transparent 0%,black 8%,black 92%,transparent 100%)}
+.testi-track{display:flex;gap:16px;width:max-content;animation:testi-scroll 40s linear infinite}
+.testi-track:hover{animation-play-state:paused}
+@keyframes testi-scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 </style>
 </head>
 <body>
@@ -919,7 +942,7 @@ footer{
     <a href="#faq">FAQ</a>
   </div>
   <div style="display:flex;gap:10px;align-items:center">
-    <a href="/dashboard/" style="font-size:14px;color:var(--text2);text-decoration:none;padding:8px 14px;border-radius:8px;border:1px solid var(--border);transition:all .2s" onmouseover="this.style.borderColor='rgba(99,102,241,.5)';this.style.color='var(--text)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--text2)'">Acessar painel</a>
+    <a href="/dashboard/" style="display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:600;color:var(--text);text-decoration:none;padding:8px 16px;border-radius:9999px;border:1px solid rgba(34,197,94,0.3);background:rgba(34,197,94,0.06);transition:all .2s" onmouseover="this.style.background='rgba(34,197,94,0.12)';this.style.borderColor='rgba(34,197,94,0.5)'" onmouseout="this.style.background='rgba(34,197,94,0.06)';this.style.borderColor='rgba(34,197,94,0.3)'"><span style="width:7px;height:7px;border-radius:50%;background:#22c55e;flex-shrink:0;box-shadow:0 0 6px #22c55e"></span>Acessar</a>
     <a href="#planos" class="nav-cta">Começar agora</a>
   </div>
 </nav>
@@ -944,55 +967,32 @@ footer{
       </div>
     </div>
 
-    <!-- WHATSAPP MOCKUP -->
-    <div class="wpp-phone" style="position:relative">
-      <div class="wpp-frame">
-        <div class="wpp-header">
-          <div class="wpp-avatar" style="background:none;overflow:hidden;padding:0">
-            <img src="/landing/ana-avatar.jpg" alt="Ana Goulart" style="width:100%;height:100%;object-fit:cover;border-radius:50%">
-          </div>
-          <div>
-            <div class="wpp-contact-name">Ana Goulart</div>
-            <div class="wpp-contact-status">Online agora</div>
-          </div>
+    <!-- WHATSAPP MSGS FLUTUANTES -->
+    <div class="wpp-phone">
+      <div class="wpp-glow"></div>
+      <div class="wpp-header">
+        <div class="wpp-avatar">
+          <img src="/landing/ana-avatar.jpg" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:50%">
         </div>
-        <div class="wpp-msgs" id="wpp-msgs">
-          <div class="msg msg-in">
-            Oi! Vocês têm tênis masculino tamanho 42?
-            <div class="msg-time">14:22</div>
-          </div>
-          <div class="msg msg-out" style="display:none" id="wpp-r1">
-            Oi, Paulo! Temos sim 😊<br>O modelo <strong style="color:#fff">Ultralight</strong> está disponível nos tamanhos 38 ao 44. No 42 temos em <strong style="color:#fff">preto, branco e cinza</strong>.
-            <div class="msg-time">14:22</div>
-          </div>
-          <div class="msg msg-in" style="display:none" id="wpp-q2">
-            Qual o preço? Aceita parcelamento?
-            <div class="msg-time">14:23</div>
-          </div>
-          <div class="msg msg-out" style="display:none" id="wpp-r2">
-            <strong style="color:#fff">R$189,90</strong>, parcelamos em até <strong style="color:#fff">6x sem juros</strong> no cartão. Ou à vista com 5% de desconto 🖤
-            <div class="msg-time">14:23</div>
-          </div>
-          <div class="msg msg-in" style="display:none" id="wpp-q3">
-            Quero o preto! Me manda o link
-            <div class="msg-time">14:23</div>
-          </div>
-          <div class="msg msg-out" style="display:none" id="wpp-r3">
-            Claro! Aqui está 👇<br>
-            <div style="margin-top:8px;background:rgba(255,255,255,0.08);border-radius:8px;padding:8px 10px;border-left:3px solid var(--green)">
-              <div style="font-size:11px;color:var(--green);font-weight:600;margin-bottom:2px">loja.exemplo.com.br</div>
-              <div style="font-size:12px;color:#e9edef;font-weight:500">Ultralight 42 Preto</div>
-              <div style="font-size:11px;color:#8696a0">R$189,90 · Frete grátis</div>
-            </div>
-            <div class="msg-time">14:24</div>
-          </div>
-          <div class="msg msg-typing" style="display:none" id="wpp-typing">
-            <span class="typing-dot"></span>
-            <span class="typing-dot"></span>
-            <span class="typing-dot"></span>
-          </div>
+        <div>
+          <div class="wpp-contact-name">Ana Goulart</div>
+          <div class="wpp-contact-status">Online agora</div>
         </div>
-        <div class="wpp-glow"></div>
+      </div>
+      <div class="wpp-msgs" id="wpp-msgs">
+        <div class="msg msg-in visible" id="wpp-q1">
+          Vocês têm tênis tamanho 42?
+          <div class="msg-time">agora</div>
+        </div>
+        <div class="msg msg-typing" id="wpp-typing">
+          <span class="typing-dot"></span>
+          <span class="typing-dot"></span>
+          <span class="typing-dot"></span>
+        </div>
+        <div class="msg msg-out" id="wpp-r1">
+          Temos sim! 😊 Disponível em <strong>preto, branco e cinza</strong>. Qual cor te interessa?
+          <div class="msg-time">agora</div>
+        </div>
       </div>
       <div class="hero-notif">
         <div class="notif-dot"></div>
@@ -1040,17 +1040,17 @@ footer{
       <p class="sec-sub">Zero instalação. Zero código. Zero técnico. <strong>Você configura tudo pelo navegador e o atendente já começa a responder.</strong></p>
     </div>
     <div class="steps-grid">
-      <div class="step reveal reveal-delay-1">
+      <div class="step">
         <div class="step-num">01</div>
         <h3 class="step-title">Conecte seu WhatsApp</h3>
         <div class="step-desc">Abra o app, escaneie o QR code na tela e seu número está conectado. Funciona com WhatsApp Business ou número comum.</div>
       </div>
-      <div class="step reveal reveal-delay-2">
+      <div class="step">
         <div class="step-num">02</div>
         <h3 class="step-title">Ensine seu negócio</h3>
         <div class="step-desc">Preencha informações da sua empresa e suba arquivos: catálogo, tabela de preços, FAQ, políticas. O atendente aprende tudo.</div>
       </div>
-      <div class="step reveal reveal-delay-3">
+      <div class="step">
         <div class="step-num">03</div>
         <h3 class="step-title">Atendente vai ao ar</h3>
         <div class="step-desc">Pronto. Seu atendente começa a responder instantaneamente. Você pode fechar o computador, ele roda nos nossos servidores.</div>
@@ -1066,38 +1066,30 @@ footer{
       <div class="sec-eyebrow">Recursos</div>
       <h2 class="sec-title">Tudo que um bom<br>atendente precisa.</h2>
     </div>
-    <div class="features-editorial">
-      <div class="feat-row">
-        <div class="feat-num feat-anim"><span class="feat-num-unit">&lt;</span>2<span class="feat-num-unit">s</span></div>
-        <div class="feat-copy feat-anim">
-          <div class="feat-label">Velocidade</div>
-          <h3 class="feat-title">Responde antes do cliente perder o interesse</h3>
-          <div class="feat-desc">Em menos de 2 segundos, qualquer mensagem já tem resposta. <strong>Enquanto concorrentes demoram minutos, você já converteu.</strong></div>
-        </div>
+    <div class="feat-grid">
+      <div class="feat-card">
+        <div class="feat-stat"><span class="feat-stat-unit">&lt;</span>2<span class="feat-stat-unit">s</span></div>
+        <div class="feat-label">Velocidade</div>
+        <div class="feat-card-title">Responde antes do cliente perder o interesse</div>
+        <div class="feat-card-desc">Em menos de 2 segundos, qualquer mensagem já tem resposta. Enquanto concorrentes demoram minutos, você já converteu.</div>
       </div>
-      <div class="feat-row">
-        <div class="feat-copy feat-anim" style="order:1">
-          <div class="feat-label">Inteligência</div>
-          <h3 class="feat-title">Sem roteiro. Sem limite de perguntas.</h3>
-          <div class="feat-desc">Entende contexto, lembra da conversa e <strong>responde qualquer pergunta sobre seu negócio com naturalidade, sem travar.</strong></div>
-        </div>
-        <div class="feat-num feat-anim" style="order:2;text-align:right">100<span class="feat-num-unit">%</span></div>
+      <div class="feat-card">
+        <div class="feat-stat">100<span class="feat-stat-unit">%</span></div>
+        <div class="feat-label">Inteligência</div>
+        <div class="feat-card-title">Sem roteiro. Sem limite de perguntas.</div>
+        <div class="feat-card-desc">Entende contexto, lembra da conversa e responde qualquer pergunta sobre seu negócio com naturalidade, sem travar.</div>
       </div>
-      <div class="feat-row">
-        <div class="feat-num feat-anim">5<span class="feat-num-unit">min</span></div>
-        <div class="feat-copy feat-anim">
-          <div class="feat-label">Simplicidade</div>
-          <h3 class="feat-title">Qualquer pessoa configura. Sem ajuda técnica.</h3>
-          <div class="feat-desc">Conecte o WhatsApp, descreva seu negócio, suba os arquivos. <strong>Em 5 minutos seu atendente já está no ar.</strong></div>
-        </div>
+      <div class="feat-card">
+        <div class="feat-stat">5<span class="feat-stat-unit">min</span></div>
+        <div class="feat-label">Simplicidade</div>
+        <div class="feat-card-title">Qualquer pessoa configura. Sem ajuda técnica.</div>
+        <div class="feat-card-desc">Conecte o WhatsApp, descreva seu negócio, suba os arquivos. Em 5 minutos seu atendente já está no ar.</div>
       </div>
-      <div class="feat-row">
-        <div class="feat-copy feat-anim" style="order:1">
-          <div class="feat-label">Disponibilidade</div>
-          <h3 class="feat-title">Feriado, madrugada, fim de semana. Sempre.</h3>
-          <div class="feat-desc">Enquanto você dorme ou descansa, seu atendente está lá. <strong>Respondendo, convertendo, encaminhando. Sem parar.</strong></div>
-        </div>
-        <div class="feat-num feat-anim" style="order:2;text-align:right">24<span class="feat-num-unit">/7</span></div>
+      <div class="feat-card">
+        <div class="feat-stat">24<span class="feat-stat-unit">/7</span></div>
+        <div class="feat-label">Disponibilidade</div>
+        <div class="feat-card-title">Feriado, madrugada, fim de semana. Sempre.</div>
+        <div class="feat-card-desc">Enquanto você dorme ou descansa, seu atendente está lá. Respondendo, convertendo, encaminhando. Sem parar.</div>
       </div>
     </div>
   </div>
@@ -1140,8 +1132,8 @@ footer{
       </div>
       <div class="demo-window reveal reveal-delay-2">
         <div class="demo-wpp-header">
-          <div class="demo-avatar" id="demo-avatar" style="background:none;overflow:hidden;padding:0">
-            <img src="/landing/ana-avatar.jpg" alt="Ana Goulart" style="width:100%;height:100%;object-fit:cover;border-radius:50%">
+          <div class="demo-avatar" id="demo-avatar">
+            <img src="/landing/ana-avatar.jpg" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:50%">
           </div>
           <div>
             <div class="demo-contact" id="demo-name">Ana Goulart</div>
@@ -1242,7 +1234,7 @@ footer{
         <div class="plan-name">Recomendado</div>
         <div style="display:flex;align-items:center;gap:8px;margin-bottom:2px">
           <span style="font-size:14px;color:#888;text-decoration:line-through;font-weight:500">R$597</span>
-          <span style="background:linear-gradient(135deg,#22c55e,#16a34a);color:#000;font-size:11px;font-weight:800;padding:3px 8px;border-radius:100px;letter-spacing:0.3px">LANÇAMENTO</span>
+          <span style="background:linear-gradient(135deg,#22c55e,#16a34a);color:#000;font-size:11px;font-weight:800;padding:3px 8px;border-radius:100px;letter-spacing:0.3px">OFERTA</span>
         </div>
         <div class="plan-price"><sup>R$</sup>397<span>/mês</span></div>
         <div class="plan-cycle">Cobrado mensalmente</div>
@@ -1278,35 +1270,35 @@ footer{
         <div class="plan-name">Pro</div>
         <div style="display:flex;align-items:center;gap:8px;margin-bottom:2px">
           <span style="font-size:14px;color:#888;text-decoration:line-through;font-weight:500">R$1.197</span>
-          <span style="background:linear-gradient(135deg,#2563eb,#3b82f6);color:#fff;font-size:11px;font-weight:800;padding:3px 8px;border-radius:100px;letter-spacing:0.3px">LANÇAMENTO</span>
+          <span style="background:linear-gradient(135deg,#2563eb,#3b82f6);color:#fff;font-size:11px;font-weight:800;padding:3px 8px;border-radius:100px;letter-spacing:0.3px">OFERTA</span>
         </div>
         <div class="plan-price"><sup>R$</sup>797<span>/mês</span></div>
         <div class="plan-cycle">Cobrado mensalmente</div>
-        <div class="plan-msgs">15.000 mensagens / mês</div>
+        <div class="plan-msgs" style="color:#2563eb;background:rgba(37,99,235,0.07);border:1px solid rgba(37,99,235,0.15)">15.000 mensagens / mês</div>
         <div class="plan-features">
           <div class="plan-feat">
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8l3 3 7-7" stroke="#2563eb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
             Tudo do Recomendado
           </div>
           <div class="plan-feat">
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8l3 3 7-7" stroke="#2563eb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
             Documentos ilimitados
           </div>
           <div class="plan-feat">
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8l3 3 7-7" stroke="#2563eb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
             Múltiplos atendentes
           </div>
           <div class="plan-feat">
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8l3 3 7-7" stroke="#2563eb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
             API de integração
           </div>
           <div class="plan-feat">
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8l3 3 7-7" stroke="#2563eb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
             Suporte VIP via WhatsApp
           </div>
-          <div class="plan-feat" style="color:var(--text);font-weight:600">
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8l3 3 7-7" stroke="#2563eb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            🎯 Onboarding com nosso gestor via Google Meet
+          <div class="plan-feat" style="color:var(--text);font-weight:700;background:rgba(37,99,235,0.08);border:1px solid rgba(37,99,235,0.2);border-radius:8px;padding:8px 10px;margin-top:4px">
+            <span style="font-size:16px">🎯</span>
+            Onboarding com nosso gestor via Google Meet
           </div>
           <div class="plan-feat" style="color:var(--text);font-weight:700;background:rgba(37,99,235,0.08);border:1px solid rgba(37,99,235,0.2);border-radius:8px;padding:8px 10px;margin-top:4px">
             <span style="font-size:16px">🛠️</span>
@@ -1339,33 +1331,21 @@ footer{
     <div class="plan-guarantees reveal">
       <div class="guarantee-items">
         <div class="guarantee-item">
-          <div style="width:48px;height:48px;background:rgba(37,211,102,0.1);border-radius:14px;display:flex;align-items:center;justify-content:center;margin-bottom:16px">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 2L3 7v5c0 5.25 3.75 10.15 9 11.35C17.25 22.15 21 17.25 21 12V7l-9-5z" fill="rgba(37,211,102,0.2)" stroke="#22c55e" stroke-width="1.5" stroke-linejoin="round"/><path d="M9 12l2 2 4-4" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </div>
           <div class="guarantee-big">7 dias</div>
           <div class="guarantee-title">Garantia total</div>
           <div class="guarantee-sub">Não gostou? Devolvemos 100% sem perguntas.</div>
         </div>
         <div class="guarantee-item">
-          <div style="width:48px;height:48px;background:rgba(37,211,102,0.1);border-radius:14px;display:flex;align-items:center;justify-content:center;margin-bottom:16px">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" fill="rgba(37,211,102,0.2)" stroke="#22c55e" stroke-width="1.5"/><path d="M15 9l-4.5 4.5L8 11" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </div>
           <div class="guarantee-big">Sem multa</div>
           <div class="guarantee-title">Cancele quando quiser</div>
-          <div class="guarantee-sub">Sem fidelidade. Sem burocracia. Você decide.</div>
+          <div class="guarantee-sub">Sem fidelidade, sem burocracia. Você decide.</div>
         </div>
         <div class="guarantee-item">
-          <div style="width:48px;height:48px;background:rgba(37,211,102,0.1);border-radius:14px;display:flex;align-items:center;justify-content:center;margin-bottom:16px">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" stroke="#22c55e" stroke-width="1.5" stroke-linecap="round"/><circle cx="9" cy="7" r="4" fill="rgba(37,211,102,0.2)" stroke="#22c55e" stroke-width="1.5"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" stroke="#22c55e" stroke-width="1.5" stroke-linecap="round"/></svg>
-          </div>
           <div class="guarantee-big">Time real</div>
           <div class="guarantee-title">Suporte humano 24h</div>
           <div class="guarantee-sub">Pessoas reais. Não outro bot te respondendo.</div>
         </div>
         <div class="guarantee-item">
-          <div style="width:48px;height:48px;background:rgba(37,211,102,0.1);border-radius:14px;display:flex;align-items:center;justify-content:center;margin-bottom:16px">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" fill="rgba(37,211,102,0.2)" stroke="#22c55e" stroke-width="1.5"/><path d="M12 7v5l3 3" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </div>
           <div class="guarantee-big">5 min</div>
           <div class="guarantee-title">Ativo em minutos</div>
           <div class="guarantee-sub">Zero código. Zero técnico. Tudo pelo navegador.</div>
@@ -1382,65 +1362,29 @@ footer{
       <div class="sec-eyebrow">Quem usa</div>
       <h2 class="sec-title">Negócios que nunca<br>mais perdem clientes.</h2>
     </div>
-    <div class="testi-track-wrap" id="testi-wrap">
-      <div class="testi-track" id="testi-track">
-        <div class="testi-card">
-          <div class="testi-stars">★★★★★</div>
-          <div class="testi-text">"Antes perdia 5 pedidos por semana por demora. Agora o atendente responde instantaneamente. Só entro quando é algo realmente complexo."</div>
-          <div class="testi-author">
-            <div class="testi-avatar" style="background:none;overflow:hidden;padding:0"><img src="/landing/testi-mariana.jpg" alt="Mariana S." width="80" height="80" loading="lazy" style="width:100%;height:100%;object-fit:cover;border-radius:50%"></div>
-            <div><div class="testi-name">Mariana S.</div><div class="testi-biz">Loja de roupas femininas</div></div>
-          </div>
-        </div>
-        <div class="testi-card">
-          <div class="testi-stars">★★★★★</div>
-          <div class="testi-text">"Minha clínica recebe agendamentos às 2h da manhã agora. Paciente manda mensagem, o atendente informa disponibilidade e confirma. Incrível."</div>
-          <div class="testi-author">
-            <div class="testi-avatar" style="background:none;overflow:hidden;padding:0"><img src="/landing/testi-ricardo.jpg" alt="Dr. Ricardo A." width="80" height="80" loading="lazy" style="width:100%;height:100%;object-fit:cover;border-radius:50%"></div>
-            <div><div class="testi-name">Dr. Ricardo A.</div><div class="testi-biz">Clínica odontológica</div></div>
-          </div>
-        </div>
-        <div class="testi-card">
-          <div class="testi-stars">★★★★★</div>
-          <div class="testi-text">"Configurei em 10 minutos. Subi o cardápio e em menos de 1 hora o atendente já estava tirando pedidos. Melhor investimento do restaurante no ano."</div>
-          <div class="testi-author">
-            <div class="testi-avatar" style="background:none;overflow:hidden;padding:0"><img src="/landing/testi-felipe.jpg" alt="Felipe M." width="80" height="80" loading="lazy" style="width:100%;height:100%;object-fit:cover;border-radius:50%"></div>
-            <div><div class="testi-name">Felipe M.</div><div class="testi-biz">Restaurante delivery</div></div>
-          </div>
-        </div>
-        <div class="testi-card">
-          <div class="testi-stars">★★★★★</div>
-          <div class="testi-text">"Cliente perguntou algo totalmente fora do padrão e o atendente respondeu perfeitamente. Nunca vi outro bot fazer isso. Me vendeu na hora."</div>
-          <div class="testi-author">
-            <div class="testi-avatar" style="background:linear-gradient(135deg,#ec4899,#be185d)">C</div>
-            <div><div class="testi-name">Camila R.</div><div class="testi-biz">E-commerce de cosméticos</div></div>
-          </div>
-        </div>
-        <div class="testi-card">
-          <div class="testi-stars">★★★★★</div>
-          <div class="testi-text">"Meu salão não perde mais agendamento por falta de resposta no fim de semana. O atendente marca, confirma e ainda manda lembrete. Virei fã."</div>
-          <div class="testi-author">
-            <div class="testi-avatar" style="background:linear-gradient(135deg,#14b8a6,#0d9488)">J</div>
-            <div><div class="testi-name">Juliana T.</div><div class="testi-biz">Salão de beleza</div></div>
-          </div>
-        </div>
-        <div class="testi-card">
-          <div class="testi-stars">★★★★★</div>
-          <div class="testi-text">"Tinha medo de parecer robótico. Mas o atendente conversa tão bem que ninguém percebe. Vários clientes perguntaram o nome 'dela'."</div>
-          <div class="testi-author">
-            <div class="testi-avatar" style="background:linear-gradient(135deg,#3b82f6,#1d4ed8)">G</div>
-            <div><div class="testi-name">Gustavo N.</div><div class="testi-biz">Loja de eletrônicos</div></div>
-          </div>
-        </div>
+    <div class="testi-track-wrap">
+      <div class="testi-track">
+        <!-- set 1 -->
+        <div class="testi-card"><div class="testi-stars">★★★★★</div><div class="testi-text">"Antes perdia 5 pedidos por semana por demora. Agora o atendente responde instantaneamente. Só entro quando é algo realmente complexo."</div><div class="testi-author"><div class="testi-avatar" style="background:none;overflow:hidden;padding:0"><img src="/landing/testi-mariana.jpg" alt="Mariana S." width="80" height="80" loading="lazy" style="width:100%;height:100%;object-fit:cover;border-radius:50%"></div><div><div class="testi-name">Mariana S.</div><div class="testi-biz">Loja de roupas femininas</div></div></div></div>
+        <div class="testi-card"><div class="testi-stars">★★★★★</div><div class="testi-text">"Minha clínica recebe agendamentos às 2h da manhã agora. Paciente manda mensagem, o atendente informa disponibilidade e confirma. Incrível."</div><div class="testi-author"><div class="testi-avatar" style="background:none;overflow:hidden;padding:0"><img src="/landing/testi-ricardo.jpg" alt="Dr. Ricardo A." width="80" height="80" loading="lazy" style="width:100%;height:100%;object-fit:cover;border-radius:50%"></div><div><div class="testi-name">Dr. Ricardo A.</div><div class="testi-biz">Clínica odontológica</div></div></div></div>
+        <div class="testi-card"><div class="testi-stars">★★★★★</div><div class="testi-text">"Configurei em 10 minutos. Subi o cardápio e em menos de 1 hora o atendente já estava tirando pedidos. Melhor investimento do restaurante no ano."</div><div class="testi-author"><div class="testi-avatar" style="background:none;overflow:hidden;padding:0"><img src="/landing/testi-felipe.jpg" alt="Felipe M." width="80" height="80" loading="lazy" style="width:100%;height:100%;object-fit:cover;border-radius:50%"></div><div><div class="testi-name">Felipe M.</div><div class="testi-biz">Restaurante delivery</div></div></div></div>
+        <div class="testi-card"><div class="testi-stars">★★★★★</div><div class="testi-text">"Cliente perguntou algo totalmente fora do padrão e o atendente respondeu perfeitamente. Nunca vi outro bot fazer isso. Me vendeu na hora."</div><div class="testi-author"><div class="testi-avatar" style="background:none;overflow:hidden;padding:0"><img src="/landing/testi-camila.jpg" alt="Camila R." width="80" height="80" loading="lazy" style="width:100%;height:100%;object-fit:cover;border-radius:50%"></div><div><div class="testi-name">Camila R.</div><div class="testi-biz">E-commerce de cosméticos</div></div></div></div>
+        <div class="testi-card"><div class="testi-stars">★★★★★</div><div class="testi-text">"Meu salão não perde mais agendamento por falta de resposta no fim de semana. O atendente marca, confirma e ainda manda lembrete. Virei fã."</div><div class="testi-author"><div class="testi-avatar" style="background:none;overflow:hidden;padding:0"><img src="/landing/testi-juliana.jpg" alt="Juliana T." width="80" height="80" loading="lazy" style="width:100%;height:100%;object-fit:cover;border-radius:50%"></div><div><div class="testi-name">Juliana T.</div><div class="testi-biz">Salão de beleza</div></div></div></div>
+        <div class="testi-card"><div class="testi-stars">★★★★★</div><div class="testi-text">"Tinha medo de parecer robótico. Mas o atendente conversa tão bem que ninguém percebe. Vários clientes perguntaram o nome 'dela'."</div><div class="testi-author"><div class="testi-avatar" style="background:none;overflow:hidden;padding:0"><img src="/landing/testi-gustavo.jpg" alt="Gustavo N." width="80" height="80" loading="lazy" style="width:100%;height:100%;object-fit:cover;border-radius:50%"></div><div><div class="testi-name">Gustavo N.</div><div class="testi-biz">Loja de eletrônicos</div></div></div></div>
+        <!-- set 2 (duplicata para loop infinito) -->
+        <div class="testi-card"><div class="testi-stars">★★★★★</div><div class="testi-text">"Antes perdia 5 pedidos por semana por demora. Agora o atendente responde instantaneamente. Só entro quando é algo realmente complexo."</div><div class="testi-author"><div class="testi-avatar" style="background:none;overflow:hidden;padding:0"><img src="/landing/testi-mariana.jpg" alt="Mariana S." width="80" height="80" loading="lazy" style="width:100%;height:100%;object-fit:cover;border-radius:50%"></div><div><div class="testi-name">Mariana S.</div><div class="testi-biz">Loja de roupas femininas</div></div></div></div>
+        <div class="testi-card"><div class="testi-stars">★★★★★</div><div class="testi-text">"Minha clínica recebe agendamentos às 2h da manhã agora. Paciente manda mensagem, o atendente informa disponibilidade e confirma. Incrível."</div><div class="testi-author"><div class="testi-avatar" style="background:none;overflow:hidden;padding:0"><img src="/landing/testi-ricardo.jpg" alt="Dr. Ricardo A." width="80" height="80" loading="lazy" style="width:100%;height:100%;object-fit:cover;border-radius:50%"></div><div><div class="testi-name">Dr. Ricardo A.</div><div class="testi-biz">Clínica odontológica</div></div></div></div>
+        <div class="testi-card"><div class="testi-stars">★★★★★</div><div class="testi-text">"Configurei em 10 minutos. Subi o cardápio e em menos de 1 hora o atendente já estava tirando pedidos. Melhor investimento do restaurante no ano."</div><div class="testi-author"><div class="testi-avatar" style="background:none;overflow:hidden;padding:0"><img src="/landing/testi-felipe.jpg" alt="Felipe M." width="80" height="80" loading="lazy" style="width:100%;height:100%;object-fit:cover;border-radius:50%"></div><div><div class="testi-name">Felipe M.</div><div class="testi-biz">Restaurante delivery</div></div></div></div>
+        <div class="testi-card"><div class="testi-stars">★★★★★</div><div class="testi-text">"Cliente perguntou algo totalmente fora do padrão e o atendente respondeu perfeitamente. Nunca vi outro bot fazer isso. Me vendeu na hora."</div><div class="testi-author"><div class="testi-avatar" style="background:none;overflow:hidden;padding:0"><img src="/landing/testi-camila.jpg" alt="Camila R." width="80" height="80" loading="lazy" style="width:100%;height:100%;object-fit:cover;border-radius:50%"></div><div><div class="testi-name">Camila R.</div><div class="testi-biz">E-commerce de cosméticos</div></div></div></div>
+        <div class="testi-card"><div class="testi-stars">★★★★★</div><div class="testi-text">"Meu salão não perde mais agendamento por falta de resposta no fim de semana. O atendente marca, confirma e ainda manda lembrete. Virei fã."</div><div class="testi-author"><div class="testi-avatar" style="background:none;overflow:hidden;padding:0"><img src="/landing/testi-juliana.jpg" alt="Juliana T." width="80" height="80" loading="lazy" style="width:100%;height:100%;object-fit:cover;border-radius:50%"></div><div><div class="testi-name">Juliana T.</div><div class="testi-biz">Salão de beleza</div></div></div></div>
+        <div class="testi-card"><div class="testi-stars">★★★★★</div><div class="testi-text">"Tinha medo de parecer robótico. Mas o atendente conversa tão bem que ninguém percebe. Vários clientes perguntaram o nome 'dela'."</div><div class="testi-author"><div class="testi-avatar" style="background:none;overflow:hidden;padding:0"><img src="/landing/testi-gustavo.jpg" alt="Gustavo N." width="80" height="80" loading="lazy" style="width:100%;height:100%;object-fit:cover;border-radius:50%"></div><div><div class="testi-name">Gustavo N.</div><div class="testi-biz">Loja de eletrônicos</div></div></div></div>
       </div>
     </div>
-    <div class="testi-dots" id="testi-dots" style="display:flex;justify-content:center;gap:6px;align-items:center;margin-top:20px">
-      <div class="testi-dot active" onclick="testiGo(0)"></div>
-      <div class="testi-dot" onclick="testiGo(1)"></div>
-      <div class="testi-dot" onclick="testiGo(2)"></div>
-      <div class="testi-dot" onclick="testiGo(3)"></div>
-      <div class="testi-dot" onclick="testiGo(4)"></div>
-      <div class="testi-dot" onclick="testiGo(5)"></div>
+    <div style="text-align:center;margin-top:48px">
+      <a href="#planos" class="btn-primary" style="display:inline-flex;align-items:center;gap:8px;font-size:16px;padding:16px 36px">
+        Ver planos e preços
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
     </div>
   </div>
 </section>
@@ -1510,6 +1454,12 @@ footer{
         </div>
       </div>
 
+    </div>
+    <div style="text-align:center;margin-top:48px">
+      <a href="#planos" class="btn-primary" style="display:inline-flex;align-items:center;gap:8px;font-size:16px;padding:16px 36px">
+        Ver planos e preços
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
     </div>
   </div>
 </section>
@@ -1597,7 +1547,7 @@ footer{
       <a href="/termos">Termos</a>
       <a href="/privacidade">Privacidade</a>
     </div>
-    <div class="footer-copy">Feito com IA · 2026</div>
+    <div class="footer-copy"><a href="mailto:contato@atendente24h.com" style="color:var(--text3);text-decoration:none">contato@atendente24h.com</a> · 2026</div>
   </div>
 </footer>
 
@@ -1634,20 +1584,23 @@ const observer = new IntersectionObserver((entries) => {
 }, {threshold:.1, rootMargin:'0px 0px -40px 0px'})
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el))
 
-// ── Features editorial animation
-const featObs = new IntersectionObserver((entries) => {
-  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('in') })
-}, {threshold:0.15})
-document.querySelectorAll('.feat-anim').forEach(el => featObs.observe(el))
+// ── Features grid + steps animation
+const cardObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if(e.isIntersecting) { e.target.classList.add('in'); cardObs.unobserve(e.target); } })
+}, {threshold:0.12, rootMargin:'0px 0px -30px 0px'})
+document.querySelectorAll('.feat-card, .step').forEach((el,i) => {
+  el.style.transitionDelay = (i * 0.1) + 's';
+  cardObs.observe(el);
+})
 
 // ── "Sem Roteiro" interactive tabs
 ;(function(){
   const nsData = [
     {
       label:'Trava', goodLabel:'Converte',
-      q: 'Esse tênis vai dar chulé?',
+      q: 'Esse tênis é bom pra academia ou só pra rua?',
       aBad: 'Desculpe, não entendi. Escolha uma opção: 1 - Ver produtos  2 - Rastrear pedido  3 - Falar com humano',
-      aGood: 'Haha, boa pergunta! O solado tem ventilação e o tecido é anti-odor. Temos também o modelo com palmilha antibacteriana no seu tamanho. Qual prefere? 😄'
+      aGood: 'Os dois! O solado tem amortecimento reforçado, então vai bem em treino leve e no dia a dia. Para corrida intensa, recomendo o Ultralight Pro. Qual seu tamanho?'
     },
     {
       label:'Piora', goodLabel:'Resolve',
@@ -1707,57 +1660,24 @@ document.querySelectorAll('.feat-anim').forEach(el => featObs.observe(el))
   wrap.addEventListener('mouseleave', () => { timer = setInterval(() => goTo(current + 1), 4000) })
 })()
 
-// ── WhatsApp mockup animation
-const wppMsgs = {
-  r1: document.getElementById('wpp-r1'),
-  q2: document.getElementById('wpp-q2'),
-  r2: document.getElementById('wpp-r2'),
-  q3: document.getElementById('wpp-q3'),
-  r3: document.getElementById('wpp-r3'),
-  typing: document.getElementById('wpp-typing'),
-}
-const wppContainer = document.getElementById('wpp-msgs')
-function showWppMsg(el) {
-  return new Promise(r => {
-    el.style.display = ''
-    el.style.opacity = '0'
-    el.style.transform = 'translateY(6px)'
-    el.style.transition = 'all 0.3s ease'
-    requestAnimationFrame(() => requestAnimationFrame(() => {
-      el.style.opacity = '1'
-      el.style.transform = 'translateY(0)'
-    }))
-    setTimeout(r, 350)
-    wppContainer.scrollTop = wppContainer.scrollHeight
-  })
-}
-function showTyping(ms) {
-  return new Promise(r => {
-    wppMsgs.typing.style.display = ''
-    wppContainer.scrollTop = wppContainer.scrollHeight
-    setTimeout(() => { wppMsgs.typing.style.display = 'none'; r() }, ms)
-  })
-}
+// ── WhatsApp msgs flutuantes
+const wppQ1 = document.getElementById('wpp-q1')
+const wppR1 = document.getElementById('wpp-r1')
+const wppTyping = document.getElementById('wpp-typing')
+function showEl(el){ return new Promise(r => { el.classList.add('visible'); setTimeout(r, 400) }) }
+function hideEl(el){ el.classList.remove('visible') }
 function wait(ms){ return new Promise(r => setTimeout(r, ms)) }
 async function animateWpp() {
+  hideEl(wppTyping); hideEl(wppR1)
+  wppQ1.classList.add('visible')
+  await wait(1000)
+  await showEl(wppTyping)
   await wait(1200)
-  await showTyping(1000)
-  await showWppMsg(wppMsgs.r1)
-  await wait(1600)
-  await showWppMsg(wppMsgs.q2)
+  hideEl(wppTyping)
+  await showEl(wppR1)
+  await wait(4000)
+  hideEl(wppQ1); hideEl(wppR1)
   await wait(600)
-  await showTyping(1000)
-  await showWppMsg(wppMsgs.r2)
-  await wait(1800)
-  await showWppMsg(wppMsgs.q3)
-  await wait(500)
-  await showTyping(1200)
-  await showWppMsg(wppMsgs.r3)
-  await wait(6000)
-  // loop
-  Object.values(wppMsgs).forEach(el => { if(el.id !== 'wpp-msgs') el.style.display = 'none' })
-  const firstMsg = document.querySelector('#wpp-msgs .msg-in')
-  if(firstMsg){ firstMsg.style.display = '' }
   animateWpp()
 }
 animateWpp()
@@ -2021,6 +1941,23 @@ window.addEventListener('scroll', () => {
 })()
 </script>
 
+<script>
+// Social proof counter: oscila entre 1351-1359
+(function() {
+  var base = 1351, range = 9, current = 1354;
+  function update() {
+    var delta = Math.random() < 0.5 ? 1 : -1;
+    current = Math.min(base + range - 1, Math.max(base, current + delta));
+    var d = document.getElementById('sb-count-desktop');
+    var m = document.getElementById('sb-count-mobile');
+    var fmt = current.toLocaleString('pt-BR');
+    if (d) d.textContent = fmt;
+    if (m) m.textContent = fmt;
+  }
+  setInterval(update, Math.floor(Math.random() * 4000) + 3000);
+})();
+</script>
+
 <!-- SOCIAL PROOF + STICKY MOBILE BARS -->
 <style>
 @keyframes sb-pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(1.5)}}
@@ -2079,13 +2016,13 @@ window.addEventListener('scroll', () => {
 <!-- Desktop pill -->
 <div id="sb-desktop">
   <span style="width:6px;height:6px;border-radius:50%;background:#22c55e;flex-shrink:0;animation:sb-pulse 2s infinite"></span>
-  <span style="font-size:12px;font-weight:600;color:rgba(255,255,255,0.9)">Primeiros acessos disponíveis este mês</span>
+  <span style="font-size:12px;font-weight:600;color:rgba(255,255,255,0.9)"><span id="sb-count-desktop">1.354</span> empresas usam a plataforma</span>
 </div>
 
 <!-- Mobile top bar: social proof -->
 <div id="sb-mobile-top">
   <span style="width:6px;height:6px;border-radius:50%;background:#22c55e;flex-shrink:0;animation:sb-pulse 2s infinite"></span>
-  <span style="font-size:12px;font-weight:600;color:rgba(255,255,255,0.88)">Primeiros acessos disponíveis este mês</span>
+  <span style="font-size:12px;font-weight:600;color:rgba(255,255,255,0.88)"><span id="sb-count-mobile">1.354</span> empresas usam a plataforma</span>
 </div>
 
 <!-- Mobile bottom bar: sticky CTA -->
