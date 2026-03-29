@@ -69,12 +69,12 @@ def composite(scene_path, headline, suporte, output_path, width=1080, height=135
 
     draw = ImageDraw.Draw(scene)
 
-    padding = 60
+    padding = 72
     text_area_width = width - (padding * 2)
 
-    # Fontes
-    headline_size = int(width * 0.076)
-    suporte_size  = int(width * 0.038)
+    # Fontes — headline maior para mais impacto
+    headline_size = int(width * 0.088)
+    suporte_size  = int(width * 0.040)
 
     font_headline = ImageFont.truetype(FONT_PATH, headline_size, index=FONT_BLACK)
     font_suporte  = ImageFont.truetype(FONT_PATH, suporte_size,  index=FONT_REG)
@@ -82,30 +82,34 @@ def composite(scene_path, headline, suporte, output_path, width=1080, height=135
     # Calcula altura do bloco de texto
     h_lines = wrap_text(headline, font_headline, text_area_width, draw)
     h_line_h = draw.textbbox((0, 0), "Ag", font=font_headline)[3]
-    h_block_h = len(h_lines) * (h_line_h + 8)
+    h_block_h = len(h_lines) * (h_line_h + 6)
 
     s_block_h = 0
     s_lines = []
     if suporte:
         s_lines = wrap_text(suporte, font_suporte, text_area_width, draw)
         s_line_h = draw.textbbox((0, 0), "Ag", font=font_suporte)[3]
-        s_block_h = len(s_lines) * (s_line_h + 6) + 20  # 20px gap entre headline e suporte
+        s_block_h = len(s_lines) * (s_line_h + 6) + 24
 
     total_text_h = h_block_h + s_block_h
-    bottom_margin = int(height * 0.065)
+    bottom_margin = int(height * 0.07)
     text_y = height - bottom_margin - total_text_h
 
-    # Desenha headline (branca)
+    # Desenha headline — centralizada
     current_y = text_y
     for line in h_lines:
-        draw.text((padding, current_y), line, font=font_headline, fill=(255, 255, 255))
-        current_y += h_line_h + 8
+        line_w = draw.textbbox((0, 0), line, font=font_headline)[2]
+        x = (width - line_w) // 2
+        draw.text((x, current_y), line, font=font_headline, fill=(255, 255, 255))
+        current_y += h_line_h + 6
 
-    # Desenha suporte (branca 75%)
+    # Desenha suporte — centralizada, mais clara
     if s_lines:
-        current_y += 12
+        current_y += 14
         for line in s_lines:
-            draw.text((padding, current_y), line, font=font_suporte, fill=(191, 191, 191))
+            line_w = draw.textbbox((0, 0), line, font=font_suporte)[2]
+            x = (width - line_w) // 2
+            draw.text((x, current_y), line, font=font_suporte, fill=(200, 200, 200))
             current_y += s_line_h + 6
 
     scene.save(output_path, "PNG", optimize=True)
