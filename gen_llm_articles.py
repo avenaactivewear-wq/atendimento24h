@@ -578,6 +578,86 @@ footer a{{color:var(--text3)}}
 </body>
 </html>"""
 
+# ─── REBUILD INDEX ────────────────────────────────────────────────────────────
+def _rebuild_index(total=None):
+    files = sorted([f for f in os.listdir(BLOG_DIR) if f.endswith(".html") and f != "index.html"])
+    if total is None:
+        total = len(files)
+    cards = []
+    for fname in files:
+        path = os.path.join(BLOG_DIR, fname)
+        try:
+            with open(path, "r", encoding="utf-8") as f:
+                html = f.read()
+            slug = fname.replace(".html", "")
+            import re as _re
+            m = _re.search(r'<title>(.+?) \| Atendente24h</title>', html)
+            title = m.group(1) if m else slug
+            m = _re.search(r'<meta name="description" content="([^"]+)"', html)
+            desc = (m.group(1)[:120] + "...") if m else ""
+            m = _re.search(r'<div class="meta">(\d{1,2} \w+ \d{4})', html)
+            if not m:
+                m = _re.search(r'"datePublished":"(\d{4}-\d{2}-\d{2})"', html)
+                date_str = m.group(1) if m else "2026"
+            else:
+                date_str = m.group(1)
+            m = _re.search(r'<span class="tag">([^<]+)</span>', html)
+            tag = m.group(1) if m else "WhatsApp IA"
+            m = _re.search(r'middot; (\d+ min)', html)
+            read_time = m.group(1) if m else "5 min"
+            cards.append((slug, title, desc, date_str, tag, read_time))
+        except:
+            pass
+    card_html = "".join(f'    <a href="/blog/{s}" class="card"><span class="tag">{tg}</span><h2>{t}</h2><p>{d}</p><span class="meta">{dt} &middot; {rt}</span></a>\n' for s,t,d,dt,tg,rt in cards)
+    idx = f"""<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blog de Atendimento WhatsApp com IA | Atendente24h</title>
+<meta name="description" content="Guias e tutoriais sobre automação de atendimento no WhatsApp com inteligência artificial para PMEs brasileiras.">
+<link rel="canonical" href="https://atendente24h.com/blog">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap">
+<script data-goatcounter="https://atendente24h.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+<style>
+*{{box-sizing:border-box;margin:0;padding:0}}
+body{{background:#080808;color:#fff;font-family:'Plus Jakarta Sans',system-ui,sans-serif;font-size:16px;line-height:1.6}}
+header{{padding:24px 24px 0;max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between}}
+header a.logo{{color:#fff;text-decoration:none;font-weight:800;font-size:20px}}
+header a.cta{{background:#25D366;color:#000;padding:10px 20px;border-radius:8px;text-decoration:none;font-weight:700;font-size:14px}}
+.hero{{padding:60px 24px 40px;max-width:1200px;margin:0 auto;text-align:center}}
+.hero h1{{font-size:clamp(32px,5vw,52px);font-weight:800;letter-spacing:-1.5px;margin-bottom:16px}}
+.hero p{{color:#a1a1aa;font-size:18px;max-width:600px;margin:0 auto 12px}}
+.hero .count{{color:#25D366;font-size:14px;font-weight:600}}
+.grid{{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px;padding:0 24px 80px;max-width:1200px;margin:0 auto}}
+.card{{background:#111;border:1px solid #1a1a1a;border-radius:12px;padding:24px;text-decoration:none;color:#fff;transition:border-color .2s,transform .2s;display:flex;flex-direction:column;gap:12px}}
+.card:hover{{border-color:#25D366;transform:translateY(-2px)}}
+.tag{{background:#25D36620;color:#25D366;font-size:12px;font-weight:700;padding:4px 10px;border-radius:20px;display:inline-block;width:fit-content}}
+.card h2{{font-size:16px;font-weight:700;line-height:1.4}}
+.card p{{font-size:14px;color:#71717a;flex:1;line-height:1.5}}
+.meta{{font-size:12px;color:#52525b;margin-top:auto}}
+@media(max-width:640px){{.grid{{grid-template-columns:1fr}}}}
+</style>
+</head>
+<body>
+<header>
+  <a href="/" class="logo">Atendente24h</a>
+  <a href="/#planos" class="cta">Ver planos</a>
+</header>
+<div class="hero">
+  <h1>Automação de Atendimento no WhatsApp com IA</h1>
+  <p>Guias práticos para clínicas, lojas, restaurantes e PMEs que querem atender clientes 24h pelo WhatsApp sem contratar mais funcionários.</p>
+  <span class="count">{total} artigos publicados</span>
+</div>
+<div class="grid">
+{card_html}</div>
+</body>
+</html>"""
+    with open(os.path.join(BLOG_DIR, "index.html"), "w", encoding="utf-8") as f:
+        f.write(idx)
+
 # ─── GERACAO DE TOPICOS ────────────────────────────────────────────────────────
 def build_topic_list():
     topics = []
@@ -714,6 +794,7 @@ def main():
             if ok % args.batch == 0:
                 total_now = len([f for f in os.listdir(BLOG_DIR) if f.endswith(".html") and f != "index.html"])
                 print(f"  → Commitando lote ({total_now} posts total)...")
+                _rebuild_index(total_now)
                 os.system(f'cd {BLOG_DIR}/.. && git add blog/ && git commit -m "blog: +{args.batch} posts SEO ({total_now} total)" && git push')
 
         except Exception as e:
@@ -722,7 +803,9 @@ def main():
             time.sleep(2)
 
     # Commit final com restante
-    os.system(f'cd {BLOG_DIR}/.. && git add blog/ && git commit -m "blog: lote final SEO" && git push 2>/dev/null || true')
+    total_final = len([f for f in os.listdir(BLOG_DIR) if f.endswith(".html") and f != "index.html"])
+    _rebuild_index(total_final)
+    os.system(f'cd {BLOG_DIR}/.. && git add blog/ && git commit -m "blog: lote final SEO ({total_final} total)" && git push 2>/dev/null || true')
     total_posts = len([f for f in os.listdir(BLOG_DIR) if f.endswith(".html") and f != "index.html"])
     print(f"\nConcluido: {ok} gerados, {erros} erros | Total no blog: {total_posts}")
 
