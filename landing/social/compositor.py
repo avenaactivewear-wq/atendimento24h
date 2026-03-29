@@ -288,6 +288,15 @@ POSTS = [
         "caption": "Sem instalar nada. Sem contratar ningu\u00e9m. S\u00f3 acessar, configurar e ligar. Seu atendente IA est\u00e1 pronto em minutos.",
         "hashtags": "#atendente24h #facildeusur #botwhatsapp #ia #saas #empreendedor #automatizacao #configuracaorapida #negociosonline #whatsappbusiness",
     },
+    {
+        "scene": f"{SCENES_DIR}/scene-oi.jpg",
+        "headline": "Seu WhatsApp\nnunca mais fica mudo.",
+        "suporte": "Resposta autom\u00e1tica, 24 horas, 7 dias por semana.",
+        "feed":  f"{POSTS_DIR}/feed-20.png",
+        "story": f"{POSTS_DIR}/story-20.png",
+        "caption": "Todo cliente que envia mensagem espera uma resposta. Com o Atendente24h, a resposta chega. Sempre. Agora.",
+        "hashtags": "#atendente24h #whatsapp #botia #automatizacao #empreendedor #negociosonline #ia #atendimento24horas #whatsappbusiness #respostarapida",
+    },
 ]
 
 if __name__ == "__main__":
