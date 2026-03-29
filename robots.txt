@@ -1,4 +1,7 @@
 User-agent: *
 Allow: /
+Disallow: /admin/
+Disallow: /dashboard/
+Disallow: /onboarding/
 
 Sitemap: https://atendente24h.com/sitemap.xml
