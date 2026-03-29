@@ -980,39 +980,18 @@ footer{
         </div>
       </div>
       <div class="wpp-msgs" id="wpp-msgs">
-        <div class="msg msg-in visible">
-          Oi! Vocês têm tênis masculino tamanho 42?
-          <div class="msg-time">14:22</div>
-        </div>
-        <div class="msg msg-out" id="wpp-r1">
-          Oi, Paulo! Temos sim 😊<br>O modelo <strong>Ultralight</strong> está disponível nos tamanhos 38 ao 44. No 42 temos em <strong>preto, branco e cinza</strong>.
-          <div class="msg-time">14:22</div>
-        </div>
-        <div class="msg msg-in" id="wpp-q2">
-          Qual o preço? Aceita parcelamento?
-          <div class="msg-time">14:23</div>
-        </div>
-        <div class="msg msg-out" id="wpp-r2">
-          <strong>R$189,90</strong>, parcelamos em até <strong>6x sem juros</strong> no cartão. Ou à vista com 5% de desconto 🖤
-          <div class="msg-time">14:23</div>
-        </div>
-        <div class="msg msg-in" id="wpp-q3">
-          Quero o preto! Me manda o link
-          <div class="msg-time">14:23</div>
-        </div>
-        <div class="msg msg-out" id="wpp-r3">
-          Claro! Aqui está 👇<br>
-          <div style="margin-top:8px;background:rgba(22,199,120,0.1);border-radius:8px;padding:8px 10px;border-left:3px solid var(--green)">
-            <div style="font-size:11px;color:var(--green);font-weight:600;margin-bottom:2px">atendente24h.com</div>
-            <div style="font-size:12px;color:rgba(255,255,255,0.88);font-weight:500">Ultralight 42 Preto</div>
-            <div style="font-size:11px;color:rgba(255,255,255,0.45)">R$189,90 · Frete grátis</div>
-          </div>
-          <div class="msg-time">14:24</div>
+        <div class="msg msg-in visible" id="wpp-q1">
+          Vocês têm tênis tamanho 42?
+          <div class="msg-time">agora</div>
         </div>
         <div class="msg msg-typing" id="wpp-typing">
           <span class="typing-dot"></span>
           <span class="typing-dot"></span>
           <span class="typing-dot"></span>
+        </div>
+        <div class="msg msg-out" id="wpp-r1">
+          Temos sim! 😊 Disponível em <strong>preto, branco e cinza</strong>. Qual cor te interessa?
+          <div class="msg-time">agora</div>
         </div>
       </div>
       <div class="hero-notif">
@@ -1682,46 +1661,23 @@ document.querySelectorAll('.feat-card, .step').forEach((el,i) => {
 })()
 
 // ── WhatsApp msgs flutuantes
-const wppMsgs = {
-  r1: document.getElementById('wpp-r1'),
-  q2: document.getElementById('wpp-q2'),
-  r2: document.getElementById('wpp-r2'),
-  q3: document.getElementById('wpp-q3'),
-  r3: document.getElementById('wpp-r3'),
-  typing: document.getElementById('wpp-typing'),
-}
-function showWppMsg(el) {
-  return new Promise(r => {
-    el.classList.add('visible')
-    setTimeout(r, 350)
-  })
-}
-function showTyping(ms) {
-  return new Promise(r => {
-    wppMsgs.typing.classList.add('visible')
-    setTimeout(() => { wppMsgs.typing.classList.remove('visible'); r() }, ms)
-  })
-}
+const wppQ1 = document.getElementById('wpp-q1')
+const wppR1 = document.getElementById('wpp-r1')
+const wppTyping = document.getElementById('wpp-typing')
+function showEl(el){ return new Promise(r => { el.classList.add('visible'); setTimeout(r, 400) }) }
+function hideEl(el){ el.classList.remove('visible') }
 function wait(ms){ return new Promise(r => setTimeout(r, ms)) }
 async function animateWpp() {
+  hideEl(wppTyping); hideEl(wppR1)
+  wppQ1.classList.add('visible')
+  await wait(1000)
+  await showEl(wppTyping)
   await wait(1200)
-  await showTyping(1000)
-  await showWppMsg(wppMsgs.r1)
-  await wait(1600)
-  await showWppMsg(wppMsgs.q2)
+  hideEl(wppTyping)
+  await showEl(wppR1)
+  await wait(4000)
+  hideEl(wppQ1); hideEl(wppR1)
   await wait(600)
-  await showTyping(1000)
-  await showWppMsg(wppMsgs.r2)
-  await wait(1800)
-  await showWppMsg(wppMsgs.q3)
-  await wait(500)
-  await showTyping(1200)
-  await showWppMsg(wppMsgs.r3)
-  await wait(6000)
-  // loop — reset all except first msg
-  Object.values(wppMsgs).forEach(el => el.classList.remove('visible'))
-  const firstMsg = document.querySelector('#wpp-msgs .msg-in')
-  if(firstMsg){ firstMsg.classList.add('visible') }
   animateWpp()
 }
 animateWpp()
