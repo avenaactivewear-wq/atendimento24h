@@ -329,15 +329,15 @@ h1 span{
 /* floating notification */
 .hero-notif{
   position:absolute;
-  bottom:40px;right:-20px;
+  bottom:-24px;left:50%;transform:translateX(-50%);
   background:var(--card);
   border:1px solid var(--border);
   border-radius:var(--radius);
-  padding:12px 16px;
+  padding:10px 16px;
   display:flex;align-items:center;gap:10px;
   box-shadow:0 16px 40px rgba(0,0,0,0.4);
   animation:floatUp 0.6s cubic-bezier(0.16,1,0.3,1) 1.5s both;
-  max-width:240px;
+  max-width:260px;white-space:nowrap;
   z-index:2;
 }
 @media(max-width:900px){.hero-notif{display:none}}
