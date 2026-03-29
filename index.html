@@ -352,66 +352,82 @@ h1 span{
 /* ─── WHATSAPP MOCKUP ─── */
 .wpp-phone{
   position:relative;
-  width:300px;margin:0 auto;
+  width:320px;margin:0 auto;
 }
-@media(max-width:900px){.wpp-phone{width:280px}}
+@media(max-width:900px){.wpp-phone{width:300px}}
 .wpp-frame{
-  background:#111;
-  border-radius:44px;
-  border:1px solid rgba(255,255,255,0.06);
-  padding:16px 12px 24px;
+  background:rgba(255,255,255,0.04);
+  backdrop-filter:blur(24px);
+  -webkit-backdrop-filter:blur(24px);
+  border-radius:20px;
+  border:1px solid rgba(255,255,255,0.10);
   box-shadow:
-    0 40px 80px rgba(0,0,0,0.7),
-    0 0 0 6px rgba(255,255,255,0.03),
-    0 0 0 7px rgba(255,255,255,0.04),
-    inset 0 1px 0 rgba(255,255,255,0.1);
-  position:relative;overflow:hidden;
-  outline:8px solid rgba(0,0,0,0.5);
-}
-.wpp-frame::before{
-  content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);
-  width:100px;height:28px;background:#000;border-radius:0 0 20px 20px;z-index:2;
+    0 32px 64px rgba(0,0,0,0.45),
+    0 0 0 1px rgba(255,255,255,0.04),
+    inset 0 1px 0 rgba(255,255,255,0.12);
+  overflow:hidden;
 }
 .wpp-header{
-  background:#1f2c34;
-  margin:-16px -12px 0;padding:36px 16px 12px;
-  display:flex;align-items:center;gap:10px;
+  background:rgba(255,255,255,0.05);
+  border-bottom:1px solid rgba(255,255,255,0.07);
+  padding:16px 18px;
+  display:flex;align-items:center;gap:12px;
 }
 .wpp-avatar{
-  width:38px;height:38px;border-radius:50%;
-  background:linear-gradient(135deg,var(--green) 0%,#128C7E 100%);
+  width:36px;height:36px;border-radius:50%;
+  background:linear-gradient(135deg,var(--green) 0%,#0a7a5a 100%);
   display:flex;align-items:center;justify-content:center;
-  font-size:16px;font-weight:700;color:#fff;flex-shrink:0;
+  font-size:14px;font-weight:700;color:#fff;flex-shrink:0;
+  box-shadow:0 0 0 2px rgba(22,199,120,0.25);
 }
-.wpp-contact-name{font-size:14px;font-weight:600;color:#e9edef}
-.wpp-contact-status{font-size:11px;color:var(--green);margin-top:1px}
+.wpp-contact-name{font-size:14px;font-weight:600;color:rgba(255,255,255,0.92);letter-spacing:-0.2px}
+.wpp-contact-status{font-size:11px;color:var(--green);margin-top:1px;opacity:0.85}
 .wpp-msgs{
-  background:#0b141a;
-  margin:0 -12px;padding:12px 10px;
-  height:320px;
+  background:transparent;
+  padding:16px 14px 18px;
+  height:300px;
   overflow:hidden;
   display:flex;flex-direction:column;gap:8px;
   justify-content:flex-end;
 }
 .msg{
   max-width:85%;padding:8px 12px;
-  border-radius:8px;font-size:13px;line-height:1.5;
+  border-radius:12px;font-size:13px;line-height:1.5;
   position:relative;
 }
-.msg-time{font-size:10px;color:rgba(255,255,255,0.4);text-align:right;margin-top:3px}
-.msg-in{background:#202c33;color:#e9edef;border-radius:8px 8px 8px 2px;align-self:flex-start}
-.msg-out{background:#005c4b;color:#e9edef;border-radius:8px 8px 2px 8px;align-self:flex-end}
-.msg-typing{background:#202c33;color:#8696a0;border-radius:8px 8px 8px 2px;align-self:flex-start;display:flex;align-items:center;gap:4px;padding:10px 14px}
-.typing-dot{width:6px;height:6px;border-radius:50%;background:#8696a0;animation:typing .8s infinite}
+.msg-time{font-size:10px;color:rgba(255,255,255,0.35);text-align:right;margin-top:3px}
+.msg-in{
+  background:rgba(255,255,255,0.08);
+  color:rgba(255,255,255,0.85);
+  border-radius:12px 12px 12px 3px;
+  align-self:flex-start;
+  border:1px solid rgba(255,255,255,0.08);
+}
+.msg-out{
+  background:rgba(22,199,120,0.18);
+  color:rgba(255,255,255,0.92);
+  border-radius:12px 12px 3px 12px;
+  align-self:flex-end;
+  border:1px solid rgba(22,199,120,0.2);
+}
+.msg-typing{
+  background:rgba(255,255,255,0.07);
+  color:rgba(255,255,255,0.45);
+  border-radius:12px 12px 12px 3px;
+  align-self:flex-start;
+  display:flex;align-items:center;gap:4px;padding:10px 14px;
+  border:1px solid rgba(255,255,255,0.07);
+}
+.typing-dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,0.4);animation:typing .8s infinite}
 .typing-dot:nth-child(2){animation-delay:.2s}
 .typing-dot:nth-child(3){animation-delay:.4s}
 @keyframes typing{0%,80%,100%{transform:scale(0.8);opacity:.5}40%{transform:scale(1);opacity:1}}
 
 .wpp-glow{
-  position:absolute;bottom:-60px;left:50%;transform:translateX(-50%);
-  width:200px;height:200px;
+  position:absolute;bottom:-80px;left:50%;transform:translateX(-50%);
+  width:240px;height:240px;
   background:radial-gradient(circle,var(--green-glow) 0%,transparent 70%);
-  pointer-events:none;
+  pointer-events:none;z-index:-1;
 }
 
 /* ─── SOCIAL PROOF ─── */
@@ -945,6 +961,7 @@ footer{
 
     <!-- WHATSAPP MOCKUP -->
     <div class="wpp-phone" style="position:relative">
+      <div class="wpp-glow"></div>
       <div class="wpp-frame">
         <div class="wpp-header">
           <div class="wpp-avatar" style="background:none;overflow:hidden;padding:0">
@@ -961,7 +978,7 @@ footer{
             <div class="msg-time">14:22</div>
           </div>
           <div class="msg msg-out" style="display:none" id="wpp-r1">
-            Oi, Paulo! Temos sim 😊<br>O modelo <strong style="color:#fff">Ultralight</strong> está disponível nos tamanhos 38 ao 44. No 42 temos em <strong style="color:#fff">preto, branco e cinza</strong>.
+            Oi, Paulo! Temos sim 😊<br>O modelo <strong>Ultralight</strong> está disponível nos tamanhos 38 ao 44. No 42 temos em <strong>preto, branco e cinza</strong>.
             <div class="msg-time">14:22</div>
           </div>
           <div class="msg msg-in" style="display:none" id="wpp-q2">
@@ -969,7 +986,7 @@ footer{
             <div class="msg-time">14:23</div>
           </div>
           <div class="msg msg-out" style="display:none" id="wpp-r2">
-            <strong style="color:#fff">R$189,90</strong>, parcelamos em até <strong style="color:#fff">6x sem juros</strong> no cartão. Ou à vista com 5% de desconto 🖤
+            <strong>R$189,90</strong>, parcelamos em até <strong>6x sem juros</strong> no cartão. Ou à vista com 5% de desconto 🖤
             <div class="msg-time">14:23</div>
           </div>
           <div class="msg msg-in" style="display:none" id="wpp-q3">
@@ -978,10 +995,10 @@ footer{
           </div>
           <div class="msg msg-out" style="display:none" id="wpp-r3">
             Claro! Aqui está 👇<br>
-            <div style="margin-top:8px;background:rgba(255,255,255,0.08);border-radius:8px;padding:8px 10px;border-left:3px solid var(--green)">
+            <div style="margin-top:8px;background:rgba(22,199,120,0.1);border-radius:8px;padding:8px 10px;border-left:3px solid var(--green)">
               <div style="font-size:11px;color:var(--green);font-weight:600;margin-bottom:2px">atendente24h.com</div>
-              <div style="font-size:12px;color:#e9edef;font-weight:500">Ultralight 42 Preto</div>
-              <div style="font-size:11px;color:#8696a0">R$189,90 · Frete grátis</div>
+              <div style="font-size:12px;color:rgba(255,255,255,0.88);font-weight:500">Ultralight 42 Preto</div>
+              <div style="font-size:11px;color:rgba(255,255,255,0.45)">R$189,90 · Frete grátis</div>
             </div>
             <div class="msg-time">14:24</div>
           </div>
@@ -991,7 +1008,6 @@ footer{
             <span class="typing-dot"></span>
           </div>
         </div>
-        <div class="wpp-glow"></div>
       </div>
       <div class="hero-notif">
         <div class="notif-dot"></div>
