@@ -547,37 +547,49 @@ section{padding:120px 24px;position:relative;z-index:1}
 }
 .demo-btn:hover,.demo-btn.active{border-color:var(--border-green);color:var(--text);background:var(--card2)}
 .demo-btn-dot{width:8px;height:8px;border-radius:50%;background:var(--green);flex-shrink:0}
-.demo-window{
-  background:var(--card);
-  border:1px solid var(--border);
-  border-radius:var(--radius-xl);
-  overflow:hidden;
-  box-shadow:0 32px 64px rgba(0,0,0,0.4);
-}
+.demo-window{position:relative}
 .demo-wpp-header{
-  background:#1f2c34;
-  padding:16px 20px;
-  display:flex;align-items:center;gap:12px;
+  display:flex;align-items:center;gap:10px;
+  margin-bottom:16px;
 }
 .demo-avatar{
-  width:36px;height:36px;border-radius:50%;
-  background:linear-gradient(135deg,var(--green),#128C7E);
+  width:32px;height:32px;border-radius:50%;
+  background:linear-gradient(135deg,var(--green) 0%,#0a7a5a 100%);
   display:flex;align-items:center;justify-content:center;
-  font-weight:700;font-size:14px;color:#fff;flex-shrink:0;
-}
-.demo-contact{font-size:14px;font-weight:600;color:#e9edef}
-.demo-online{font-size:11px;color:var(--green)}
-.demo-msgs{
-  background:#0b141a;
-  padding:20px 16px;
-  min-height:300px;height:300px;
-  display:flex;flex-direction:column;gap:10px;
+  font-weight:700;font-size:13px;color:#fff;flex-shrink:0;
+  box-shadow:0 0 0 2px rgba(22,199,120,0.2);
   overflow:hidden;
-  transition:height .4s ease;
 }
-.d-in{background:#202c33;color:#e9edef;padding:10px 14px;border-radius:8px 8px 8px 2px;font-size:14px;max-width:80%;align-self:flex-start;line-height:1.5}
-.d-out{background:#005c4b;color:#e9edef;padding:10px 14px;border-radius:8px 8px 2px 8px;font-size:14px;max-width:80%;align-self:flex-end;line-height:1.5}
-.d-time{font-size:10px;color:rgba(255,255,255,0.35);text-align:right;margin-top:4px}
+.demo-contact{font-size:13px;font-weight:600;color:rgba(255,255,255,0.85);letter-spacing:-0.2px}
+.demo-online{
+  font-size:10px;color:var(--green);opacity:0.8;
+  display:flex;align-items:center;gap:5px;
+}
+.demo-online::before{
+  content:'';width:6px;height:6px;border-radius:50%;
+  background:var(--green);display:inline-block;flex-shrink:0;
+}
+.demo-msgs{
+  display:flex;flex-direction:column;gap:8px;
+  min-height:200px;
+  overflow:hidden;
+  transition:all .4s ease;
+}
+.d-in{
+  background:rgba(255,255,255,0.07);
+  color:rgba(255,255,255,0.82);
+  padding:9px 13px;border-radius:16px 16px 16px 4px;
+  font-size:13px;max-width:88%;align-self:flex-start;line-height:1.55;
+  border:1px solid rgba(255,255,255,0.07);backdrop-filter:blur(8px);
+}
+.d-out{
+  background:rgba(22,199,120,0.15);
+  color:rgba(255,255,255,0.90);
+  padding:9px 13px;border-radius:16px 16px 4px 16px;
+  font-size:13px;max-width:88%;align-self:flex-end;line-height:1.55;
+  border:1px solid rgba(22,199,120,0.18);backdrop-filter:blur(8px);
+}
+.d-time{font-size:10px;color:rgba(255,255,255,0.3);text-align:right;margin-top:4px}
 
 /* ─── PRICING ─── */
 .pricing-section{background:var(--bg)}
@@ -960,7 +972,7 @@ footer{
       <div class="wpp-glow"></div>
       <div class="wpp-header">
         <div class="wpp-avatar">
-          <img src="/landing/ana-avatar.jpg" alt="Ana Goulart" style="width:100%;height:100%;object-fit:cover;border-radius:50%">
+          <img src="/landing/ana-avatar.jpg" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:50%">
         </div>
         <div>
           <div class="wpp-contact-name">Ana Goulart</div>
@@ -1141,8 +1153,8 @@ footer{
       </div>
       <div class="demo-window reveal reveal-delay-2">
         <div class="demo-wpp-header">
-          <div class="demo-avatar" id="demo-avatar" style="background:none;overflow:hidden;padding:0">
-            <img src="/landing/ana-avatar.jpg" alt="Ana Goulart" style="width:100%;height:100%;object-fit:cover;border-radius:50%">
+          <div class="demo-avatar" id="demo-avatar">
+            <img src="/landing/ana-avatar.jpg" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:50%">
           </div>
           <div>
             <div class="demo-contact" id="demo-name">Ana Goulart</div>
