@@ -1804,47 +1804,8 @@ document.querySelectorAll('.feat-card, .step').forEach((el,i) => {
   cardObs.observe(el);
 })
 
-// ── "Sem Roteiro" interactive tabs
-;(function(){
-  const nsData = [
-    {
-      label:'Trava', goodLabel:'Converte',
-      q: 'Esse tênis é bom pra academia ou só pra rua?',
-      aBad: 'Desculpe, não entendi. Escolha uma opção: 1 - Ver produtos  2 - Rastrear pedido  3 - Falar com humano',
-      aGood: 'Os dois! O solado tem amortecimento reforçado, então vai bem em treino leve e no dia a dia. Para corrida intensa, recomendo o Ultralight Pro. Qual seu tamanho?'
-    },
-    {
-      label:'Piora', goodLabel:'Resolve',
-      q: 'Que empresa péssima, meu produto não chegou!',
-      aBad: 'Opção inválida. Por favor, escolha: 1 - Produtos  2 - Pedidos  3 - Sair',
-      aGood: 'Entendo sua frustração e sinto muito. Me passa o número do pedido e resolvo agora mesmo. 🙏'
-    },
-    {
-      label:'Trava', goodLabel:'Negocia',
-      q: 'Tem desconto se eu comprar 3 pares?',
-      aBad: 'Desculpe, essa opção não está disponível. Digite 1 para continuar.',
-      aGood: 'Sim! Para 3 pares damos 10% de desconto automático, já aplicado no checkout. Posso te mandar o link com os 3 já selecionados? 😊'
-    },
-    {
-      label:'Trava', goodLabel:'Responde',
-      q: 'Qual a capital da França?',
-      aBad: 'Não entendi sua mensagem. Por favor escolha: 1 - Produtos  2 - Pedidos  3 - Suporte',
-      aGood: 'Paris! 😄 Mas posso te ajudar com algo da nossa loja também. Está procurando algum produto em especial?'
-    }
-  ]
-  function renderNs(i){
-    const d = nsData[i]
-    document.getElementById('ns-badge-bad').textContent = d.label
-    document.getElementById('ns-badge-good').textContent = d.goodLabel
-    document.getElementById('ns-q-bad').textContent = d.q
-    document.getElementById('ns-a-bad').textContent = d.aBad
-    document.getElementById('ns-q-good').textContent = d.q
-    document.getElementById('ns-a-good').textContent = d.aGood
-    document.querySelectorAll('.ns-tab').forEach((t,j) => t.classList.toggle('active', i===j))
-  }
-  window.showNs = renderNs
-  renderNs(0)
-})()
+// ── "Sem Roteiro" interactive tabs (seção removida, código mantido como no-op)
+window.showNs = function(){}
 
 // ── Testimonials auto-scroll
 ;(function(){
