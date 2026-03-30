@@ -513,6 +513,8 @@ def make_html(slug, title, focus_kw, description, setor, body_html, read_time="6
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-X2LWF9TRG8"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){{dataLayer.push(arguments)}}gtag('js',new Date());gtag('config','G-X2LWF9TRG8');</script>
 <script data-goatcounter="https://atendente24h.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 <script type="application/ld+json">
 {{"@context":"https://schema.org","@type":"Article","headline":"{title}","description":"{description}","url":"{slug_to_url(slug)}","datePublished":"{pub_date}","dateModified":"{pub_date}","author":{{"@type":"Organization","name":"Atendente24h","url":"{SITE_URL}"}},"publisher":{{"@type":"Organization","name":"Atendente24h","url":"{SITE_URL}","logo":{{"@type":"ImageObject","url":"{SITE_URL}/favicon.svg"}}}},"breadcrumb":{{"@type":"BreadcrumbList","itemListElement":[{{"@type":"ListItem","position":1,"name":"Inicio","item":"{SITE_URL}"}},{{"@type":"ListItem","position":2,"name":"Blog","item":"{SITE_URL}/blog"}},{{"@type":"ListItem","position":3,"name":"{title}","item":"{slug_to_url(slug)}"}}]}}}}
