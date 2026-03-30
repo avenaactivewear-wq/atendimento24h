@@ -712,6 +712,40 @@ body{
 }
 .btn-modal-save:hover{opacity:.88}
 
+/* CAMPOS ESTRUTURADOS DO MODAL */
+.modal-field{margin-bottom:14px}
+.modal-input{
+  width:100%;background:var(--surface-2);
+  border:1px solid var(--border-2);border-radius:var(--radius);
+  padding:10px 14px;font-size:13px;font-family:inherit;
+  color:var(--text);outline:none;transition:border-color .15s;
+}
+.modal-input::placeholder{color:var(--text-3)}
+.modal-input:focus{border-color:var(--green);box-shadow:0 0 0 3px rgba(22,163,74,0.08)}
+.modal-select{
+  width:100%;background:var(--surface-2);
+  border:1px solid var(--border-2);border-radius:var(--radius);
+  padding:10px 14px;font-size:13px;font-family:inherit;
+  color:var(--text);outline:none;transition:border-color .15s;
+  appearance:none;-webkit-appearance:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236e6e73' stroke-width='2.5'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 14px center;
+  cursor:pointer;
+}
+.modal-select:focus{border-color:var(--green);box-shadow:0 0 0 3px rgba(22,163,74,0.08)}
+.modal-row-2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:500px){.modal-row-2{grid-template-columns:1fr}}
+
+/* RESUMO ESTRUTURADO NA SECAO MEU ATENDENTE */
+.config-summary{display:flex;flex-direction:column;gap:8px;margin-bottom:14px}
+.config-summary-item{display:flex;align-items:flex-start;gap:10px;font-size:13px}
+.config-summary-icon{font-size:14px;flex-shrink:0;line-height:1.6}
+.config-summary-label{color:var(--text-3);font-size:11px;font-weight:600;letter-spacing:.04em;margin-bottom:1px}
+.config-summary-value{color:var(--text);font-size:13px;line-height:1.4}
+.config-pending-list{display:flex;flex-direction:column;gap:6px}
+.config-pending-item{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--text-2)}
+.config-pending-dot{width:6px;height:6px;border-radius:50%;background:var(--yellow);flex-shrink:0}
+
 /* TOAST */
 #toast{
   position:fixed;bottom:80px;left:50%;
@@ -1042,7 +1076,12 @@ body{
         </div>
 
         <div id="config-preview-wrap">
-          <div class="config-preview" id="config-preview-text">Nenhum contexto configurado.</div>
+          <div id="config-summary-filled" class="config-summary" style="display:none"></div>
+          <div id="config-pending-wrap" style="display:none">
+            <div style="font-size:12px;color:var(--text-2);margin-bottom:8px">Campos ainda nao preenchidos:</div>
+            <div class="config-pending-list" id="config-pending-list"></div>
+          </div>
+          <div class="config-preview empty-preview" id="config-preview-text" style="display:none">Nenhum contexto configurado.</div>
         </div>
 
         <div class="info-row">
@@ -1276,13 +1315,54 @@ body{
       <span class="modal-title">Editar configuração</span>
       <button class="modal-close" id="modal-close-btn">&times;</button>
     </div>
-    <p class="modal-sub">Descreva seu negócio e suba arquivos de referência. Quanto mais detalhes, melhor o atendente responde.</p>
+    <p class="modal-sub">Preencha as informacoes abaixo para o atendente responder com precisao.</p>
 
-    <label class="modal-label">Contexto do negócio</label>
-    <textarea class="modal-textarea" id="modal-textarea"
-      placeholder="Ex: Somos uma clinica odontologica em SP. Atendemos seg-sex 8h-18h. Fazemos clareamento, implantes e ortodontia. Para agendar, pedimos nome, telefone e tratamento desejado. Nossos precos comecam em R$150..."></textarea>
+    <div class="modal-row-2">
+      <div class="modal-field">
+        <label class="modal-label" for="cfg-nome">Nome do negocio</label>
+        <input type="text" id="cfg-nome" class="modal-input" placeholder="Ex: Neo Black Store">
+      </div>
+      <div class="modal-field">
+        <label class="modal-label" for="cfg-segmento">Segmento</label>
+        <select id="cfg-segmento" class="modal-select">
+          <option value="">Selecione...</option>
+          <option value="Loja e e-commerce">Loja e e-commerce</option>
+          <option value="Clinica/Consultorio">Clinica/Consultorio</option>
+          <option value="Salao/Estetica">Salao/Estetica</option>
+          <option value="Restaurante/Delivery">Restaurante/Delivery</option>
+          <option value="Prestador de servico">Prestador de servico</option>
+          <option value="Imobiliaria">Imobiliaria</option>
+          <option value="Escola/Curso">Escola/Curso</option>
+          <option value="Outro">Outro</option>
+        </select>
+      </div>
+    </div>
 
-    <div class="modal-upload-section">
+    <div class="modal-field">
+      <label class="modal-label" for="cfg-horario">Horario de funcionamento</label>
+      <input type="text" id="cfg-horario" class="modal-input" placeholder="Seg-Sex 9h-18h, Sab 9h-13h">
+    </div>
+
+    <div class="modal-field">
+      <label class="modal-label" for="cfg-produtos">Servicos ou produtos principais</label>
+      <textarea id="cfg-produtos" class="modal-textarea" style="min-height:80px;margin-bottom:0" placeholder="Liste seus principais produtos ou servicos"></textarea>
+    </div>
+
+    <div class="modal-field" style="margin-top:14px">
+      <label class="modal-label" for="cfg-tom">Tom do atendente</label>
+      <select id="cfg-tom" class="modal-select">
+        <option value="Amigavel e descontraido">Amigavel e descontraido</option>
+        <option value="Profissional e formal">Profissional e formal</option>
+        <option value="Misto">Misto</option>
+      </select>
+    </div>
+
+    <div class="modal-field">
+      <label class="modal-label" for="cfg-instrucoes">Instrucoes especiais <span style="color:var(--text-3);font-weight:400">(opcional)</span></label>
+      <textarea id="cfg-instrucoes" class="modal-textarea" style="min-height:80px;margin-bottom:0" placeholder="Ex: Nunca dar descontos, sempre perguntar o nome, encaminhar reclamacoes para humano..."></textarea>
+    </div>
+
+    <div class="modal-upload-section" style="margin-top:14px">
       <label class="modal-label">Documentos de referencia <span style="color:var(--text-3);font-weight:400">(opcional)</span></label>
       <div class="modal-upload-zone" id="modal-upload-zone"
         onclick="document.getElementById('modal-file-input').click()"
@@ -1587,20 +1667,79 @@ function updateBotStatusUI(ativo) {
   }
 }
 
+function buildSystemPrompt(data) {
+  return `Voce e o atendente virtual de ${data.nome_negocio || 'nossa empresa'}.
+
+Segmento: ${data.segmento || 'nao informado'}
+Horario de funcionamento: ${data.horario || 'nao informado'}
+Produtos/servicos: ${data.produtos || 'nao informado'}
+Tom: ${data.tom || 'Amigavel e descontraido'}
+${data.instrucoes ? 'Instrucoes especiais: ' + data.instrucoes : ''}
+
+Responda sempre em portugues, de forma natural e humana. Nunca mencione que e uma IA a menos que perguntado diretamente.`;
+}
+
 function updateConfigPreview() {
   const badge = document.getElementById("config-status-badge");
-  const preview = document.getElementById("config-preview-text");
+  const summaryEl = document.getElementById("config-summary-filled");
+  const pendingWrap = document.getElementById("config-pending-wrap");
+  const pendingList = document.getElementById("config-pending-list");
+  const legacyPreview = document.getElementById("config-preview-text");
+  const config = currentCliente && currentCliente.config;
 
-  if (currentCliente && currentCliente.system_prompt && currentCliente.system_prompt.trim()) {
+  const fieldDefs = [
+    { key: "nome_negocio", label: "Nome do negocio", icon: "🏪" },
+    { key: "segmento",     label: "Segmento",         icon: "📂" },
+    { key: "horario",      label: "Horario",           icon: "🕐" },
+    { key: "produtos",     label: "Produtos/servicos", icon: "📋" },
+    { key: "tom",          label: "Tom do atendente",  icon: "💬" },
+  ];
+
+  if (config && Object.keys(config).some(k => config[k])) {
+    legacyPreview.style.display = "none";
+    summaryEl.style.display = "flex";
+    summaryEl.innerHTML = "";
+    const pending = [];
+
+    fieldDefs.forEach(function(f) {
+      const val = config[f.key];
+      if (val && val.trim()) {
+        const item = document.createElement("div");
+        item.className = "config-summary-item";
+        item.innerHTML = '<span class="config-summary-icon">' + f.icon + '</span><div><div class="config-summary-label">' + f.label + '</div><div class="config-summary-value">' + val + '</div></div>';
+        summaryEl.appendChild(item);
+      } else {
+        pending.push(f.label);
+      }
+    });
+
+    if (pending.length > 0) {
+      pendingWrap.style.display = "block";
+      pendingList.innerHTML = pending.map(function(p) {
+        return '<div class="config-pending-item"><span class="config-pending-dot"></span>' + p + '</div>';
+      }).join("");
+      badge.className = "badge badge-warning";
+      badge.innerHTML = '<span class="badge-dot"></span>Incompleto';
+    } else {
+      pendingWrap.style.display = "none";
+      badge.className = "badge badge-active";
+      badge.innerHTML = '<span class="badge-dot"></span>Configurado';
+    }
+  } else if (currentCliente && currentCliente.system_prompt && currentCliente.system_prompt.trim()) {
+    summaryEl.style.display = "none";
+    pendingWrap.style.display = "none";
+    legacyPreview.style.display = "block";
     const text = currentCliente.system_prompt.trim();
-    const truncated = text.length > 200 ? text.substring(0, 200) + "..." : text;
-    preview.textContent = truncated;
-    preview.classList.remove("empty-preview");
+    legacyPreview.textContent = text.length > 200 ? text.substring(0, 200) + "..." : text;
+    legacyPreview.classList.remove("empty-preview");
     badge.className = "badge badge-active";
     badge.innerHTML = '<span class="badge-dot"></span>Configurado';
   } else {
-    preview.textContent = "Nenhum contexto configurado. Adicione o contexto do seu negócio para o bot responder com precisão.";
-    preview.classList.add("empty-preview");
+    summaryEl.style.display = "none";
+    pendingWrap.style.display = "none";
+    legacyPreview.style.display = "block";
+    legacyPreview.textContent = "Nenhum contexto configurado. Clique em Editar configuracao para comecar.";
+    legacyPreview.classList.add("empty-preview");
     badge.className = "badge badge-warning";
     badge.innerHTML = '<span class="badge-dot"></span>Pendente';
   }
@@ -1655,12 +1794,32 @@ function renderPlanos(planoAtual) {
 
 // MODAL
 const overlay = document.getElementById("modal-overlay");
-const textarea = document.getElementById("modal-textarea");
+
+function getModalFormData() {
+  return {
+    nome_negocio: (document.getElementById("cfg-nome").value || "").trim(),
+    segmento:     (document.getElementById("cfg-segmento").value || "").trim(),
+    horario:      (document.getElementById("cfg-horario").value || "").trim(),
+    produtos:     (document.getElementById("cfg-produtos").value || "").trim(),
+    tom:          (document.getElementById("cfg-tom").value || "Amigavel e descontraido").trim(),
+    instrucoes:   (document.getElementById("cfg-instrucoes").value || "").trim()
+  };
+}
+
+function populateModalFromConfig(config) {
+  document.getElementById("cfg-nome").value      = (config && config.nome_negocio) || "";
+  document.getElementById("cfg-segmento").value  = (config && config.segmento) || "";
+  document.getElementById("cfg-horario").value   = (config && config.horario) || "";
+  document.getElementById("cfg-produtos").value  = (config && config.produtos) || "";
+  document.getElementById("cfg-tom").value       = (config && config.tom) || "Amigavel e descontraido";
+  document.getElementById("cfg-instrucoes").value = (config && config.instrucoes) || "";
+}
 
 document.getElementById("btn-configurar").addEventListener("click", function() {
-  textarea.value = (currentCliente && currentCliente.system_prompt) || "";
+  const config = currentCliente && currentCliente.config;
+  populateModalFromConfig(config);
   overlay.classList.add("open");
-  setTimeout(() => textarea.focus(), 100);
+  setTimeout(function() { document.getElementById("cfg-nome").focus(); }, 100);
 });
 
 function closeModal() { overlay.classList.remove("open"); }
@@ -1672,12 +1831,22 @@ document.addEventListener("keydown", function(e) { if (e.key === "Escape") close
 document.getElementById("modal-save-btn").addEventListener("click", async function() {
   const btn = document.getElementById("modal-save-btn");
   btn.textContent = "Salvando..."; btn.disabled = true;
-  if (currentCliente) currentCliente.system_prompt = textarea.value;
+  const session = getSession();
+  const formData = getModalFormData();
+  const contexto = buildSystemPrompt(formData);
+  if (currentCliente) {
+    currentCliente.system_prompt = contexto;
+    currentCliente.config = formData;
+  }
   try {
     await fetch(WEBHOOK_BASE + "/webhook/atendente24h-save-config", {
       method: "POST",
       headers: { "Content-Type": "application/json", "ngrok-skip-browser-warning": "1" },
-      body: JSON.stringify({ email: currentCliente ? currentCliente.email : "", contexto: textarea.value })
+      body: JSON.stringify({
+        email: session ? session.email : (currentCliente ? currentCliente.email : ""),
+        contexto: contexto,
+        config: formData
+      })
     });
   } catch(_) {}
   closeModal();
