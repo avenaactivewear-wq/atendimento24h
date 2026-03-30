@@ -172,6 +172,42 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',-apple-system,sa
 .msg-trecho{display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;overflow:hidden}
 .badge-respondido{display:inline-flex;align-items:center;padding:2px 8px;border-radius:9999px;font-size:10px;font-weight:500;background:rgba(34,197,94,0.1);color:var(--green-light);border:1px solid rgba(34,197,94,0.15);white-space:nowrap}
 
+/* ─── REPORTS ─── */
+.reports-filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.filter-btn{background:var(--surface-2);border:1px solid var(--border);border-radius:9999px;padding:6px 14px;font-size:12px;font-weight:500;font-family:inherit;color:var(--text-2);cursor:pointer;transition:all .15s}
+.filter-btn:hover{border-color:rgba(255,255,255,0.1);color:var(--text)}
+.filter-btn.active{background:var(--green-light);border-color:var(--green-light);color:#000;font-weight:600}
+.report-summary{background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius);padding:16px;font-size:13px;color:var(--text-2);line-height:1.7;margin-bottom:16px;white-space:pre-wrap}
+.report-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+.report-stat{background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius);padding:14px;text-align:center}
+.report-stat-n{font-size:24px;font-weight:800;letter-spacing:-0.04em;color:var(--text);font-variant-numeric:tabular-nums}
+.report-stat-l{font-size:11px;color:var(--text-3);margin-top:2px}
+.date-range-row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:16px}
+.date-input{background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius);padding:8px 12px;font-size:12px;font-family:inherit;color:var(--text);outline:none;transition:border-color .15s}
+.date-input:focus{border-color:rgba(34,197,94,0.4)}
+
+/* ─── CONVERSATIONS / INTERVENTION ─── */
+.conv-list{display:flex;flex-direction:column;gap:6px;margin-bottom:16px}
+.conv-item{background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius);padding:12px 14px;cursor:pointer;transition:border-color .15s;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.conv-item:hover{border-color:rgba(255,255,255,0.1)}
+.conv-item.paused{border-color:rgba(234,179,8,0.3);background:rgba(234,179,8,0.04)}
+.conv-phone{font-size:13px;font-weight:600;color:var(--text)}
+.conv-preview{font-size:12px;color:var(--text-3);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:200px}
+.conv-badge-paused{display:inline-flex;align-items:center;gap:4px;padding:2px 8px;border-radius:9999px;font-size:10px;font-weight:600;background:rgba(234,179,8,0.12);color:var(--yellow);border:1px solid rgba(234,179,8,0.2);white-space:nowrap;flex-shrink:0}
+.conv-detail{display:none;margin-top:10px;border-top:1px solid var(--border);padding-top:10px}
+.conv-msgs{max-height:220px;overflow-y:auto;display:flex;flex-direction:column;gap:6px;margin-bottom:10px;padding-right:4px}
+.conv-msg-in{align-self:flex-start;background:var(--surface);border:1px solid var(--border);border-radius:12px 12px 12px 4px;padding:8px 12px;font-size:12px;color:var(--text-2);max-width:80%}
+.conv-msg-out{align-self:flex-end;background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.2);border-radius:12px 12px 4px 12px;padding:8px 12px;font-size:12px;color:var(--text);max-width:80%}
+.conv-intervention-area{display:flex;gap:8px;align-items:flex-end}
+.conv-intervention-input{flex:1;background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius);padding:8px 12px;font-size:13px;font-family:inherit;color:var(--text);outline:none;transition:border-color .15s;resize:none;min-height:40px}
+.conv-intervention-input:focus{border-color:rgba(34,197,94,0.4)}
+.btn-assumir{background:var(--yellow);color:#000;border:none;border-radius:9999px;padding:6px 14px;font-size:12px;font-weight:700;font-family:inherit;cursor:pointer;transition:opacity .15s;white-space:nowrap;flex-shrink:0}
+.btn-assumir.active{background:var(--green-light)}
+.btn-send-manual{background:var(--green-light);color:#000;border:none;border-radius:9999px;padding:8px 16px;font-size:12px;font-weight:700;font-family:inherit;cursor:pointer;white-space:nowrap}
+.tab-nav{display:flex;gap:2px;background:var(--surface-2);border:1px solid var(--border);border-radius:10px;padding:3px;margin-bottom:20px;overflow-x:auto}
+.tab-btn{flex:1;min-width:80px;background:transparent;border:none;border-radius:7px;padding:8px 12px;font-size:12px;font-weight:500;font-family:inherit;color:var(--text-2);cursor:pointer;transition:all .15s;white-space:nowrap}
+.tab-btn.active{background:var(--surface);color:var(--text);font-weight:600;box-shadow:0 1px 3px rgba(0,0,0,0.3)}
+
 /* ─── UPGRADE ─── */
 .upgrade-section{margin-top:32px;padding-top:28px;border-top:1px solid var(--border)}
 .upgrade-title{font-size:18px;font-weight:700;letter-spacing:-0.04em;margin-bottom:4px}
@@ -415,14 +451,79 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',-apple-system,sa
       </button>
     </div>
 
-    <!-- Histórico -->
+    <!-- Tabs: Relatorios / Conversas -->
     <div class="card-full">
-      <div class="section-label">Últimas mensagens atendidas</div>
-      <div id="history-container">
-        <div class="empty-state">
-          <div class="empty-icon">💬</div>
-          <div class="empty-title">Aguardando primeiras mensagens</div>
-          <div class="empty-sub">Quando seu atendente responder os primeiros clientes, o histórico aparece aqui.</div>
+      <div class="tab-nav">
+        <button class="tab-btn active" onclick="switchTab('relatorios')">Relatorios</button>
+        <button class="tab-btn" onclick="switchTab('conversas')">Conversas ao vivo</button>
+        <button class="tab-btn" onclick="switchTab('historico')">Historico</button>
+      </div>
+
+      <!-- Tab: Relatorios -->
+      <div id="tab-relatorios">
+        <div class="reports-filters">
+          <button class="filter-btn active" onclick="loadReport('today')">Hoje</button>
+          <button class="filter-btn" onclick="loadReport('yesterday')">Ontem</button>
+          <button class="filter-btn" onclick="loadReport('week')">Esta semana</button>
+          <button class="filter-btn" onclick="loadReport('custom')">Periodo</button>
+        </div>
+        <div id="report-date-range" style="display:none">
+          <div class="date-range-row">
+            <input type="date" class="date-input" id="date-from" placeholder="De">
+            <span style="color:var(--text-3);font-size:12px">ate</span>
+            <input type="date" class="date-input" id="date-to" placeholder="Ate">
+            <button class="filter-btn active" onclick="loadReport('custom')">Buscar</button>
+          </div>
+        </div>
+        <div id="report-stats" class="report-stats" style="display:none">
+          <div class="report-stat">
+            <div class="report-stat-n" id="stat-msgs">0</div>
+            <div class="report-stat-l">Mensagens</div>
+          </div>
+          <div class="report-stat">
+            <div class="report-stat-n" id="stat-contacts">0</div>
+            <div class="report-stat-l">Contatos</div>
+          </div>
+          <div class="report-stat">
+            <div class="report-stat-n" id="stat-resp">--</div>
+            <div class="report-stat-l">Respondidas</div>
+          </div>
+        </div>
+        <div id="report-summary-box" style="display:none">
+          <div class="section-label" style="margin-bottom:8px">Resumo gerado por IA</div>
+          <div class="report-summary" id="report-summary-text"></div>
+        </div>
+        <div id="report-loading" style="display:none;text-align:center;padding:24px;color:var(--text-3);font-size:13px">Gerando relatorio...</div>
+        <div id="report-empty" class="empty-state">
+          <div class="empty-icon">📊</div>
+          <div class="empty-title">Selecione um periodo</div>
+          <div class="empty-sub">Escolha hoje, ontem, semana ou um periodo personalizado para ver o relatorio de conversas.</div>
+        </div>
+      </div>
+
+      <!-- Tab: Conversas ao vivo -->
+      <div id="tab-conversas" style="display:none">
+        <div id="conv-list-container">
+          <div class="empty-state">
+            <div class="empty-icon">💬</div>
+            <div class="empty-title">Nenhuma conversa ainda</div>
+            <div class="empty-sub">Quando clientes enviarem mensagens, elas aparecem aqui em tempo real. Voce pode assumir qualquer conversa com um clique.</div>
+          </div>
+        </div>
+        <button class="btn-ghost" style="width:100%;justify-content:center;margin-top:8px" onclick="loadConversations()">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 2v6h-6M3 12a9 9 0 0115-6.7L21 8M3 22v-6h6M21 12a9 9 0 01-15 6.7L3 16"/></svg>
+          Atualizar
+        </button>
+      </div>
+
+      <!-- Tab: Historico -->
+      <div id="tab-historico" style="display:none">
+        <div id="history-container">
+          <div class="empty-state">
+            <div class="empty-icon">📋</div>
+            <div class="empty-title">Aguardando primeiras mensagens</div>
+            <div class="empty-sub">Quando seu atendente responder os primeiros clientes, o historico aparece aqui.</div>
+          </div>
         </div>
       </div>
     </div>
@@ -777,6 +878,190 @@ function showToast(msg) {
   document.getElementById("toast-text").textContent = msg;
   toast.classList.add("show");
   setTimeout(() => toast.classList.remove("show"), 3000);
+}
+
+// ─── TABS ─────────────────────────────────────────────────────────────────────
+function switchTab(tab) {
+  ["relatorios","conversas","historico"].forEach(t => {
+    document.getElementById("tab-" + t).style.display = t === tab ? "block" : "none";
+  });
+  document.querySelectorAll(".tab-btn").forEach((btn, i) => {
+    btn.classList.toggle("active", ["relatorios","conversas","historico"][i] === tab);
+  });
+  if (tab === "conversas") loadConversations();
+}
+
+// ─── REPORTS ──────────────────────────────────────────────────────────────────
+function loadReport(period) {
+  document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+  event.target.classList.add("active");
+  const dateRange = document.getElementById("report-date-range");
+  dateRange.style.display = period === "custom" ? "block" : "none";
+  if (period === "custom") return;
+  fetchReport(period, null, null);
+}
+
+async function fetchReport(period, dateFrom, dateTo) {
+  const session = getSession();
+  if (!session) return;
+  const token = session.cliente.token;
+
+  document.getElementById("report-empty").style.display = "none";
+  document.getElementById("report-loading").style.display = "block";
+  document.getElementById("report-stats").style.display = "none";
+  document.getElementById("report-summary-box").style.display = "none";
+
+  let url = WEBHOOK_BASE + "/webhook/atendente24h-reports?token=" + encodeURIComponent(token) + "&period=" + period;
+  if (period === "custom" && dateFrom && dateTo) {
+    url += "&date_from=" + dateFrom + "&date_to=" + dateTo;
+  }
+
+  try {
+    const resp = await fetch(url, { headers: { "ngrok-skip-browser-warning": "true" } });
+    const data = await resp.json();
+    document.getElementById("report-loading").style.display = "none";
+
+    if (data && (data.total_msgs >= 0)) {
+      document.getElementById("stat-msgs").textContent = data.total_msgs || 0;
+      document.getElementById("stat-contacts").textContent = data.total_contacts || 0;
+      document.getElementById("stat-resp").textContent = (data.total_msgs || 0) + " / " + (data.total_msgs || 0);
+      document.getElementById("report-stats").style.display = "grid";
+      if (data.summary) {
+        document.getElementById("report-summary-text").textContent = data.summary;
+        document.getElementById("report-summary-box").style.display = "block";
+      }
+    } else {
+      document.getElementById("report-empty").style.display = "block";
+    }
+  } catch(e) {
+    document.getElementById("report-loading").style.display = "none";
+    document.getElementById("report-empty").style.display = "block";
+    document.getElementById("report-empty").querySelector(".empty-title").textContent = "Erro ao carregar relatorio";
+    document.getElementById("report-empty").querySelector(".empty-sub").textContent = "Verifique sua conexao e tente novamente.";
+  }
+}
+
+// ─── CONVERSATIONS / INTERVENTION ─────────────────────────────────────────────
+let convData = [];
+
+async function loadConversations() {
+  const session = getSession();
+  if (!session) return;
+  const token = session.cliente.token;
+  const container = document.getElementById("conv-list-container");
+  container.innerHTML = '<div style="text-align:center;padding:24px;color:var(--text-3);font-size:13px">Carregando...</div>';
+
+  try {
+    const resp = await fetch(WEBHOOK_BASE + "/webhook/atendente24h-conversations?token=" + encodeURIComponent(token), {
+      headers: { "ngrok-skip-browser-warning": "true" }
+    });
+    const data = await resp.json();
+    convData = data.conversations || [];
+    renderConversations();
+  } catch(e) {
+    container.innerHTML = '<div class="empty-state"><div class="empty-icon">💬</div><div class="empty-title">Nenhuma conversa ainda</div><div class="empty-sub">Quando clientes enviarem mensagens, elas aparecem aqui.</div></div>';
+  }
+}
+
+function renderConversations() {
+  const container = document.getElementById("conv-list-container");
+  if (!convData.length) {
+    container.innerHTML = '<div class="empty-state"><div class="empty-icon">💬</div><div class="empty-title">Nenhuma conversa ainda</div><div class="empty-sub">Quando clientes enviarem mensagens, elas aparecem aqui em tempo real.</div></div>';
+    return;
+  }
+  const list = document.createElement("div");
+  list.className = "conv-list";
+  convData.forEach((conv, idx) => {
+    const item = document.createElement("div");
+    item.className = "conv-item" + (conv.bot_paused ? " paused" : "");
+    item.innerHTML = `
+      <div style="flex:1;min-width:0">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:3px">
+          <span class="conv-phone">${conv.contact_name || conv.contact_phone}</span>
+          ${conv.bot_paused ? '<span class="conv-badge-paused">Voce no controle</span>' : ""}
+        </div>
+        <div class="conv-preview">${conv.last_message || "..."}</div>
+      </div>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--text-3);flex-shrink:0;transform:rotate(${conv._open ? 180 : 0}deg);transition:transform .2s"><polyline points="6 9 12 15 18 9"/></svg>
+    `;
+    const detail = document.createElement("div");
+    detail.className = "conv-detail";
+    detail.style.display = conv._open ? "block" : "none";
+    detail.innerHTML = `
+      <div class="conv-msgs" id="conv-msgs-${idx}">
+        ${(conv.messages || []).map(m => `<div class="${m.direction === 'in' ? 'conv-msg-in' : 'conv-msg-out'}">${m.message}</div>`).join("")}
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+        <span style="font-size:11px;color:var(--text-3)">${conv.bot_paused ? "Bot pausado para este contato" : "Bot ativo"}</span>
+        <button class="btn-assumir ${conv.bot_paused ? 'active' : ''}" onclick="toggleIntervention(event,${idx},'${conv.contact_phone}',${!conv.bot_paused})">
+          ${conv.bot_paused ? "Devolver para bot" : "Assumir conversa"}
+        </button>
+      </div>
+      ${conv.bot_paused ? `
+      <div class="conv-intervention-area">
+        <textarea class="conv-intervention-input" id="conv-input-${idx}" placeholder="Digite sua mensagem..." rows="2"></textarea>
+        <button class="btn-send-manual" onclick="sendManual(event,${idx},'${conv.contact_phone}')">Enviar</button>
+      </div>` : ""}
+    `;
+    item.appendChild(detail);
+    item.querySelector(".conv-phone").parentElement.parentElement.addEventListener("click", (e) => {
+      if (e.target.closest("button")) return;
+      const isOpen = detail.style.display !== "none";
+      detail.style.display = isOpen ? "none" : "block";
+      conv._open = !isOpen;
+    });
+    list.appendChild(item);
+  });
+  container.innerHTML = "";
+  container.appendChild(list);
+}
+
+async function toggleIntervention(e, idx, contactPhone, paused) {
+  e.stopPropagation();
+  const session = getSession();
+  if (!session) return;
+  const token = session.cliente.token;
+  try {
+    await fetch(WEBHOOK_BASE + "/webhook/atendente24h-intervention", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "ngrok-skip-browser-warning": "true" },
+      body: JSON.stringify({ token, contact_phone: contactPhone, paused })
+    });
+    convData[idx].bot_paused = paused;
+    renderConversations();
+    showToast(paused ? "Voce assumiu a conversa" : "Bot retomou o atendimento");
+  } catch(err) {
+    showToast("Erro ao alternar controle");
+  }
+}
+
+async function sendManual(e, idx, contactPhone) {
+  e.stopPropagation();
+  const input = document.getElementById("conv-input-" + idx);
+  const msg = input.value.trim();
+  if (!msg) return;
+  const session = getSession();
+  if (!session) return;
+  const token = session.cliente.token;
+  input.value = "";
+  input.disabled = true;
+  try {
+    await fetch(WEBHOOK_BASE + "/webhook/atendente24h-intervention", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "ngrok-skip-browser-warning": "true" },
+      body: JSON.stringify({ token, contact_phone: contactPhone, paused: true, message: msg })
+    });
+    convData[idx].messages = convData[idx].messages || [];
+    convData[idx].messages.push({ direction: "out", message: msg });
+    convData[idx].last_message = msg;
+    renderConversations();
+    showToast("Mensagem enviada");
+  } catch(err) {
+    input.value = msg;
+    showToast("Erro ao enviar mensagem");
+  } finally {
+    input.disabled = false;
+  }
 }
 
 // ─── INIT ─────────────────────────────────────────────────────────────────────
