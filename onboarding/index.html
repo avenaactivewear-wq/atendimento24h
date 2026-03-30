@@ -69,7 +69,7 @@ main{flex:1;padding:40px 24px 80px;max-width:680px;margin:0 auto;width:100%}
 /* ─── STEP PANELS ─── */
 .step-panel{display:none;animation:fadeIn .35s ease}
 .step-panel.active{display:block}
-@keyframes fadeIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
 
 .step-header{margin-bottom:36px}
 .step-num-label{font-size:12px;font-weight:600;color:var(--green);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px}
@@ -273,6 +273,24 @@ textarea{resize:vertical;min-height:120px}
 @media(max-width:400px){
   .hours-row{flex-wrap:wrap}
   .hours-times{width:100%}
+}
+@media(max-width:640px){
+  main{padding-bottom:88px}
+  .nav-btns{
+    position:fixed;bottom:0;left:0;right:0;
+    background:var(--bg);
+    border-top:1px solid var(--border);
+    padding:12px 20px;
+    margin-top:24px;
+    z-index:100;
+  }
+  .activate-btn{
+    position:fixed;bottom:0;left:0;right:0;
+    border-radius:0;
+    width:100%;
+    padding:18px 24px;
+    z-index:100;
+  }
 }
 </style>
 </head>
