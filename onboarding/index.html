@@ -674,6 +674,17 @@ Dica: quanto mais voce escrever ou colar aqui, melhor seu atendente vai responde
       <div class="step-desc">Em menos de 30 segundos seu atendente estará ativo.</div>
     </div>
 
+    <!-- Aviso mobile: nao pode escanear com o mesmo celular -->
+    <div id="mobile-qr-warning" style="display:none;background:rgba(251,191,36,0.1);border:1px solid rgba(251,191,36,0.3);border-radius:12px;padding:16px;margin-bottom:20px">
+      <div style="font-size:14px;font-weight:700;color:#fbbf24;margin-bottom:6px">Voce esta no celular</div>
+      <div style="font-size:13px;color:rgba(255,255,255,0.7);line-height:1.5;margin-bottom:12px">
+        Para conectar o WhatsApp, voce precisa escanear o QR code com um segundo dispositivo.<br>
+        <strong style="color:#fff">Use um computador ou tablet</strong> para abrir este link:
+      </div>
+      <div style="background:rgba(0,0,0,0.3);border-radius:8px;padding:10px 14px;font-family:monospace;font-size:12px;color:#22c55e;word-break:break-all;margin-bottom:12px" id="mobile-onboarding-url"></div>
+      <div style="font-size:12px;color:rgba(255,255,255,0.5)">O link foi enviado para seu email tambem.</div>
+    </div>
+
     <!-- Layout dois lados: QR + Instruções -->
     <div class="qr-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:24px;align-items:start">
 
@@ -744,6 +755,16 @@ Dica: quanto mais voce escrever ou colar aqui, melhor seu atendente vai responde
 </div><!-- /#main-content -->
 
 <script>
+// Mobile QR warning
+(function(){
+  if(/Android|iPhone|iPad|iPod/i.test(navigator.userAgent)){
+    const el = document.getElementById('mobile-qr-warning');
+    if(el){ el.style.display='block'; }
+    const urlEl = document.getElementById('mobile-onboarding-url');
+    if(urlEl){ urlEl.textContent = window.location.href; }
+  }
+})();
+
 const WEBHOOK_BASE = 'https://crista-oleographic-frightfully.ngrok-free.dev'
 const WEBHOOK_ONBOARDING = WEBHOOK_BASE + '/webhook/atendente24h-onboarding'
 const WEBHOOK_QR = WEBHOOK_BASE + '/webhook/atendente24h-qr'
