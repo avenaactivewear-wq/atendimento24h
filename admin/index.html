@@ -1059,7 +1059,7 @@ function renderMensagens() {
   // DONUT GRID
   const grid = document.getElementById('msg-donut-grid');
   grid.innerHTML = sorted.map(a => {
-    const limite = LIMITES[a.plano] || 500;
+    const limite = LIMITES[a.plano] || 1000;
     const pct = Math.min(100, Math.round(a.msgs / limite * 100));
     const [c1] = avatarColor(a.nome);
     const r = 28; const circ = 2 * Math.PI * r;
@@ -1085,7 +1085,7 @@ function renderMensagens() {
   // TABLE
   const tbody = document.getElementById('msg-table-body');
   tbody.innerHTML = sorted.map(a => {
-    const limite = LIMITES[a.plano] || 500;
+    const limite = LIMITES[a.plano] || 1000;
     const pct = Math.min(100, Math.round(a.msgs / limite * 100));
     const fillClass = pct >= 90 ? 'fill-danger' : pct >= 70 ? 'fill-warn' : 'fill-ok';
     const [c1,c2] = avatarColor(a.nome);
