@@ -909,6 +909,7 @@ function updateStepper() {
 function showPanel(n) {
   document.querySelectorAll('.step-panel').forEach(p => p.classList.remove('active'))
   document.getElementById('panel-'+n).classList.add('active')
+  if (n === 3) fillSummary()
   window.scrollTo({top:0,behavior:'smooth'})
 }
 

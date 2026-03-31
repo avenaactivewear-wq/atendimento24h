@@ -2267,7 +2267,7 @@ async function gerarQRCode() {
   errorEl.style.display = "none";
   if (qrCountdownTimer) { clearInterval(qrCountdownTimer); qrCountdownTimer = null; }
   try {
-    const resp = await fetch(WEBHOOK_BASE + "/webhook/atendente24h-qrcode?email=" + encodeURIComponent(session.email), {
+    const resp = await fetch(WEBHOOK_BASE + "/webhook/atendente24h-qr?email=" + encodeURIComponent(session.email), {
       headers: { "ngrok-skip-browser-warning": "true" }
     });
     const data = await resp.json().catch(() => ({}));
@@ -2310,19 +2310,19 @@ function iniciarConexaoWhatsApp() {
 
 // Config inline - popular campos quando o cliente carrega
 function popularConfigInline(config) {
-  if (!config) return;
+  const cd = currentCliente || {};
   const nome = document.getElementById('cfg-nome');
   const seg = document.getElementById('cfg-segmento');
   const hor = document.getElementById('cfg-horario');
   const prod = document.getElementById('cfg-produtos');
   const tom = document.getElementById('cfg-tom');
   const inst = document.getElementById('cfg-instrucoes');
-  if (nome) nome.value = config.nome_negocio || '';
-  if (seg) seg.value = config.segmento || '';
-  if (hor) hor.value = config.horario || '';
-  if (prod) prod.value = config.produtos || '';
-  if (tom) tom.value = config.tom || 'Amigável e descontraído';
-  if (inst) inst.value = config.instrucoes || '';
+  if (nome) nome.value = (config && config.nome_negocio) || cd.nome_empresa || '';
+  if (seg) seg.value = (config && config.segmento) || '';
+  if (hor) hor.value = (config && config.horario) || '';
+  if (prod) prod.value = (config && config.produtos) || '';
+  if (tom) tom.value = (config && config.tom) || 'Amigável e descontraído';
+  if (inst) inst.value = (config && config.instrucoes) || '';
 }
 
 // Salvar config inline
