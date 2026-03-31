@@ -1232,7 +1232,7 @@ body{
           <div class="usage-big">
             <span id="plano-msg-usadas">0</span>
             <span class="usage-sep"> / </span>
-            <span id="plano-msg-limite">500</span>
+            <span id="plano-msg-limite">1.000</span>
           </div>
           <div class="progress-track">
             <div class="progress-fill progress-green" id="plano-progress-bar" style="width:0%"></div>
@@ -1581,7 +1581,10 @@ function showDashboard(email, clienteData) {
   document.getElementById("plano-renovacao-full").textContent = renovacao;
 
   const usadas = Number(clienteData.mensagens_usadas) || 0;
-  const limite = Number(clienteData.mensagens_limite) || 500;
+  const planoLimites = { Basico: 1000, Recomendado: 5000, Pro: 30000 };
+  const planoNomeNorm = (clienteData.plano || 'Basico').charAt(0).toUpperCase() + (clienteData.plano || 'basico').slice(1).toLowerCase();
+  const planoNomeKey = planoNomeNorm === 'Pro' ? 'Pro' : planoNomeNorm === 'Recomendado' ? 'Recomendado' : 'Basico';
+  const limite = Number(clienteData.mensagens_limite) || planoLimites[planoNomeKey] || 1000;
   const disponiveis = Math.max(limite - usadas, 0);
   const pct = limite > 0 ? Math.round((usadas / limite) * 100) : 0;
 

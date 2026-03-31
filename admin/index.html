@@ -587,19 +587,19 @@ tr.row-cancelado:hover{background:rgba(220,38,38,0.045)}
           <div style="padding:24px">
             <div class="config-plans" id="config-plans-grid">
               <div class="config-plan-card" style="--bar-color:linear-gradient(90deg,#6ee7b7,#22c55e)">
-                <div class="config-plan-name">Essencial</div>
+                <div class="config-plan-name">Basico</div>
                 <div class="config-plan-price">R$197</div>
-                <div class="config-plan-msgs">500 msgs / mês</div>
+                <div class="config-plan-msgs">1.000 msgs / mes</div>
               </div>
               <div class="config-plan-card" style="--bar-color:linear-gradient(90deg,#fcd34d,#d97706)">
                 <div class="config-plan-name">Recomendado</div>
                 <div class="config-plan-price">R$397</div>
-                <div class="config-plan-msgs">2.500 msgs / mês</div>
+                <div class="config-plan-msgs">5.000 msgs / mes</div>
               </div>
               <div class="config-plan-card" style="--bar-color:linear-gradient(90deg,#818cf8,#4f46e5)">
                 <div class="config-plan-name">Pro</div>
                 <div class="config-plan-price">R$797</div>
-                <div class="config-plan-msgs">15.000 msgs / mês</div>
+                <div class="config-plan-msgs">30.000 msgs / mes</div>
               </div>
             </div>
           </div>
@@ -663,7 +663,8 @@ const WEBHOOK_BASE = 'https://crista-oleographic-frightfully.ngrok-free.dev';
 const WEBHOOK_ADMIN = WEBHOOK_BASE + '/webhook/atendente24h-admin';
 const WEBHOOK_ACTION = WEBHOOK_BASE + '/webhook/atendente24h-admin-action';
 const NGROK_H = { 'ngrok-skip-browser-warning': 'true', 'Content-Type': 'application/json' };
-const LIMITES = { Essencial: 500, Basico: 500, Recomendado: 2500, Pro: 15000 };
+const LIMITES = { Basico: 1000, Recomendado: 5000, Pro: 30000 };
+const PRECOS = { Basico: 197, Recomendado: 397, Pro: 797 };
 let assinantes = [];
 
 async function carregarDados() {
@@ -671,20 +672,27 @@ async function carregarDados() {
     const resp = await fetch(WEBHOOK_ADMIN, { headers: NGROK_H });
     const data = await resp.json();
     if (data.ok && data.clientes) {
-      assinantes = data.clientes.map(c => ({
-        id: c.id,
-        nome: c.nome || c.email,
-        empresa: c.empresa || c.nome || c.email,
-        email: c.email,
-        whatsapp: c.whatsapp || '',
-        plano: c.plano || 'Basico',
-        status: c.status === 'active' ? 'ativo' : c.status === 'suspended' ? 'cancelado' : c.status,
-        desde: c.desde || '',
-        mrr: c.mrr || 0,
-        licenca: c.subscription_id || ('A24H-' + String(c.id).padStart(4,'0')),
-        msgs: c.msgs || 0,
-        msgs_limite: c.msgs_limite || LIMITES[c.plano] || 500
-      }));
+      assinantes = data.clientes.map(c => {
+        const planoRaw = c.plano || 'Basico';
+        const planoNorm = planoRaw.charAt(0).toUpperCase() + planoRaw.slice(1).toLowerCase();
+        const plano = ['Basico','Recomendado','Pro'].includes(planoNorm) ? planoNorm : (planoRaw === 'basico' ? 'Basico' : planoRaw === 'recomendado' ? 'Recomendado' : planoRaw === 'pro' ? 'Pro' : planoRaw);
+        const status = c.status === 'active' || c.status === 'ativo' ? 'ativo' : c.status === 'suspended' || c.status === 'cancelado' || c.status === 'cancelled' ? 'cancelado' : c.status || 'ativo';
+        const mrrBase = PRECOS[plano] || 197;
+        return {
+          id: c.id,
+          nome: c.nome || c.email,
+          empresa: c.empresa || c.nome || c.email,
+          email: c.email,
+          whatsapp: c.whatsapp || '',
+          plano,
+          status,
+          desde: c.desde || '',
+          mrr: c.mrr || (status === 'ativo' ? mrrBase : 0),
+          licenca: c.subscription_id || ('A24H-' + String(c.id).padStart(4,'0')),
+          msgs: c.msgs || 0,
+          msgs_limite: c.msgs_limite || LIMITES[plano] || 1000
+        };
+      });
     }
   } catch(e) {
     console.warn('Nao foi possivel carregar dados reais:', e.message);
@@ -745,7 +753,7 @@ function renderTable() {
     tbody.innerHTML = '<tr class="empty-row"><td colspan="6">Nenhum assinante encontrado.</td></tr>';
   } else {
     tbody.innerHTML = pagina.map(a => {
-      const limite = LIMITES[a.plano] || 500;
+      const limite = LIMITES[a.plano] || 1000;
       const isCancelado = a.status === 'cancelado' || a.status === 'suspenso';
       const pct = isCancelado ? 0 : Math.min(100, Math.round((a.msgs / limite) * 100));
       const fillClass = pct >= 90 ? 'fill-danger' : pct >= 70 ? 'fill-warn' : 'fill-ok';
@@ -829,7 +837,7 @@ function updateSidebarChart() {
     counts[a.plano] = (counts[a.plano] || 0) + 1;
   });
   const total = Object.values(counts).reduce((s,v) => s + v, 0) || 1;
-  const classMap = { Essencial: 'essencial', Recomendado: 'recomendado', Pro: 'pro' };
+  const classMap = { Basico: 'essencial', Recomendado: 'recomendado', Pro: 'pro' };
   const container = document.getElementById('sidebar-plan-chart');
   if (!container) return;
   container.innerHTML = Object.entries(counts).map(([plano, count]) => `
@@ -939,7 +947,7 @@ async function reativar(id) {
     return;
   }
   a.status = 'ativo';
-  a.mrr = a.plano === 'Pro' ? 797 : a.plano === 'Recomendado' ? 397 : 197;
+  a.mrr = PRECOS[a.plano] || 197;
   renderTable();
 }
 
@@ -1043,8 +1051,8 @@ function renderReceita() {
 function renderMensagens() {
   const ativos = assinantes.filter(a => a.status !== 'cancelado');
   const sorted = [...ativos].sort((a,b) => {
-    const pctA = (a.msgs / (LIMITES[a.plano] || 500));
-    const pctB = (b.msgs / (LIMITES[b.plano] || 500));
+    const pctA = (a.msgs / (LIMITES[a.plano] || 1000));
+    const pctB = (b.msgs / (LIMITES[b.plano] || 1000));
     return pctB - pctA;
   });
 
