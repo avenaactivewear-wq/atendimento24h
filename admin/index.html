@@ -512,7 +512,7 @@ tr.row-cancelado:hover{background:rgba(220,38,38,0.045)}
         <div class="metrics" id="receita-metrics"></div>
 
         <div class="table-wrap" style="margin-bottom:20px">
-          <div class="table-header"><div class="table-title">MRR Ultimos 6 Meses</div></div>
+          <div class="table-header"><div class="table-title">MRR Últimos 6 Meses</div></div>
           <div class="bar-chart-wrap">
             <div class="bar-chart" id="mrr-bar-chart"></div>
           </div>
@@ -587,19 +587,19 @@ tr.row-cancelado:hover{background:rgba(220,38,38,0.045)}
           <div style="padding:24px">
             <div class="config-plans" id="config-plans-grid">
               <div class="config-plan-card" style="--bar-color:linear-gradient(90deg,#6ee7b7,#22c55e)">
-                <div class="config-plan-name">Basico</div>
+                <div class="config-plan-name">Básico</div>
                 <div class="config-plan-price">R$197</div>
-                <div class="config-plan-msgs">1.000 msgs / mes</div>
+                <div class="config-plan-msgs">1.000 msgs / mês</div>
               </div>
               <div class="config-plan-card" style="--bar-color:linear-gradient(90deg,#fcd34d,#d97706)">
                 <div class="config-plan-name">Recomendado</div>
                 <div class="config-plan-price">R$397</div>
-                <div class="config-plan-msgs">5.000 msgs / mes</div>
+                <div class="config-plan-msgs">5.000 msgs / mês</div>
               </div>
               <div class="config-plan-card" style="--bar-color:linear-gradient(90deg,#818cf8,#4f46e5)">
                 <div class="config-plan-name">Pro</div>
                 <div class="config-plan-price">R$797</div>
-                <div class="config-plan-msgs">30.000 msgs / mes</div>
+                <div class="config-plan-msgs">30.000 msgs / mês</div>
               </div>
             </div>
           </div>
@@ -663,8 +663,8 @@ const WEBHOOK_BASE = 'https://crista-oleographic-frightfully.ngrok-free.dev';
 const WEBHOOK_ADMIN = WEBHOOK_BASE + '/webhook/atendente24h-admin';
 const WEBHOOK_ACTION = WEBHOOK_BASE + '/webhook/atendente24h-admin-action';
 const NGROK_H = { 'ngrok-skip-browser-warning': 'true', 'Content-Type': 'application/json' };
-const LIMITES = { Basico: 1000, Recomendado: 5000, Pro: 30000 };
-const PRECOS = { Basico: 197, Recomendado: 397, Pro: 797 };
+const LIMITES = { Básico: 1000, Recomendado: 5000, Pro: 30000 };
+const PRECOS = { Básico: 197, Recomendado: 397, Pro: 797 };
 let assinantes = [];
 
 async function carregarDados() {
@@ -673,9 +673,9 @@ async function carregarDados() {
     const data = await resp.json();
     if (data.ok && data.clientes) {
       assinantes = data.clientes.map(c => {
-        const planoRaw = c.plano || 'Basico';
-        const planoNorm = planoRaw.charAt(0).toUpperCase() + planoRaw.slice(1).toLowerCase();
-        const plano = ['Basico','Recomendado','Pro'].includes(planoNorm) ? planoNorm : (planoRaw === 'basico' ? 'Basico' : planoRaw === 'recomendado' ? 'Recomendado' : planoRaw === 'pro' ? 'Pro' : planoRaw);
+        const planoRaw = c.plano || 'basico';
+        const planoLow = planoRaw.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+        const plano = planoLow === 'basico' ? 'Básico' : planoLow === 'recomendado' ? 'Recomendado' : planoLow === 'pro' ? 'Pro' : (c.plano || 'Básico');
         const status = c.status === 'active' || c.status === 'ativo' ? 'ativo' : c.status === 'suspended' || c.status === 'cancelado' || c.status === 'cancelled' ? 'cancelado' : c.status || 'ativo';
         const mrrBase = PRECOS[plano] || 197;
         return {
@@ -695,7 +695,7 @@ async function carregarDados() {
       });
     }
   } catch(e) {
-    console.warn('Nao foi possivel carregar dados reais:', e.message);
+    console.warn('Não foi possível carregar dados reais:', e.message);
   }
   renderTable();
 }
@@ -763,8 +763,8 @@ function renderTable() {
       const planClass = a.plano === 'Pro' ? 'plan-pro' : a.plano === 'Recomendado' ? 'plan-recomendado' : '';
       const acoes = isCancelado
         ? `<button class="action-btn reativar" onclick="reativar(${a.id})">Reativar</button>`
-        : `<button class="action-btn" onclick="abrirLicenca(${a.id})">Licenca</button>
-           <button class="action-btn" style="color:var(--blue);border-color:rgba(37,99,235,0.25)" onclick="abrirBonus(${a.id})">+Bonus</button>
+        : `<button class="action-btn" onclick="abrirLicenca(${a.id})">Licença</button>
+           <button class="action-btn" style="color:var(--blue);border-color:rgba(37,99,235,0.25)" onclick="abrirBonus(${a.id})">+Bônus</button>
            <button class="action-btn danger" onclick="cancelar(${a.id})">Cancelar</button>`;
       return `
       <tr class="${isCancelado ? 'row-cancelado' : ''}">
@@ -789,7 +789,7 @@ function renderTable() {
           </div>`}
         </td>
         <td>
-          <a class="whatsapp-link" href="https://wa.me/55${a.whatsapp.replace(/\D/g,'')}" target="_blank">
+          <a class="whatsapp-link" href="https://wa.me/${(() => { const n = a.whatsapp.replace(/\D/g,''); return n.startsWith('55') ? n : '55' + n; })()}" target="_blank">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
             ${a.whatsapp}
           </a>
@@ -837,7 +837,7 @@ function updateSidebarChart() {
     counts[a.plano] = (counts[a.plano] || 0) + 1;
   });
   const total = Object.values(counts).reduce((s,v) => s + v, 0) || 1;
-  const classMap = { Basico: 'essencial', Recomendado: 'recomendado', Pro: 'pro' };
+  const classMap = { Básico: 'essencial', Recomendado: 'recomendado', Pro: 'pro' };
   const container = document.getElementById('sidebar-plan-chart');
   if (!container) return;
   container.innerHTML = Object.entries(counts).map(([plano, count]) => `
@@ -896,8 +896,8 @@ function copiarLicenca() {
 function reenviarEmail() {
   if (!modalClienteAtual) return;
   const a = modalClienteAtual;
-  const subject = encodeURIComponent('Sua licenca Atendente24h');
-  const body = encodeURIComponent(`Ola ${a.nome},\n\nSegue sua chave de licenca Atendente24h:\n\n${a.licenca}\n\nPlano: ${a.plano}\n\nPara ativar acesse: https://atendente24h.com/onboarding/\n\nQualquer duvida estamos a disposicao.\n\nEquipe Atendente24h`);
+  const subject = encodeURIComponent('Sua licença Atendente24h');
+  const body = encodeURIComponent(`Olá ${a.nome},\n\nSegue sua chave de licença Atendente24h:\n\n${a.licenca}\n\nPlano: ${a.plano}\n\nPara ativar acesse: https://atendente24h.com/onboarding/\n\nQualquer dúvida estamos à disposição.\n\nEquipe Atendente24h`);
   window.open(`mailto:${a.email}?subject=${subject}&body=${body}`, '_blank');
 }
 
@@ -905,8 +905,9 @@ function reenviarWpp() {
   if (!modalClienteAtual) return;
   const a = modalClienteAtual;
   const num = a.whatsapp.replace(/\D/g, '');
-  const msg = encodeURIComponent(`Ola ${a.nome}! Segue sua chave de licenca Atendente24h:\n\n*${a.licenca}*\n\nPlano: ${a.plano}\n\nPara ativar acesse: https://atendente24h.com/onboarding/`);
-  window.open(`https://wa.me/55${num}?text=${msg}`, '_blank');
+  const msg = encodeURIComponent(`Olá ${a.nome}! Segue sua chave de licença Atendente24h:\n\n*${a.licenca}*\n\nPlano: ${a.plano}\n\nPara ativar acesse: https://atendente24h.com/onboarding/`);
+  const wppNum = num.startsWith('55') ? num : '55' + num;
+  window.open(`https://wa.me/${wppNum}?text=${msg}`, '_blank');
 }
 
 function calcRenovacao(desde) {
@@ -923,7 +924,7 @@ function calcRenovacao(desde) {
 
 async function cancelar(id) {
   const a = assinantes.find(x => x.id === id);
-  if (!confirm(`Cancelar assinatura de ${a.nome}? Um email sera enviado ao cliente.`)) return;
+  if (!confirm(`Cancelar assinatura de ${a.nome}? Um e-mail será enviado ao cliente.`)) return;
   try {
     const r = await fetch(WEBHOOK_ACTION, { method:'POST', headers: NGROK_H, body: JSON.stringify({ action:'cancel', email: a.email }) });
     if (!r.ok) throw new Error('HTTP ' + r.status);
@@ -938,7 +939,7 @@ async function cancelar(id) {
 
 async function reativar(id) {
   const a = assinantes.find(x => x.id === id);
-  if (!confirm(`Reativar assinatura de ${a.nome}? Um email sera enviado ao cliente.`)) return;
+  if (!confirm(`Reativar assinatura de ${a.nome}? Um e-mail será enviado ao cliente.`)) return;
   try {
     const r = await fetch(WEBHOOK_ACTION, { method:'POST', headers: NGROK_H, body: JSON.stringify({ action:'reativar', email: a.email }) });
     if (!r.ok) throw new Error('HTTP ' + r.status);
@@ -953,7 +954,7 @@ async function reativar(id) {
 
 function abrirBonus(id) {
   const a = assinantes.find(x => x.id === id);
-  const qty = prompt(`Quantas mensagens de bonus para ${a.nome}?\n(Atual: ${a.msgs_limite} disponiveis)`);
+  const qty = prompt(`Quantas mensagens de bônus para ${a.nome}?\n(Atual: ${a.msgs_limite} disponíveis)`);
   if (!qty || isNaN(Number(qty)) || Number(qty) <= 0) return;
   darBonus(id, Number(qty));
 }
@@ -985,7 +986,7 @@ function exportCSV() {
 }
 
 function showTab(tab, btn) {
-  const titulos = { assinantes:'Assinantes', receita:'Receita', mensagens:'Mensagens', config:'Configuracoes' };
+  const titulos = { assinantes:'Assinantes', receita:'Receita', mensagens:'Mensagens', config:'Configurações' };
   document.getElementById('page-title').textContent = titulos[tab] || tab;
   document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
   if (btn) btn.classList.add('active');
@@ -1005,7 +1006,7 @@ function renderReceita() {
   document.getElementById('receita-metrics').innerHTML = `
     <div class="metric-card"><div class="metric-label">MRR</div><div class="metric-value green">R$${mrr.toLocaleString('pt-BR')}</div><div class="metric-sub">Receita mensal recorrente</div></div>
     <div class="metric-card"><div class="metric-label">ARR Projetado</div><div class="metric-value">R$${arr.toLocaleString('pt-BR')}</div><div class="metric-sub">x12 meses</div></div>
-    <div class="metric-card"><div class="metric-label">Ticket Medio</div><div class="metric-value">R$${ativos.length ? Math.round(mrr/ativos.length) : 0}</div><div class="metric-sub">${ativos.length} clientes ativos</div></div>
+    <div class="metric-card"><div class="metric-label">Ticket Médio</div><div class="metric-value">R$${ativos.length ? Math.round(mrr/ativos.length) : 0}</div><div class="metric-sub">${ativos.length} clientes ativos</div></div>
     <div class="metric-card"><div class="metric-label">Meta (20 clientes)</div><div class="metric-value">R$7.940</div><div class="metric-sub">Progresso: ${Math.round(mrr/7940*100)}%</div></div>
   `;
 
@@ -1042,7 +1043,7 @@ function renderReceita() {
         <td style="font-size:12px;color:var(--text2)">${a.empresa}</td>
         <td><span class="plan-badge ${a.plano==='Pro'?'plan-pro':a.plano==='Recomendado'?'plan-recomendado':''}">${a.plano}</span></td>
         <td><span class="status-badge status-${a.status}">${a.status==='ativo'?'Ativo':'Trial'}</span></td>
-        <td style="font-weight:800;color:var(--green);font-size:14px">R$${a.mrr}/mes</td>
+        <td style="font-weight:800;color:var(--green);font-size:14px">R$${a.mrr}/mês</td>
         <td style="font-size:12px;color:var(--text2)">${formatDate(a.desde)}</td>
       </tr>`;
     }).join('');
@@ -1120,7 +1121,7 @@ function doLogin() {
     document.getElementById('loginOverlay').style.display = 'none';
     sessionStorage.setItem('a24h_auth', '1');
   } else {
-    document.getElementById('loginError').textContent = 'Usuario ou senha incorretos.';
+    document.getElementById('loginError').textContent = 'Usuário ou senha incorretos.';
   }
 }
 if (!sessionStorage.getItem('a24h_auth')) {

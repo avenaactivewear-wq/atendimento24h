@@ -920,7 +920,7 @@ body{
         </button>
         <button class="quick-action-btn" onclick="goToSection('relatorios');setTimeout(()=>fetchReport('today',null,null),50)">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
-          Relatorio de hoje
+          Relatório de hoje
         </button>
         <button class="quick-action-btn" onclick="goToSection('plano')">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
@@ -1023,9 +1023,9 @@ body{
 
       <!-- Card impacto acumulado -->
       <div id="impact-card" style="background:linear-gradient(135deg,var(--green-bg) 0%,var(--surface) 100%);border:1px solid var(--green-border);border-radius:var(--radius);padding:20px 24px;margin-top:4px;display:none">
-        <div style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--green);margin-bottom:10px">Seu atendente em acao</div>
+        <div style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--green);margin-bottom:10px">Seu atendente em ação</div>
         <div style="font-size:16px;font-weight:600;color:var(--text);line-height:1.6" id="impact-text"></div>
-        <div style="font-size:12px;color:var(--text-2);margin-top:6px">Tudo automatico. Voce nao precisou atender nenhuma dessas mensagens.</div>
+        <div style="font-size:12px;color:var(--text-2);margin-top:6px">Tudo automático. Você não precisou atender nenhuma dessas mensagens.</div>
       </div>
 
       <!-- Buy More (aparece quando perto do limite) -->
@@ -1202,9 +1202,9 @@ body{
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
           </div>
           <div style="flex:1">
-            <div style="font-size:14px;font-weight:700;color:var(--text);margin-bottom:8px;letter-spacing:-0.02em">Quando voce quer atender pessoalmente</div>
+            <div style="font-size:14px;font-weight:700;color:var(--text);margin-bottom:8px;letter-spacing:-0.02em">Quando você quer atender pessoalmente</div>
             <div style="font-size:13px;color:var(--text-2);line-height:1.7">
-              Mande uma mensagem pelo WhatsApp normalmente. O bot detecta que um humano respondeu e <strong>pausa automaticamente para aquele contato por 30 minutos</strong>, sem conflito entre voce e o bot.<br><br>
+              Mande uma mensagem pelo WhatsApp normalmente. O bot detecta que um humano respondeu e <strong>pausa automaticamente para aquele contato por 30 minutos</strong>, sem conflito entre você e o bot.<br><br>
               Quando os 30 minutos passarem, o bot retoma sozinho. Ou use a aba <strong>Conversas</strong> para pausar e retomar qualquer conversa com um clique.
             </div>
             <button onclick="goToSection('conversas')" style="margin-top:12px;background:none;border:1px solid var(--green-border);color:var(--green);font-size:12px;font-weight:600;padding:7px 14px;border-radius:9999px;cursor:pointer;font-family:inherit;transition:all .15s">Ver conversas em tempo real</button>
@@ -1314,7 +1314,7 @@ body{
 
         <!-- Banner assumir conversa -->
         <div style="padding:12px 16px;background:var(--surface-2);border-radius:var(--radius);border:1px solid var(--border);margin-bottom:8px;font-size:12px;color:var(--text-2);line-height:1.6">
-          <strong style="color:var(--text)">Como assumir uma conversa:</strong> clique em qualquer conversa abaixo e use o botao "Assumir conversa". O bot pausa para esse contato. Quando quiser devolver ao bot, clique em "Devolver ao bot".
+          <strong style="color:var(--text)">Como assumir uma conversa:</strong> clique em qualquer conversa abaixo e use o botão "Assumir conversa". O bot pausa para esse contato. Quando quiser devolver ao bot, clique em "Devolver ao bot".
         </div>
 
         <div id="conv-list-container" style="margin-top:8px">
@@ -1361,7 +1361,7 @@ body{
           </div>
           <div class="usage-footer-row">
             <span class="usage-pct"><span id="plano-usage-pct">0</span>% utilizado</span>
-            <span class="msgs-disp" id="plano-msgs-disp">0 disponiveis</span>
+            <span class="msgs-disp" id="plano-msgs-disp">0 disponíveis</span>
           </div>
         </div>
       </div>
@@ -1757,7 +1757,7 @@ function showDashboard(email, clienteData) {
   if (usadas > 0) {
     impactCard.style.display = "block";
     const mesesTexto = usadas >= 1000 ? usadas.toLocaleString("pt-BR") : usadas;
-    document.getElementById("impact-text").textContent = "Este mes, " + mesesTexto + " mensagens respondidas, " + clientes.toLocaleString("pt-BR") + " clientes atendidos e " + horas + "h do seu tempo liberadas.";
+    document.getElementById("impact-text").textContent = "Este mês, " + mesesTexto + " mensagens respondidas, " + clientes.toLocaleString("pt-BR") + " clientes atendidos e " + horas.toLocaleString("pt-BR") + "h do seu tempo liberadas.";
   }
 
   if (pct >= 95) {
@@ -1845,65 +1845,30 @@ Responda sempre em português, de forma natural e humana. Nunca mencione que é 
 
 function updateConfigPreview() {
   const badge = document.getElementById("config-status-badge");
-  const summaryEl = document.getElementById("config-summary-filled");
-  const pendingWrap = document.getElementById("config-pending-wrap");
-  const pendingList = document.getElementById("config-pending-list");
-  const legacyPreview = document.getElementById("config-preview-text");
+  if (!badge) return;
   const config = currentCliente && currentCliente.config;
 
   const fieldDefs = [
-    { key: "nome_negocio", label: "Nome do negócio", icon: "🏪" },
-    { key: "segmento",     label: "Segmento",         icon: "📂" },
-    { key: "horario",      label: "Horário",           icon: "🕐" },
-    { key: "produtos",     label: "Produtos/serviços", icon: "📋" },
-    { key: "tom",          label: "Tom do atendente",  icon: "💬" },
+    { key: "nome_negocio", label: "Nome do negócio" },
+    { key: "segmento",     label: "Segmento" },
+    { key: "horario",      label: "Horário" },
+    { key: "produtos",     label: "Produtos/serviços" },
+    { key: "tom",          label: "Tom do atendente" },
   ];
 
   if (config && Object.keys(config).some(k => config[k])) {
-    legacyPreview.style.display = "none";
-    summaryEl.style.display = "flex";
-    summaryEl.innerHTML = "";
-    const pending = [];
-
-    fieldDefs.forEach(function(f) {
-      const val = config[f.key];
-      if (val && val.trim()) {
-        const item = document.createElement("div");
-        item.className = "config-summary-item";
-        item.innerHTML = '<span class="config-summary-icon">' + f.icon + '</span><div><div class="config-summary-label">' + f.label + '</div><div class="config-summary-value">' + val + '</div></div>';
-        summaryEl.appendChild(item);
-      } else {
-        pending.push(f.label);
-      }
-    });
-
+    const pending = fieldDefs.filter(f => !config[f.key] || !String(config[f.key]).trim());
     if (pending.length > 0) {
-      pendingWrap.style.display = "block";
-      pendingList.innerHTML = pending.map(function(p) {
-        return '<div class="config-pending-item"><span class="config-pending-dot"></span>' + p + '</div>';
-      }).join("");
       badge.className = "badge badge-warning";
       badge.innerHTML = '<span class="badge-dot"></span>Incompleto';
     } else {
-      pendingWrap.style.display = "none";
       badge.className = "badge badge-active";
       badge.innerHTML = '<span class="badge-dot"></span>Configurado';
     }
   } else if (currentCliente && currentCliente.system_prompt && currentCliente.system_prompt.trim()) {
-    summaryEl.style.display = "none";
-    pendingWrap.style.display = "none";
-    legacyPreview.style.display = "block";
-    const text = currentCliente.system_prompt.trim();
-    legacyPreview.textContent = text.length > 200 ? text.substring(0, 200) + "..." : text;
-    legacyPreview.classList.remove("empty-preview");
     badge.className = "badge badge-active";
     badge.innerHTML = '<span class="badge-dot"></span>Configurado';
   } else {
-    summaryEl.style.display = "none";
-    pendingWrap.style.display = "none";
-    legacyPreview.style.display = "block";
-    legacyPreview.textContent = "Nenhum contexto configurado. Clique em Editar configuração para começar.";
-    legacyPreview.classList.add("empty-preview");
     badge.className = "badge badge-warning";
     badge.innerHTML = '<span class="badge-dot"></span>Pendente';
   }
