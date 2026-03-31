@@ -965,7 +965,7 @@ async function darBonus(id, bonus_msgs) {
     const r = await fetch(WEBHOOK_ACTION, { method:'POST', headers: NGROK_H, body: JSON.stringify({ action:'bonus', email: a.email, bonus_msgs }) });
     if (!r.ok) throw new Error('HTTP ' + r.status);
   } catch(e) {
-    alert('Erro ao adicionar bonus: ' + e.message + '\nTente novamente.');
+    alert('Erro ao adicionar bônus: ' + e.message + '\nTente novamente.');
     return;
   }
   a.msgs_limite = (a.msgs_limite || 0) + bonus_msgs;
@@ -974,7 +974,7 @@ async function darBonus(id, bonus_msgs) {
 }
 
 function exportCSV() {
-  const rows = [['Nome','Empresa','Email','WhatsApp','Plano','Status','Desde','Licenca']];
+  const rows = [['Nome','Empresa','Email','WhatsApp','Plano','Status','Desde','Licença']];
   assinantes.forEach(a => rows.push([a.nome, a.empresa, a.email, a.whatsapp, a.plano, a.status, a.desde, a.licenca]));
   const csv = rows.map(r => r.join(',')).join('\n');
   const blob = new Blob([csv], {type:'text/csv'});
