@@ -476,6 +476,19 @@ body{
   width:100%;justify-content:center;
 }
 .btn-edit-config:hover{background:var(--green-bg);border-color:var(--green-border)}
+.config-inline-form{display:flex;flex-direction:column;gap:12px;margin-top:16px}
+.config-field-row{display:flex;flex-direction:column;gap:4px}
+.config-field-label{font-size:12px;font-weight:500;color:var(--text-2);letter-spacing:0.01em}
+.config-field-input,.config-field-select,.config-field-textarea{
+  width:100%;background:var(--surface);border:1px solid var(--border-2);
+  border-radius:var(--radius);padding:9px 12px;font-size:13px;
+  font-family:inherit;color:var(--text);outline:none;
+  transition:border-color .15s,box-shadow .15s;
+}
+.config-field-input:focus,.config-field-select:focus,.config-field-textarea:focus{
+  border-color:var(--green);box-shadow:0 0 0 3px rgba(22,163,74,0.08)
+}
+.config-field-textarea{min-height:72px;resize:vertical;line-height:1.5}
 .info-row{display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border)}
 .info-row:last-of-type{border-bottom:none}
 .info-key{font-size:11px;color:var(--text-3)}
@@ -889,6 +902,12 @@ body{
         </div>
       </div>
 
+      <!-- Aviso session -->
+      <div id="session-refresh-hint" style="display:none;background:var(--yellow-bg);border:1px solid var(--yellow-border);border-radius:var(--radius);padding:12px 16px;font-size:12px;color:var(--text-2);margin-bottom:12px;align-items:center;gap:8px">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--yellow)" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        Para ver os dados mais recentes, <button onclick="sair()" style="background:none;border:none;color:var(--green);font-weight:600;cursor:pointer;font-size:12px;font-family:inherit;text-decoration:underline">faça login novamente</button>.
+      </div>
+
       <!-- Acoes rapidas -->
       <div class="quick-actions-row">
         <button class="quick-action-btn" onclick="goToSection('atendente')">
@@ -958,6 +977,23 @@ body{
         </div>
       </div>
 
+      <!-- Card setup status -->
+      <div id="setup-status-card" class="card" style="margin-top:4px;display:none">
+        <div class="card-label" style="margin-bottom:12px">Configure seu atendente</div>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <div id="setup-item-config" style="display:flex;align-items:center;gap:10px;font-size:13px">
+            <div id="setup-icon-config" style="width:20px;height:20px;border-radius:50%;background:var(--surface-3);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:10px">1</div>
+            <span id="setup-text-config" style="color:var(--text-2)">Configurar seu atendente (nome, produtos, horário)</span>
+            <button onclick="goToSection('atendente')" style="margin-left:auto;background:var(--green);color:#fff;border:none;border-radius:9999px;padding:5px 12px;font-size:11px;font-weight:600;cursor:pointer;font-family:inherit;white-space:nowrap">Configurar</button>
+          </div>
+          <div id="setup-item-wpp" style="display:flex;align-items:center;gap:10px;font-size:13px">
+            <div id="setup-icon-wpp" style="width:20px;height:20px;border-radius:50%;background:var(--surface-3);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:10px">2</div>
+            <span id="setup-text-wpp" style="color:var(--text-2)">Conectar seu WhatsApp</span>
+            <button onclick="goToSection('atendente')" style="margin-left:auto;background:var(--green);color:#fff;border:none;border-radius:9999px;padding:5px 12px;font-size:11px;font-weight:600;cursor:pointer;font-family:inherit;white-space:nowrap">Conectar</button>
+          </div>
+        </div>
+      </div>
+
       <!-- Card mensagens (progress) + plano -->
       <div class="grid-2" style="margin-top:4px">
         <div class="card">
@@ -1024,7 +1060,7 @@ body{
       <div class="bot-name-field">
         <label>Nome do seu atendente</label>
         <input type="text" class="bot-name-input" id="bot-name-input" value="Bento" placeholder="Ex: Bento, Clara, Max...">
-        <div class="bot-name-hint">Este é o nome que o bot usa ao se apresentar para seus clientes.</div>
+        <div class="bot-name-hint" id="bot-name-hint">Este é o nome que o bot usa ao se apresentar para seus clientes.</div>
       </div>
 
       <!-- Toggle Bot -->
@@ -1067,10 +1103,10 @@ body{
       <div class="whatsapp-card" id="whatsapp-card">
         <div class="whatsapp-info">
           <div class="whatsapp-label">WhatsApp conectado</div>
-          <div class="whatsapp-number" id="whatsapp-number-display">Nenhum numero conectado</div>
+          <div class="whatsapp-number" id="whatsapp-number-display">Nenhum número conectado</div>
         </div>
         <div id="whatsapp-action">
-          <button class="btn-connect-wa" onclick="showToast('Acesse o painel do seu WhatsApp para escanear o QR code.')">
+          <button class="btn-connect-wa" onclick="iniciarConexaoWhatsApp()">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 2v6h-6M3 12a9 9 0 0115-6.7L21 8M3 22v-6h6M21 12a9 9 0 01-15 6.7L3 16"/></svg>
             Conectar WhatsApp
           </button>
@@ -1098,37 +1134,66 @@ body{
 
       <!-- Config context -->
       <div class="config-context-card">
-        <div class="config-context-header">
-          <div>
-            <div class="config-context-title">Configuração do atendente</div>
-            <div class="config-context-sub">Ensine como o bot deve se apresentar e responder seus clientes.</div>
-          </div>
-          <span class="badge" id="config-status-badge"><span class="badge-dot"></span>Verificando</span>
-        </div>
+  <div class="config-context-header">
+    <div>
+      <div class="config-context-title">Configuração do atendente</div>
+      <div class="config-context-sub">Como seu bot se apresenta e responde seus clientes.</div>
+    </div>
+    <span class="badge" id="config-status-badge"><span class="badge-dot"></span>Verificando</span>
+  </div>
 
-        <div id="config-preview-wrap">
-          <div id="config-summary-filled" class="config-summary" style="display:none"></div>
-          <div id="config-pending-wrap" style="display:none">
-            <div style="font-size:12px;color:var(--text-2);margin-bottom:8px">Campos ainda não preenchidos:</div>
-            <div class="config-pending-list" id="config-pending-list"></div>
-          </div>
-          <div class="config-preview empty-preview" id="config-preview-text" style="display:none">Nenhum contexto configurado.</div>
-        </div>
+  <div class="config-inline-form">
+    <div class="config-field-row">
+      <label class="config-field-label">Nome do negócio</label>
+      <input type="text" class="config-field-input" id="cfg-nome" placeholder="Ex: Neo Black Store">
+    </div>
+    <div class="config-field-row">
+      <label class="config-field-label">Segmento</label>
+      <select class="config-field-select" id="cfg-segmento">
+        <option value="">Selecione...</option>
+        <option value="Loja e e-commerce">Loja e e-commerce</option>
+        <option value="Clínica/Consultório">Clínica/Consultório</option>
+        <option value="Salão/Estética">Salão/Estética</option>
+        <option value="Restaurante/Delivery">Restaurante/Delivery</option>
+        <option value="Prestador de serviço">Prestador de serviço</option>
+        <option value="Imobiliária">Imobiliária</option>
+        <option value="Escola/Curso">Escola/Curso</option>
+        <option value="Outro">Outro</option>
+      </select>
+    </div>
+    <div class="config-field-row">
+      <label class="config-field-label">Horário de funcionamento</label>
+      <input type="text" class="config-field-input" id="cfg-horario" placeholder="Ex: Seg-Sex 9h-18h, Sáb 9h-13h">
+    </div>
+    <div class="config-field-row">
+      <label class="config-field-label">Produtos / Serviços principais</label>
+      <textarea class="config-field-textarea" id="cfg-produtos" placeholder="Liste seus principais produtos ou serviços, um por linha"></textarea>
+    </div>
+    <div class="config-field-row">
+      <label class="config-field-label">Tom do atendente</label>
+      <select class="config-field-select" id="cfg-tom">
+        <option value="Amigável e descontraído">Amigável e descontraído</option>
+        <option value="Profissional e formal">Profissional e formal</option>
+        <option value="Misto">Misto</option>
+      </select>
+    </div>
+    <div class="config-field-row">
+      <label class="config-field-label">Instruções especiais <span style="font-weight:400;color:var(--text-3)">(opcional)</span></label>
+      <textarea class="config-field-textarea" id="cfg-instrucoes" placeholder="Ex: Nunca dar descontos, sempre perguntar o nome, encaminhar reclamações para humano..."></textarea>
+    </div>
+    <button class="btn-modal-save" id="btn-salvar-config" style="width:100%;margin-top:8px;border-radius:var(--radius)">Salvar configuração</button>
+    <p id="config-save-msg" style="display:none;font-size:12px;text-align:center;margin-top:8px;color:var(--green)">Configuração salva com sucesso!</p>
+  </div>
 
-        <div class="info-row">
-          <span class="info-key">Empresa</span>
-          <span class="info-val" id="info-empresa">--</span>
-        </div>
-        <div class="info-row" id="instancia-row" style="display:none">
-          <span class="info-key">Instância WhatsApp</span>
-          <span class="info-val" id="info-instancia">--</span>
-        </div>
-
-        <button class="btn-edit-config" id="btn-configurar" style="margin-top:16px">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
-          Editar configuração
-        </button>
-      </div>
+  <div class="info-row" style="margin-top:16px">
+    <span class="info-key">Empresa</span>
+    <span class="info-val" id="info-empresa">--</span>
+  </div>
+  <div class="info-row" id="instancia-row" style="display:none">
+    <span class="info-key">Instância WhatsApp</span>
+    <span class="info-val" id="info-instancia">--</span>
+  </div>
+</div>
 
       <!-- Como assumir o atendimento -->
       <div style="margin-top:16px;padding:20px 24px;border-radius:var(--radius);background:var(--surface);border:1px solid var(--border)">
@@ -1376,12 +1441,12 @@ body{
 
     <div class="modal-row-2">
       <div class="modal-field">
-        <label class="modal-label" for="cfg-nome">Nome do negócio</label>
-        <input type="text" id="cfg-nome" class="modal-input" placeholder="Ex: Neo Black Store">
+        <label class="modal-label" for="modal-cfg-nome">Nome do negócio</label>
+        <input type="text" id="modal-cfg-nome" class="modal-input" placeholder="Ex: Neo Black Store">
       </div>
       <div class="modal-field">
-        <label class="modal-label" for="cfg-segmento">Segmento</label>
-        <select id="cfg-segmento" class="modal-select">
+        <label class="modal-label" for="modal-cfg-segmento">Segmento</label>
+        <select id="modal-cfg-segmento" class="modal-select">
           <option value="">Selecione...</option>
           <option value="Loja e e-commerce">Loja e e-commerce</option>
           <option value="Clínica/Consultório">Clínica/Consultório</option>
@@ -1396,18 +1461,18 @@ body{
     </div>
 
     <div class="modal-field">
-      <label class="modal-label" for="cfg-horario">Horário de funcionamento</label>
-      <input type="text" id="cfg-horario" class="modal-input" placeholder="Seg-Sex 9h-18h, Sab 9h-13h">
+      <label class="modal-label" for="modal-cfg-horario">Horário de funcionamento</label>
+      <input type="text" id="modal-cfg-horario" class="modal-input" placeholder="Seg-Sex 9h-18h, Sab 9h-13h">
     </div>
 
     <div class="modal-field">
-      <label class="modal-label" for="cfg-produtos">Serviços ou produtos principais</label>
-      <textarea id="cfg-produtos" class="modal-textarea" style="min-height:80px;margin-bottom:0" placeholder="Liste seus principais produtos ou servicos"></textarea>
+      <label class="modal-label" for="modal-cfg-produtos">Serviços ou produtos principais</label>
+      <textarea id="modal-cfg-produtos" class="modal-textarea" style="min-height:80px;margin-bottom:0" placeholder="Liste seus principais produtos ou servicos"></textarea>
     </div>
 
     <div class="modal-field" style="margin-top:14px">
-      <label class="modal-label" for="cfg-tom">Tom do atendente</label>
-      <select id="cfg-tom" class="modal-select">
+      <label class="modal-label" for="modal-cfg-tom">Tom do atendente</label>
+      <select id="modal-cfg-tom" class="modal-select">
         <option value="Amigável e descontraído">Amigável e descontraído</option>
         <option value="Profissional e formal">Profissional e formal</option>
         <option value="Misto">Misto</option>
@@ -1415,8 +1480,8 @@ body{
     </div>
 
     <div class="modal-field">
-      <label class="modal-label" for="cfg-instrucoes">Instruções especiais <span style="color:var(--text-3);font-weight:400">(opcional)</span></label>
-      <textarea id="cfg-instrucoes" class="modal-textarea" style="min-height:80px;margin-bottom:0" placeholder="Ex: Nunca dar descontos, sempre perguntar o nome, encaminhar reclamações para humano..."></textarea>
+      <label class="modal-label" for="modal-cfg-instrucoes">Instruções especiais <span style="color:var(--text-3);font-weight:400">(opcional)</span></label>
+      <textarea id="modal-cfg-instrucoes" class="modal-textarea" style="min-height:80px;margin-bottom:0" placeholder="Ex: Nunca dar descontos, sempre perguntar o nome, encaminhar reclamações para humano..."></textarea>
     </div>
 
     <div class="modal-upload-section" style="margin-top:14px">
@@ -1623,6 +1688,7 @@ function showDashboard(email, clienteData) {
   }
 
   updateConfigPreview();
+  popularConfigInline(clienteData.config);
 
   const planoNomeRaw = clienteData.plano || "Recomendado";
   const _pn = planoNomeRaw.trim().toLowerCase();
@@ -1704,6 +1770,31 @@ function showDashboard(email, clienteData) {
 
   // Planos grid
   renderPlanos(planoNome);
+
+  // Setup status card
+  const config = clienteData.config;
+  const hasConfig = config && Object.values(config).some(v => v && String(v).trim());
+  const hasWpp = !!clienteData.instancia;
+  const setupCard = document.getElementById('setup-status-card');
+  if (!hasConfig || !hasWpp) {
+    setupCard.style.display = 'block';
+    const iconConfig = document.getElementById('setup-icon-config');
+    const textConfig = document.getElementById('setup-text-config');
+    const iconWpp = document.getElementById('setup-icon-wpp');
+    const textWpp = document.getElementById('setup-text-wpp');
+    if (hasConfig) {
+      iconConfig.style.background = 'var(--green)'; iconConfig.style.color = '#fff'; iconConfig.textContent = '✓';
+      textConfig.style.color = 'var(--text-2)'; textConfig.style.textDecoration = 'line-through';
+      const btn = document.getElementById('setup-item-config').querySelector('button');
+      if (btn) btn.remove();
+    }
+    if (hasWpp) {
+      iconWpp.style.background = 'var(--green)'; iconWpp.style.color = '#fff'; iconWpp.textContent = '✓';
+      textWpp.style.color = 'var(--text-2)'; textWpp.style.textDecoration = 'line-through';
+      const btn = document.getElementById('setup-item-wpp').querySelector('button');
+      if (btn) btn.remove();
+    }
+  }
 }
 
 function updateBotStatusUI(ativo) {
@@ -1870,30 +1961,25 @@ const overlay = document.getElementById("modal-overlay");
 
 function getModalFormData() {
   return {
-    nome_negocio: (document.getElementById("cfg-nome").value || "").trim(),
-    segmento:     (document.getElementById("cfg-segmento").value || "").trim(),
-    horario:      (document.getElementById("cfg-horario").value || "").trim(),
-    produtos:     (document.getElementById("cfg-produtos").value || "").trim(),
-    tom:          (document.getElementById("cfg-tom").value || "Amigável e descontraído").trim(),
-    instrucoes:   (document.getElementById("cfg-instrucoes").value || "").trim()
+    nome_negocio: (document.getElementById("modal-cfg-nome").value || "").trim(),
+    segmento:     (document.getElementById("modal-cfg-segmento").value || "").trim(),
+    horario:      (document.getElementById("modal-cfg-horario").value || "").trim(),
+    produtos:     (document.getElementById("modal-cfg-produtos").value || "").trim(),
+    tom:          (document.getElementById("modal-cfg-tom").value || "Amigável e descontraído").trim(),
+    instrucoes:   (document.getElementById("modal-cfg-instrucoes").value || "").trim()
   };
 }
 
 function populateModalFromConfig(config) {
-  document.getElementById("cfg-nome").value      = (config && config.nome_negocio) || "";
-  document.getElementById("cfg-segmento").value  = (config && config.segmento) || "";
-  document.getElementById("cfg-horario").value   = (config && config.horario) || "";
-  document.getElementById("cfg-produtos").value  = (config && config.produtos) || "";
-  document.getElementById("cfg-tom").value       = (config && config.tom) || "Amigável e descontraído";
-  document.getElementById("cfg-instrucoes").value = (config && config.instrucoes) || "";
+  document.getElementById("modal-cfg-nome").value      = (config && config.nome_negocio) || "";
+  document.getElementById("modal-cfg-segmento").value  = (config && config.segmento) || "";
+  document.getElementById("modal-cfg-horario").value   = (config && config.horario) || "";
+  document.getElementById("modal-cfg-produtos").value  = (config && config.produtos) || "";
+  document.getElementById("modal-cfg-tom").value       = (config && config.tom) || "Amigável e descontraído";
+  document.getElementById("modal-cfg-instrucoes").value = (config && config.instrucoes) || "";
 }
 
-document.getElementById("btn-configurar").addEventListener("click", function() {
-  const config = currentCliente && currentCliente.config;
-  populateModalFromConfig(config);
-  overlay.classList.add("open");
-  setTimeout(function() { document.getElementById("cfg-nome").focus(); }, 100);
-});
+// btn-configurar removido - formulario agora inline na secao Meu Atendente
 
 function closeModal() { overlay.classList.remove("open"); }
 document.getElementById("modal-close-btn").addEventListener("click", closeModal);
@@ -2248,6 +2334,65 @@ async function gerarQRCode() {
     btnGerar.style.display = "";
   }
 }
+
+// WHATSAPP INLINE QR
+function iniciarConexaoWhatsApp() {
+  const reconnect = document.getElementById('reconnect-card');
+  reconnect.style.display = 'block';
+  gerarQRCode();
+  setTimeout(() => reconnect.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+}
+
+// Config inline - popular campos quando o cliente carrega
+function popularConfigInline(config) {
+  if (!config) return;
+  const nome = document.getElementById('cfg-nome');
+  const seg = document.getElementById('cfg-segmento');
+  const hor = document.getElementById('cfg-horario');
+  const prod = document.getElementById('cfg-produtos');
+  const tom = document.getElementById('cfg-tom');
+  const inst = document.getElementById('cfg-instrucoes');
+  if (nome) nome.value = config.nome_negocio || '';
+  if (seg) seg.value = config.segmento || '';
+  if (hor) hor.value = config.horario || '';
+  if (prod) prod.value = config.produtos || '';
+  if (tom) tom.value = config.tom || 'Amigável e descontraído';
+  if (inst) inst.value = config.instrucoes || '';
+}
+
+// Salvar config inline
+document.addEventListener('DOMContentLoaded', function() {
+  const btn = document.getElementById('btn-salvar-config');
+  if (btn) {
+    btn.addEventListener('click', async function() {
+      btn.textContent = 'Salvando...'; btn.disabled = true;
+      const session = getSession();
+      const formData = {
+        nome_negocio: (document.getElementById('cfg-nome').value || '').trim(),
+        segmento: (document.getElementById('cfg-segmento').value || '').trim(),
+        horario: (document.getElementById('cfg-horario').value || '').trim(),
+        produtos: (document.getElementById('cfg-produtos').value || '').trim(),
+        tom: (document.getElementById('cfg-tom').value || 'Amigável e descontraído').trim(),
+        instrucoes: (document.getElementById('cfg-instrucoes').value || '').trim()
+      };
+      const contexto = buildSystemPrompt(formData);
+      if (currentCliente) { currentCliente.system_prompt = contexto; currentCliente.config = formData; }
+      try {
+        await fetch(WEBHOOK_BASE + '/webhook/atendente24h-save-config', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'ngrok-skip-browser-warning': '1' },
+          body: JSON.stringify({ email: session ? session.email : '', contexto, config: formData })
+        });
+      } catch(_) {}
+      const badge = document.getElementById('config-status-badge');
+      if (badge) { badge.className = 'badge badge-active'; badge.innerHTML = '<span class="badge-dot"></span>Configurado'; }
+      const msg = document.getElementById('config-save-msg');
+      if (msg) { msg.style.display = 'block'; setTimeout(() => msg.style.display = 'none', 3000); }
+      showToast('Configuração salva com sucesso!');
+      btn.textContent = 'Salvar configuração'; btn.disabled = false;
+    });
+  }
+});
 
 // INIT
 (function init() {
